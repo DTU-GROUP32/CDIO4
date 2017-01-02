@@ -7,8 +7,9 @@ public class Player{
 	private int onField;
 	private int ID;
 	private static int nextID = 0;
-	private int lastRoll;
-	private boolean taxChoice;
+	private int equalsCount;
+	private boolean inJail;
+	private int getOutOfJail;
 
 	/**
 	 * Default constructor.
@@ -35,6 +36,19 @@ public class Player{
 		bankAccount = new BankAccount(startingBalance);
 		this.onField = 0;
 		this.ID = nextID++;
+		this.equalsCount = 0;
+		this.inJail = false;
+		this.getOutOfJail = 0;
+	}
+	
+	/**
+	 * TODO;
+	 * @param gameBoard
+	 * @return
+	 */
+	public int getTotalAssets(GameBoard gameBoard){
+		int totalAssets = 0;
+		return totalAssets;
 	}
 	
 	/**
@@ -79,8 +93,11 @@ public class Player{
 	 */
 	public void movePlayer(int roll){
 		this.onField += roll;
-		while(this.onField > 21)
-			this.onField -= 22;
+		while(this.onField > 39)
+		{
+			this.onField -= 40;
+			this.getBankAccount().deposit(4000);
+		}
 	}
 	
 	/**
@@ -92,35 +109,45 @@ public class Player{
 	}
 
 	/**
-	 * Returns sum of the last roll.
-	 * @return lastRoll
+	 * @return the equalsCount
 	 */
-	public int getLastRoll() {
-		return lastRoll;
+	public int getEqualsCount() {
+		return equalsCount;
 	}
 
 	/**
-	 * Sets sum of last roll.
-	 * @param lastRoll
+	 * @param equalsCount the equalsCount to set
 	 */
-	public void setLastRoll(int lastRoll) {
-		this.lastRoll = lastRoll;
+	public void setEqualsCount(int equalsCount) {
+		this.equalsCount = equalsCount;
 	}
 
 	/**
-	 * Returns wether or not it is a Tax with a choice
-	 * @return
+	 * @return the inJail
 	 */
-	public boolean isTaxChoice() {
-		return taxChoice;
+	public boolean isInJail() {
+		return inJail;
 	}
 
 	/**
-	 * Returns tax choice
-	 * @param taxChoice
+	 * @param inJail the inJail to set
 	 */
-	public void setTaxChoice(boolean taxChoice) {
-		this.taxChoice = taxChoice;
+	public void setInJail(boolean inJail) {
+		this.inJail = inJail;
+	}
+
+	/**
+	 * @return the getOutOfJail
+	 */
+	public int getGetOutOfJail() {
+		return getOutOfJail;
+	}
+
+	/**
+	 * @param getOutOfJail the getOutOfJail to set
+	 */
+	public void setGetOutOfJail(int getOutOfJail) {
+		this.getOutOfJail = getOutOfJail;
 	}
 	
 	public static void resetID() {

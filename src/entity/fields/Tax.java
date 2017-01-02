@@ -1,6 +1,8 @@
 package entity.fields;
 
+import entity.GameBoard;
 import entity.Player;
+import entity.PlayerList;
 
 public class Tax extends Field {
 
@@ -11,9 +13,8 @@ public class Tax extends Field {
 	 * Default constructor. Tax, which is not ownable, will have a tax amount and a tax rate, which is automatically set to 0.
 	 * @param taxAmount
 	 */
-	public Tax(int taxAmount) {
-		this(taxAmount,0);
-		this.ownable = false;
+	public Tax(String name, int taxAmount) {
+		this(name, taxAmount, 0);
 	}
 
 	/**
@@ -21,38 +22,29 @@ public class Tax extends Field {
 	 * @param taxAmount
 	 * @param taxRate
 	 */
-	public Tax(int taxAmount, int taxRate) {
+	public Tax(String name, int taxAmount, int taxRate) {
+		super(name);
 		this.taxAmount = taxAmount;
 		this.taxRate = taxRate;
 	}
-	
-	/**
-	 * Returns the tax amount
-	 * @return taxAmount
-	 */
-	public int getTaxAmount() {
-		return taxAmount;
-	}
-	
-	/**
-	 * Returns the tax rate
-	 * @return taxRate
-	 */
-	public int getTaxRate() {
-		return taxRate;
+
+	@Override
+	public boolean landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
+		if (taxChoice)
+		{
+			player.getBankAccount().withdraw(player.getTotalAssets(gameBoard) * taxRate / 100);
+			return true;
+		}
+		else
+		{
+			player.getBankAccount().withdraw(taxAmount); 	
+			return false;
+		}
 	}
 
 	@Override
-	public void landOnField(Player player) {
-		if (player.isTaxChoice())
-			player.getBankAccount().withdraw(player.getBankAccount().getBalance() * taxRate / 100);
-		else player.getBankAccount().withdraw(taxAmount);
-		player.setTaxChoice(false);
-	}
-	
-	@Override
 	public int getPrice() {
-		return -1;
+		return 0;
 	}
 
 	@Override
@@ -61,13 +53,41 @@ public class Tax extends Field {
 	}
 
 	@Override
-	public void setOwner(Player newOwner) {}
-
-	@Override
-	public int getRent() {
-		return -1;
+	public void setOwner(Player newOwner) {
 	}
 
 	@Override
-	public void buyField(Player player) {}
+	public int getRent(GameBoard gameBoard) {
+		return 0;
+	}
+
+	@Override
+	public boolean buyField(Player player) {
+		return false;
+	}
+
+	@Override
+	public boolean tradeField(Player seller, Player buyer, int price) {
+		return false;
+	}
+
+	@Override
+	public int getConstructionRate() {
+		return 0;
+	}
+
+	@Override
+	public int getConstructionPrice() {
+		return 0;
+	}
+
+	@Override
+	public int getPawnValue() {
+		return 0;
+	}
+
+	@Override
+	public int getPropertyGroup() {
+		return 0;
+	}
 }
