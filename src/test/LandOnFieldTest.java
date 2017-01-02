@@ -29,13 +29,13 @@ public class LandOnFieldTest {
 		player = new Player("Test",5000);
 		player2 = new Player("TestOwner",30000);
 		refuge = new Refuge(500);
-		territory = new Territory(1000,100);
-		laborcamp = new LaborCamp();
+		territory = new Plot(1000,100);
+		laborcamp = new Brewery();
 		tax = new Tax(2000);
-		fleet1 = new Fleet();
-		fleet2 = new Fleet();
-		fleet3 = new Fleet();
-		fleet4 = new Fleet();
+		fleet1 = new ShippingLine();
+		fleet2 = new ShippingLine();
+		fleet3 = new ShippingLine();
+		fleet4 = new ShippingLine();
 	}
 
 	@After
@@ -51,7 +51,7 @@ public class LandOnFieldTest {
 		fleet3 = null;
 		fleet4 = null;
 		Player.resetID();
-		Fleet.resetFleetsOwned();
+		ShippingLine.resetFleetsOwned();
 	}
 
 	/**

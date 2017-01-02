@@ -4,3 +4,4 @@
 # Compiled files
 out/
 !out/.gitkeep
+/bin/
