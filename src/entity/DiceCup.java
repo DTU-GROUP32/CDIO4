@@ -66,4 +66,14 @@ public class DiceCup {
 		} else
 			return false;
 	}
+		
+	/**
+	 * Checks if the dices a equal. 
+	 * @param dice
+	 * @return
+	 */
+	    public static boolean diceEvalEqual(DiceCup dice) {
+	        return (dices.getDices()[0].getFaceValue() == dices.getDices()[1].getFaceValue());
+	    }
+	    
 }
