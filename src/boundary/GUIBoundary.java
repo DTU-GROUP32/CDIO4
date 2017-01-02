@@ -214,9 +214,13 @@ public class GUIBoundary {
 		return response.equals(optionTrue);
 	}
 
-	public boolean getButtonPressed(String message) {
+	public boolean getButtonPressed(String msg, String... buttons) {
 		GUI.getUserButtonPressed(message, "OK!");
 		return true;
+	}
+
+	public String getUserButtonPressed(String msg, String... buttons) {
+		return GUI.getUserButtonPressed(msg, buttons).toString();
 	}
 
 	private int convertFieldNumber(int fieldNumber) {
