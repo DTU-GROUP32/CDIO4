@@ -27,18 +27,13 @@ public class BankAccount {
 	 * @param amount to withdraw.
 	 * @return amount actually withdrawn.
 	 */
-	public int withdraw(int amount){
+	public boolean withdraw(int amount){
 		if (this.balance >= amount)
 		{
 			this.balance -= amount;
-			return amount;
+			return true;
 		}
-		else
-		{
-			int remainder = this.balance;
-			this.balance = 0;
-			return remainder;
-		}
+		return false;
 	}
 	
 	/**
@@ -47,8 +42,16 @@ public class BankAccount {
 	 */
 	public void deposit(int amount){
 		this.balance += amount;
-		if (amount < 0)
-			this.balance = 0;
+	}
+	
+	public boolean transfer(Player receiver, int amount){
+		if(this.balance - amount > 0)
+		{
+			this.withdraw(amount);
+			receiver.getBankAccount().deposit(amount);
+			return true;
+		}
+		return false;
 	}
 
 	/**
