@@ -4,33 +4,19 @@ import entity.GameBoard;
 import entity.Player;
 import entity.PlayerList;
 
-public class Refuge extends Field {
+public class Jail extends Field {
 
-	private int bonus;
-
-	/**
-	 * Constructor. Refuge, which is not ownable, that has a bonus
-	 * @param bonus
-	 */
-	public Refuge(String name, int bonus) {
+	public Jail(String name) {
 		super(name);
-		this.bonus = bonus;
-	}
-
-	/**
-	 * Returns the bonus
-	 * @return
-	 */
-	public int getBonus() {
-		return bonus;
 	}
 
 	@Override
 	public boolean landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
-		player.getBankAccount().deposit(bonus);
-		return false;
+		player.setOnField(10);
+		player.setInJail(true);
+		return true;
 	}
-
+	
 	@Override
 	public int getPrice() {
 		return 0;
@@ -43,8 +29,6 @@ public class Refuge extends Field {
 
 	@Override
 	public void setOwner(Player newOwner) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
