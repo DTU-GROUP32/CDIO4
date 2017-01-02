@@ -219,7 +219,7 @@ public class GUIBoundary {
 		return true;
 	}
 
-	public String getUserButtonPressed(String message) {
+	public String getUserButtonPressed(String msg, String... buttons) {
 		return GUI.getUserButtonPressed(msg, buttons).toString();
 	}
 
