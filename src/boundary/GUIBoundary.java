@@ -127,6 +127,10 @@ public class GUIBoundary {
 	public String getLanguage() {
 		return GUI.getUserSelection("Select entity.language. \nVælg sprog.", "Dansk", "English");
 	}
+	
+	public String getUserSelection(String message, String... options) {
+		return GUI.getUserSelection(message, options).toString();
+	}
 
 	public void setDices(DiceCup diceCup) {
 		GUI.setDice(diceCup.getDices()[0].getFaceValue(), diceCup.getDices()[1].getFaceValue());
