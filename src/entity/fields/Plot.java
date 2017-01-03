@@ -24,35 +24,9 @@ public class Plot extends Ownable {
 
 	@Override
 	public int getRent(GameBoard gameBoard){
-		// numbers of fields in group
-		int propertyGroup = this.getPropertyGroup();
-		int fieldsInGroup = 0;
-		for(Field field : gameBoard.getFields())
-		{
-			if(field.getPropertyGroup() == propertyGroup)
-				fieldsInGroup++;
-		}
-
-		// making property group
-		Field[] fieldGroup = new Field[fieldsInGroup];
-		int arrayIndex = 0;
-		for(int i = 0; i < gameBoard.getFields().length; i++)
-		{
-			if(gameBoard.getField(i).getPropertyGroup() == propertyGroup)
-				fieldGroup[arrayIndex] = gameBoard.getField(i);
-			arrayIndex++;
-		}
-
-		// evaluating
-		boolean ownedBySame = false;
-		if(fieldGroup.length == 2)
-			ownedBySame = fieldGroup[0].getOwner() == fieldGroup[1].getOwner();
-		else ownedBySame = fieldGroup[0].getOwner() == fieldGroup[1].getOwner() && fieldGroup[0].getOwner() == fieldGroup[2].getOwner();
-
-		//returning
-		if (ownedBySame && constructionRate == 0)
-			return rent[constructionRate] * 2;
-		return rent[constructionRate];
+		if (gameBoard.evalPropertyGroupSameOwner(gameBoard.getPropertyGroup(this.propertyGroup)) && constructionRate == 0)
+			return this.rent[constructionRate] * 2;
+		return this.rent[constructionRate];
 	}
 
 	public boolean buildConstruction(){
