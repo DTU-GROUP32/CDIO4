@@ -1,15 +1,17 @@
 package entity;
 
+import java.util.ArrayList;
+
+import entity.fields.Brewery;
+import entity.fields.Chance;
 import entity.fields.Field;
 import entity.fields.Jail;
 import entity.fields.Ownable;
-import entity.fields.ShippingLine;
-import entity.fields.Brewery;
-import entity.fields.Chance;
+import entity.fields.Plot;
 import entity.fields.Refuge;
+import entity.fields.ShippingLine;
 import entity.fields.Tax;
 import entity.language.LanguageHandler;
-import entity.fields.Plot;
 
 public class GameBoard {
 
@@ -60,6 +62,122 @@ public class GameBoard {
 		fields[37] = new Plot(language.fieldNames(37), 7000, new int[] {700,3500,10000,22000,26000,30000}, 4000, 7);
 		fields[38] = new Tax(language.fieldNames(38), 2000);
 		fields[39] = new Plot(language.fieldNames(39), 8000, new int[] {1000,4000,12000,28000,34000,40000}, 4000, 7);
+	}
+
+	public Field[] getPropertyGroup(int propertyGroup) {
+		// numbers of fields in group
+		int fieldsInGroup = 0;
+		for(Field field : this.fields)
+		{
+			if(field.getPropertyGroup() == propertyGroup)
+				fieldsInGroup++;
+		}
+
+		// making property group
+		Field[] fieldGroup = new Field[fieldsInGroup];
+		int arrayIndex = 0;
+		for(int i = 0; i < this.fields.length; i++)
+		{
+			if(this.fields[i].getPropertyGroup() == propertyGroup)
+			{
+				fieldGroup[arrayIndex] = this.fields[i];
+				arrayIndex++;
+			}
+		}
+
+		return fieldGroup;
+	}
+
+	public boolean evalPropertyGroupSameOwner(Field[] propertyGroup) {
+		boolean ownedBySame = false;
+		if(propertyGroup.length == 2)
+			ownedBySame = propertyGroup[0].getOwner() == propertyGroup[1].getOwner();
+		else ownedBySame = propertyGroup[0].getOwner() == propertyGroup[1].getOwner() && propertyGroup[0].getOwner() == propertyGroup[2].getOwner();
+
+		return ownedBySame;
+	}
+
+	public ArrayList<Field> getPropertyList(Player owner) {
+
+		ArrayList<Field> listOfProperties = new ArrayList<Field>();
+
+		for(int i = 0; i < this.fields.length; i++) {
+			if(this.fields[i].getOwner() == owner)
+				listOfProperties.add(this.fields[i]);		
+		}
+
+		return listOfProperties;
+	}
+
+	public ArrayList<Field> getBuildableList(Player owner) {
+
+		ArrayList<Field> listOfBuildableProperties = new ArrayList<Field>();
+
+		for(int i = 0; i < 8; i++) { // For every property group
+			Field[] propertyGroup = getPropertyGroup(i);
+
+			if(propertyGroup[0].getOwner() == owner && evalPropertyGroupSameOwner(propertyGroup)) // If the owner of the fields is the "input"-owner
+			{
+				int smallestConstructionRate = 0;
+
+				// Find the smallest construction rate of property group
+				for(Field field : propertyGroup) {
+					if(field.getConstructionRate() < smallestConstructionRate)
+						smallestConstructionRate = field.getConstructionRate();
+				}
+
+				// If construction rate is equal to the smallest construction rate, then add to the buildable list.
+				for(int j = 0; j < propertyGroup.length; i++)
+				{
+					if(propertyGroup[j].getConstructionRate() == smallestConstructionRate)
+						listOfBuildableProperties.add(propertyGroup[j]);
+				}
+			}
+		}
+
+		return listOfBuildableProperties;
+	}
+
+	public ArrayList<Field> getSellableList(Player owner) {
+
+		ArrayList<Field> listOfSellableProperties = new ArrayList<Field>();
+
+		for(int i = 0; i < 8; i++) { // For every property group
+			Field[] propertyGroup = getPropertyGroup(i);
+
+			if(propertyGroup[0].getOwner() == owner) // If the owner of the fields is the "input"-owner
+			{
+				int highestConstructionRate = 0;
+
+				// Determine the highest construction rate
+				for(Field field : propertyGroup)
+					if(field.getConstructionRate() > highestConstructionRate)
+						highestConstructionRate = field.getConstructionRate();
+
+				// If construction rate is equal to the highest construction rate, then add to the sellable list.
+				if(highestConstructionRate > 0)
+				{
+					for(int j = 0; j < propertyGroup.length; i++)
+					{
+						if(propertyGroup[j].getConstructionRate() == highestConstructionRate)
+							listOfSellableProperties.add(propertyGroup[j]);
+					}
+				}
+			}
+		}
+
+		return listOfSellableProperties;
+	}
+
+	public ArrayList<Field> getPawnableList(Player owner) {
+		
+		ArrayList<Field> listOfPawnableProperties = new ArrayList<Field>();
+		
+		for(int i = 0; i < this.fields.length; i++)
+			if(fields[i].getOwner() == owner && fields[i].getConstructionRate() == 0)
+				listOfPawnableProperties.add(fields[i]);
+		
+		return	listOfPawnableProperties;
 	}
 
 	/**
