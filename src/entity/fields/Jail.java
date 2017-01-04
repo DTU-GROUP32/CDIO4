@@ -65,4 +65,24 @@ public class Jail extends Field {
 	public int getPropertyGroup() {
 		return 0;
 	}
+
+	@Override
+	public boolean pawnField() {
+		return false;
+	}
+
+	@Override
+	public boolean releasePawnedField() {
+		return false;
+	}
+
+	@Override
+	public boolean buildConstruction() {
+		return false;
+	}
+
+	@Override
+	public boolean sellConstruction() {
+		return false;
+	}
 }
