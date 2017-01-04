@@ -14,23 +14,22 @@ import entity.language.LanguageHandler;
  */
 public abstract class SequenceController {
 
-	/**
-	 *
-	 */
-	public static void buildSequence(Player player, GameBoard gameBoard, GUIBoundary boundary) {
-		int i = 0;
-		ArrayList<Field> buildableList = gameBoard.getBuildableList(player);
-		String[] buildableLabels = new String[gameBoard.getBuildableList(player).size()];
-		for (Field field : buildableList) {
-			buildableLabels[i++] = field.getName();
-		}
-		if (buildableLabels.length == 0) {
-			boundary.getButtonPressed("You have no buildable properties", "Ok!");
-		} else {
-			boundary.getUserSelection("Choose plot to build on", buildableLabels);
-		}
-
-	}
+    /**
+     *
+     */
+    public static void buildSequence(Player player, GameBoard gameBoard, GUIBoundary boundary) {
+        int i = 0;
+        ArrayList<Field> buildableList = gameBoard.getBuildableList(player);
+        String[] buildableLabels = new String[gameBoard.getBuildableList(player).size()];
+        for (Field field : buildableList) {
+            buildableLabels[i++] = field.getName();
+        }
+        if (buildableLabels.length == 0) {
+            boundary.getButtonPressed("You have no buildable properties", "Ok!");
+        } else {
+            Field fieldToBuildOn = gameBoard.getField(gameBoard.getIndexByName(boundary.getUserSelection("Choose plot to build on", buildableLabels)));
+        }
+    }
 
 	/**
 	 *
@@ -107,6 +106,8 @@ public abstract class SequenceController {
                             int price = boundary.getInteger("Which price?", 0, 30000);
                             fieldToSellObject.tradeField(owner, buyerObject, price);
                             boundary.setOwner(field.getID(), buyerObject.getName());
+                            boundary.updateBalance(owner.getName(), owner.getBankAccount().getBalance());
+                            boundary.updateBalance(buyerObject.getName(), buyerObject.getBankAccount().getBalance());
                             break fieldLoop;
                         }
                     }
