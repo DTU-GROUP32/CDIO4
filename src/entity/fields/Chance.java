@@ -2,9 +2,12 @@ package entity.fields;
 
 import java.util.ArrayList;
 
+import boundary.GUIBoundary;
+import control.SequenceController;
 import entity.GameBoard;
 import entity.Player;
 import entity.PlayerList;
+import entity.language.LanguageHandler;
 
 public class Chance extends Field {
 
@@ -43,16 +46,10 @@ public class Chance extends Field {
 			player.getBankAccount().deposit(3000);
 			break;
 		case 7:
-			//TODO Tjek op p� pants�tnings sekvens
-			//TODO G�lder ogs� for ALLE nedenst�ende withdraw-metoder
-			boolean check = true;
-			for(int i = 0; i < playerList.getPlayers().length; i++) {
-				if(playerList.getPlayer(i).getBankAccount().getBalance() < 200)
-					check = false;		
-			}
-			if(check == false)
-				return check;
-			else for(int i = 0; i < playerList.getPlayers().length; i++)
+			for(int i = 0; i < playerList.getPlayers().length; i++)
+				while(playerList.getPlayer(i).getBankAccount().getBalance() < 200)
+					SequenceController.getMoneySequence(playerList.getPlayer(i), gameBoard, GUIBoundary.getInstance, playerList);
+			for(int i = 0; i < playerList.getPlayers().length; i++)
 				playerList.getPlayer(i).getBankAccount().transfer(player, 200);
 			break;
 		case 8:
@@ -62,32 +59,32 @@ public class Chance extends Field {
 			player.getBankAccount().deposit(500);
 			break;
 		case 10:
-			if(player.getBankAccount().withdraw(200) == false)
-				return false;
+			while(player.getBankAccount().withdraw(200) == false)
+				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance, playerList);
 			break;
 		case 11:
-			if(player.getBankAccount().withdraw(1000) == false)
-				return false;
+			while(player.getBankAccount().withdraw(1000) == false)
+				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance, playerList);
 			break;
 		case 12:
-			if(player.getBankAccount().withdraw(3000) == false)
-				return false;
+			while(player.getBankAccount().withdraw(3000) == false)
+				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance, playerList);
 			break;
 		case 13:
-			if(player.getBankAccount().withdraw(1000) == false)
-				return false;
+			while(player.getBankAccount().withdraw(1000) == false)
+				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance, playerList);
 			break;
 		case 14:
-			if(player.getBankAccount().withdraw(3000) == false)
-				return false;
+			while(player.getBankAccount().withdraw(3000) == false)
+				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance, playerList);
 			break;
 		case 15:
-			if(player.getBankAccount().withdraw(2000) == false)
-				return false;
+			while(player.getBankAccount().withdraw(2000) == false)
+				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance, playerList);
 			break;
 		case 16:
-			if(player.getBankAccount().withdraw(200) == false)
-				return false;
+			while(player.getBankAccount().withdraw(200) == false)
+				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance, playerList);
 			break;
 		case 17:
 			ArrayList<Field> list = gameBoard.getDemolitionableList(player);
@@ -103,8 +100,8 @@ public class Chance extends Field {
 						amountToPay += 2300;
 				}
 			
-			if(player.getBankAccount().withdraw(amountToPay) == false)
-				return false;
+			while(player.getBankAccount().withdraw(amountToPay) == false)
+				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance, playerList);
 			
 			break;
 		case 18:
@@ -121,8 +118,8 @@ public class Chance extends Field {
 						amountToPay1 += 2000;
 				}
 			
-			if(player.getBankAccount().withdraw(amountToPay1) == false)
-				return false;
+			while(player.getBankAccount().withdraw(amountToPay1) == false)
+				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance, playerList);
 			
 			break;
 		case 19:
@@ -133,10 +130,34 @@ public class Chance extends Field {
 			player.setInJail(true);
 			break;
 		case 21:
-			//TODO N�rmeste redderi (k�be sekvens)
+			if(player.getOnField() > 4 && player.getOnField() < 15)
+				player.movePlayer(15-player.getOnField());
+			if(player.getOnField() > 14 && player.getOnField() < 25)
+				player.movePlayer(25-player.getOnField());
+			if(player.getOnField() > 24 && player.getOnField() < 35)
+				player.movePlayer(35-player.getOnField());
+			if(player.getOnField() > 34)
+				player.movePlayer(45-player.getOnField());
+			else player.movePlayer(5-player.getOnField());
+			if(gameBoard.getField(player.getOnField()).getOwner() == null)
+				SequenceController.buyPropertySequence(player, gameBoard.getField(player.getOnField()), GUIBoundary.getInstance, LanguageHandler.getInstance);
+			else
+				{
+				gameBoard.getField(player.getOnField()).landOnField(player, 0, gameBoard, playerList, false);
+				gameBoard.getField(player.getOnField()).landOnField(player, 0, gameBoard, playerList, false);
+				}
 			break;
 		case 22:
-			//TODO Samme som 21
+			if(player.getOnField() > 4 && player.getOnField() < 15)
+				player.movePlayer(15-player.getOnField());
+			if(player.getOnField() > 14 && player.getOnField() < 25)
+				player.movePlayer(25-player.getOnField());
+			if(player.getOnField() > 24 && player.getOnField() < 35)
+				player.movePlayer(35-player.getOnField());
+			if(player.getOnField() > 34)
+				player.movePlayer(45-player.getOnField());
+			else player.movePlayer(5-player.getOnField());
+			gameBoard.getField(player.getOnField()).landOnField(player, 0, gameBoard, playerList, false);
 			break;
 		case 23:
 			if(player.getOnField() > 24)
