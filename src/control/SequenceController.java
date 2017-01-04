@@ -17,7 +17,6 @@ public abstract class SequenceController {
 	/**
 	 *
 	 */
-<<<<<<< Updated upstream
 	public static void buildSequence(Player player, GameBoard gameBoard) {
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
@@ -25,24 +24,13 @@ public abstract class SequenceController {
 		String[] buildableLabels = new String[gameBoard.getBuildableList(player).size()];
 		for (int i = 0; i < buildableLabels.length; i++) {
 			buildableLabels[i] = buildableList.get(i).getName();
-=======
-	public static void buildSequence(Player player, GameBoard gameBoard, GUIBoundary boundary) {
-		int i = 0;
-		ArrayList<Field> buildableList = gameBoard.getBuildableList(player);
-		String[] buildableLabels = new String[gameBoard.getBuildableList(player).size()];
-		for (Field field : buildableList) {
-			buildableLabels[i++] = field.getName();
->>>>>>> Stashed changes
 		}
 		if (buildableLabels.length == 0) {
 			boundary.getButtonPressed("You have no buildable properties");
 		} else {
 			Field fieldToBuildOn = gameBoard.getField(gameBoard.getIndexByName(boundary.getUserSelection("Choose plot to build on", buildableLabels)));
-<<<<<<< Updated upstream
 			fieldToBuildOn.buildConstruction();
 			boundary.updateBalance(player.getName(), player.getBankAccount().getBalance());
-=======
->>>>>>> Stashed changes
 		}
 	}
 
@@ -95,7 +83,6 @@ public abstract class SequenceController {
 			String fieldToSell = boundary.getUserSelection("Choose plot to trade", sellableLabels);
 			String buyer = boundary.getUserSelection("Choose who is buying", playerLabels);
 
-<<<<<<< Updated upstream
             fieldLoop:
             for (Field field : sellableList) {
                 if (fieldToSell.equals(field.getName())) {
@@ -117,38 +104,13 @@ public abstract class SequenceController {
             }
         }
     }
-=======
-			fieldLoop:
-				for (Field field : sellableList) {
-					if (fieldToSell.equals(field.getName())) {
-						fieldToSellObject = field;
-						for (Player player : playerList.getPlayers()) {
-							if (buyer.equals(player.getName())) {
-								buyerObject = player;
-								int price = boundary.getInteger("Which price?", 0, 30000);
-								fieldToSellObject.tradeField(owner, buyerObject, price);
-								boundary.setOwner(field.getID(), buyerObject.getName());
-								boundary.updateBalance(owner.getName(), owner.getBankAccount().getBalance());
-								boundary.updateBalance(buyerObject.getName(), buyerObject.getBankAccount().getBalance());
-								break fieldLoop;
-							}
-						}
-					}
-				}
-		}
-	}
->>>>>>> Stashed changes
 
 	/**
 	 *
 	 */
-<<<<<<< Updated upstream
 	public static void pawnSequence(Player player, GameBoard gameBoard) {
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
-=======
-	public static void pawnSequence(Player player, GameBoard gameBoard, GUIBoundary boundary) {
->>>>>>> Stashed changes
 		ArrayList<Field> pawnableList = gameBoard.getPawnableList(player);
 		String[] pawnableLabels = new String[gameBoard.getPawnableList(player).size()];
 		for (int i = 0; i < pawnableLabels.length; i++)
@@ -163,10 +125,6 @@ public abstract class SequenceController {
 			if(gameBoard.getField(gameBoard.getIndexByName(fieldToPawn)).pawnField())
 			{
 				boundary.getButtonPressed("Din ejendom er blevet pantsat");
-<<<<<<< Updated upstream
-				//TODO sæt som pantsat på brættet
-=======
->>>>>>> Stashed changes
 			} else
 			{
 				boundary.getButtonPressed("Din ejendom kunne ikke pantsættes");
