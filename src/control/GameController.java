@@ -92,9 +92,9 @@ public class GameController {
                 gameBoard.releasePlayersFields(player);
             }
         } else if (turnChoice.equals(language.build())) {
-            SequenceController.buildSequence(player, gameBoard, boundary);
+            SequenceController.buildSequence(player, gameBoard);
         } else if (turnChoice.equals(language.trade())) {
-            SequenceController.tradePropertiesSequence(player, gameBoard, boundary, playerList);
+            SequenceController.tradePropertiesSequence(player, gameBoard, playerList);
         }
     }
 
