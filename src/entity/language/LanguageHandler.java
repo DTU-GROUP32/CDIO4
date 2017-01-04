@@ -250,4 +250,22 @@ public class LanguageHandler {
 	public String printDiceChangeNotExecuted(){
 		return selectedLanguage.printDiceChangeNotExecuted();
 	}
+
+	/**
+	 * Prints button message for throw-action
+	 * @return String
+	 */
+	public String throwDices(){ return selectedLanguage.throwDices(); }
+
+	/**
+	 * Prints button message for build-action
+	 * @return String
+	 */
+	public String build(){ return selectedLanguage.build(); }
+
+	/**
+	 * Prints button message for trade-action
+	 * @return
+	 */
+	public String trade(){ return selectedLanguage.trade(); }
 }

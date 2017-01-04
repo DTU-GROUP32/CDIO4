@@ -59,4 +59,10 @@ public interface Language {
 	String printDiceChangeSucces();
 
 	String printDiceChangeNotExecuted();
+
+	String throwDices();
+
+	String build();
+
+	String trade();
 }

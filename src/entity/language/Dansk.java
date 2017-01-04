@@ -224,7 +224,7 @@ public class Dansk implements Language{
 	}
 
 	public String preMsg(Player player){
-		return "Det er " + player.getName() + "'s tur, tryk på knappen for at slå!";
+		return "Det er " + player.getName() + "'s tur, tryk på en knap!";
 	}
 
 	@Override
@@ -400,4 +400,13 @@ public class Dansk implements Language{
 	public String printDiceChangeNotExecuted(){
 		return "Terningerne kunne ikke ændres";
 	}
+
+	@Override
+	public String throwDices(){ return "Slå Terning"; }
+
+	@Override
+	public String build(){ return "Bygge"; }
+
+	@Override
+	public String trade(){ return "Handle"; }
 }
