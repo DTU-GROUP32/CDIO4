@@ -45,19 +45,26 @@ public class ShippingLine extends Ownable {
 
 	@Override
 	public int getConstructionRate() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int getConstructionPrice() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int getPropertyGroup() {
-		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public boolean buildConstruction() {
+		return false;
+	}
+
+	@Override
+	public boolean sellConstruction() {
+		return false;
 	}
 }
