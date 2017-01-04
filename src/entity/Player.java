@@ -48,6 +48,13 @@ public class Player{
 	 */
 	public int getTotalAssets(GameBoard gameBoard){
 		int totalAssets = 0;
+		totalAssets += this.bankAccount.getBalance();
+		
+		for(int i = 0; i < gameBoard.getPropertyList(this).size(); i++) {
+			totalAssets += gameBoard.getPropertyList(this).get(i).getPawnValue();
+			totalAssets += gameBoard.getPropertyList(this).get(i).getConstructionRate() * gameBoard.getPropertyList(this).get(i).getConstructionPrice() / 2;
+		}
+		
 		return totalAssets;
 	}
 	
