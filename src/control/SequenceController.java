@@ -61,24 +61,21 @@ public abstract class SequenceController {
 	public static void tradePropertiesSequence(Player owner, GameBoard gameBoard, PlayerList playerList) {
         GUIBoundary boundary = GUIBoundary.getInstance();
         LanguageHandler language = LanguageHandler.getInstance();
-		int i = 0;
 		ArrayList<Field> sellableList = gameBoard.getPropertyList(owner);
 		String[] sellableLabels = new String[sellableList.size()];
 		String[] playerLabels = new String[playerList.getPlayers().length - 1];
 		Field fieldToSellObject;
 		Player buyerObject;
 
-		for (Field field : sellableList) {
-			sellableLabels[i++] = field.getName();
+		for (int i = 0; i < sellableList.size(); i++) {
+			sellableLabels[i] = sellableList.get(i).getName();
 		}
 		if (sellableLabels.length == 0) {
 			boundary.getButtonPressed("Du har ingen felter at sælge", "Ok!");
 		} else {
-			i = 0;
-			for (Player player : playerList.getPlayers()) {
-				if (!player.getName().equals(owner.getName())) {
-					playerLabels[i] = player.getName();
-					i++;
+			for (int i = 1; i < playerList.getPlayers().length; i++) {
+				if (!playerList.getPlayers()[i].getName().equals(owner.getName())) {
+					playerLabels[i] = playerList.getPlayers()[i].getName();
 				}
 			}
 
