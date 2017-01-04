@@ -78,24 +78,6 @@ public abstract class SequenceController {
 			String fieldToSell = boundary.getUserSelection("Choose plot to trade", sellableLabels);
 			String buyer = boundary.getUserSelection("Choose who is buying", playerLabels);
 
-			fieldLoop:
-				for (Field field : sellableList) {
-					if (fieldToSell.equals(field.getName())) {
-						fieldToSellObject = field;
-						for (Player player : playerList.getPlayers()) {
-							if (buyer.equals(player.getName())) {
-								buyerObject = player;
-								int price = boundary.getInteger("Which price?", 0, 30000);
-								fieldToSellObject.tradeField(owner, buyerObject, price);
-								boundary.setOwner(field.getID(), buyerObject.getName());
-								break fieldLoop;
-							}
-						}
-					}
-				}
-		}
-	}
-
             fieldLoop:
             for (Field field : sellableList) {
                 if (fieldToSell.equals(field.getName())) {
