@@ -3,7 +3,6 @@ package control;
 import boundary.GUIBoundary;
 import entity.GameBoard;
 import entity.PlayerList;
-import entity.language.Language;
 import entity.language.LanguageHandler;
 
 public class SetupController {
@@ -44,9 +43,5 @@ public class SetupController {
 			boundary.addPlayer(playerList.getPlayer(i));
 		}
 		return playerList;
-	}
-
-	public GUIBoundary getBoundary() {
-		return boundary;
 	}
 }

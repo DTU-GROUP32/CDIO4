@@ -190,4 +190,13 @@ public class GUIBoundary {
 					if(gameBoard.getField(i).getOwner().getName().equals(player.getName()))
 						GUI.removeOwner(convertFieldNumber(i));
 	}
+
+	public void updateConstructionRate(entity.fields.Field field){
+		if(field.getConstructionRate() == 5){
+			GUI.setHouses(field.getID(), 0);
+			GUI.setHotel(field.getID(), true);
+		}else{
+			GUI.setHouses(field.getID(), field.getConstructionRate());
+		}
+	}
 }
