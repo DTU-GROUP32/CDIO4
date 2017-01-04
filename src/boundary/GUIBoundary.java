@@ -153,6 +153,10 @@ public class GUIBoundary {
 	public void setOwner(int fieldNumber, String playerName) {
 		GUI.setOwner(convertFieldNumber(fieldNumber), playerName);
 	}
+	
+	public int getInteger(String message) {
+		return GUI.getUserInteger(message);
+	}
 
 	public int getInteger(String message, int min, int max) {
 		return GUI.getUserInteger(message, min, max);
@@ -178,8 +182,8 @@ public class GUIBoundary {
 
 	private int convertFieldNumber(int fieldNumber) {
 		int convertedFieldNumber = fieldNumber + 1;
-		while(convertedFieldNumber > 22)
-			convertedFieldNumber -= 22;
+		while(convertedFieldNumber > 40)
+			convertedFieldNumber -= 40;
 		return convertedFieldNumber;
 	}
 

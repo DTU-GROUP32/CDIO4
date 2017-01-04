@@ -57,6 +57,8 @@ public abstract class Field {
 	 */
 	public abstract boolean buyField(Player player);
 	
+	public abstract boolean buyField(Player player, int price);
+	
 	public abstract boolean tradeField(Player seller, Player buyer, int price);
 	
 	public abstract boolean pawnField();

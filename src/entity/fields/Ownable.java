@@ -1,6 +1,5 @@
 package entity.fields;
 
-import boundary.GUIBoundary;
 import control.SequenceController;
 import entity.GameBoard;
 import entity.Player;
@@ -46,7 +45,7 @@ public abstract class Ownable extends Field {
 	}
 
 	public boolean landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
-		if (this.owner.isInJail() == false)
+		if (this.owner.isInJail() == false || this.isPawned == false)
 			while (player.getBankAccount().transfer(owner, this.getRent(gameBoard)) == false)
 				SequenceController.getMoneySequence(player, gameBoard, playerList);
 		return true;
@@ -56,6 +55,14 @@ public abstract class Ownable extends Field {
 
 	public boolean buyField(Player player) {
 		if (player.getBankAccount().withdraw(this.price)) {
+			this.setOwner(player);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean buyField(Player player, int price) {
+		if (player.getBankAccount().withdraw(price)) {
 			this.setOwner(player);
 			return true;
 		}
