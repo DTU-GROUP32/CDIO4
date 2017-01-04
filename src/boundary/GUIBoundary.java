@@ -167,7 +167,7 @@ public class GUIBoundary {
 		return response.equals(optionTrue);
 	}
 
-	public boolean getButtonPressed(String message, String... buttons) {
+	public boolean getButtonPressed(String message) {
 		GUI.getUserButtonPressed(message, "OK!");
 		return true;
 	}
