@@ -127,7 +127,7 @@ public class GameBoard {
 				}
 
 				// If construction rate is equal to the smallest construction rate, then add to the buildable list.
-				for(int j = 0; j < propertyGroup.length; i++)
+				for(int j = 0; j < propertyGroup.length; j++)
 				{
 					if(propertyGroup[j].getConstructionRate() == smallestConstructionRate)
 						listOfBuildableProperties.add(propertyGroup[j]);
@@ -138,7 +138,7 @@ public class GameBoard {
 		return listOfBuildableProperties;
 	}
 
-	public ArrayList<Field> getSellableList(Player owner) {
+	public ArrayList<Field> getDemolitionableList(Player owner) {
 
 		ArrayList<Field> listOfSellableProperties = new ArrayList<Field>();
 
@@ -157,7 +157,7 @@ public class GameBoard {
 				// If construction rate is equal to the highest construction rate, then add to the sellable list.
 				if(highestConstructionRate > 0)
 				{
-					for(int j = 0; j < propertyGroup.length; i++)
+					for(int j = 0; j < propertyGroup.length; j++)
 					{
 						if(propertyGroup[j].getConstructionRate() == highestConstructionRate)
 							listOfSellableProperties.add(propertyGroup[j]);
