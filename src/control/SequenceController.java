@@ -97,12 +97,23 @@ public abstract class SequenceController {
 		}
 	}
 
-	/**
-	 *
-	 */
-	public static boolean getMoneySequence(Player player, GameBoard gameBoard, GUIBoundary boundary, PlayerList playerList) {
-		return false;
-	}
+            fieldLoop:
+            for (Field field : sellableList) {
+                if (fieldToSell.equals(field.getName())) {
+                    fieldToSellObject = field;
+                    for (Player player : playerList.getPlayers()) {
+                        if (buyer.equals(player.getName())) {
+                            buyerObject = player;
+                            int price = boundary.getInteger("Which price?", 0, 30000);
+                            fieldToSellObject.tradeField(owner, buyerObject, price);
+                            boundary.setOwner(field.getID(), buyerObject.getName());
+                            break fieldLoop;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 	/**
 	 *
