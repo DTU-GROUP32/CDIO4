@@ -63,4 +63,14 @@ public class Brewery extends Ownable {
 	public int getPropertyGroup() {
 		return 0;
 	}
+
+	@Override
+	public boolean buildConstruction() {
+		return false;
+	}
+
+	@Override
+	public boolean sellConstruction() {
+		return false;
+	}
 }
