@@ -67,7 +67,7 @@ public class GameController {
             if (field instanceof Ownable) {
                 Player ownerOfField = field.getOwner();
                 if (ownerOfField == null) {
-                    SequenceController.buyPropertySequence(player, field, boundary, language);
+                    SequenceController.buyPropertySequence(player, field);
                 } else {
                     if (!field.getOwner().getName().equals(player.getName())) {
                         boundary.getButtonPressed(language.landedOnOwnedField(ownerOfField));

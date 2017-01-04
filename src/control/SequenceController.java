@@ -17,7 +17,9 @@ public abstract class SequenceController {
     /**
      *
      */
-    public static void buildSequence(Player player, GameBoard gameBoard, GUIBoundary boundary) {
+    public static void buildSequence(Player player, GameBoard gameBoard) {
+        GUIBoundary boundary = GUIBoundary.getInstance();
+        LanguageHandler language = LanguageHandler.getInstance();
         ArrayList<Field> buildableList = gameBoard.getBuildableList(player);
         String[] buildableLabels = new String[gameBoard.getBuildableList(player).size()];
         for (int i = 0; i < buildableLabels.length; i++) {
@@ -35,7 +37,9 @@ public abstract class SequenceController {
 	/**
 	 *
 	 */
-	public static void demolitionSequence(Player player, GameBoard gameBoard, GUIBoundary boundary) {
+	public static void demolitionSequence(Player player, GameBoard gameBoard) {
+        GUIBoundary boundary = GUIBoundary.getInstance();
+        LanguageHandler language = LanguageHandler.getInstance();
 		ArrayList<Field> demolitionableList = gameBoard.getDemolitionableList(player);
 		String[] demolitionableLabels = new String[gameBoard.getDemolitionableList(player).size()];
 		for (int i = 0; i < demolitionableLabels.length; i++) {
@@ -54,7 +58,9 @@ public abstract class SequenceController {
 	/**
 	 *
 	 */
-	public static void tradePropertiesSequence(Player owner, GameBoard gameBoard, GUIBoundary boundary, PlayerList playerList) {
+	public static void tradePropertiesSequence(Player owner, GameBoard gameBoard, PlayerList playerList) {
+        GUIBoundary boundary = GUIBoundary.getInstance();
+        LanguageHandler language = LanguageHandler.getInstance();
 		int i = 0;
 		ArrayList<Field> sellableList = gameBoard.getPropertyList(owner);
 		String[] sellableLabels = new String[sellableList.size()];
@@ -109,7 +115,9 @@ public abstract class SequenceController {
 	/**
 	 *
 	 */
-	public static void buyPropertySequence(Player player, Field field, GUIBoundary boundary, LanguageHandler language) {
+	public static void buyPropertySequence(Player player, Field field) {
+	    GUIBoundary boundary = GUIBoundary.getInstance();
+	    LanguageHandler language = LanguageHandler.getInstance();
 		int priceOfField = field.getPrice();
 		if (boundary.getBoolean(language.buyingOfferMsg(priceOfField), language.yes(), language.no())) {
 			if (player.getBankAccount().getBalance() > priceOfField) {
