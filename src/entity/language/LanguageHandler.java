@@ -5,13 +5,20 @@ import entity.Player;
 public class LanguageHandler {
 
 	private Language selectedLanguage;
+	private static LanguageHandler instance;
 
 	/**
 	 * Default constructor that takes a parameter to initialize a entity.language
 	 * @param language
 	 */
-	public LanguageHandler(String language) {
+	private LanguageHandler(String language) {
 		setLanguage(language);
+	}
+	
+	public static LanguageHandler getInstance() {
+		if(instance == null)
+			 instance = new LanguageHandler("Dansk");
+		return instance;
 	}
 
 	/**
