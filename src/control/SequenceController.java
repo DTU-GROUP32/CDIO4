@@ -18,16 +18,17 @@ public abstract class SequenceController {
      *
      */
     public static void buildSequence(Player player, GameBoard gameBoard, GUIBoundary boundary) {
-        int i = 0;
         ArrayList<Field> buildableList = gameBoard.getBuildableList(player);
         String[] buildableLabels = new String[gameBoard.getBuildableList(player).size()];
-        for (Field field : buildableList) {
-            buildableLabels[i++] = field.getName();
+        for (int i = 0; i < buildableLabels.length; i++) {
+            buildableLabels[i] = buildableList.get(i).getName();
         }
         if (buildableLabels.length == 0) {
             boundary.getButtonPressed("You have no buildable properties", "Ok!");
         } else {
             Field fieldToBuildOn = gameBoard.getField(gameBoard.getIndexByName(boundary.getUserSelection("Choose plot to build on", buildableLabels)));
+            fieldToBuildOn.buildConstruction();
+            boundary.updateBalance(player.getName(), player.getBankAccount().getBalance());
         }
     }
 
