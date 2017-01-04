@@ -198,6 +198,20 @@ public class GameBoard {
 	}
 
 	/**
+	 * Returns field index by name. Returns 0 if not found.
+	 * @param name
+	 * @return
+	 */
+	public int getIndexByName(String name){
+		for (Field field : this.fields){
+			if(name.equals(field.getName())){
+				return field.getID();
+			}
+		}
+		return 0;
+	}
+
+	/**
 	 * Removes ownership of every field a player owns
 	 * @param player
 	 */
