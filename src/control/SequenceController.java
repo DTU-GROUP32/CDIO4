@@ -37,9 +37,9 @@ public class SequenceController {
     /**
      *
      */
-    public static void tradePropertiesSequence(Player owner, GameBoard gameBoard, GUIBoundary boundary, PlayerList playerList){
+    public static void tradePropertiesSequence(Player player, GameBoard gameBoard, GUIBoundary boundary, PlayerList playerList){
         int i = 0;
-        ArrayList<Field> sellableList = gameBoard.getPropertyList(owner);
+        ArrayList<Field> sellableList = gameBoard.getPropertyList(player);
         String[] sellableLabels = new String[sellableList.size()];
         for (Field field: sellableList) {
             sellableLabels[i++] = field.getName();
