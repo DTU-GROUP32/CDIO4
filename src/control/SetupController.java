@@ -14,8 +14,8 @@ public class SetupController {
 
 	public SetupController() {
 		boundary = new GUIBoundary();
-		gameBoard = new GameBoard();
 		language = new LanguageHandler("Dansk");
+		gameBoard = new GameBoard(language);
 	}
 
 	public GameBoard setupGameBoard() {
