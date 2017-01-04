@@ -1,19 +1,24 @@
 package entity.fields;
 
+import entity.GameBoard;
 import entity.Player;
+import entity.PlayerList;
 
 public abstract class Field {
 
-	protected boolean ownable;
-
-	/**
-	 * Returns boolean for a field being ownable or not
-	 * @return Boolean
-	 */
-	public boolean isOwnable() {
-		return ownable;
-		}
-
+	protected String name;
+	protected int ID;
+	private static int nextID = 0;
+	
+	public Field(String name){
+		this.name = name;
+		this.ID = nextID++;
+	}
+	
+	public String getName(){
+		return this.name;
+	}
+	
 	/**
 	 * Returns the price of the field
 	 * @return price
@@ -36,17 +41,27 @@ public abstract class Field {
 	 * Method that will evaluate what is going to happen to the player that lands on the field
 	 * @param player
 	 */
-	public abstract void landOnField(Player player);
+	public abstract boolean landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice);
 
 	/**
 	 * Returns rent of the field
 	 * @return rent
 	 */
-	public abstract int getRent();
+	public abstract int getRent(GameBoard gameBoard);
 
 	/**
 	 * Makes you able to buy an ownable field. Will set you to the owner if you want to buy it for certain price
 	 * @param player
 	 */
-	public abstract void buyField(Player player);
+	public abstract boolean buyField(Player player);
+	
+	public abstract boolean tradeField(Player seller, Player buyer, int price);
+	
+	public abstract int getConstructionRate();
+
+	public abstract int getConstructionPrice();
+
+	public abstract int getPawnValue();
+
+	public abstract int getPropertyGroup();
 }
