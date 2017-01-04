@@ -78,7 +78,7 @@ public class GUIBoundary {
 	}
 	
 	public String getUserSelection(String message, String... options) {
-		return GUI.getUserSelection(message, options).toString();
+		return GUI.getUserSelection(message, options);
 	}
 
 	public void setDices(DiceCup diceCup) {
@@ -173,7 +173,7 @@ public class GUIBoundary {
 	}
 
 	public String getUserButtonPressed(String msg, String... buttons) {
-		return GUI.getUserButtonPressed(msg, buttons).toString();
+		return GUI.getUserButtonPressed(msg, buttons);
 	}
 
 	private int convertFieldNumber(int fieldNumber) {

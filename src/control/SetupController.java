@@ -3,18 +3,16 @@ package control;
 import boundary.GUIBoundary;
 import entity.GameBoard;
 import entity.PlayerList;
+import entity.language.Language;
 import entity.language.LanguageHandler;
 
 public class SetupController {
 
-	private GUIBoundary boundary;
+	private GUIBoundary boundary = GUIBoundary.getInstance();
 	private GameBoard gameBoard;
-	private LanguageHandler language;
-	private PlayerList playerList;
+	private LanguageHandler language = LanguageHandler.getInstance();
 
 	public SetupController() {
-		boundary = new GUIBoundary();
-		language = new LanguageHandler("Dansk");
 		gameBoard = new GameBoard(language);
 	}
 
@@ -27,7 +25,6 @@ public class SetupController {
 	 * Method to change & set entity.language for the gameboard
 	 */
 	public LanguageHandler chooseLanguage() {
-		language = new LanguageHandler(boundary.getLanguage());
 		boundary.getButtonPressed(language.notifyLangChange());
 		return language;
 	}
@@ -36,7 +33,7 @@ public class SetupController {
 	 * Method to ask for each players name and generate a player object from it.
 	 */
 	public PlayerList setupPlayers() {
-		playerList = new PlayerList(boundary.getInteger(language.askForNumberOfPlayers(), 2, 6));
+		PlayerList playerList = new PlayerList(boundary.getInteger(language.askForNumberOfPlayers(), 2, 6));
 		for(int i = 0; i < playerList.getPlayers().length; i++)
 		{
 			String name;
