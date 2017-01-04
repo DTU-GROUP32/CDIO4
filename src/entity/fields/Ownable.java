@@ -48,7 +48,7 @@ public abstract class Ownable extends Field {
 	public boolean landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
 		if (this.owner.isInJail() == false)
 			while (player.getBankAccount().transfer(owner, this.getRent(gameBoard)) == false)
-				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance(), playerList);
+				SequenceController.getMoneySequence(player, gameBoard, playerList);
 		return true;
 	}
 

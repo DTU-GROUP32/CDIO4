@@ -17,7 +17,9 @@ public abstract class SequenceController {
     /**
      *
      */
-    public static void buildSequence(Player player, GameBoard gameBoard, GUIBoundary boundary) {
+    public static void buildSequence(Player player, GameBoard gameBoard) {
+        GUIBoundary boundary = GUIBoundary.getInstance();
+        LanguageHandler language = LanguageHandler.getInstance();
         ArrayList<Field> buildableList = gameBoard.getBuildableList(player);
         String[] buildableLabels = new String[gameBoard.getBuildableList(player).size()];
         for (int i = 0; i < buildableLabels.length; i++) {
@@ -35,7 +37,9 @@ public abstract class SequenceController {
 	/**
 	 *
 	 */
-	public static void demolitionSequence(Player player, GameBoard gameBoard, GUIBoundary boundary) {
+	public static void demolitionSequence(Player player, GameBoard gameBoard) {
+        GUIBoundary boundary = GUIBoundary.getInstance();
+        LanguageHandler language = LanguageHandler.getInstance();
 		ArrayList<Field> demolitionableList = gameBoard.getDemolitionableList(player);
 		String[] demolitionableLabels = new String[gameBoard.getDemolitionableList(player).size()];
 		for (int i = 0; i < demolitionableLabels.length; i++) {
@@ -54,25 +58,24 @@ public abstract class SequenceController {
 	/**
 	 *
 	 */
-	public static void tradePropertiesSequence(Player owner, GameBoard gameBoard, GUIBoundary boundary, PlayerList playerList) {
-		int i = 0;
+	public static void tradePropertiesSequence(Player owner, GameBoard gameBoard, PlayerList playerList) {
+        GUIBoundary boundary = GUIBoundary.getInstance();
+        LanguageHandler language = LanguageHandler.getInstance();
 		ArrayList<Field> sellableList = gameBoard.getPropertyList(owner);
 		String[] sellableLabels = new String[sellableList.size()];
 		String[] playerLabels = new String[playerList.getPlayers().length - 1];
 		Field fieldToSellObject;
 		Player buyerObject;
 
-		for (Field field : sellableList) {
-			sellableLabels[i++] = field.getName();
+		for (int i = 0; i < sellableList.size(); i++) {
+			sellableLabels[i] = sellableList.get(i).getName();
 		}
 		if (sellableLabels.length == 0) {
 			boundary.getButtonPressed("Du har ingen felter at sælge", "Ok!");
 		} else {
-			i = 0;
-			for (Player player : playerList.getPlayers()) {
-				if (!player.getName().equals(owner.getName())) {
-					playerLabels[i] = player.getName();
-					i++;
+			for (int i = 1; i < playerList.getPlayers().length; i++) {
+				if (!playerList.getPlayers()[i].getName().equals(owner.getName())) {
+					playerLabels[i] = playerList.getPlayers()[i].getName();
 				}
 			}
 
@@ -109,7 +112,9 @@ public abstract class SequenceController {
 	/**
 	 *
 	 */
-	public static void buyPropertySequence(Player player, Field field, GUIBoundary boundary, LanguageHandler language) {
+	public static void buyPropertySequence(Player player, Field field) {
+	    GUIBoundary boundary = GUIBoundary.getInstance();
+	    LanguageHandler language = LanguageHandler.getInstance();
 		int priceOfField = field.getPrice();
 		if (boundary.getBoolean(language.buyingOfferMsg(priceOfField), language.yes(), language.no())) {
 			if (player.getBankAccount().getBalance() > priceOfField) {

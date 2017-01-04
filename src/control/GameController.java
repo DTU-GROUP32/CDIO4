@@ -67,7 +67,7 @@ public class GameController {
             if (field instanceof Ownable) {
                 Player ownerOfField = field.getOwner();
                 if (ownerOfField == null) {
-                    SequenceController.buyPropertySequence(player, field, boundary, language);
+                    SequenceController.buyPropertySequence(player, field);
                 } else {
                     if (!field.getOwner().getName().equals(player.getName())) {
                         boundary.getButtonPressed(language.landedOnOwnedField(ownerOfField));
@@ -92,9 +92,9 @@ public class GameController {
                 gameBoard.releasePlayersFields(player);
             }
         } else if (turnChoice.equals(language.build())) {
-            SequenceController.buildSequence(player, gameBoard, boundary);
+            SequenceController.buildSequence(player, gameBoard);
         } else if (turnChoice.equals(language.trade())) {
-            SequenceController.tradePropertiesSequence(player, gameBoard, boundary, playerList);
+            SequenceController.tradePropertiesSequence(player, gameBoard, playerList);
         }
     }
 
