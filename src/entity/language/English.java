@@ -331,5 +331,14 @@ public class English implements Language{
 	@Override
 	public String printDiceChangeNotExecuted(){
 		return "Dice could not be changed";
-	}	
+	}
+
+	@Override
+	public String throwDices(){ return "Throw Dices"; }
+
+	@Override
+	public String build(){ return "Build"; }
+
+	@Override
+	public String trade(){ return "Trade"; }
 }

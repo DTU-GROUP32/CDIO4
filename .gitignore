@@ -1,5 +1,7 @@
-# Intellij IDEA
+# Intellij & Eclipise IDEA
 .idea/
+.classpath
+.project
 
 # Compiled files
 out/

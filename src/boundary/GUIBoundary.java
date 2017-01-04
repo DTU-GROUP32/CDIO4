@@ -10,116 +10,56 @@ import desktop_fields.Refuge;
 import desktop_fields.Shipping;
 import desktop_fields.Street;
 import desktop_fields.Tax;
+import desktop_fields.Jail;
+import desktop_fields.Chance;
 import desktop_resources.GUI;
 import entity.DiceCup;
 import entity.GameBoard;
 import entity.Player;
 import entity.language.LanguageHandler;
+import entity.fields.*;
 
 public class GUIBoundary {
 
 	public void createGameBoard(GameBoard gameBoard, LanguageHandler language) {
 		Field[] fields = new Field[gameBoard.getFields().length];
-		fields[0] = new Street.Builder()
-				.setTitle(language.fieldNames(0))
-				.setSubText(language.fieldPrices(0))
-				.setBgColor(Color.RED)
-				.build();
-		fields[1] = new Street.Builder()
-				.setTitle(language.fieldNames(1))
-				.setSubText(language.fieldPrices(1))
-				.setBgColor(Color.cyan)
-				.build();
-		fields[2] = new Shipping.Builder()
-				.setTitle(language.fieldNames(2))
-				.setSubText(language.fieldPrices(2))
-				.build();
-		fields[3] = new Street.Builder()
-				.setTitle(language.fieldNames(3))
-				.setSubText(language.fieldPrices(3))
-				.setBgColor(Color.cyan)
-				.build();
-		fields[4] = new Brewery.Builder()
-				.setTitle(language.fieldNames(4))
-				.setSubText(language.fieldPrices(4))
-				.build();
-		fields[5] = new Street.Builder()
-				.setTitle(language.fieldNames(5))
-				.setSubText(language.fieldPrices(5))
-				.setBgColor(Color.PINK)
-				.build();
-		fields[6] = new Refuge.Builder()
-				.setTitle(language.fieldNames(6))
-				.setSubText(language.fieldDescription(6))
-				.build();
-		fields[7] = new Street.Builder()
-				.setTitle(language.fieldNames(7))
-				.setSubText(language.fieldPrices(7))
-				.setBgColor(Color.PINK)
-				.build();
-		fields[8] = new Shipping.Builder()
-				.setTitle(language.fieldNames(8))
-				.setSubText(language.fieldPrices(8))
-				.build();
-		fields[9] = new Street.Builder()
-				.setTitle(language.fieldNames(9))
-				.setSubText(language.fieldPrices(9))
-				.setBgColor(Color.GREEN)
-				.build();
-		fields[10] = new Tax.Builder()
-				.setTitle(language.fieldNames(10))
-				.setDescription(language.fieldDescription(10))
-				.build();
-		fields[11] = new Street.Builder()
-				.setTitle(language.fieldNames(11))
-				.setSubText(language.fieldPrices(11))
-				.setBgColor(Color.GREEN)
-				.build();
-		fields[12] = new Brewery.Builder()
-				.setTitle(language.fieldNames(12))
-				.setSubText(language.fieldPrices(12))
-				.build();
-		fields[13] = new Street.Builder()
-				.setTitle(language.fieldNames(13))
-				.setSubText(language.fieldPrices(13))
-				.setBgColor(Color.GRAY)
-				.build();
-		fields[14] = new Shipping.Builder()
-				.setTitle(language.fieldNames(14))
-				.setSubText(language.fieldPrices(14))
-				.build();
-		fields[15] = new Street.Builder()
-				.setTitle(language.fieldNames(15))
-				.setSubText(language.fieldPrices(15))
-				.setBgColor(Color.GRAY)
-				.build();
-		fields[16] = new Refuge.Builder()
-				.setTitle(language.fieldNames(16))
-				.setSubText(language.fieldDescription(16))
-				.build();
-		fields[17] = new Street.Builder()
-				.setTitle(language.fieldNames(17))
-				.setSubText(language.fieldPrices(17))
-				.setBgColor(Color.WHITE)
-				.build();
-		fields[18] = new Tax.Builder()
-				.setTitle(language.fieldNames(18))
-				.setDescription(language.fieldDescription(18))
-				.build();
-		fields[19] = new Street.Builder()
-				.setTitle(language.fieldNames(19))
-				.setSubText(language.fieldPrices(19))
-				.setBgColor(Color.WHITE)
-				.build();
-		fields[20] = new Shipping.Builder()
-				.setTitle(language.fieldNames(20))
-				.setSubText(language.fieldPrices(20))
-				.build();
-		fields[21] = new Street.Builder()
-				.setTitle(language.fieldNames(21))
-				.setSubText(language.fieldPrices(21))
-				.setBgColor(Color.YELLOW)
-				.build();
+		for(int i = 0; i < gameBoard.getFields().length; i++){
+			if(gameBoard.getField(i) instanceof entity.fields.Brewery){
+				fields[i] = new Brewery.Builder()
+						.setTitle(language.fieldNames(i))
+						.setSubText(language.fieldPrices(i))
+						.build();
+			}else if(gameBoard.getField(i) instanceof entity.fields.Chance){
+				fields[i] = new Chance.Builder()
+						.build();
+			}else if(gameBoard.getField(i) instanceof entity.fields.Jail){
+				fields[i] = new Jail.Builder()
+						.setTitle(language.fieldNames(i))
+						.setDescription(language.fieldDescription(i))
+						.build();
+			}else if(gameBoard.getField(i) instanceof entity.fields.Plot){
+				fields[i] = new Street.Builder()
+						.setTitle(language.fieldNames(i))
+						.setSubText(language.fieldPrices(i))
+						.setBgColor(Color.RED)
+						.build();
+			}else if(gameBoard.getField(i) instanceof entity.fields.Refuge){
+				fields[i] = new Refuge.Builder()
+						.setTitle(language.fieldNames(i))
+						.setSubText(language.fieldDescription(i))
+						.build();
+			}else if(gameBoard.getField(i) instanceof entity.fields.ShippingLine){
+				fields[i] = new Shipping.Builder()
+						.setTitle(language.fieldNames(i))
+						.setSubText(language.fieldPrices(i))
+						.build();
+			}else if(gameBoard.getField(i) instanceof entity.fields.Tax){
+				fields[i] = new Tax.Builder()
+						.setTitle(language.fieldNames(i))
+						.setDescription(language.fieldDescription(i))
+						.build();
+			}
+		}
 		GUI.create(fields);
 		GUI.setDice(1, 1);
 	}
@@ -218,7 +158,7 @@ public class GUIBoundary {
 		return response.equals(optionTrue);
 	}
 
-	public boolean getButtonPressed(String msg, String... buttons) {
+	public boolean getButtonPressed(String message, String... buttons) {
 		GUI.getUserButtonPressed(message, "OK!");
 		return true;
 	}
@@ -236,7 +176,7 @@ public class GUIBoundary {
 
 	public void releasePlayersFields(GameBoard gameBoard, Player player) {
 		for(int i = 0; i < gameBoard.getFields().length; i++)
-			if(gameBoard.getField(i).isOwnable())
+			if(gameBoard.getField(i) instanceof Ownable)
 				if(gameBoard.getField(i).getOwner() != null)
 					if(gameBoard.getField(i).getOwner().getName().equals(player.getName()))
 						GUI.removeOwner(convertFieldNumber(i));

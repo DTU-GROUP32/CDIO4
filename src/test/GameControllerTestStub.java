@@ -3,6 +3,7 @@ package test;
 import entity.GameBoard;
 import entity.Player;
 import entity.fields.Field;
+import entity.fields.Ownable;
 
 public class GameControllerTestStub {
 	
@@ -16,21 +17,6 @@ public class GameControllerTestStub {
 	 */
 	public void playTurnTest(GameBoard gameBoard, Player player, boolean wantToBuy) {
 		Field field = gameBoard.getField(player.getOnField());
-		if(field.isOwnable())
-		{
-			if(field.getOwner() == null)
-			{
-				if(wantToBuy)
-				{
-						field.buyField(player);
-				}
-			} else
-			{
-				field.landOnField(player);
-			}
-		} else
-		{
-			field.landOnField(player);
-		}
+		
 	}
 }

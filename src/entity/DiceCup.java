@@ -72,8 +72,8 @@ public class DiceCup {
 	 * @param dice
 	 * @return
 	 */
-	    public static boolean diceEvalEqual(DiceCup dice) {
-	        return (dices.getDices()[0].getFaceValue() == dices.getDices()[1].getFaceValue());
+	    public boolean diceEvalEqual(DiceCup dice) {
+	        return (this.dices[0].getFaceValue() == this.dices[1].getFaceValue());
 	    }
 	    
 }
