@@ -20,6 +20,15 @@ import entity.language.LanguageHandler;
 import entity.fields.*;
 
 public class GUIBoundary {
+	
+	private static GUIBoundary instance;
+	
+	public static GUIBoundary getInstance() {
+		if(instance == null) {
+			instance = new GUIBoundary();
+		}
+		return instance;
+	}
 
 	public void createGameBoard(GameBoard gameBoard, LanguageHandler language) {
 		Field[] fields = new Field[gameBoard.getFields().length];
