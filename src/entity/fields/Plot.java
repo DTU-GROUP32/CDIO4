@@ -40,6 +40,7 @@ public class Plot extends Ownable {
 
 	public boolean sellConstruction(){
 		owner.getBankAccount().deposit(constructionPrice / 2);
+		constructionRate--;
 		return true;
 	}
 
