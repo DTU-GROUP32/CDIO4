@@ -43,8 +43,8 @@ public class Chance extends Field {
 			player.getBankAccount().deposit(3000);
 			break;
 		case 7:
-			//TODO Tjek op på pantsætnings sekvens
-			//TODO Gælder også for ALLE nedenstående withdraw-metoder
+			//TODO Tjek op pï¿½ pantsï¿½tnings sekvens
+			//TODO Gï¿½lder ogsï¿½ for ALLE nedenstï¿½ende withdraw-metoder
 			boolean check = true;
 			for(int i = 0; i < playerList.getPlayers().length; i++) {
 				if(playerList.getPlayer(i).getBankAccount().getBalance() < 200)
@@ -90,7 +90,7 @@ public class Chance extends Field {
 				return false;
 			break;
 		case 17:
-			ArrayList<Field> list = gameBoard.getSellableList(player);
+			ArrayList<Field> list = gameBoard.getDemolitionableList(player);
 			int amountToPay = 0;
 			
 			if(list.size() > 0)
@@ -108,7 +108,7 @@ public class Chance extends Field {
 			
 			break;
 		case 18:
-			ArrayList<Field> list1 = gameBoard.getSellableList(player);
+			ArrayList<Field> list1 = gameBoard.getDemolitionableList(player);
 			int amountToPay1 = 0;
 			
 			if(list1.size() > 0)
@@ -133,7 +133,7 @@ public class Chance extends Field {
 			player.setInJail(true);
 			break;
 		case 21:
-			//TODO Nærmeste redderi (købe sekvens)
+			//TODO Nï¿½rmeste redderi (kï¿½be sekvens)
 			break;
 		case 22:
 			//TODO Samme som 21
@@ -158,6 +158,9 @@ public class Chance extends Field {
 			break;
 		case 27:
 			player.setOnField(player.getOnField()-3);
+			if(player.getOnField() < 0){
+				player.setOnField(40+player.getOnField());
+			}
 			gameBoard.getField(player.getOnField()).landOnField(player, roll, gameBoard, playerList, taxChoice);
 			break;
 		default:
