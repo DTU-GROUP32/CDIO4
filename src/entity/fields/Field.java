@@ -18,6 +18,8 @@ public abstract class Field {
 	public String getName(){
 		return this.name;
 	}
+
+	public int getID(){ return this.ID; }
 	
 	/**
 	 * Returns the price of the field

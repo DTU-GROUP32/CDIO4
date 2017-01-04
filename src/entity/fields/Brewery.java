@@ -16,9 +16,7 @@ public class Brewery extends Ownable {
 
 	@Override
 	public boolean landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
-		if(player.getBankAccount().transfer(owner, this.getRent(gameBoard) * roll))
-			return true;
-		return false;
+		return player.getBankAccount().transfer(owner, this.getRent(gameBoard) * roll);
 	}
 
 	@Override

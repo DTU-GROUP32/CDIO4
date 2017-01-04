@@ -89,7 +89,7 @@ public class GameBoard {
 	}
 
 	public boolean evalPropertyGroupSameOwner(Field[] propertyGroup) {
-		boolean ownedBySame = false;
+		boolean ownedBySame;
 		if(propertyGroup.length == 2)
 			ownedBySame = propertyGroup[0].getOwner() == propertyGroup[1].getOwner();
 		else ownedBySame = propertyGroup[0].getOwner() == propertyGroup[1].getOwner() && propertyGroup[0].getOwner() == propertyGroup[2].getOwner();

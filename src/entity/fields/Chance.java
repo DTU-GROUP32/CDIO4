@@ -60,7 +60,7 @@ public class Chance extends Field {
 			break;
 		case 10:
 			while(player.getBankAccount().withdraw(200) == false)
-				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance, playerList);
+				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance(), playerList);
 			break;
 		case 11:
 			while(player.getBankAccount().withdraw(1000) == false)
