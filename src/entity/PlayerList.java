@@ -29,7 +29,7 @@ public class PlayerList {
 	 * @return Boolean
 	 */
 	public boolean isPlayerBroke(int atIndex) {
-		return players[atIndex].getBankAccount().getBalance() <= 0;
+		return players[atIndex].getBankAccount().getBalance() < 0;
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class PlayerList {
 	public boolean isThereAWinner() {
 		int brokePlayers = 0;
 		for (int i = 0; i < players.length; i++)
-			if (players[i].getBankAccount().getBalance() <= 0)
+			if (players[i].getBankAccount().getBalance() < 0)
 				brokePlayers++;
 		return brokePlayers == players.length - 1;
 	}

@@ -180,5 +180,7 @@ public abstract class SequenceController {
 	public static void getMoneySequence(Player player, GameBoard gameBoard, PlayerList playerList) {
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
+		
+		
 	}
 }
