@@ -189,16 +189,30 @@ public class Dansk implements Language{
 	public String fieldDescription(int fieldNumber) {
 		String fieldName;
 		switch (fieldNumber) {
-		case 6:  fieldName = "Modtag 500 mønter";
+		case 0:  fieldName = "Modtag 4.000 kr. fra banken";
 		break;
-		case 10: fieldName = "Betal 2000 mønter";
+		case 2:  fieldName = "Tag det øverste af lykkekortene";
 		break;
-		case 16: fieldName = "Modtag 5000 mønter";
+		case 4:  fieldName = "Betal 10% eller kr.4000";
 		break;
-		case 18: fieldName = "Betal 4000 eller 10% af dine mønter";
+		case 7: fieldName = "Tag det øverste af lykkekortene";
 		break;
-		default: fieldName = "Ukendt felt DESVÆRRE!";
+		case 10: fieldName = "Går i fængsel";
 		break;
+		case 17: fieldName = "Tag det øverste af lykkekortene";
+		break;
+		case 22: fieldName = "Tag det øverste af lykkekortene";
+		break;
+		case 30: fieldName = "Går i fængsel";
+		break;
+		case 33: fieldName = "Tag det øverste af lykkekortene";
+		break;
+		case 36: fieldName = "Tag det øverste af lykkekortene";
+		break;
+		case 38: fieldName = "Betal skat";
+		break;
+
+
 		}
 		return fieldName;
 	}
@@ -233,7 +247,7 @@ public class Dansk implements Language{
 		switch (fieldNumber) {
 		case 0:  fieldString = "START";
 		break;
-		case 1:  fieldString = "Du bliver inviteret til fest hos stammelejren!";
+		case 1:  fieldString = "Du er ankommet til Rødovrevej";
 		break;
 		case 2:  fieldString = "Du sejler en tur med Second Sail";
 		break;
@@ -274,8 +288,42 @@ public class Dansk implements Language{
 		case 20: fieldString = "Du sejler en tur med Privateer Armade";
 		break;	
 		case 21: fieldString = "Du er inviteret ind i det store slot!";
-		break;	
-		default: fieldString = "Ukendt felt DESVÆRRE!";
+		break;
+		case 22: fieldString = "Du er inviteret ind i det store slot!";  // <------------
+		break;
+		case 23: fieldString = "Du er inviteret ind i det store slot!";
+		break;
+		case 24: fieldString = "Du er inviteret ind i det store slot!";
+		break;
+		case 25: fieldString = "Du er inviteret ind i det store slot!";
+		break;
+		case 26: fieldString = "Du er inviteret ind i det store slot!";
+		break;
+		case 27: fieldString = "Du er inviteret ind i det store slot!";
+		break;
+		case 28: fieldString = "Du er inviteret ind i det store slot!";
+		break;
+		case 29: fieldString = "Du er inviteret ind i det store slot!";
+		break;
+		case 30: fieldString = "Du er inviteret ind i det store slot!";
+		break;
+		case 31: fieldString = "Du er inviteret ind i det store slot!";
+		break;
+		case 32: fieldString = "Du er inviteret ind i det store slot!";
+		break;
+		case 33: fieldString = "Du er inviteret ind i det store slot!";
+		break;
+		case 34: fieldString = "Du er inviteret ind i det store slot!";
+		break;
+		case 35: fieldString = "Du er inviteret ind i det store slot!";
+		break;
+		case 36: fieldString = "Du er inviteret ind i det store slot!";
+		break;
+		case 37: fieldString = "Du er inviteret ind i det store slot!";
+		break;
+		case 38: fieldString = "Du er inviteret ind i det store slot!";
+		break;
+		case 39: fieldString = "Du er inviteret ind i det store slot!";
 		break;
 		}
 		return fieldString;
@@ -330,13 +378,29 @@ public class Dansk implements Language{
 	public String nonOwnableFieldEffectMsg(int fieldNumber) {
 		String message;
 		switch (fieldNumber) {
-		case 6:  message = "Du er landet på Klosteret og får 500 mønter!";
+		case 0:  message = "Du er landet på START og får 4.000 kr.";
 		break;
-		case 10: message = "Du landede på Guldminen og betaler 2000 mønter i skat!";
+		case 2: message = "Du landede på Prøv lykken og du skal tage det øverste af lykkekortene";
+		break;
+		case 4: message = "Du landede på Skat feltet og skal betale 10% eller kr.4000";
+		break;
+		case 7: message = "Du landede på Prøv lykken og du skal tage det øverste af lykkekortene";
+		break;
+		case 10: message = "Du landede på fængsel og skal går i fængsel";
 		break;
 		case 16: message = "Du er landet på Fæstningen og får 5000 mønter";
 		break;
-		default: message = "Ukendt felt DESVÆRRE!";
+		case 17: message = "Du landede på Prøv lykken og du skal tage det øverste af lykkekortene";
+		break;
+		case 22: message = "Du landede på Prøv lykken og du skal tage det øverste af lykkekortene";
+		break;
+		case 30: message = "Du landede på fængsel og skal går i fængsel";
+		break;
+		case 33: message = "Du landede på Prøv lykken og du skal tage det øverste af lykkekortene";
+		break;
+		case 36: message = "Du landede på Prøv lykken og du skal tage det øverste af lykkekortene";
+		break;
+		case 38: message = "Du landede på Skat feltet og skal betale 10% eller kr.4000";
 		break;
 		}
 		return message;
@@ -363,18 +427,46 @@ public class Dansk implements Language{
 
 	@Override
 	public String printRules(){
-		return "Dette spil er et terningespil mellem 2 personer. Du slår med terninger og lander på et felt fra 2-12. \nDisse felter har enten en negativ eller positiv effekt på din beholdning. Her er vist listen over felterne: \n"
-				+ "2. Tower: +250 \n"
-				+ "3. Crater: -100 \n"
-				+ "4. Palace gates: +100 \n"
-				+ "5. Cold Desert: -20 \n"
-				+ "6. Walled city: +180 \n"
-				+ "7. Monastery: 0 \n"
-				+ "8. Black cave: -70 \n"
-				+ "9. Huts in the mountain: +60 \n"
-				+ "10. The Werewall (werewolf-wall): -80, men spilleren får en ekstra tur \n"
-				+ "11. The pit: -50 \n"
-				+ "12. Goldmine: +650";
+		return "Dette spil er et terningespil mellem 2 personer. Du slår med terninger og lander på et felt fra 1-39. \nDisse felter har enten en negativ eller positiv effekt på din beholdning. Her er vist listen over felterne: \n"
+				+ "1. Rødovrevej: 1200 kr. \n"
+				+ "2. Prøv lykken: ? \n"
+				+ "3. Hvidovrevej: 1200 kr. \n"
+				+ "4. Skat: 10% eller 4.000 kr. \n"
+				+ "5. SFL: 4000 kr. \n"
+				+ "6. Roskildevej: 2000 kr. \n"
+				+ "7. Prøv lykken: ? \n"
+				+ "8. Valby Langgade: 2000 kr. \n"
+				+ "9. Allégade: 2400 kr. \n"
+				+ "10. Fængsel \n"
+				+ "11. Frederiksberg Alle: 2800 kr. \n"
+				+ "12. TUBORG: 3000 kr. \n"
+				+ "13. Bülowsvej: 4700 kr. \n"
+				+ "14. Gl. Kongevej: 3200 kr. \n"
+				+ "15. Kalundborg/ Århus: 4000 k. \n"
+				+ "16. Bernstorffsvej: 3600 kr. \n"
+				+ "17. Prøv lykken: ? \n"
+				+ "18. Hellerupvej: 3600 kr. \n"
+				+ "19. Strandvej: 4000 kr. \n"
+				+ "20. Parkering: Bank \n"
+				+ "21. Trianglen: 4400 kr. \n"
+				+ "22. Prøv lykken: ? \n"
+				+ "23. Østerbrogade: 4400 kr. \n"
+				+ "24. Grønningen: 4800 kr. \n"
+				+ "25. DFDS SEAWAYS: 4000 kr. \n"
+				+ "26. Bredgade: 5200 kr. \n"
+				+ "27. Kgs.Nytorv: 5200 kr. \n"
+				+ "28. CocaCola: 3000 kr. \n"
+				+ "29. Østergade: 5600 kr. \n"
+				+ "30. Fængsle: fængsel \n"
+				+ "31. Amagertorv: 6000 kr. \n"
+				+ "32. Vimmelskaftet: 6000 kr. \n"
+				+ "33. Prøv lykken: ? \n"
+				+ "34. Nygade: 6400 kr. \n"
+				+ "35. Helsskov/ Knudshoved: 4000 kr. \n"
+				+ "36. Prøv lykken: ? \n"
+				+ "37. Frederiksberggade: 7000 kr. \n"
+				+ "38. Skat: 2000 kr. \n"
+				+ "39. Rådhuspladsen: 8000 kr. \n"
 	}
 
 	@Override
