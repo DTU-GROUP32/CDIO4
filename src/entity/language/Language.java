@@ -61,13 +61,32 @@ public interface Language {
 	String printDiceChangeNotExecuted();
 
 	String throwDices();
-
-	String build();
-
-	String trade();
-
-	// Updating Language class regards to changes in SequenceController class
-
+	
+	String notBuildable();
+	
+	String buildable();
+	
+	String notdemolitionable();
+	
+	String choosedemolition();
+	
+	String notTradeable();
+	
+	String choosePlotTrade();
+	
+	String chooseBuyerTrade();
+	
+	String tradePrice();
+	
+	String wantToTrade();
+	
+	String noPawnableFields();
+	
+	String choosePawnField();
+	
+	String pawnSucces();
+	
+	String notPawnable();
 
 
 }
