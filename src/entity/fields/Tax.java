@@ -11,7 +11,8 @@ public class Tax extends Field {
 	private int taxRate; //in percent
 
 	/**
-	 * Default constructor. Tax, which is not ownable, will have a tax amount and a tax rate, which is automatically set to 0.
+	 * Constructor. Tax, which is not ownable, will have a name, a tax amount and a tax rate, which is set to 0 with this constructor.
+	 * @param name
 	 * @param taxAmount
 	 */
 	public Tax(String name, int taxAmount) {
@@ -19,7 +20,8 @@ public class Tax extends Field {
 	}
 
 	/**
-	 * Constructor that has a tax amount and a tax rate
+	 * Constructor. Tax, which is not ownable, will have a name, a tax amount and a tax rate.
+	 * @param name
 	 * @param taxAmount
 	 * @param taxRate
 	 */
@@ -44,6 +46,18 @@ public class Tax extends Field {
 			return true;
 		}
 	}
+	
+	@Override
+	public int getTaxAmount() {
+		return this.taxAmount;
+	}
+
+	@Override
+	public int getTaxRate() {
+		return this.taxRate;
+	}
+	
+	// all methods under this line are default methods
 
 	@Override
 	public int getPrice() {
@@ -56,11 +70,10 @@ public class Tax extends Field {
 	}
 
 	@Override
-	public void setOwner(Player newOwner) {
-	}
+	public void setOwner(Player newOwner) {}
 
 	@Override
-	public int getRent(GameBoard gameBoard) {
+	public int getRent(GameBoard gameBoard, int roll) {
 		return 0;
 	}
 
@@ -120,13 +133,10 @@ public class Tax extends Field {
 	}
 
 	@Override
-	public void releasePawnField() {
-		
-	}
+	public void releasePawnField() {}
 
 	@Override
-	public void setConstructionRate(int rate) {
-	}
+	public void setConstructionRate(int rate) {}
 
 	@Override
 	public boolean getIsPawned() {
@@ -134,12 +144,17 @@ public class Tax extends Field {
 	}
 
 	@Override
-	public int[] getRent() {
-		return null;
+	public int getTopCardNumber() {
+		return 0;
 	}
 
 	@Override
-	public int getTopCardNumber() {
+	public int getBonus() {
 		return 0;
+	}
+
+	@Override
+	public int[] getRentArray() {
+		return null;
 	}
 }

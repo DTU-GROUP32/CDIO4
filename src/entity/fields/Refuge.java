@@ -9,7 +9,8 @@ public class Refuge extends Field {
 	private int bonus;
 
 	/**
-	 * Constructor. Refuge, which is not ownable, that has a bonus
+	 * Constructor. Refuge, which is not ownable, that has a name and a bonus
+	 * @param name
 	 * @param bonus
 	 */
 	public Refuge(String name, int bonus) {
@@ -17,19 +18,18 @@ public class Refuge extends Field {
 		this.bonus = bonus;
 	}
 
-	/**
-	 * Returns the bonus
-	 * @return
-	 */
-	public int getBonus() {
-		return bonus;
-	}
-
 	@Override
 	public boolean landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
 		player.getBankAccount().deposit(bonus);
 		return false;
 	}
+	
+	@Override
+	public int getBonus() {
+		return bonus;
+	}
+	
+	// all methods under this line are default methods
 
 	@Override
 	public int getPrice() {
@@ -42,13 +42,10 @@ public class Refuge extends Field {
 	}
 
 	@Override
-	public void setOwner(Player newOwner) {
-		// TODO Auto-generated method stub
-
-	}
+	public void setOwner(Player newOwner) {}
 
 	@Override
-	public int getRent(GameBoard gameBoard) {
+	public int getRent(GameBoard gameBoard, int roll) {
 		return 0;
 	}
 
@@ -108,12 +105,10 @@ public class Refuge extends Field {
 	}
 
 	@Override
-	public void releasePawnField() {
-	}
+	public void releasePawnField() {}
 
 	@Override
-	public void setConstructionRate(int rate) {
-	}
+	public void setConstructionRate(int rate) {}
 
 	@Override
 	public boolean getIsPawned() {
@@ -121,12 +116,22 @@ public class Refuge extends Field {
 	}
 
 	@Override
-	public int[] getRent() {
-		return null;
+	public int getTopCardNumber() {
+		return 0;
 	}
 
 	@Override
-	public int getTopCardNumber() {
+	public int getTaxAmount() {
 		return 0;
+	}
+
+	@Override
+	public int getTaxRate() {
+		return 0;
+	}
+
+	@Override
+	public int[] getRentArray() {
+		return null;
 	}
 }

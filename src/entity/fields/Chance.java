@@ -11,6 +11,11 @@ public class Chance extends Field {
 
 	private static int[] chanceCards = {1,1,1,2,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,19,20,20,21,21,22,23,24,25,26,27};
 	
+	/**
+	 * Constructor for the Chance field, only takes a name.
+	 * The constructor also shuffles the "chance cards" represented in the array.
+	 * @param name
+	 */
 	public Chance(String name) {
 		super(name);
 		
@@ -205,6 +210,8 @@ public class Chance extends Field {
 		return chanceCards[0];
 	}
 	
+	// all methods under this line are default methods
+	
 	@Override
 	public int getPrice() {
 		return 0;
@@ -216,12 +223,10 @@ public class Chance extends Field {
 	}
 
 	@Override
-	public void setOwner(Player newOwner) {
-		
-	}
+	public void setOwner(Player newOwner) {}
 
 	@Override
-	public int getRent(GameBoard gameBoard) {
+	public int getRent(GameBoard gameBoard, int roll) {
 		return 0;
 	}
 
@@ -281,12 +286,10 @@ public class Chance extends Field {
 	}
 
 	@Override
-	public void releasePawnField() {
-	}
+	public void releasePawnField() {}
 
 	@Override
-	public void setConstructionRate(int rate) {
-	}
+	public void setConstructionRate(int rate) {}
 
 	@Override
 	public boolean getIsPawned() {
@@ -294,7 +297,22 @@ public class Chance extends Field {
 	}
 
 	@Override
-	public int[] getRent() {
+	public int getBonus() {
+		return 0;
+	}
+
+	@Override
+	public int getTaxAmount() {
+		return 0;
+	}
+
+	@Override
+	public int getTaxRate() {
+		return 0;
+	}
+
+	@Override
+	public int[] getRentArray() {
 		return null;
 	}
 	
