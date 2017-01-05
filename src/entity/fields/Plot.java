@@ -63,5 +63,10 @@ public class Plot extends Ownable {
 	 */
 	public int getPropertyGroup() {
 		return propertyGroup;
+	}
+
+	@Override
+	public void setConstructionRate(int rate) {
+		this.constructionRate = rate;
 	}	
 }

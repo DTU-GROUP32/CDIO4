@@ -58,8 +58,11 @@ public class BankAccount {
 	 * Get the current balance of the BankAccount.
 	 * @return the current balance.
 	 */
-	public int getBalance()
-	{
+	public int getBalance() {
 		return this.balance;
+	}
+	
+	public void setBalance(int balance) {
+		this.balance = balance;
 	}
 }

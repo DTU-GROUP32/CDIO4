@@ -20,9 +20,9 @@ import entity.fields.Ownable;
 import entity.language.LanguageHandler;
 
 public class GUIBoundary {
-	
+
 	private static GUIBoundary instance;
-	
+
 	public static GUIBoundary getInstance() {
 		if(instance == null) {
 			instance = new GUIBoundary();
@@ -32,7 +32,7 @@ public class GUIBoundary {
 
 	public void createGameBoard(GameBoard gameBoard, LanguageHandler language) {
 		Field[] fields = new Field[gameBoard.getFields().length];
-		
+
 		for(int i = 0; i < gameBoard.getFields().length; i++){
 			if(gameBoard.getField(i) instanceof entity.fields.Brewery){
 				fields[i] = new Brewery.Builder()
@@ -75,10 +75,10 @@ public class GUIBoundary {
 		GUI.create(fields);
 		GUI.setDice(1, 1);
 	}
-	
+
 	private Color getPropertyGroupColor(int propertyGroup) {
 		Color color = null;
-		
+
 		switch(propertyGroup) {
 		case 0:
 			color = new Color(38, 131, 212); // Lyseblå
@@ -107,15 +107,15 @@ public class GUIBoundary {
 		default:
 			break;
 		}
-		
+
 		return color;
-		
+
 	}
 
 	public String getLanguage() {
 		return GUI.getUserSelection("Select entity.language. \nVælg sprog.", "Dansk", "English");
 	}
-	
+
 	public String getUserSelection(String message, String... options) {
 		return GUI.getUserSelection(message, options);
 	}
@@ -192,7 +192,7 @@ public class GUIBoundary {
 	public void setOwner(int fieldNumber, String playerName) {
 		GUI.setOwner(convertFieldNumber(fieldNumber), playerName);
 	}
-	
+
 	public int getInteger(String message) {
 		return GUI.getUserInteger(message);
 	}
@@ -229,9 +229,9 @@ public class GUIBoundary {
 	public void releasePlayersFields(GameBoard gameBoard, Player player) {
 		for(int i = 0; i < gameBoard.getFields().length; i++)
 			if(gameBoard.getField(i) instanceof Ownable)
-				if(gameBoard.getField(i).getOwner() != null)
-					if(gameBoard.getField(i).getOwner().getName().equals(player.getName()))
-						GUI.removeOwner(convertFieldNumber(i));
+				if(gameBoard.getField(i).getOwner().getName().equals(player.getName())) {
+					GUI.removeOwner(convertFieldNumber(i));
+				}
 	}
 
 	public void updateConstructionRate(entity.fields.Field field){
@@ -242,4 +242,17 @@ public class GUIBoundary {
 			GUI.setHouses(field.getID(), field.getConstructionRate());
 		}
 	}
+	
+	public void updatePawnStatus(entity.fields.Field field) {
+		if(field.getIsPawned()) {
+			GUI.setSubText(field.getID(), "PANTSAT");
+		} else {
+			if(field.getOwner() == null)
+				GUI.setSubText(field.getID(), LanguageHandler.getInstance().fieldPrices(field.getID()));
+			else
+				GUI.setSubText(field.getID(), field.getOwner().getName());
+		}
+			
+	}
+
 }

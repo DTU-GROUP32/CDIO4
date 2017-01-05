@@ -63,17 +63,23 @@ public abstract class Field {
 	
 	public abstract boolean pawnField();
 	
-	public abstract boolean releasePawnedField();
+	public abstract boolean undoPawnField();
+	
+	public abstract void releasePawnField();
 	
 	public abstract boolean buildConstruction();
 	
 	public abstract boolean sellConstruction();
 	
 	public abstract int getConstructionRate();
+	
+	public abstract void setConstructionRate(int rate);
 
 	public abstract int getConstructionPrice();
 
 	public abstract int getPawnValue();
+	
+	public abstract boolean getIsPawned();
 
 	public abstract int getPropertyGroup();
 }

@@ -47,7 +47,7 @@ public abstract class Ownable extends Field {
 	public boolean landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
 		if (this.owner.isInJail() == false || this.isPawned == false)
 			while (player.getBankAccount().transfer(owner, this.getRent(gameBoard)) == false)
-				SequenceController.getMoneySequence(player, gameBoard, playerList);
+				SequenceController.getMoneySequence(player, this.owner, gameBoard, playerList, this.getRent(gameBoard));
 		return true;
 	}
 
@@ -86,7 +86,7 @@ public abstract class Ownable extends Field {
 		return false;
 	}
 
-	public boolean releasePawnedField() {
+	public boolean undoPawnField() {
 		if (this.isPawned == true) {
 			this.owner.getBankAccount().withdraw(pawnValue * 110 / 100);
 			this.isPawned = false;
@@ -95,5 +95,11 @@ public abstract class Ownable extends Field {
 		return false;
 	}
 
-
+	public void releasePawnField() {
+		this.isPawned = false;
+	}
+	
+	public boolean getIsPawned() {
+		return this.isPawned;
+	}
 }

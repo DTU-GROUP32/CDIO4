@@ -179,6 +179,17 @@ public class GameBoard {
 		
 		return	listOfPawnableProperties;
 	}
+	
+	public ArrayList<Field> getAlreadyPawnedList(Player owner) {
+		
+		ArrayList<Field> listOfAlreadyPawnedProperties = new ArrayList<Field>();
+		
+		for(int i = 0; i < this.fields.length; i++)
+			if(fields[i].getOwner() == owner && fields[i].getIsPawned())
+				listOfAlreadyPawnedProperties.add(fields[i]);
+		
+		return	listOfAlreadyPawnedProperties;
+	}
 
 	/**
 	 * Returns array of fields
@@ -219,8 +230,11 @@ public class GameBoard {
 		for(int i = 0; i < fields.length; i++)
 			if (fields[i] instanceof Ownable) {
 				if(fields[i].getOwner() != null)
-					if(getField(i).getOwner().getName().equals(player.getName()))
+					if(getField(i).getOwner().getName().equals(player.getName())) {
 						fields[i].setOwner(null);
+						fields[i].setConstructionRate(0);
+						fields[i].releasePawnField();
+					}
 			}
 	}
 }
