@@ -20,7 +20,7 @@ public class Player{
 
 	/**
 	 * Constructor that can give the player a name.
-	 * @param name the players name.
+	 * @param name - the players name.
 	 */
 	public Player(String name){
 		this(name, 30000);
@@ -42,9 +42,9 @@ public class Player{
 	}
 	
 	/**
-	 * TODO;
+	 * Calculates total assets of player from his balance, owned plots and constructions.
 	 * @param gameBoard
-	 * @return
+	 * @return totalAssets
 	 */
 	public int getTotalAssets(GameBoard gameBoard){
 		int totalAssets = 0;
@@ -90,6 +90,10 @@ public class Player{
 		return this.onField;
 	}
 	
+	/**
+	 * Sets the position of the player
+	 * @param onField
+	 */
 	public void setOnField(int onField) {
 		this.onField = onField;
 	}
@@ -116,6 +120,7 @@ public class Player{
 	}
 
 	/**
+	 * Returns how many times the player has rolled two equal facevalues
 	 * @return the equalsCount
 	 */
 	public int getEqualsCount() {
@@ -123,6 +128,7 @@ public class Player{
 	}
 
 	/**
+	 * Sets the count of how many times the player has rolled two equal facevalues
 	 * @param equalsCount the equalsCount to set
 	 */
 	public void setEqualsCount(int equalsCount) {
@@ -130,6 +136,7 @@ public class Player{
 	}
 
 	/**
+	 * Returns wether or not the player is in jail
 	 * @return the inJail
 	 */
 	public boolean isInJail() {
@@ -137,6 +144,7 @@ public class Player{
 	}
 
 	/**
+	 * Sets the player to be either in or out of jail
 	 * @param inJail the inJail to set
 	 */
 	public void setInJail(boolean inJail) {
@@ -144,6 +152,7 @@ public class Player{
 	}
 
 	/**
+	 * Returns the count of the ability to get out of jail
 	 * @return the getOutOfJail
 	 */
 	public int getGetOutOfJail() {
@@ -151,12 +160,16 @@ public class Player{
 	}
 
 	/**
+	 * Sets the count of the ability to get out of jail
 	 * @param getOutOfJail the getOutOfJail to set
 	 */
 	public void setGetOutOfJail(int getOutOfJail) {
 		this.getOutOfJail = getOutOfJail;
 	}
 	
+	/**
+	 * Resets the count of players
+	 */
 	public static void resetID() {
 		nextID = 0;
 	}

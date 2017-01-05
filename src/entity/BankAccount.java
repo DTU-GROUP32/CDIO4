@@ -23,9 +23,9 @@ public class BankAccount {
 	}
 	
 	/**
-	 * Withdraws money from the BankAccount.
-	 * @param amount to withdraw.
-	 * @return amount actually withdrawn.
+	 * Withdraws money from the BankAccount if player has the required balance
+	 * @param amount to withdraw
+	 * @return boolean - whether the withdrawal has been completed or not
 	 */
 	public boolean withdraw(int amount){
 		if (this.balance >= amount)
@@ -44,6 +44,12 @@ public class BankAccount {
 		this.balance += amount;
 	}
 	
+	/**
+	 * Transfers amount to receiver from the player if player has the required balance
+	 * @param receiver to receive the amount
+	 * @param amount to transfer
+	 * @return boolean - whether the transfer has been completed or not
+	 */
 	public boolean transfer(Player receiver, int amount){
 		if(this.balance - amount > 0)
 		{
@@ -55,13 +61,17 @@ public class BankAccount {
 	}
 
 	/**
-	 * Get the current balance of the BankAccount.
-	 * @return the current balance.
+	 * Returns the current balance of the BankAccount.
+	 * @return balance - the current balance.
 	 */
 	public int getBalance() {
 		return this.balance;
 	}
 	
+	/**
+	 * Changes the balance to new balance
+	 * @param balance - the new balance
+	 */
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
