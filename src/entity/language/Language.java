@@ -64,11 +64,13 @@ public interface Language {
 	
 	String notBuildable();
 	
+	String getChanceCardMsg(int topCardNumber);
+
 	String buildable();
 	
-	String notdemolitionable();
+	String notDemolitionable();
 	
-	String choosedemolition();
+	String chooseDemolition();
 	
 	String notTradeable();
 	
@@ -88,5 +90,24 @@ public interface Language {
 	
 	String notPawnable();
 
+	String noPawnedProperties();
+
+	String choosePawnedWithdraw();
+	
+	String pawnedWithdrawSucces();
+	
+	String pawnedWithdrawUnsuccesful();
+	
+	String pawn();
+	
+	String sell();
+	
+	String trade();
+	
+	String bankrupt();
+	
+	String toPay();
+	
+	String canGetMoney();
 
 }
