@@ -1,5 +1,6 @@
 package entity.fields;
 
+import control.SequenceController;
 import entity.GameBoard;
 import entity.Player;
 import entity.PlayerList;
@@ -32,13 +33,15 @@ public class Tax extends Field {
 	public boolean landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
 		if (taxChoice)
 		{
-			player.getBankAccount().withdraw(player.getTotalAssets(gameBoard) * taxRate / 100);
+			while (player.getBankAccount().withdraw(player.getTotalAssets(gameBoard) * taxRate / 100) == false)
+				SequenceController.getMoneySequence(player, null, gameBoard, playerList, player.getTotalAssets(gameBoard) * taxRate / 100);
 			return true;
 		}
 		else
 		{
-			player.getBankAccount().withdraw(taxAmount); 	
-			return false;
+			while (player.getBankAccount().withdraw(taxAmount) == false)
+				SequenceController.getMoneySequence(player, null, gameBoard, playerList, taxAmount);	
+			return true;
 		}
 	}
 
@@ -97,7 +100,7 @@ public class Tax extends Field {
 	}
 
 	@Override
-	public boolean releasePawnedField() {
+	public boolean undoPawnField() {
 		return false;
 	}
 
@@ -108,6 +111,30 @@ public class Tax extends Field {
 
 	@Override
 	public boolean sellConstruction() {
+		return false;
+	}
+
+	@Override
+	public boolean buyField(Player player, int price) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void releasePawnField() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setConstructionRate(int rate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getIsPawned() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 }

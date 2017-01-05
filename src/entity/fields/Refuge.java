@@ -88,7 +88,7 @@ public class Refuge extends Field {
 	}
 
 	@Override
-	public boolean releasePawnedField() {
+	public boolean undoPawnField() {
 		return false;
 	}
 
@@ -99,6 +99,30 @@ public class Refuge extends Field {
 
 	@Override
 	public boolean sellConstruction() {
+		return false;
+	}
+
+	@Override
+	public boolean buyField(Player player, int price) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void releasePawnField() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setConstructionRate(int rate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getIsPawned() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 }
