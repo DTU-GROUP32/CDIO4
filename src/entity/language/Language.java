@@ -63,10 +63,49 @@ public interface Language {
 	String printDiceChangeNotExecuted();
 
 	String throwDices();
+	
+	String notBuildable();
+	
+	String getChanceCardMsg(int topCardNumber);
 
-	String build();
+	String buildable();
+	
+	String notDemolitionable();
+	
+	String chooseDemolition();
+	
+	String notTradeable();
+	
+	String choosePlotTrade();
+	
+	String chooseBuyerTrade();
+	
+	String tradePrice();
+	
+	String wantToTrade();
+	
+	String noPawnableFields();
+	
+	String choosePawnField();
+	
+	String pawnSucces();
+	
+	String notPawnable();
 
+	String noPawnedProperties();
+
+	String choosePawnedWithdraw();
+	
+	String pawnedWithdrawSucces();
+	
+	String pawnedWithdrawUnsuccesful();
+	
+	String pawn();
+	
+	String sell();
+	
 	String trade();
+<<<<<<< HEAD
 
 
 
@@ -75,3 +114,13 @@ public interface Language {
 
 
 }
+=======
+	
+	String bankrupt();
+	
+	String toPay();
+	
+	String canGetMoney();
+
+}
+>>>>>>> languagePakkee

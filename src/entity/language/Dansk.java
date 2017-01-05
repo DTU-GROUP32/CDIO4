@@ -3,7 +3,7 @@ package entity.language;
 import entity.Player;
 
 public class Dansk implements Language{
-	
+
 	@Override
 	public String notifyLangChange(){
 		return "Sproget er nu sat til dansk!";
@@ -31,7 +31,7 @@ public class Dansk implements Language{
 		break;
 		case 8:  fieldName = "Valby Langgade";
 		break;
-		case 9:  fieldName = "Allégade";
+		case 9:  fieldName = "Alløgade";
 		break;
 		case 10: fieldName = "På Besøg";
 		break;
@@ -39,7 +39,7 @@ public class Dansk implements Language{
 		break;	
 		case 12: fieldName = "TUBORG";
 		break;	
-		case 13: fieldName = "Bülowsvej";
+		case 13: fieldName = "Bølowsvej";
 		break;	
 		case 14: fieldName = "Gl. Kongevej";
 		break;	
@@ -96,90 +96,94 @@ public class Dansk implements Language{
 		}
 		return fieldName;
 	}
-	
+
 	@Override
 	public String fieldPrices(int fieldNumber) {
 		String fieldPrice = null;
 		switch (fieldNumber) {
-		case 0:  fieldPrice = "4000";
+		case 0:  fieldPrice = "Modtag kr. 4000";
 		break;
-		case 1:  fieldPrice = "Pris: 1200";
+		case 1:  fieldPrice = "kr. 1200";
 		break;
-		case 2:  fieldPrice = "?";
+		case 2:  fieldPrice = " ";
 		break;
-		case 3:  fieldPrice = "Pris: 1200";
+		case 3:  fieldPrice = "kr. 1200";
 		break;
-		case 4:  fieldPrice = "Betal 10% eller kr.4000";
+		case 4:  fieldPrice = "Betal 10% eller kr. 4000";
 		break;
-		case 5:  fieldPrice = "Pris: 4000";
+		case 5:  fieldPrice = "kr. 4000";
 		break;
-		case 6:  fieldPrice = "Pris: 2000";
+		case 6:  fieldPrice = "kr. 2000";
 		break;
-		case 7:  fieldPrice = "?";
+		case 7:  fieldPrice = " ";
 		break;
-		case 8:  fieldPrice = "Pris: 2000";
+		case 8:  fieldPrice = "kr. 2000";
 		break;
-		case 9:  fieldPrice = "Pris: 2400";
+		case 9:  fieldPrice = "kr. 2400";
 		break;
 		case 10: fieldPrice = "I Fængsel";
 		break;
-		case 11: fieldPrice = "Pris: 2800";
+		case 11: fieldPrice = "kr. 2800";
 		break;	
-		case 12: fieldPrice = "Pris: 3000";
+		case 12: fieldPrice = "kr. 3000";
 		break;	
-		case 13: fieldPrice = "Pris: 4700";
+		case 13: fieldPrice = "kr. 4700";
 		break;	
-		case 14: fieldPrice = "Pris: 3200";
+		case 14: fieldPrice = "kr. 3200";
 		break;	
-		case 15: fieldPrice = "Pris: 4000";
+		case 15: fieldPrice = "kr. 4000";
 		break;	
-		case 16: fieldPrice = "Pris: 3600";
+		case 16: fieldPrice = "kr. 3600";
 		break;	
-		case 17: fieldPrice = "?";
+		case 17: fieldPrice = " ";
 		break;	
-		case 18: fieldPrice = "Pris:3600";
+		case 18: fieldPrice = "kr. 3600";
 		break;	
-		case 19: fieldPrice = "Pris: 4000";
+		case 19: fieldPrice = "kr. 4000";
 		break;	
 		case 20: fieldPrice = "Den Danske Bank";
 		break;	
-		case 21: fieldPrice = "Pris: 4400";
+		case 21: fieldPrice = "kr. 4400";
 		break;
-		case 22: fieldPrice = "?";
+		case 22: fieldPrice = " ";
 		break;
-		case 23: fieldPrice = "Pris: 4400";
+		case 23: fieldPrice = "kr. 4400";
 		break;
-		case 24: fieldPrice = "Pris: 4800";
+		case 24: fieldPrice = "kr. 4800";
 		break;
-		case 25: fieldPrice = "Pris: 4000";
+		case 25: fieldPrice = "kr. 4000";
 		break;
-		case 26: fieldPrice = "Pris: 5200";
+		case 26: fieldPrice = "kr. 5200";
 		break;
-		case 27: fieldPrice = "Pris: 5200";
+		case 27: fieldPrice = "kr. 5200";
 		break;
-		case 28: fieldPrice = "Pris: 3000";
+		case 28: fieldPrice = "kr. 3000";
 		break;
-		case 29: fieldPrice = "Pris: 5600";
+		case 29: fieldPrice = "kr. 5600";
 		break;
 		case 30: fieldPrice = "De Fængsles";
 		break;
+<<<<<<< HEAD
 		case 31: fieldPrice = "Pris: 6000";
+=======
+		case 31: fieldPrice = "kr. 6000";
+>>>>>>> languagePakkee
 		break;
-		case 32: fieldPrice = "Pris: 6000";
+		case 32: fieldPrice = "kr. 6000";
 		break;
-		case 33: fieldPrice = "?";
+		case 33: fieldPrice = " ";
 		break;
-		case 34: fieldPrice = "Pris: 6400";
+		case 34: fieldPrice = "kr. 6400";
 		break;
-		case 35: fieldPrice = "Pris: 4000";
+		case 35: fieldPrice = "kr. 4000";
 		break;
-		case 36: fieldPrice = "?";
+		case 36: fieldPrice = " ";
 		break;
-		case 37: fieldPrice = "Pris: 7000";
+		case 37: fieldPrice = "kr. 7000";
 		break;
-		case 38: fieldPrice = "Betal skat kr.2000";
+		case 38: fieldPrice = "Betal kr. 2000";
 		break;
-		case 39: fieldPrice = "Pris: 8000";
+		case 39: fieldPrice = "kr. 8000";
 		break;
 		}
 		return fieldPrice;
@@ -189,29 +193,28 @@ public class Dansk implements Language{
 	public String fieldDescription(int fieldNumber) {
 		String fieldName = null;
 		switch (fieldNumber) {
-		case 0:  fieldName = "Modtag 4.000 kr. fra banken";
+		case 0:  fieldName = "Modtag kr. 4.000 fra banken";
 		break;
-		case 2:  fieldName = "Tag det øverste af lykkekortene";
+		case 2:  fieldName = "Prøv lykken";
 		break;
-		case 4:  fieldName = "Betal 10% eller kr.4000";
+		case 4:  fieldName = "Betal 10% eller kr. 4000";
 		break;
-		case 7: fieldName = "Tag det øverste af lykkekortene";
+		case 7: fieldName = "Prøv lykken";
 		break;
-		case 10: fieldName = "Går i fængsel";
+		case 10: fieldName = "På besøg i fængselet";
 		break;
-		case 17: fieldName = "Tag det øverste af lykkekortene";
+		case 17: fieldName = "Prøv lykken";
 		break;
-		case 22: fieldName = "Tag det øverste af lykkekortene";
+		case 22: fieldName = "Prøv lykken";
 		break;
-		case 30: fieldName = "Går i fængsel";
+		case 30: fieldName = "Du fængsles";
 		break;
-		case 33: fieldName = "Tag det øverste af lykkekortene";
+		case 33: fieldName = "Prøv lykken";
 		break;
-		case 36: fieldName = "Tag det øverste af lykkekortene";
+		case 36: fieldName = "Prøv lykken";
 		break;
-		case 38: fieldName = "Betal skat";
+		case 38: fieldName = "Betal kr. 2000 i skat";
 		break;
-
 
 		}
 		return fieldName;
@@ -222,7 +225,11 @@ public class Dansk implements Language{
 		// TODO Nedskriv de forskellige tekster til Chancekortene - HUSK DEFAULT BESKED: "Prøv lykken"
 		return null;
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> languagePakkee
 	@Override
 	public String welcomeMsg(){
 		return "Velkommen til spillet!";
@@ -337,7 +344,7 @@ public class Dansk implements Language{
 
 	@Override
 	public String buyingOfferMsg(int price) {
-		return "Dette felt er ikke ejet af nogen, vil du købe det for " + price + " mønter?";
+		return "Dette felt er ikke ejet af nogen, vil du købe det for " + price + " kr?";
 	}
 
 	@Override
@@ -357,7 +364,7 @@ public class Dansk implements Language{
 
 	@Override
 	public String notEnoughMoney() {
-		return "Du havde desværre ikke nok mønter..";
+		return "Du havde desværre ikke nok penge..";
 	}
 
 	public String landedOnOwnedField(Player owner) {
@@ -366,17 +373,17 @@ public class Dansk implements Language{
 
 	@Override
 	public String youPaidThisMuchToThisPerson(int amountPayed, Player owner) {
-		return "Du betalte " + amountPayed + " mønter til " + owner.getName() + ".";
+		return "Du betalte " + amountPayed + " kr til " + owner.getName() + ".";
 	}
 
 	@Override
 	public String youOwnThisField() {
 		return "Slap af! Du ejer selv dette felt ;)";
 	}
-	
+
 	@Override
 	public String getTaxChoice() {
-		return "Du kan vælge enten at betale 4000 mønter eller 10% af din pengebeholdning,"
+		return "Du kan vælge enten at betale 4000 kr eller 10% af din pengebeholdning,"
 				+ "\nvil du betale 10%?";
 	}
 
@@ -384,27 +391,25 @@ public class Dansk implements Language{
 	public String nonOwnableFieldEffectMsg(int fieldNumber) {
 		String message = null;
 		switch (fieldNumber) {
-		case 0:  message = "Du er landet på START og får 4.000 kr.";
+		case 0:  message = "Du er passeret START og fÃ¥r 4.000 kr.";
 		break;
-		case 2: message = "Du landede på Prøv lykken og du skal tage det øverste af lykkekortene";
+		case 2: message = "Du landede på Prøv lykken og du skal tage et af chancekortene";
 		break;
 		case 4: message = "Du landede på Skat feltet og skal betale 10% eller kr.4000";
 		break;
-		case 7: message = "Du landede på Prøv lykken og du skal tage det øverste af lykkekortene";
+		case 7: message = "Du landede på Prøv lykken og du skal tage et af chancekortene";
 		break;
-		case 10: message = "Du landede på fængsel og skal går i fængsel";
+		case 10: message = "Du er på besøg i fængslet";
 		break;
-		case 16: message = "Du er landet på Fæstningen og får 5000 mønter";
+		case 17: message = "Du landede på Prøv lykken og du skal tage et af chancekortene";
 		break;
-		case 17: message = "Du landede på Prøv lykken og du skal tage det øverste af lykkekortene";
-		break;
-		case 22: message = "Du landede på Prøv lykken og du skal tage det øverste af lykkekortene";
+		case 22: message = "Du landede på Prøv lykken og du skal tage et af chancekortene";
 		break;
 		case 30: message = "Du landede på fængsel og skal går i fængsel";
 		break;
-		case 33: message = "Du landede på Prøv lykken og du skal tage det øverste af lykkekortene";
+		case 33: message = "Du landede på Prøv lykken og du skal tage et af chancekortene";
 		break;
-		case 36: message = "Du landede på Prøv lykken og du skal tage det øverste af lykkekortene";
+		case 36: message = "Du landede på Prøv lykken og du skal tage et af chancekortene";
 		break;
 		case 38: message = "Du landede på Skat feltet og skal betale 10% eller kr.4000";
 		break;
@@ -419,7 +424,7 @@ public class Dansk implements Language{
 
 	@Override
 	public String winnerMsg(Player player){
-		return player.getName() + " har vundet spillet med " + player.getBankAccount().getBalance() + " mønter!";
+		return player.getName() + " har vundet spillet med " + player.getBankAccount().getBalance() + " kr.!";
 	}
 
 	@Override
@@ -432,30 +437,31 @@ public class Dansk implements Language{
 	}
 
 	@Override
+
 	public String printRules(){
-		return "Dette spil er et terningespil mellem 2 personer. Du slår med terninger og lander på et felt fra 1-39. \nDisse felter har enten en negativ eller positiv effekt på din beholdning. Her er vist listen over felterne: \n"
+		return "Dette spil er et terningespil mellem 2 personer. Du slår med terninger og lander på et felt fra 1-39. \n Her er vist listen over felterne: \n"
 				+ "1. Rødovrevej: 1200 kr. \n"
-				+ "2. Prøv lykken: ? \n"
+				+ "2. Prøv lykken:  \n"
 				+ "3. Hvidovrevej: 1200 kr. \n"
 				+ "4. Skat: 10% eller 4.000 kr. \n"
 				+ "5. SFL: 4000 kr. \n"
 				+ "6. Roskildevej: 2000 kr. \n"
-				+ "7. Prøv lykken: ? \n"
+				+ "7. Prøv lykken:  \n"
 				+ "8. Valby Langgade: 2000 kr. \n"
-				+ "9. Allégade: 2400 kr. \n"
+				+ "9. Alløgade: 2400 kr. \n"
 				+ "10. Fængsel \n"
 				+ "11. Frederiksberg Alle: 2800 kr. \n"
 				+ "12. TUBORG: 3000 kr. \n"
-				+ "13. Bülowsvej: 4700 kr. \n"
+				+ "13. Bølowsvej: 4700 kr. \n"
 				+ "14. Gl. Kongevej: 3200 kr. \n"
 				+ "15. Kalundborg/ Århus: 4000 k. \n"
 				+ "16. Bernstorffsvej: 3600 kr. \n"
-				+ "17. Prøv lykken: ? \n"
+				+ "17. Prøv lykken:  \n"
 				+ "18. Hellerupvej: 3600 kr. \n"
 				+ "19. Strandvej: 4000 kr. \n"
 				+ "20. Parkering: Bank \n"
 				+ "21. Trianglen: 4400 kr. \n"
-				+ "22. Prøv lykken: ? \n"
+				+ "22. Prøv lykken:  \n"
 				+ "23. Østerbrogade: 4400 kr. \n"
 				+ "24. Grønningen: 4800 kr. \n"
 				+ "25. DFDS SEAWAYS: 4000 kr. \n"
@@ -463,13 +469,13 @@ public class Dansk implements Language{
 				+ "27. Kgs.Nytorv: 5200 kr. \n"
 				+ "28. CocaCola: 3000 kr. \n"
 				+ "29. Østergade: 5600 kr. \n"
-				+ "30. Fængsle: fængsel \n"
+				+ "30. Fængsle: Fængsel \n"
 				+ "31. Amagertorv: 6000 kr. \n"
 				+ "32. Vimmelskaftet: 6000 kr. \n"
-				+ "33. Prøv lykken: ? \n"
+				+ "33. Prøv lykken:  \n"
 				+ "34. Nygade: 6400 kr. \n"
 				+ "35. Helsskov/ Knudshoved: 4000 kr. \n"
-				+ "36. Prøv lykken: ? \n"
+				+ "36. Prøv lykken:  \n"
 				+ "37. Frederiksberggade: 7000 kr. \n"
 				+ "38. Skat: 2000 kr. \n"
 				+ "39. Rådhuspladsen: 8000 kr. \n";
@@ -486,7 +492,7 @@ public class Dansk implements Language{
 
 	@Override
 	public String changeDices(){
-		return "Indtast hvor mange øjne de to terninger skal have, på formatet \"x,y\" - summen skal være 12"; // Summen måtte kun gå op til 12?
+		return "Indtast hvor mange øjne de to terninger skal have, på formatet \"x,y\" - summen skal være 12"; // Summen mÃ¥tte kun gÃ¥ op til 12?
 	}
 
 	@Override
@@ -503,9 +509,104 @@ public class Dansk implements Language{
 	public String throwDices(){ return "Slå Terning"; }
 
 	@Override
-	public String build(){ return "Bygge"; }
+	public String notBuildable(){
+		return "Du har ingen grunde du kan bygge på.";
+	}
+	@Override
+	public String buildable(){
+		return "Vælg en grund at bygge pÃ¥";
+	}
+	@Override
+	public String notDemolitionable(){
+		return "Du har ingen grunde du kan nedrive";
+	}
+	@Override
+	public String chooseDemolition(){
+		return "Vælg et felt at nedrive";
+	}
 
 	@Override
+<<<<<<< HEAD
 	public String trade(){ return "Handle"; }
 
 }
+=======
+	public String notTradeable(){
+		return "Du har ingen felter at handle med.";
+	}
+	@Override
+	public String choosePlotTrade(){
+		return "Vælg et felt at handle med.";
+	}
+	@Override
+	public String chooseBuyerTrade(){
+		return "Hvem køber feltet?";
+	}
+	@Override
+	public String tradePrice(){
+		return "Hvilken pris bliver feltet solgt til?";
+	}
+	@Override
+	public String wantToTrade(){
+		return "Vil du gerne lave denne handel?";
+	}
+	@Override
+	public String noPawnableFields(){
+		return "Du har ingen felter at pantsÃ¦tte";
+	}
+	@Override
+	public String choosePawnField(){
+		return "Vælg et felt at pantsætte";
+	}
+	@Override
+	public String pawnSucces(){
+		return "Du har pantsat din grund";
+	}
+	@Override 
+	public String notPawnable(){
+		return "Din grund kan ikke pantsættes";
+	}
+	@Override 
+	public String noPawnedProperties(){
+		return "Du har ingen felter at hæve pantsætningen på";
+	}
+	@Override 
+	public String choosePawnedWithdraw(){
+		return "Vælg et grund at hæve pantsætningen på";
+	}
+	@Override 
+	public String pawnedWithdrawSucces(){
+		return "Din pantsætning er blevet indfriet";
+	}
+	@Override
+	public String pawnedWithdrawUnsuccesful(){
+		return "Din pantsætning kunne ikke indfires";
+	}
+	@Override
+	public String pawn(){
+		return "Pantsæt";
+	}
+	@Override
+
+	public String sell(){
+		return "Sælge bygninger";
+	}
+	@Override
+	public String trade(){
+		return "Handle ejemdomme";
+	}
+	@Override
+	public String bankrupt(){
+		return "Erklær konkurs";
+	}
+	public String toPay(){
+		return "Du skal betale " + targetAmount + ", men du har ikke penge nok. Hvad vil du gøre?"; // Hvor kommer targetAmount fra?
+	}
+	public String canGetMoney(){
+		return "Du kan godt få nok penge";
+	}
+}
+
+
+
+>>>>>>> languagePakkee
