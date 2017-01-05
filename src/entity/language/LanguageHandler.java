@@ -265,93 +265,169 @@ public class LanguageHandler {
 	public String throwDices(){ return selectedLanguage.throwDices(); }
 	
 	/**
-	 * Prints button message when trying to build houses but dont own all the fields.
+	 * Prints  message when trying to build houses but dont own all the fields.
 	 * @return String
 	 */
 
 	public String notBuildable(){ return selectedLanguage.notBuildable(); }
 	
 	/**
-	 * Prints button message when building houses
+	 * Prints  message when building houses
 	 * @return String
 	 */
 	
 	public String buildable(){ return selectedLanguage.buildable();}
 	
 	/**
-	 * Prints button message when trying to destroy a not destroyable property
+	 * Prints  message when trying to destroy a not destroyable property
 	 * @return String
 	 */
 	
-	public String notdemolitionable(){ return selectedLanguage.notdemolitionable(); }
+	public String notDemolitionable(){ return selectedLanguage.notDemolitionable(); }
+	
+	
+	public String getChanceCardMsg(int topCardNumber) {
+		 		return selectedLanguage.getChanceCardMsg(topCardNumber);
+		 }
 	
 	/**
-	 * Prints button message when destroying a property
+	 * Prints  message when destroying a property
 	 * @return String
 	 */
 	
-	public String choosedemolitionable(){ return selectedLanguage.choosedemolition(); }
+	public String chooseDemolitionable(){ return selectedLanguage.chooseDemolition(); }
 	
 	/**
-	 * Prints button message when a trade is not available
+	 * Prints  message when a trade is not available
 	 * @return String
 	 */
 	
 	public String notTradeable() { return selectedLanguage.notTradeable(); }
 	
 	/**
-	 * Prints button message for choosing a plot to trade
+	 * Prints  message for choosing a plot to trade
 	 * @return String
 	 */
 	
 	public String choosePlotTrade(){ return selectedLanguage.choosePlotTrade(); }
 	
 	/**
-	 * Prints button message for choosing a buyer to trade
+	 * Prints  message for choosing a buyer to trade
 	 * @return String
 	 */
 	
 	public String chooseBuyerTrade(){ return selectedLanguage.chooseBuyerTrade(); }
 	
 	/**
-	 * Prints button message for choosing trade price
+	 * Prints  message for choosing trade price
 	 * @return String
 	 */
 	
 	public String tradePrice(){ return selectedLanguage.tradePrice(); }
 	
 	/**
-	 * Prints button message for asking the counterpart if want to trade.
+	 * Prints  message for asking the counterpart if want to trade.
 	 * @return String
 	 */
 	
 	public String wantToTrade(){ return selectedLanguage.wantToTrade(); }
 	
 	/**
-	 * Prints button message when you have no pawnablefields
+	 * Prints  message when you have no pawnablefields
 	 * @return String
 	 */
 	
 	public String noPawnableFields(){ return selectedLanguage.noPawnableFields();}
 	
 	/**
-	 * Prints button message when selecting a pawnable field
+	 * Prints  message when selecting a pawnable field
 	 * @return String
 	 */
 	
 	public String choosePawnField(){ return selectedLanguage.choosePawnField(); }
 	
 	/**
-	 * Prints button message for succesful pawn
+	 * Prints  message for succesful pawn
 	 * @return String
 	 */
 	
 	public String pawnSucces(){ return selectedLanguage.pawnSucces(); }
 	
 	/**
-	 * Prints button message when field isnt pawnable. 
+	 * Prints  message when field isnt pawnable. 
 	 * @return String
 	 */
 	
 	public String notPawnable(){ return selectedLanguage.notPawnable(); }
+
+	/**
+	 * Prints  message when player got no pawned properties 
+	 * @return String
+	 */
+
+	public String noPawnedProperties(){ return selectedLanguage.noPawnedProperties();}
+	
+	/**
+	 * Prints  message when player chooses which pawned field to withdraw
+	 * @return String
+	 */
+	
+	public String choosePawnedWithdraw(){ return selectedLanguage.choosePawnedWithdraw();}
+	
+	/**
+	 * Prints  message when withdraw succesful
+	 * @return String
+	 */
+	
+	public String pawnedWithdrawSucces(){ return selectedLanguage.pawnedWithdrawSucces();}
+	
+	/**
+	 * Prints  message when withdraw unsuccesful 
+	 * @return String
+	 */
+	
+	public String pawnedWithdrawUnsuccesful(){ return selectedLanguage.pawnedWithdrawUnsuccesful();}
+	
+	/**
+	 * Prints options menu selections
+	 * @return String
+	 */
+	
+	public String pawn(){ return selectedLanguage.pawn();}
+	
+	/**
+	 * Prints options menu selections
+	 * @return String
+	 */
+	
+	public String sell(){ return selectedLanguage.sell();}
+	
+	/**
+	 * Prints options menu selections
+	 * @return String
+	 */
+	
+	public String trade(){ return selectedLanguage.trade();}
+	
+	/**
+	 * Prints options menu selections
+	 * @return String
+	 */
+	
+	public String bankrupt(){ return selectedLanguage.bankrupt();}
+	
+	/**
+	 * Prints  message when a player has to pay a targeted amount
+	 * @return String
+	 */
+	
+	public String toPay(){ return selectedLanguage.toPay();}
+	
+	/**
+	 * Prints message if player got enough money 
+	 * @return String
+	 */
+	
+	public String canGetMoney(){ return selectedLanguage.canGetMoney();}
+	
 }
