@@ -3,7 +3,7 @@ package entity.language;
 import entity.Player;
 
 public class Dansk implements Language{
-	
+
 	@Override
 	public String notifyLangChange(){
 		return "Sproget er nu sat til dansk!";
@@ -31,7 +31,7 @@ public class Dansk implements Language{
 		break;
 		case 8:  fieldName = "Valby Langgade";
 		break;
-		case 9:  fieldName = "Allégade";
+		case 9:  fieldName = "Alløgade";
 		break;
 		case 10: fieldName = "På Besøg";
 		break;
@@ -39,7 +39,7 @@ public class Dansk implements Language{
 		break;	
 		case 12: fieldName = "TUBORG";
 		break;	
-		case 13: fieldName = "Bülowsvej";
+		case 13: fieldName = "Bølowsvej";
 		break;	
 		case 14: fieldName = "Gl. Kongevej";
 		break;	
@@ -96,7 +96,7 @@ public class Dansk implements Language{
 		}
 		return fieldName;
 	}
-	
+
 	@Override
 	public String fieldPrices(int fieldNumber) {
 		String fieldPrice = null;
@@ -187,7 +187,7 @@ public class Dansk implements Language{
 
 	@Override
 	public String fieldDescription(int fieldNumber) {
-		String fieldName;
+		String fieldName = null;
 		switch (fieldNumber) {
 		case 0:  fieldName = "Modtag kr. 4.000 fra banken";
 		break;
@@ -197,7 +197,7 @@ public class Dansk implements Language{
 		break;
 		case 7: fieldName = "Prøv lykken";
 		break;
-		case 10: fieldName = "På besøg i fængsel";
+		case 10: fieldName = "På besøg i fængselet";
 		break;
 		case 17: fieldName = "Prøv lykken";
 		break;
@@ -212,9 +212,14 @@ public class Dansk implements Language{
 		case 38: fieldName = "Betal kr. 2000 i skat";
 		break;
 
-
 		}
 		return fieldName;
+	}
+
+	@Override
+	public String getChanceCardMsg(int topCardNumber) {
+		// TODO Nedskriv de forskellige tekster til Chancekortene - HUSK DEFAULT BESKED: "Prøv lykken"
+		return null;
 	}
 
 	@Override
@@ -243,7 +248,7 @@ public class Dansk implements Language{
 
 	@Override
 	public String fieldMsg(int fieldNumber){
-		String fieldString;
+		String fieldString = null;
 		switch (fieldNumber) {
 		case 0:  fieldString = "START";
 		break;
@@ -367,7 +372,7 @@ public class Dansk implements Language{
 	public String youOwnThisField() {
 		return "Slap af! Du ejer selv dette felt ;)";
 	}
-	
+
 	@Override
 	public String getTaxChoice() {
 		return "Du kan vælge enten at betale 4000 kr eller 10% af din pengebeholdning,"
@@ -376,9 +381,9 @@ public class Dansk implements Language{
 
 	@Override
 	public String nonOwnableFieldEffectMsg(int fieldNumber) {
-		String message;
+		String message = null;
 		switch (fieldNumber) {
-		case 0:  message = "Du er passeret START og får 4.000 kr.";
+		case 0:  message = "Du er passeret START og fÃ¥r 4.000 kr.";
 		break;
 		case 2: message = "Du landede på Prøv lykken og du skal tage et af chancekortene";
 		break;
@@ -426,29 +431,29 @@ public class Dansk implements Language{
 	@Override
 
 	public String printRules(){
-		return "Dette spil er et terningespil mellem 2 personer. Du slår med terninger og lander på et felt fra 1-39. \nDisse felter har enten en negativ eller positiv effekt på din beholdning. Her er vist listen over felterne: \n"
+		return "Dette spil er et terningespil mellem 2 personer. Du slår med terninger og lander på et felt fra 1-39. \n Her er vist listen over felterne: \n"
 				+ "1. Rødovrevej: 1200 kr. \n"
-				+ "2. Prøv lykken: ? \n"
+				+ "2. Prøv lykken:  \n"
 				+ "3. Hvidovrevej: 1200 kr. \n"
 				+ "4. Skat: 10% eller 4.000 kr. \n"
 				+ "5. SFL: 4000 kr. \n"
 				+ "6. Roskildevej: 2000 kr. \n"
-				+ "7. Prøv lykken: ? \n"
+				+ "7. Prøv lykken:  \n"
 				+ "8. Valby Langgade: 2000 kr. \n"
-				+ "9. Allégade: 2400 kr. \n"
+				+ "9. Alløgade: 2400 kr. \n"
 				+ "10. Fængsel \n"
 				+ "11. Frederiksberg Alle: 2800 kr. \n"
 				+ "12. TUBORG: 3000 kr. \n"
-				+ "13. Bülowsvej: 4700 kr. \n"
+				+ "13. Bølowsvej: 4700 kr. \n"
 				+ "14. Gl. Kongevej: 3200 kr. \n"
 				+ "15. Kalundborg/ Århus: 4000 k. \n"
 				+ "16. Bernstorffsvej: 3600 kr. \n"
-				+ "17. Prøv lykken: ? \n"
+				+ "17. Prøv lykken:  \n"
 				+ "18. Hellerupvej: 3600 kr. \n"
 				+ "19. Strandvej: 4000 kr. \n"
 				+ "20. Parkering: Bank \n"
 				+ "21. Trianglen: 4400 kr. \n"
-				+ "22. Prøv lykken: ? \n"
+				+ "22. Prøv lykken:  \n"
 				+ "23. Østerbrogade: 4400 kr. \n"
 				+ "24. Grønningen: 4800 kr. \n"
 				+ "25. DFDS SEAWAYS: 4000 kr. \n"
@@ -456,13 +461,13 @@ public class Dansk implements Language{
 				+ "27. Kgs.Nytorv: 5200 kr. \n"
 				+ "28. CocaCola: 3000 kr. \n"
 				+ "29. Østergade: 5600 kr. \n"
-				+ "30. Fængsle: fængsel \n"
+				+ "30. Fængsle: Fængsel \n"
 				+ "31. Amagertorv: 6000 kr. \n"
 				+ "32. Vimmelskaftet: 6000 kr. \n"
-				+ "33. Prøv lykken: ? \n"
+				+ "33. Prøv lykken:  \n"
 				+ "34. Nygade: 6400 kr. \n"
 				+ "35. Helsskov/ Knudshoved: 4000 kr. \n"
-				+ "36. Prøv lykken: ? \n"
+				+ "36. Prøv lykken:  \n"
 				+ "37. Frederiksberggade: 7000 kr. \n"
 				+ "38. Skat: 2000 kr. \n"
 				+ "39. Rådhuspladsen: 8000 kr. \n";
@@ -479,7 +484,7 @@ public class Dansk implements Language{
 
 	@Override
 	public String changeDices(){
-		return "Indtast hvor mange øjne de to terninger skal have, på formatet \"x,y\" - summen skal være 12"; // Summen måtte kun gå op til 12?
+		return "Indtast hvor mange øjne de to terninger skal have, på formatet \"x,y\" - summen skal være 12"; // Summen mÃ¥tte kun gÃ¥ op til 12?
 	}
 
 	@Override
@@ -501,17 +506,17 @@ public class Dansk implements Language{
 	}
 	@Override
 	public String buildable(){
-		return "Vælg en grund at bygge på";
+		return "Vælg en grund at bygge pÃ¥";
 	}
 	@Override
-		public String notDemolitionable(){
-			return "Du har ingen grunde du kan nedrive";
+	public String notDemolitionable(){
+		return "Du har ingen grunde du kan nedrive";
 	}
 	@Override
 	public String chooseDemolition(){
 		return "Vælg et felt at nedrive";
 	}
-	
+
 	@Override
 	public String notTradeable(){
 		return "Du har ingen felter at handle med.";
@@ -534,7 +539,7 @@ public class Dansk implements Language{
 	}
 	@Override
 	public String noPawnableFields(){
-		return "Du har ingen felter at pantsætte";
+		return "Du har ingen felter at pantsÃ¦tte";
 	}
 	@Override
 	public String choosePawnField(){
@@ -548,4 +553,46 @@ public class Dansk implements Language{
 	public String notPawnable(){
 		return "Din grund kan ikke pantsættes";
 	}
+	@Override 
+	public String noPawnedProperties(){
+		return "Du har ingen felter at hæve pantsætningen på";
 	}
+	@Override 
+	public String choosePawnedWithdraw(){
+		return "Vælg et grund at hæve pantsætningen på";
+	}
+	@Override 
+	public String pawnedWithdrawSucces(){
+		return "Din pantsætning er blevet indfriet";
+	}
+	@Override
+	public String pawnedWithdrawUnsuccesful(){
+		return "Din pantsætning kunne ikke indfires";
+	}
+	@Override
+	public String pawn(){
+		return "Pantsæt";
+	}
+	@Override
+
+	public String sell(){
+		return "Sælge bygninger";
+	}
+	@Override
+	public String trade(){
+		return "Handle ejemdomme";
+	}
+	@Override
+	public String bankrupt(){
+		return "Erklær konkurs";
+	}
+	public String toPay(){
+		return "Du skal betale " + targetAmount + ", men du har ikke penge nok. Hvad vil du gøre?"; // Hvor kommer targetAmount fra?
+	}
+	public String canGetMoney(){
+		return "Du kan godt få nok penge";
+	}
+}
+
+
+
