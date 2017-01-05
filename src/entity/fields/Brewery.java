@@ -78,7 +78,11 @@ public class Brewery extends Ownable {
 
 	@Override
 	public void setConstructionRate(int rate) {
-		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public int[] getRent() {
+		return null;
 	}
 }

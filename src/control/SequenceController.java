@@ -74,9 +74,11 @@ public abstract class SequenceController {
 		if (sellableLabels.length == 0) {
 			boundary.getButtonPressed("Du har ingen felter at sælge");
 		} else {
-			for (int i = 1; i < playerList.getPlayers().length; i++) {
-				if (!playerList.getPlayers()[i].getName().equals(owner.getName())) {
-					playerLabels[i] = playerList.getPlayers()[i].getName();
+			int j = 0;
+			for (int i = 0; i < playerList.getPlayers().length; i++) {
+				if (playerList.getPlayers()[i].getName().equals(owner.getName()) == false) {
+					playerLabels[j] = playerList.getPlayers()[i].getName();
+					j++;
 				}
 			}
 

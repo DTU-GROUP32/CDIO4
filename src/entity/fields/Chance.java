@@ -292,5 +292,10 @@ public class Chance extends Field {
 	public boolean getIsPawned() {
 		return false;
 	}
+
+	@Override
+	public int[] getRent() {
+		return null;
+	}
 	
 }

@@ -10,6 +10,7 @@ import desktop_fields.Field;
 import desktop_fields.Jail;
 import desktop_fields.Refuge;
 import desktop_fields.Shipping;
+import desktop_fields.Start;
 import desktop_fields.Street;
 import desktop_fields.Tax;
 import desktop_resources.GUI;
@@ -30,11 +31,22 @@ public class GUIBoundary {
 		return instance;
 	}
 
-	public void createGameBoard(GameBoard gameBoard, LanguageHandler language) {
+	public void createGameBoard(GameBoard gameBoard) {
 		Field[] fields = new Field[gameBoard.getFields().length];
+		LanguageHandler language = LanguageHandler.getInstance();
 
 		for(int i = 0; i < gameBoard.getFields().length; i++){
-			if(gameBoard.getField(i) instanceof entity.fields.Brewery){
+
+			if(gameBoard.getField(i).getID() == 0) { // Startfelt
+				fields[i] = new Start.Builder()
+						.setSubText(language.fieldDescription(i))		
+						.build();
+			} else if(gameBoard.getField(i).getID() == 10 || gameBoard.getField(i).getID() == 30) {
+				fields[i] = new Jail.Builder()
+						.setSubText(language.fieldNames(i))
+						.setDescription(language.fieldDescription(i))
+						.build();
+			} else if(gameBoard.getField(i) instanceof entity.fields.Brewery){
 				fields[i] = new Brewery.Builder()
 						.setTitle(language.fieldNames(i))
 						.setSubText(language.fieldPrices(i))
@@ -44,16 +56,18 @@ public class GUIBoundary {
 						.setFgColor(Color.WHITE)
 						.setBgColor(Color.BLACK)
 						.build();
-			}else if(gameBoard.getField(i) instanceof entity.fields.Jail){
-				fields[i] = new Jail.Builder()
-						.setTitle(language.fieldNames(i))
-						.setDescription(language.fieldDescription(i))
-						.build();
 			}else if(gameBoard.getField(i) instanceof entity.fields.Plot){
 				fields[i] = new Street.Builder()
 						.setTitle(language.fieldNames(i))
 						.setSubText(language.fieldPrices(i))
 						.setBgColor(getPropertyGroupColor(gameBoard.getField(i).getPropertyGroup()))
+						.setDescription(
+								" - Kun grund: " + gameBoard.getField(i).getRent()[0] + " | " +
+										"1 hus: " + gameBoard.getField(i).getRent()[1] + " | " +
+										"2 huse: " + gameBoard.getField(i).getRent()[2] + " | " +
+										"3 huse: " + gameBoard.getField(i).getRent()[3] + " | " +
+										"4 huse: " + gameBoard.getField(i).getRent()[4] + " | " +
+										"Hotel: " + gameBoard.getField(i).getRent()[5])
 						.build();
 			}else if(gameBoard.getField(i) instanceof entity.fields.Refuge){
 				fields[i] = new Refuge.Builder()
@@ -81,7 +95,7 @@ public class GUIBoundary {
 
 		switch(propertyGroup) {
 		case 0:
-			color = new Color(38, 131, 212); // Lyseblå
+			color = new Color(38, 131, 212); // Blå
 			break;
 		case 1:
 			color = new Color(240, 106, 79); // Laksefarve
@@ -242,7 +256,7 @@ public class GUIBoundary {
 			GUI.setHouses(field.getID(), field.getConstructionRate());
 		}
 	}
-	
+
 	public void updatePawnStatus(entity.fields.Field field) {
 		if(field.getIsPawned()) {
 			GUI.setSubText(field.getID(), "PANTSAT");
@@ -252,7 +266,7 @@ public class GUIBoundary {
 			else
 				GUI.setSubText(field.getID(), field.getOwner().getName());
 		}
-			
+
 	}
 
 }

@@ -16,7 +16,7 @@ public class SetupController {
 	}
 
 	public GameBoard setupGameBoard() {
-		boundary.createGameBoard(gameBoard, language);
+		boundary.createGameBoard(gameBoard);
 		return gameBoard;
 	}
 

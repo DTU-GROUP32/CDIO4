@@ -50,6 +50,8 @@ public abstract class Field {
 	 * @return rent
 	 */
 	public abstract int getRent(GameBoard gameBoard);
+	
+	public abstract int[] getRent();
 
 	/**
 	 * Makes you able to buy an ownable field. Will set you to the owner if you want to buy it for certain price
