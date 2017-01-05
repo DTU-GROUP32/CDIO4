@@ -5,24 +5,24 @@ import java.awt.Color;
 import desktop_codebehind.Car;
 import desktop_codebehind.Car.Builder;
 import desktop_fields.Brewery;
+import desktop_fields.Chance;
 import desktop_fields.Field;
+import desktop_fields.Jail;
 import desktop_fields.Refuge;
 import desktop_fields.Shipping;
 import desktop_fields.Street;
 import desktop_fields.Tax;
-import desktop_fields.Jail;
-import desktop_fields.Chance;
 import desktop_resources.GUI;
 import entity.DiceCup;
 import entity.GameBoard;
 import entity.Player;
+import entity.fields.Ownable;
 import entity.language.LanguageHandler;
-import entity.fields.*;
 
 public class GUIBoundary {
-	
+
 	private static GUIBoundary instance;
-	
+
 	public static GUIBoundary getInstance() {
 		if(instance == null) {
 			instance = new GUIBoundary();
@@ -32,6 +32,7 @@ public class GUIBoundary {
 
 	public void createGameBoard(GameBoard gameBoard, LanguageHandler language) {
 		Field[] fields = new Field[gameBoard.getFields().length];
+
 		for(int i = 0; i < gameBoard.getFields().length; i++){
 			if(gameBoard.getField(i) instanceof entity.fields.Brewery){
 				fields[i] = new Brewery.Builder()
@@ -40,6 +41,8 @@ public class GUIBoundary {
 						.build();
 			}else if(gameBoard.getField(i) instanceof entity.fields.Chance){
 				fields[i] = new Chance.Builder()
+						.setFgColor(Color.WHITE)
+						.setBgColor(Color.BLACK)
 						.build();
 			}else if(gameBoard.getField(i) instanceof entity.fields.Jail){
 				fields[i] = new Jail.Builder()
@@ -50,7 +53,7 @@ public class GUIBoundary {
 				fields[i] = new Street.Builder()
 						.setTitle(language.fieldNames(i))
 						.setSubText(language.fieldPrices(i))
-						.setBgColor(Color.RED)
+						.setBgColor(getPropertyGroupColor(gameBoard.getField(i).getPropertyGroup()))
 						.build();
 			}else if(gameBoard.getField(i) instanceof entity.fields.Refuge){
 				fields[i] = new Refuge.Builder()
@@ -73,10 +76,46 @@ public class GUIBoundary {
 		GUI.setDice(1, 1);
 	}
 
+	private Color getPropertyGroupColor(int propertyGroup) {
+		Color color = null;
+
+		switch(propertyGroup) {
+		case 0:
+			color = new Color(38, 131, 212); // Lyseblå
+			break;
+		case 1:
+			color = new Color(240, 106, 79); // Laksefarve
+			break;
+		case 2:
+			color = new Color(74, 222, 20); // Lysegrøn
+			break;
+		case 3:
+			color = new Color(195, 195, 195); // Grå
+			break;
+		case 4:
+			color = new Color(255, 0, 0); // Rød
+			break;
+		case 5:
+			color = new Color(255, 255, 255); // Hvid
+			break;
+		case 6:
+			color = new Color(246, 255, 0); // Gul
+			break;
+		case 7:
+			color = new Color(111, 77, 177); //Lilla
+			break;
+		default:
+			break;
+		}
+
+		return color;
+
+	}
+
 	public String getLanguage() {
 		return GUI.getUserSelection("Select entity.language. \nVælg sprog.", "Dansk", "English");
 	}
-	
+
 	public String getUserSelection(String message, String... options) {
 		return GUI.getUserSelection(message, options);
 	}
@@ -153,7 +192,7 @@ public class GUIBoundary {
 	public void setOwner(int fieldNumber, String playerName) {
 		GUI.setOwner(convertFieldNumber(fieldNumber), playerName);
 	}
-	
+
 	public int getInteger(String message) {
 		return GUI.getUserInteger(message);
 	}
@@ -190,9 +229,9 @@ public class GUIBoundary {
 	public void releasePlayersFields(GameBoard gameBoard, Player player) {
 		for(int i = 0; i < gameBoard.getFields().length; i++)
 			if(gameBoard.getField(i) instanceof Ownable)
-				if(gameBoard.getField(i).getOwner() != null)
-					if(gameBoard.getField(i).getOwner().getName().equals(player.getName()))
-						GUI.removeOwner(convertFieldNumber(i));
+				if(gameBoard.getField(i).getOwner().getName().equals(player.getName())) {
+					GUI.removeOwner(convertFieldNumber(i));
+				}
 	}
 
 	public void updateConstructionRate(entity.fields.Field field){
@@ -203,4 +242,17 @@ public class GUIBoundary {
 			GUI.setHouses(field.getID(), field.getConstructionRate());
 		}
 	}
+	
+	public void updatePawnStatus(entity.fields.Field field) {
+		if(field.getIsPawned()) {
+			GUI.setSubText(field.getID(), "PANTSAT");
+		} else {
+			if(field.getOwner() == null)
+				GUI.setSubText(field.getID(), LanguageHandler.getInstance().fieldPrices(field.getID()));
+			else
+				GUI.setSubText(field.getID(), field.getOwner().getName());
+		}
+			
+	}
+
 }

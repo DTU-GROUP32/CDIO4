@@ -1,5 +1,6 @@
 package entity.fields;
 
+import control.SequenceController;
 import entity.GameBoard;
 import entity.Player;
 import entity.PlayerList;
@@ -16,7 +17,10 @@ public class Brewery extends Ownable {
 
 	@Override
 	public boolean landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
-		return player.getBankAccount().transfer(owner, this.getRent(gameBoard) * roll);
+		if (this.owner.isInJail() == false || this.isPawned == false)
+			while (player.getBankAccount().transfer(owner, this.getRent(gameBoard) * roll) == false)
+				SequenceController.getMoneySequence(player, this.owner, gameBoard, playerList, this.getRent(gameBoard) * roll);
+		return true;
 	}
 
 	@Override
@@ -70,5 +74,11 @@ public class Brewery extends Ownable {
 	@Override
 	public boolean sellConstruction() {
 		return false;
+	}
+
+	@Override
+	public void setConstructionRate(int rate) {
+		// TODO Auto-generated method stub
+		
 	}
 }

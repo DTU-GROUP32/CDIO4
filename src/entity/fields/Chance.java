@@ -2,12 +2,10 @@ package entity.fields;
 
 import java.util.ArrayList;
 
-import boundary.GUIBoundary;
 import control.SequenceController;
 import entity.GameBoard;
 import entity.Player;
 import entity.PlayerList;
-import entity.language.LanguageHandler;
 
 public class Chance extends Field {
 
@@ -48,7 +46,10 @@ public class Chance extends Field {
 		case 7:
 			for(int i = 0; i < playerList.getPlayers().length; i++)
 				while(playerList.getPlayer(i).getBankAccount().getBalance() < 200)
-					SequenceController.getMoneySequence(playerList.getPlayer(i), gameBoard, GUIBoundary.getInstance(), playerList);
+					if(playerList.getPlayer(i) == player) {} 
+					else {
+						SequenceController.getMoneySequence(playerList.getPlayer(i), player, gameBoard, playerList, 200);
+					}
 			for(int i = 0; i < playerList.getPlayers().length; i++)
 				playerList.getPlayer(i).getBankAccount().transfer(player, 200);
 			break;
@@ -60,31 +61,31 @@ public class Chance extends Field {
 			break;
 		case 10:
 			while(player.getBankAccount().withdraw(200) == false)
-				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance(), playerList);
+				SequenceController.getMoneySequence(player, null, gameBoard, playerList, 200);
 			break;
 		case 11:
 			while(player.getBankAccount().withdraw(1000) == false)
-				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance(), playerList);
+				SequenceController.getMoneySequence(player, null, gameBoard, playerList, 1000);
 			break;
 		case 12:
 			while(player.getBankAccount().withdraw(3000) == false)
-				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance(), playerList);
+				SequenceController.getMoneySequence(player, null, gameBoard, playerList, 3000);
 			break;
 		case 13:
 			while(player.getBankAccount().withdraw(1000) == false)
-				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance(), playerList);
+				SequenceController.getMoneySequence(player, null, gameBoard, playerList, 1000);
 			break;
 		case 14:
 			while(player.getBankAccount().withdraw(3000) == false)
-				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance(), playerList);
+				SequenceController.getMoneySequence(player, null, gameBoard, playerList, 3000);
 			break;
 		case 15:
 			while(player.getBankAccount().withdraw(2000) == false)
-				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance(), playerList);
+				SequenceController.getMoneySequence(player, null, gameBoard, playerList, 2000);
 			break;
 		case 16:
 			while(player.getBankAccount().withdraw(200) == false)
-				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance(), playerList);
+				SequenceController.getMoneySequence(player, null, gameBoard, playerList, 200);
 			break;
 		case 17:
 			ArrayList<Field> list = gameBoard.getDemolitionableList(player);
@@ -101,7 +102,7 @@ public class Chance extends Field {
 				}
 			
 			while(player.getBankAccount().withdraw(amountToPay) == false)
-				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance(), playerList);
+				SequenceController.getMoneySequence(player, null, gameBoard, playerList, amountToPay);
 			
 			break;
 		case 18:
@@ -119,7 +120,7 @@ public class Chance extends Field {
 				}
 			
 			while(player.getBankAccount().withdraw(amountToPay1) == false)
-				SequenceController.getMoneySequence(player, gameBoard, GUIBoundary.getInstance(), playerList);
+				SequenceController.getMoneySequence(player, null, gameBoard, playerList, amountToPay1);
 			
 			break;
 		case 19:
@@ -140,7 +141,7 @@ public class Chance extends Field {
 				player.movePlayer(45-player.getOnField());
 			else player.movePlayer(5-player.getOnField());
 			if(gameBoard.getField(player.getOnField()).getOwner() == null)
-				SequenceController.buyPropertySequence(player, gameBoard.getField(player.getOnField()), GUIBoundary.getInstance(), LanguageHandler.getInstance());
+				SequenceController.buyPropertySequence(player, gameBoard.getField(player.getOnField()));
 			else
 				{
 				gameBoard.getField(player.getOnField()).landOnField(player, 0, gameBoard, playerList, false);
@@ -260,7 +261,7 @@ public class Chance extends Field {
 	}
 
 	@Override
-	public boolean releasePawnedField() {
+	public boolean undoPawnField() {
 		return false;
 	}
 
@@ -271,6 +272,24 @@ public class Chance extends Field {
 
 	@Override
 	public boolean sellConstruction() {
+		return false;
+	}
+
+	@Override
+	public boolean buyField(Player player, int price) {
+		return false;
+	}
+
+	@Override
+	public void releasePawnField() {
+	}
+
+	@Override
+	public void setConstructionRate(int rate) {
+	}
+
+	@Override
+	public boolean getIsPawned() {
 		return false;
 	}
 	

@@ -67,4 +67,10 @@ public class ShippingLine extends Ownable {
 	public boolean sellConstruction() {
 		return false;
 	}
+
+	@Override
+	public void setConstructionRate(int rate) {
+		// TODO Auto-generated method stub
+		
+	}
 }
