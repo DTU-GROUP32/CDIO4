@@ -84,4 +84,6 @@ public abstract class Field {
 	public abstract boolean getIsPawned();
 
 	public abstract int getPropertyGroup();
+
+	public abstract int getTopCardNumber();
 }

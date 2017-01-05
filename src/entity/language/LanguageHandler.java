@@ -67,6 +67,10 @@ public class LanguageHandler {
 	public String fieldDescription(int fieldNumber) {
 		return selectedLanguage.fieldDescription(fieldNumber);
 	}
+	
+	public String getChanceCardMsg(int topCardNumber) {
+		return selectedLanguage.getChanceCardMsg(topCardNumber);
+	}
 
 	/**
 	 * Asks for number of players to add into the game
@@ -275,4 +279,6 @@ public class LanguageHandler {
 	 * @return
 	 */
 	public String trade(){ return selectedLanguage.trade(); }
+
+
 }

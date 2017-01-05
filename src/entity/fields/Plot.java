@@ -73,5 +73,10 @@ public class Plot extends Ownable {
 	@Override
 	public int[] getRent() {
 		return this.rent;
+	}
+
+	@Override
+	public int getTopCardNumber() {
+		return 0;
 	}	
 }

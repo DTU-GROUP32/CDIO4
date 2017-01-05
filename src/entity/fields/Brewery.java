@@ -85,4 +85,10 @@ public class Brewery extends Ownable {
 	public int[] getRent() {
 		return null;
 	}
+
+	@Override
+	public int getTopCardNumber() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

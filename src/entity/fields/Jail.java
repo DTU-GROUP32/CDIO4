@@ -109,4 +109,16 @@ public class Jail extends Field {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public int[] getRent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getTopCardNumber() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

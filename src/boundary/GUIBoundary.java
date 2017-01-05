@@ -266,7 +266,11 @@ public class GUIBoundary {
 			else
 				GUI.setSubText(field.getID(), field.getOwner().getName());
 		}
-
 	}
+	
+	public void setChanceCard(String message) {
+		GUI.setChanceCard(message);
+	}
+	
 
 }

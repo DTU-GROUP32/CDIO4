@@ -8,6 +8,7 @@ import entity.DiceCup;
 import entity.GameBoard;
 import entity.Player;
 import entity.PlayerList;
+import entity.fields.Chance;
 import entity.fields.Field;
 import entity.fields.Ownable;
 import entity.language.LanguageHandler;
@@ -63,7 +64,15 @@ public class GameController {
             int fieldNumber = player.getOnField();
             Field field = gameBoard.getField(fieldNumber);
             boundary.setCar(fieldNumber, player.getName());
-            boundary.getButtonPressed(language.fieldMsg(fieldNumber));
+            // læg kort klar
+            if(field instanceof Chance) {
+            	boundary.setChanceCard(language.getChanceCardMsg(field.getTopCardNumber()));
+                boundary.getButtonPressed(language.fieldMsg(fieldNumber));
+                boundary.setChanceCard(language.getChanceCardMsg(-1));
+            } else {
+            	boundary.getButtonPressed(language.fieldMsg(fieldNumber));
+            }
+            // fjern kort
             if (field instanceof Ownable) {
                 Player ownerOfField = field.getOwner();
                 if (ownerOfField == null) {

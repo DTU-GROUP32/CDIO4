@@ -76,4 +76,9 @@ public class ShippingLine extends Ownable {
 	public int[] getRent() {
 		return this.rent;
 	}
+
+	@Override
+	public int getTopCardNumber() {
+		return 0;
+	}
 }

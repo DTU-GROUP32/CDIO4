@@ -341,4 +341,10 @@ public class English implements Language{
 
 	@Override
 	public String trade(){ return "Trade"; }
+
+	@Override
+	public String getChanceCardMsg(int topCardNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

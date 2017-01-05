@@ -11,6 +11,8 @@ public interface Language {
 	String fieldPrices(int fieldNumber);
 
 	String fieldDescription(int fieldNumber);
+	
+	String getChanceCardMsg(int topCardNumber);
 
 	String welcomeMsg();
 
@@ -65,6 +67,8 @@ public interface Language {
 	String build();
 
 	String trade();
+
+
 
 	// Updating Language class regards to changes in SequenceController class
 

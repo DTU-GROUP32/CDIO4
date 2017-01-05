@@ -137,4 +137,9 @@ public class Tax extends Field {
 	public int[] getRent() {
 		return null;
 	}
+
+	@Override
+	public int getTopCardNumber() {
+		return 0;
+	}
 }

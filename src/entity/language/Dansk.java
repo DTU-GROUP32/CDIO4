@@ -187,7 +187,7 @@ public class Dansk implements Language{
 
 	@Override
 	public String fieldDescription(int fieldNumber) {
-		String fieldName;
+		String fieldName = null;
 		switch (fieldNumber) {
 		case 0:  fieldName = "Modtag 4.000 kr. fra banken";
 		break;
@@ -218,6 +218,12 @@ public class Dansk implements Language{
 	}
 
 	@Override
+	public String getChanceCardMsg(int topCardNumber) {
+		// TODO Nedskriv de forskellige tekster til Chancekortene - HUSK DEFAULT BESKED: "Prøv lykken"
+		return null;
+	}
+	
+	@Override
 	public String welcomeMsg(){
 		return "Velkommen til spillet!";
 	}
@@ -243,7 +249,7 @@ public class Dansk implements Language{
 
 	@Override
 	public String fieldMsg(int fieldNumber){
-		String fieldString;
+		String fieldString = null;
 		switch (fieldNumber) {
 		case 0:  fieldString = "START";
 		break;
@@ -376,7 +382,7 @@ public class Dansk implements Language{
 
 	@Override
 	public String nonOwnableFieldEffectMsg(int fieldNumber) {
-		String message;
+		String message = null;
 		switch (fieldNumber) {
 		case 0:  message = "Du er landet på START og får 4.000 kr.";
 		break;
@@ -466,7 +472,7 @@ public class Dansk implements Language{
 				+ "36. Prøv lykken: ? \n"
 				+ "37. Frederiksberggade: 7000 kr. \n"
 				+ "38. Skat: 2000 kr. \n"
-				+ "39. Rådhuspladsen: 8000 kr. \n"
+				+ "39. Rådhuspladsen: 8000 kr. \n";
 	}
 
 	@Override
@@ -501,4 +507,5 @@ public class Dansk implements Language{
 
 	@Override
 	public String trade(){ return "Handle"; }
+
 }
