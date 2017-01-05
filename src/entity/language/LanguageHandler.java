@@ -263,16 +263,95 @@ public class LanguageHandler {
 	 * @return String
 	 */
 	public String throwDices(){ return selectedLanguage.throwDices(); }
-
+	
 	/**
-	 * Prints button message for build-action
+	 * Prints button message when trying to build houses but dont own all the fields.
 	 * @return String
 	 */
-	public String build(){ return selectedLanguage.build(); }
 
+	public String notBuildable(){ return selectedLanguage.notBuildable(); }
+	
 	/**
-	 * Prints button message for trade-action
-	 * @return
+	 * Prints button message when building houses
+	 * @return String
 	 */
-	public String trade(){ return selectedLanguage.trade(); }
+	
+	public String buildable(){ return selectedLanguage.buildable();}
+	
+	/**
+	 * Prints button message when trying to destroy a not destroyable property
+	 * @return String
+	 */
+	
+	public String notdemolitionable(){ return selectedLanguage.notdemolitionable(); }
+	
+	/**
+	 * Prints button message when destroying a property
+	 * @return String
+	 */
+	
+	public String choosedemolitionable(){ return selectedLanguage.choosedemolition(); }
+	
+	/**
+	 * Prints button message when a trade is not available
+	 * @return String
+	 */
+	
+	public String notTradeable() { return selectedLanguage.notTradeable(); }
+	
+	/**
+	 * Prints button message for choosing a plot to trade
+	 * @return String
+	 */
+	
+	public String choosePlotTrade(){ return selectedLanguage.choosePlotTrade(); }
+	
+	/**
+	 * Prints button message for choosing a buyer to trade
+	 * @return String
+	 */
+	
+	public String chooseBuyerTrade(){ return selectedLanguage.chooseBuyerTrade(); }
+	
+	/**
+	 * Prints button message for choosing trade price
+	 * @return String
+	 */
+	
+	public String tradePrice(){ return selectedLanguage.tradePrice(); }
+	
+	/**
+	 * Prints button message for asking the counterpart if want to trade.
+	 * @return String
+	 */
+	
+	public String wantToTrade(){ return selectedLanguage.wantToTrade(); }
+	
+	/**
+	 * Prints button message when you have no pawnablefields
+	 * @return String
+	 */
+	
+	public String noPawnableFields(){ return selectedLanguage.noPawnableFields();}
+	
+	/**
+	 * Prints button message when selecting a pawnable field
+	 * @return String
+	 */
+	
+	public String choosePawnField(){ return selectedLanguage.choosePawnField(); }
+	
+	/**
+	 * Prints button message for succesful pawn
+	 * @return String
+	 */
+	
+	public String pawnSucces(){ return selectedLanguage.pawnSucces(); }
+	
+	/**
+	 * Prints button message when field isnt pawnable. 
+	 * @return String
+	 */
+	
+	public String notPawnable(){ return selectedLanguage.notPawnable(); }
 }
