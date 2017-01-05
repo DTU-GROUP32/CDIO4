@@ -85,27 +85,27 @@ public abstract class SequenceController {
 			String fieldToSell = boundary.getUserSelection("Choose plot to trade", sellableLabels);
 			String buyer = boundary.getUserSelection("Choose who is buying", playerLabels);
 
-            fieldLoop:
-            for (Field field : sellableList) {
-                if (fieldToSell.equals(field.getName())) {
-                    fieldToSellObject = field;
-                    for (Player player : playerList.getPlayers()) {
-                        if (buyer.equals(player.getName())) {
-                            buyerObject = player;
-                            int price = boundary.getInteger("Which price?", 0, 30000);
-                            if(boundary.getBoolean("Do you want to trade?", "Yes", "No")){
-                                fieldToSellObject.tradeField(owner, buyerObject, price);
-                                boundary.setOwner(field.getID(), buyerObject.getName());
-                                boundary.updateBalance(owner.getName(), owner.getBankAccount().getBalance());
-                                boundary.updateBalance(buyerObject.getName(), buyerObject.getBankAccount().getBalance());
-                            }
-                            break fieldLoop;
-                        }
-                    }
-                }
-            }
-        }
-    }
+			fieldLoop:
+				for (Field field : sellableList) {
+					if (fieldToSell.equals(field.getName())) {
+						fieldToSellObject = field;
+						for (Player player : playerList.getPlayers()) {
+							if (buyer.equals(player.getName())) {
+								buyerObject = player;
+								int price = boundary.getInteger("Which price?", 0, 30000);
+								if(boundary.getBoolean("Do you want to trade?", "Yes", "No")){
+									fieldToSellObject.tradeField(owner, buyerObject, price);
+									boundary.setOwner(field.getID(), buyerObject.getName());
+									boundary.updateBalance(owner.getName(), owner.getBankAccount().getBalance());
+									boundary.updateBalance(buyerObject.getName(), buyerObject.getBankAccount().getBalance());
+								}
+								break fieldLoop;
+							}
+						}
+					}
+				}
+		}
+	}
 
 	/**
 	 *
@@ -134,7 +134,7 @@ public abstract class SequenceController {
 			}
 		}
 	}
-	
+
 	public static void undoPawnSequence(Player player, GameBoard gameBoard) {
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
@@ -209,11 +209,11 @@ public abstract class SequenceController {
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
 		String[] options = {"Pantsætte", "Sælge bygninger", "Handle ejendomme", "Erklær konkurs"};
-		
+
 		getMoneySeq: while(debitor.getBankAccount().getBalance() < targetAmount) {
-			
+
 			String choice = boundary.getUserSelection("Du skal betale " + targetAmount + ", men du har ikke nok penge. Hvad vil du gøre?", options);
-			
+
 			switch(choice) {
 			case "Pantsætte":
 				pawnSequence(debitor, gameBoard);
@@ -225,25 +225,30 @@ public abstract class SequenceController {
 				tradePropertiesSequence(debitor, gameBoard, playerList);
 				break;
 			case "Erklær konkurs":
-				if(creditor != null) {
-					debitor.getBankAccount().transfer(creditor, debitor.getTotalAssets(gameBoard));
-					debitor.getBankAccount().setBalance(-1);
+				if(debitor.getTotalAssets(gameBoard) < targetAmount) {
+					if(creditor != null) {
+						debitor.getBankAccount().transfer(creditor, debitor.getTotalAssets(gameBoard));
+						debitor.getBankAccount().setBalance(-1);
+					} else {
+						debitor.getBankAccount().withdraw(debitor.getTotalAssets(gameBoard));
+						debitor.getBankAccount().setBalance(-1);
+					}
+					boundary.releasePlayersFields(gameBoard, debitor);
+					gameBoard.releasePlayersFields(debitor);
+					for(int i = 0; i < gameBoard.getFields().length; i++){
+						boundary.updateConstructionRate(gameBoard.getField(i));
+						boundary.updatePawnStatus(gameBoard.getField(i));
+					}
+					break getMoneySeq;
 				} else {
-					debitor.getBankAccount().withdraw(debitor.getTotalAssets(gameBoard));
-					debitor.getBankAccount().setBalance(-1);
+					boundary.getButtonPressed("Du kan godt få nok penge");
+					break;
 				}
-				boundary.releasePlayersFields(gameBoard, debitor);
-				gameBoard.releasePlayersFields(debitor);
-				for(int i = 0; i < gameBoard.getFields().length; i++){
-					boundary.updateConstructionRate(gameBoard.getField(i));
-					boundary.updatePawnStatus(gameBoard.getField(i));
-				}
-				break getMoneySeq;
 			default:
 				break;
 			}
-			
+
 		}
 	}
-	
+
 }
