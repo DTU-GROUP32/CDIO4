@@ -65,4 +65,9 @@ public interface Language {
 	String build();
 
 	String trade();
+
+	// Updating Language class regards to changes in SequenceController class
+
+
+
 }
