@@ -13,8 +13,9 @@ public abstract class Ownable extends Field {
 	protected boolean isPawned;
 
 	/**
-	 * Default constructor
-	 * 
+	 * Constructor for the ownable type fields, because the class is abstract, this constructor is only used as a super constructor.
+	 * By default it sets the owner, pawnValue and isPawned.
+	 * @param name
 	 * @param price
 	 */
 	public Ownable(String name, int price) {
@@ -24,7 +25,7 @@ public abstract class Ownable extends Field {
 		this.pawnValue = price / 2;
 		this.isPawned = false;
 	}
-
+	
 	public int getPrice() {
 		return price;
 	}
@@ -37,28 +38,27 @@ public abstract class Ownable extends Field {
 		this.owner = newOwner;
 	}
 
-	/**
-	 * @return the pawnValue
-	 */
 	public int getPawnValue() {
 		return pawnValue;
 	}
+	
+	public boolean getIsPawned() {
+		return this.isPawned;
+	}
 
+	public void releasePawnField() {
+		this.isPawned = false;
+	}
+	
 	public boolean landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
 		if (this.owner.isInJail() == false || this.isPawned == false)
-			while (player.getBankAccount().transfer(owner, this.getRent(gameBoard)) == false)
-				SequenceController.getMoneySequence(player, this.owner, gameBoard, playerList, this.getRent(gameBoard));
+			while (player.getBankAccount().transfer(owner, this.getRent(gameBoard, roll)) == false)
+				SequenceController.getMoneySequence(player, this.owner, gameBoard, playerList, this.getRent(gameBoard, roll));
 		return true;
 	}
 
-	public abstract int getRent(GameBoard gameBoard);
-
 	public boolean buyField(Player player) {
-		if (player.getBankAccount().withdraw(this.price)) {
-			this.setOwner(player);
-			return true;
-		}
-		return false;
+		return buyField(player, this.price);
 	}
 	
 	public boolean buyField(Player player, int price) {
@@ -93,13 +93,5 @@ public abstract class Ownable extends Field {
 			return true;
 		}
 		return false;
-	}
-
-	public void releasePawnField() {
-		this.isPawned = false;
-	}
-	
-	public boolean getIsPawned() {
-		return this.isPawned;
 	}
 }

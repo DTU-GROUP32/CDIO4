@@ -6,6 +6,10 @@ import entity.PlayerList;
 
 public class Jail extends Field {
 
+	/**
+	 * Constructor for the Jail field, only takes a name.
+	 * @param name
+	 */
 	public Jail(String name) {
 		super(name);
 	}
@@ -16,6 +20,8 @@ public class Jail extends Field {
 		player.setInJail(true);
 		return true;
 	}
+	
+	// all methods under this line are default methods
 	
 	@Override
 	public int getPrice() {
@@ -28,11 +34,10 @@ public class Jail extends Field {
 	}
 
 	@Override
-	public void setOwner(Player newOwner) {
-	}
+	public void setOwner(Player newOwner) {}
 
 	@Override
-	public int getRent(GameBoard gameBoard) {
+	public int getRent(GameBoard gameBoard, int roll) {
 		return 0;
 	}
 
@@ -88,37 +93,42 @@ public class Jail extends Field {
 
 	@Override
 	public boolean buyField(Player player, int price) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void releasePawnField() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void releasePawnField() {}
 
 	@Override
-	public void setConstructionRate(int rate) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void setConstructionRate(int rate) {}
 
 	@Override
 	public boolean getIsPawned() {
-		// TODO Auto-generated method stub
 		return false;
-	}
-
-	@Override
-	public int[] getRent() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
 	public int getTopCardNumber() {
-		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int getBonus() {
+		return 0;
+	}
+
+	@Override
+	public int getTaxAmount() {
+		return 0;
+	}
+
+	@Override
+	public int getTaxRate() {
+		return 0;
+	}
+
+	@Override
+	public int[] getRentArray() {
+		return null;
 	}
 }

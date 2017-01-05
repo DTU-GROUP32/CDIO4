@@ -9,14 +9,16 @@ public class ShippingLine extends Ownable {
 	private static int[] numberOfShippingLinesOwnedByEachPlayer = {0,0,0,0,0,0};
 
 	/**
-	 * Default constructor. Shipping line has a price of 4000.
+	 * Constructor for the shipping line field. Only takes a name.
+	 * By default it sets the price of the field to 4000, because all shipping lines has the same price in the game.
+	 * @param name
 	 */
 	public ShippingLine(String name) {
 		super(name, 4000);
 	}
 
 	@Override
-	public int getRent(GameBoard gameBoard) {
+	public int getRent(GameBoard gameBoard, int roll) {
 		return rent[numberOfShippingLinesOwnedByEachPlayer[owner.getID()]-1];
 	}
 
@@ -43,6 +45,8 @@ public class ShippingLine extends Ownable {
 		return false;
 	}
 
+	// all methods under this line are default methods
+	
 	@Override
 	public int getConstructionRate() {
 		return 0;
@@ -73,12 +77,31 @@ public class ShippingLine extends Ownable {
 	}
 
 	@Override
-	public int[] getRent() {
-		return this.rent;
+	public int getTopCardNumber() {
+		return 0;
 	}
 
 	@Override
-	public int getTopCardNumber() {
+	public int getBonus() {
+		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int getTaxAmount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getTaxRate() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int[] getRentArray() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
