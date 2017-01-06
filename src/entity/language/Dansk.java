@@ -8,6 +8,47 @@ public class Dansk implements Language{
 	public String notifyLangChange(){
 		return "Sproget er nu sat til dansk!";
 	}
+	
+	@Override
+	public String askForNumberOfPlayers() {
+		return "Hvor mange spillere skal være med? Der kan vælges fra 2 til 6";
+	}
+
+	@Override
+	public String askForPlayerName(int playerNumber){
+		return "Indtast spiller " + playerNumber + "'s navn, alle spillere skal have forskellige navne.";
+	}
+	
+	@Override
+	public String fieldDescription(int fieldNumber) {
+		String fieldDescription = null;
+		switch (fieldNumber) {
+		case 0:  fieldDescription = "Modtag kr. 4.000 fra banken";
+		break;
+		case 2:  fieldDescription = "Prøv lykken";
+		break;
+		case 4:  fieldDescription = "Betal 10% eller kr. 4000";
+		break;
+		case 7: fieldDescription = "Prøv lykken";
+		break;
+		case 10: fieldDescription = "På besøg i fængselet";
+		break;
+		case 17: fieldDescription = "Prøv lykken";
+		break;
+		case 22: fieldDescription = "Prøv lykken";
+		break;
+		case 30: fieldDescription = "Du fængsles";
+		break;
+		case 33: fieldDescription = "Prøv lykken";
+		break;
+		case 36: fieldDescription = "Prøv lykken";
+		break;
+		case 38: fieldDescription = "Betal kr. 2000 i skat";
+		break;
+
+		}
+		return fieldDescription;
+	}
 
 	@Override
 	public String fieldNames(int fieldNumber) {
@@ -185,61 +226,20 @@ public class Dansk implements Language{
 		return fieldPrice;
 	}
 
-	@Override
-	public String fieldDescription(int fieldNumber) {
-		String fieldName = null;
-		switch (fieldNumber) {
-		case 0:  fieldName = "Modtag kr. 4.000 fra banken";
-		break;
-		case 2:  fieldName = "Prøv lykken";
-		break;
-		case 4:  fieldName = "Betal 10% eller kr. 4000";
-		break;
-		case 7: fieldName = "Prøv lykken";
-		break;
-		case 10: fieldName = "På besøg i fængselet";
-		break;
-		case 17: fieldName = "Prøv lykken";
-		break;
-		case 22: fieldName = "Prøv lykken";
-		break;
-		case 30: fieldName = "Du fængsles";
-		break;
-		case 33: fieldName = "Prøv lykken";
-		break;
-		case 36: fieldName = "Prøv lykken";
-		break;
-		case 38: fieldName = "Betal kr. 2000 i skat";
-		break;
-
-		}
-		return fieldName;
-	}
+	
 
 	@Override
 	public String getChanceCardMsg(int topCardNumber) {
 		// TODO Nedskriv de forskellige tekster til Chancekortene - HUSK DEFAULT BESKED: "Prøv lykken"
 		return null;
 	}
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> languagePakkee
 	@Override
 	public String welcomeMsg(){
 		return "Velkommen til spillet!";
 	}
 
-	@Override
-	public String askForNumberOfPlayers() {
-		return "Hvor mange spillere skal være med? Der kan vælges fra 2 til 6";
-	}
-
-	@Override
-	public String askForPlayerName(int playerNumber){
-		return "Indtast spiller " + playerNumber + "'s navn, alle spillere skal have forskellige navne.";
-	}
+	
 
 	@Override
 	public String readyToBegin(){
