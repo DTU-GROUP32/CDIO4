@@ -214,6 +214,10 @@ public class LanguageHandler {
 	public String enterAuctionPrice() {
 		return selectedLanguage.enterAuctionPrice();
 	}
+	
+	public String confirmPurchase() {
+		return selectedLanguage.confirmPurchase();
+	}
 
 	public String pawn(){ 
 		return selectedLanguage.pawn();

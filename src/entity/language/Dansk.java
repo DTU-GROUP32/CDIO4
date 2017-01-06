@@ -440,6 +440,11 @@ public class Dansk implements Language{
 	public String enterAuctionPrice(){
 		return "Hvad blev auktionsprisen?";
 	}
+
+	@Override
+	public String confirmPurchase() {
+		return "Vil du bekræfte købet?";
+	}
 	
 	@Override
 	public String pawn(){

@@ -90,6 +90,8 @@ public interface Language {
 
 	String enterAuctionPrice();
 
+	String confirmPurchase();
+
 	String pawn();
 
 	String demolish();

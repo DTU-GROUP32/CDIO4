@@ -70,8 +70,8 @@ public abstract class SequenceController {
 		ArrayList<Field> sellableList = gameBoard.getPropertyList(owner);
 		String[] sellableLabels = getFieldNamesFromListOfFields(sellableList);
 		String[] playerLabels = getPlayerNamesExceptSpecificPlayer(playerList, owner);
-		Field fieldToSellObject;
-		Player buyerObject;
+		Field fieldToSellObject = null;
+		Player buyerObject = null;
 
 		if (sellableLabels.length == 0) {
 			boundary.getButtonPressed(language.noTradeableProperties());
@@ -80,30 +80,33 @@ public abstract class SequenceController {
 			String fieldToSell = boundary.getUserSelection(language.choosePlotTrade(), sellableLabels);
 			String buyer = boundary.getUserSelection(language.choosePropertyBuyer(), playerLabels);
 
-			fieldLoop:
-				// finds the field object by the name
-				for (Field field : sellableList) {
-					if (fieldToSell.equals(field.getName())) {
-						fieldToSellObject = field;
-						// finds the buyer by name
-						for (Player player : playerList.getPlayers()) {
-							if (buyer.equals(player.getName())) {
-								buyerObject = player;
-								// gets the trade price
-								int price = boundary.getInteger(language.enterTradePrice(), 0, buyerObject.getBankAccount().getBalance());
-								// gets confirmation on the trade and executes actions if confirmed
-								if(boundary.getBoolean(language.confirmTrade(), language.yes(), language.no())){
-									if(fieldToSellObject.tradeField(owner, buyerObject, price)) {
-										boundary.setOwner(field.getID(), buyerObject.getName());
-										boundary.updateBalance(owner.getName(), owner.getBankAccount().getBalance());
-										boundary.updateBalance(buyerObject.getName(), buyerObject.getBankAccount().getBalance());
-									}
-								}
-								break fieldLoop;
-							}
-						}
-					}
+			// finds the field object by the name
+			for (Field field : sellableList) {
+				if (fieldToSell.equals(field.getName())) {
+					fieldToSellObject = field;
 				}
+			}
+
+			// finds the buyer object by name
+			for (Player player : playerList.getPlayers()) {
+				if (buyer.equals(player.getName())) {
+					buyerObject = player;
+				}
+			}
+
+			// gets the trade price
+			int price = boundary.getInteger(language.enterTradePrice(), 0, buyerObject.getBankAccount().getBalance());
+			// gets confirmation on the trade and executes actions if confirmed
+			if(boundary.getBoolean(language.confirmTrade(), language.yes(), language.no())){
+				if(fieldToSellObject.tradeField(owner, buyerObject, price)) {
+					boundary.setOwner(fieldToSellObject.getID(), buyer);
+					boundary.updateBalance(owner.getName(), owner.getBankAccount().getBalance());
+					boundary.updateBalance(buyerObject.getName(), buyerObject.getBankAccount().getBalance());
+					boundary.getButtonPressed(language.purchaseConfirmation());
+				} else {
+					boundary.getButtonPressed(language.notEnoughMoney());
+				}
+			}
 		}
 	}
 
@@ -203,8 +206,8 @@ public abstract class SequenceController {
 
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
-		Player buyerObject = null;
 		String[] playerLabels = getPlayerNamesExceptSpecificPlayer(playerList, playerOnField);
+		Player buyerObject = null;
 
 		// gets user choice
 		String buyer = boundary.getUserSelection(language.choosePropertyBuyer(), playerLabels);
@@ -219,13 +222,15 @@ public abstract class SequenceController {
 
 		//gets user choice
 		int price = boundary.getInteger(language.enterAuctionPrice(), 0, buyerObject.getBankAccount().getBalance());
-		// carries out the buy if possible and updates the GUI
-		if(field.buyField(buyerObject, price)) {
-			boundary.setOwner(field.getID(), buyer);
-			boundary.updateBalance(buyer, buyerObject.getBankAccount().getBalance());
-			boundary.getButtonPressed(language.purchaseConfirmation());
-		} else {
-			boundary.getButtonPressed(language.notEnoughMoney());
+		// gets confirmation on the purchase and executes actions if confirmed
+		if(boundary.getBoolean(language.confirmPurchase(), language.yes(), language.no())){
+			if(field.buyField(buyerObject, price)) {
+				boundary.setOwner(field.getID(), buyer);
+				boundary.updateBalance(buyer, buyerObject.getBankAccount().getBalance());
+				boundary.getButtonPressed(language.purchaseConfirmation());
+			} else {
+				boundary.getButtonPressed(language.notEnoughMoney());
+			}
 		}
 	}
 
