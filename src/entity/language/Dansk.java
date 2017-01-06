@@ -38,7 +38,7 @@ public class Dansk implements Language{
 		break;
 		case 20: fieldDescription = "Parkering";
 		break;
-		case 30: fieldDescription = "Du fængsles";
+		case 30: fieldDescription = "De fængsles";
 		break;
 		case 38: fieldDescription = "Betal kr. 2000 i skat";
 		break;

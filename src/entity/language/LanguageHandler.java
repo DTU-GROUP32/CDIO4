@@ -2,329 +2,207 @@ package entity.language;
 
 import entity.Player;
 
+/**
+ * Every method in this class should be self-explanatory by their names
+ * @author Frederik
+ *
+ */
+
 public class LanguageHandler {
 
 	private Language selectedLanguage;
 	private static LanguageHandler instance;
 
 	/**
-	 * Default constructor that takes a parameter to initialize a entity.language
+	 * Constructor that takes a parameter to initialize a language
 	 * @param language
 	 */
 	private LanguageHandler(String language) {
 		setLanguage(language);
 	}
-	
+
+	/**
+	 * Returns an instance of LanguageHandler. And initializes the instance if it isn't already initialized
+	 * @return instance
+	 */
 	public static LanguageHandler getInstance() {
 		if(instance == null)
-			 instance = new LanguageHandler("Dansk");
+			instance = new LanguageHandler("Dansk");
 		return instance;
 	}
 
 	/**
-	 * Changes entity.language and sets it to either Danish or English
+	 * Changes language to input parameter
 	 * @param language
 	 */
 	public void setLanguage(String language) {
 		switch(language) {
 		case "Dansk": selectedLanguage = new Dansk(); break;
 		case "English": selectedLanguage = new English(); break;
-		default: selectedLanguage = new English();
+		default: selectedLanguage = new Dansk();
 		}
 	}
 
-	/**
-	 * Notifies of entity.language change
-	 * @return String
-	 */
 	public String notifyLangChange(){
 		return selectedLanguage.notifyLangChange();
 	}
-	
-	/**
-	 * Asks for number of players to add into the game
-	 * @return String
-	 */
+
 	public String askForNumberOfPlayers() {
 		return selectedLanguage.askForNumberOfPlayers();
 	}
 
-	/** 
-	 * Asks for player name.
-	 * @return String
-	 */
 	public String askForPlayerName(int playerNumber){
 		return selectedLanguage.askForPlayerName(playerNumber);
 	}
-	
-	/**
-	 * Returns a string that describes the field, depending on the number of the field
-	 * @param fieldNumber
-	 * @return String
-	 */
+
 	public String fieldDescription(int fieldNumber) {
 		return selectedLanguage.fieldDescription(fieldNumber);
 	}
-	
-	/**
-	 * Returns name of the field, using the number of the field to determine the exact field
-	 * @param fieldNumber
-	 * @return String
-	 */
+
 	public String fieldNames(int fieldNumber) {
 		return selectedLanguage.fieldNames(fieldNumber);
 	}
 
-	/**
-	 * Returns the price of the field, using the number of the field to determine the exact field
-	 * @param fieldNumber
-	 * @return String
-	 */
 	public String fieldPrices(int fieldPrice) {
 		return selectedLanguage.fieldPrices(fieldPrice);
 	}
 
-	/** 
-	 * Tells user that the game will start shortly. 
-	 * @return String
-	 */
 	public String readyToBegin(){
 		return selectedLanguage.readyToBegin();
 	}
-	
-	/**
-	 * Prints who won with how many points.
-	 * @return String
-	 */
+
 	public String winnerMsg(Player player){
 		return selectedLanguage.winnerMsg(player);
 	}
 
-	/**
-	 * Premessage at the start of players turn 
-	 * @return String
-	 */
 	public String preMsg(Player player){
 		return selectedLanguage.preMsg(player);
 	}
-	
-	/**
-	 * Prints button message for throw-action
-	 * @return String
-	 */
-	public String throwDices(){ return selectedLanguage.throwDices(); }
-	
-	/**
-	 * Prints option menu selection
-	 * @return
-	 */
-	public String build(){ return selectedLanguage.build(); }
-	
-	/**
-	 * Prints options menu selections
-	 * @return String
-	 */
-	public String trade(){ return selectedLanguage.trade();}
-	
-	/**
-	 * 
-	 * @param topCardNumber
-	 * @return
-	 */
+
+	public String throwDices(){ 
+		return selectedLanguage.throwDices();
+	}
+
+	public String build(){ 
+		return selectedLanguage.build();
+	}
+
+	public String trade(){ 
+		return selectedLanguage.trade();
+	}
+
 	public String getChanceCardMsg(int topCardNumber) {
 		return selectedLanguage.getChanceCardMsg(topCardNumber);
 	}
-	
-	/**
-	 * Switch case that displays the field message that was landed on.
-	 * @return String
-	 */
+
 	public String fieldMsg(int fieldNumber){
 		return selectedLanguage.fieldMsg(fieldNumber);
 	}
 
-	/**
-	 * Returns a message that
-	 * @param owner
-	 * @return String
-	 */
 	public String landedOnOwnedField(Player owner) {
 		return selectedLanguage.landedOnOwnedField(owner);
 	}
-	
-	/**
-	 * Returns a message that tells you how much you paid to who
-	 * @param amountPayed
-	 * @param owner
-	 * @return String
-	 */
+
 	public String youPaidThisMuchToThisPerson(int amountPayed, Player owner) {
 		return selectedLanguage.youPaidThisMuchToThisPerson(amountPayed, owner);
 	}
-	
-	/**
-	 * Returns a message that tells you that you already own this field
-	 * @return
-	 */
+
 	public String youOwnThisField() {
 		return selectedLanguage.youOwnThisField();
 	}
-	
-	/**
-	 * Returns a message that asks you if you want to pay either 10% or 4000
-	 * @return String
-	 */
+
 	public String getTaxChoice() {
 		return selectedLanguage.getTaxChoice();
 	}
-	
-	/**
-	 * Returns a message that tells you're broke
-	 * @return
-	 */
+
 	public String youAreBroke() {
 		return selectedLanguage.youAreBroke();
 	}
-	
-	/**
-	 * Prints  message when trying to build houses but dont own all the fields.
-	 * @return String
-	 */
-	public String notBuildable(){ return selectedLanguage.notBuildable(); }
 
-	/**
-	 * Prints  message when building houses
-	 * @return String
-	 */
-	public String choosePlotToBuildOn(){ return selectedLanguage.choosePlotToBuildOn();}
-	
-	/**
-	 * Prints  message when trying to destroy a not destroyable property
-	 * @return String
-	 */
-	public String noDemolitionableProperties(){ return selectedLanguage.noDemolitionableProperties(); }
-	
-	/**
-	 * Prints  message when destroying a property
-	 * @return String
-	 */
-	public String choosePropertyToDemolishOn(){ return selectedLanguage.choosePropertyToDemolishOn(); }
-	
-	/**
-	 * Prints  message when a trade is not available
-	 * @return String
-	 */
-	public String noTradeableProperties() { return selectedLanguage.noTradeableProperties(); }
-	
-	/**
-	 * Prints  message for choosing a plot to trade
-	 * @return String
-	 */
-	public String choosePlotTrade(){ return selectedLanguage.choosePlotTrade(); }
-	
-	/**
-	 * Prints  message for choosing a buyer to trade
-	 * @return String
-	 */
-	public String choosePropertyBuyer(){ return selectedLanguage.choosePropertyBuyer(); }
-	
-	/**
-	 * Prints  message for choosing trade price
-	 * @return String
-	 */
-	public String enterTradePrice(){ return selectedLanguage.enterTradePrice(); }
-	
-	/**
-	 * Prints  message for asking the counterpart if want to trade.
-	 * @return String
-	 */
-	public String confirmTrade(){ return selectedLanguage.confirmTrade(); }
-	
-	/**
-	 * Returns yes
-	 * @return String
-	 */
+	public String notBuildable(){ 
+		return selectedLanguage.notBuildable();
+	}
+
+	public String choosePlotToBuildOn(){
+		return selectedLanguage.choosePlotToBuildOn();
+	}
+
+	public String noDemolitionableProperties(){ 
+		return selectedLanguage.noDemolitionableProperties();
+	}
+
+	public String choosePropertyToDemolishOn(){ 
+		return selectedLanguage.choosePropertyToDemolishOn(); 
+	}
+
+	public String noTradeableProperties() { 
+		return selectedLanguage.noTradeableProperties();
+	}
+
+	public String choosePlotTrade(){ 
+		return selectedLanguage.choosePlotTrade(); 
+	}
+
+	public String choosePropertyBuyer(){ 
+		return selectedLanguage.choosePropertyBuyer(); 
+	}
+
+	public String enterTradePrice(){ 
+		return selectedLanguage.enterTradePrice(); 
+	}
+
+	public String confirmTrade(){ 
+		return selectedLanguage.confirmTrade(); 
+	}
+
 	public String yes() {
 		return selectedLanguage.yes();
 	}
 
-	/**
-	 * Returns no
-	 * @return String
-	 */
 	public String no() {
 		return selectedLanguage.no();
 	}
-	
-	/**
-	 * Prints  message when you have no pawnablefields
-	 * @return String
-	 */
-	public String noPawnableFields(){ return selectedLanguage.noPawnableFields();}
-	
-	/**
-	 * Prints  message when selecting a pawnable field
-	 * @return String
-	 */
-	public String choosePropertyToPawn(){ return selectedLanguage.choosePropertyToPawn(); }
-	
-	/**
-	 * Prints  message for succesful pawn
-	 * @return String
-	 */
-	public String pawnSuccessful(){ return selectedLanguage.pawnSuccessful(); }
-	
-	/**
-	 * Prints  message when field isnt pawnable. 
-	 * @return String
-	 */
-	public String pawnUnsuccessful(){ return selectedLanguage.pawnUnsuccessful(); }
-	
-	/**
-	 * Prints  message when player got no pawned properties 
-	 * @return String
-	 */
-	public String noPawnedProperties(){ return selectedLanguage.noPawnedProperties();}
-	
-	/**
-	 * Prints  message when player chooses which pawned field to withdraw
-	 * @return String
-	 */
-	public String choosePropertyToUndoPawn(){ return selectedLanguage.choosePropertyToUndoPawn();}
-	
-	/**
-	 * Prints  message when withdraw succesful
-	 * @return String
-	 */
-	public String undoPawnSuccesful(){ return selectedLanguage.undoPawnSuccesful();}
-	
-	/**
-	 * Prints  message when withdraw unsuccesful 
-	 * @return String
-	 */
-	public String undoPawnUnsuccesful(){ return selectedLanguage.undoPawnUnsuccesful();}
-	
-	/**
-	 * Returns a message that asks wether or not the player wants to buy the field
-	 * @param price
-	 * @return String
-	 */
+
+	public String noPawnableFields(){ 
+		return selectedLanguage.noPawnableFields();
+	}
+
+	public String choosePropertyToPawn(){ 
+		return selectedLanguage.choosePropertyToPawn();
+	}
+
+	public String pawnSuccessful(){ 
+		return selectedLanguage.pawnSuccessful(); 
+	}
+
+	public String pawnUnsuccessful(){
+		return selectedLanguage.pawnUnsuccessful(); 
+	}
+
+	public String noPawnedProperties(){
+		return selectedLanguage.noPawnedProperties();
+	}
+
+	public String choosePropertyToUndoPawn(){
+		return selectedLanguage.choosePropertyToUndoPawn();
+	}
+
+	public String undoPawnSuccessful(){
+		return selectedLanguage.undoPawnSuccessful();
+	}
+
+	public String undoPawnUnsuccessful(){ 
+		return selectedLanguage.undoPawnUnsuccessful();
+	}
+
 	public String buyingOfferMsg(int price){
 		return selectedLanguage.buyingOfferMsg(price);
 	}
 
-	/**
-	 * Returns a message that confirms your purchase
-	 * @return
-	 */
 	public String purchaseConfirmation() {
 		return selectedLanguage.purchaseConfirmation();
 	}
 
-	/**
-	 * Returns a message that tells you that you don't have enough money
-	 * @return
-	 */
 	public String notEnoughMoney() {
 		return selectedLanguage.notEnoughMoney();
 	}
@@ -332,96 +210,57 @@ public class LanguageHandler {
 	public String enterAuctionPrice() {
 		return selectedLanguage.enterAuctionPrice();
 	}
-	
-	/**
-	 * Prints options menu selections
-	 * @return String
-	 */
-	public String pawn(){ return selectedLanguage.pawn();}
 
-	/**
-	 * Prints options menu selections
-	 * @return String
-	 */
-	public String demolish(){ return selectedLanguage.demolish();}
-	
-	/**
-	 * Prints options menu selections
-	 * @return String
-	 */
-	public String bankrupt(){ return selectedLanguage.bankrupt();}
-	
-	/**
-	 * Prints  message when a player has to pay a targeted amount
-	 * @return String
-	 */
-	public String toPay(int targetAmount){ return selectedLanguage.toPay(targetAmount);}
-	
-	/**
-	 * Prints message if player got enough money 
-	 * @return String
-	 */
-	public String canGetMoney(){ return selectedLanguage.canGetMoney();}
+	public String pawn(){ 
+		return selectedLanguage.pawn();
+	}
+
+	public String demolish(){ 
+		return selectedLanguage.demolish();
+	}
+
+	public String bankrupt(){ 
+		return selectedLanguage.bankrupt();
+	}
+
+	public String toPay(int targetAmount){ 
+		return selectedLanguage.toPay(targetAmount);
+	}
+
+	public String canGetMoney(){ 
+		return selectedLanguage.canGetMoney();
+	}
 
 	//
 	//
 	// METHODS UNDER THIS LINE ARE NOT USED IN THIS VERSION OF THE GAME
 	//
 	//
-	
-	/**
-	 * Returns message used for non-ownable field, determined by which field it is
-	 * @param onField
-	 * @return String
-	 */
+
 	public String nonOwnableFieldEffectMsg(int onField) {
 		return selectedLanguage.nonOwnableFieldEffectMsg(onField);
 	}
-	
-	/**
-	 * Prints the available commands in the menu.
-	 * @return String
-	 */
+
 	public String menu(){
 		return selectedLanguage.menu();
 	}
 
-	/**
-	 * Prints the rules of the game.
-	 * @return String
-	 */
 	public String printRules(){
 		return selectedLanguage.printRules();
 	}
 
-	/**
-	 * Prints the score. 
-	 * @return String
-	 */
 	public String printScore(Player[] players){
 		return selectedLanguage.printScore(players);
 	}
 
-	/** 
-	 * Prints how to change the dices.
-	 * @return String
-	 */
 	public String changeDices(){
 		return selectedLanguage.changeDices();
 	}
 
-	/**
-	 * Prints that the dices were changed successfully.			
-	 * @return String
-	 */
 	public String printDiceChangeSucces(){
 		return selectedLanguage.printDiceChangeSucces();
 	}
 
-	/**
-	 * Prints a error message if the dices couldn't be changed.
-	 * @return String
-	 */
 	public String printDiceChangeNotExecuted(){
 		return selectedLanguage.printDiceChangeNotExecuted();
 	}	

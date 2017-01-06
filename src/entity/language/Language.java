@@ -76,9 +76,9 @@ public interface Language {
 
 	String choosePropertyToUndoPawn();
 
-	String undoPawnSuccesful();
+	String undoPawnSuccessful();
 
-	String undoPawnUnsuccesful();
+	String undoPawnUnsuccessful();
 
 	String buyingOfferMsg(int price);
 
