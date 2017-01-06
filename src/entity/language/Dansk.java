@@ -163,11 +163,7 @@ public class Dansk implements Language{
 		break;
 		case 30: fieldPrice = "De Fængsles";
 		break;
-<<<<<<< HEAD
-		case 31: fieldPrice = "Pris: 6000";
-=======
 		case 31: fieldPrice = "kr. 6000";
->>>>>>> languagePakkee
 		break;
 		case 32: fieldPrice = "kr. 6000";
 		break;

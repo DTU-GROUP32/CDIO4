@@ -138,33 +138,7 @@ public class GUIBoundary {
 		return color;
 
 	}
-
-	/**
-	 * Returns a string containing which language is selected
-	 * @return language that is selected
-	 */
-	public String getLanguage() {
-		return GUI.getUserSelection("Select entity.language. \nVælg sprog.", "Dansk", "English");
-	}
-
-	/**
-	 * Returns a string of which is chosen
-	 * @param message
-	 * @param options
-	 * @return String of the choice that has been made
-	 */
-	public String getUserSelection(String message, String... options) {
-		return GUI.getUserSelection(message, options);
-	}
-
-	/**
-	 * Shows two dice on the board. The dice will have specified values, but placement is random
-	 * @param diceCup which contains two dice
-	 */
-	public void setDices(DiceCup diceCup) {
-		GUI.setDice(diceCup.getDices()[0].getFaceValue(), diceCup.getDices()[1].getFaceValue());
-	}
-
+	
 	/**
 	 * Adds a player with a specific vehicle on the game board
 	 * @param player
@@ -220,6 +194,85 @@ public class GUIBoundary {
 		Car car = carBuilder.build();
 		GUI.addPlayer(player.getName(), player.getBankAccount().getBalance(), car);
 		this.setCar(player.getOnField(), player.getName());
+	}
+
+	/**
+	 * Changes the field number so it remains under 40
+	 * @param fieldNumber - the current field number
+	 * @return convertedFieldNumber - the new converted field number
+	 */
+	private int convertFieldNumber(int fieldNumber) {
+		int convertedFieldNumber = fieldNumber + 1;
+		while(convertedFieldNumber > 40)
+			convertedFieldNumber -= 40;
+		return convertedFieldNumber;
+	}
+
+	/**
+	 * Removes ownership from every field that a player owns
+	 * @param gameBoard
+	 * @param player to release fields from
+	 */
+	public void releasePlayersFields(GameBoard gameBoard, Player player) {
+		for(int i = 0; i < gameBoard.getFields().length; i++)
+			if(gameBoard.getField(i) instanceof Ownable)
+				if(gameBoard.getField(i).getOwner().getName().equals(player.getName())) {
+					GUI.removeOwner(convertFieldNumber(i));
+				}
+	}
+
+	/**
+	 * Updates the construction rate on a specific field
+	 * @param field that is updated
+	 */
+	public void updateConstructionRate(entity.fields.Field field){
+		if(field.getConstructionRate() == 5){
+			GUI.setHouses(field.getID(), 0);
+			GUI.setHotel(field.getID(), true);
+		}else{
+			GUI.setHouses(field.getID(), field.getConstructionRate());
+		}
+	}
+
+	/**
+	 * Updates the pawn status on field
+	 * @param field that is updated
+	 */
+	public void updatePawnStatus(entity.fields.Field field) {
+		if(field.getIsPawned()) {
+			GUI.setSubText(field.getID(), "PANTSAT");
+		} else {
+			if(field.getOwner() == null)
+				GUI.setSubText(field.getID(), LanguageHandler.getInstance().fieldPrices(field.getID()));
+			else
+				GUI.setSubText(field.getID(), field.getOwner().getName());
+		}
+	}
+	
+	/**
+	 * Returns a string containing which language is selected
+	 * @return language that is selected
+	 */
+	public String getLanguage() {
+		return GUI.getUserSelection("Select entity.language. \nVælg sprog.", "Dansk", "English");
+	}
+
+	/**
+	 * Returns a string of which is chosen
+	 * @param message
+	 * @param options
+	 * @return String of the choice that has been made
+	 */
+	public String getUserSelection(String message, String... options) {
+		return GUI.getUserSelection(message, options);
+	}
+
+	/**
+	 * Shows two dice on the board. The dice will have specified values, but placement is random
+	 * @param diceCup which contains two dice
+	 */
+	public void setDices(DiceCup diceCup) {
+		GUI.setDice(diceCup.getDices()[0].getFaceValue(), diceCup.getDices()[1].getFaceValue());
 	}
 
 	/**
@@ -317,59 +370,6 @@ public class GUIBoundary {
 	 */
 	public String getUserButtonPressed(String msg, String... buttons) {
 		return GUI.getUserButtonPressed(msg, buttons);
-	}
-
-	/**
-	 * Changes the field number so it remains under 40
-	 * @param fieldNumber - the current field number
-	 * @return convertedFieldNumber - the new converted field number
-	 */
-	private int convertFieldNumber(int fieldNumber) {
-		int convertedFieldNumber = fieldNumber + 1;
-		while(convertedFieldNumber > 40)
-			convertedFieldNumber -= 40;
-		return convertedFieldNumber;
-	}
-
-	/**
-	 * Removes ownership from every field that a player owns
-	 * @param gameBoard
-	 * @param player to release fields from
-	 */
-	public void releasePlayersFields(GameBoard gameBoard, Player player) {
-		for(int i = 0; i < gameBoard.getFields().length; i++)
-			if(gameBoard.getField(i) instanceof Ownable)
-				if(gameBoard.getField(i).getOwner().getName().equals(player.getName())) {
-					GUI.removeOwner(convertFieldNumber(i));
-				}
-	}
-
-	/**
-	 * Updates the construction rate on a specific field
-	 * @param field that is updated
-	 */
-	public void updateConstructionRate(entity.fields.Field field){
-		if(field.getConstructionRate() == 5){
-			GUI.setHouses(field.getID(), 0);
-			GUI.setHotel(field.getID(), true);
-		}else{
-			GUI.setHouses(field.getID(), field.getConstructionRate());
-		}
-	}
-
-	/**
-	 * Updates the pawn status on field
-	 * @param field that is updated
-	 */
-	public void updatePawnStatus(entity.fields.Field field) {
-		if(field.getIsPawned()) {
-			GUI.setSubText(field.getID(), "PANTSAT");
-		} else {
-			if(field.getOwner() == null)
-				GUI.setSubText(field.getID(), LanguageHandler.getInstance().fieldPrices(field.getID()));
-			else
-				GUI.setSubText(field.getID(), field.getOwner().getName());
-		}
 	}
 	
 	/**

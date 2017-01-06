@@ -65,8 +65,6 @@ public interface Language {
 	String throwDices();
 	
 	String notBuildable();
-	
-	String getChanceCardMsg(int topCardNumber);
 
 	String buildable();
 	
@@ -105,22 +103,17 @@ public interface Language {
 	String sell();
 	
 	String trade();
-<<<<<<< HEAD
 
+	//TODO Updating Language class regards to changes in SequenceController class
 
-
-	// Updating Language class regards to changes in SequenceController class
-
-
-
-}
-=======
 	
 	String bankrupt();
 	
 	String toPay();
 	
 	String canGetMoney();
+	
+	String build();
 
 }
->>>>>>> languagePakkee
+

@@ -71,7 +71,7 @@ public class LanguageHandler {
 	public String getChanceCardMsg(int topCardNumber) {
 		return selectedLanguage.getChanceCardMsg(topCardNumber);
 	}
-
+	
 	/**
 	 * Asks for number of players to add into the game
 	 * @return String
@@ -289,11 +289,6 @@ public class LanguageHandler {
 	
 	public String notDemolitionable(){ return selectedLanguage.notDemolitionable(); }
 	
-	
-	public String getChanceCardMsg(int topCardNumber) {
-		 		return selectedLanguage.getChanceCardMsg(topCardNumber);
-		 }
-	
 	/**
 	 * Prints  message when destroying a property
 	 * @return String
@@ -424,11 +419,6 @@ public class LanguageHandler {
 	 * Prints  message when a player has to pay a targeted amount
 	 * @return String
 	 */
-<<<<<<< HEAD
-	public String trade(){ return selectedLanguage.trade(); }
-
-
-=======
 	
 	public String toPay(){ return selectedLanguage.toPay();}
 	
@@ -439,5 +429,8 @@ public class LanguageHandler {
 	
 	public String canGetMoney(){ return selectedLanguage.canGetMoney();}
 	
->>>>>>> languagePakkee
+	public String build(){
+		return selectedLanguage.build();
+	}
+	
 }
