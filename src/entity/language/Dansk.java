@@ -68,7 +68,7 @@ public class Dansk implements Language{
 		break;
 		case 8:  fieldName = "Valby Langgade";
 		break;
-		case 9:  fieldName = "Alløgade";
+		case 9:  fieldName = "Allégade";
 		break;
 		case 10: fieldName = "På Besøg";
 		break;
@@ -176,96 +176,127 @@ public class Dansk implements Language{
 
 	@Override
 	public String getChanceCardMsg(int topCardNumber) {
-		// TODO Nedskriv de forskellige tekster til Chancekortene - HUSK DEFAULT BESKED: "Prøv lykken"
-		return null;
+		String chanceCardMsg = null;
+		
+		switch(topCardNumber) {
+		case 1:
+			chanceCardMsg = "Modtag udbytte af Deres aktier kr. 1000.";
+			break;
+		case 2:
+			chanceCardMsg = "Deres præmieobligation er kommet ud. De modtager kr. 1000 af banken.";
+			break;
+		case 3:
+			chanceCardMsg = "Grundet dyrtiden har De fået gageforhøjelse. Modtag kr. 1000.";
+			break;
+		case 4:
+			chanceCardMsg = "Værdien af egen avl fra nytthaven udgør kr. 200, som De modtager af banken.";
+			break;
+		case 5:
+			chanceCardMsg = "De modtager \"Matador-legatet for værdig trængende\", stort kr. 40000. Ved værdig trængende forstås, at Deres formue, d.v.s. Deres kontante penge + skøder + bygninger ikke overstiger kr. 15000.";
+			break;
+		case 6:
+			chanceCardMsg = "Kommunen har eftergivet et kvartals skat. Hæv i banken kr. 3000.";
+			break;
+		case 7:
+			chanceCardMsg = "Det er Deres fødselsdag. Modtag af hver medspiller kr. 200.";
+			break;
+		case 8:
+			chanceCardMsg = "De havde en række med elleve rigtige i tipning. Modtag kr. 1000.";
+			break;
+		case 9:
+			chanceCardMsg = "De har vundet i Klasselotteriet. Modtag kr. 500.";
+			break;
+		case 10:
+			chanceCardMsg = "De har måttet vedtage en parkeringsbøde. Betal kr. 200 i bøde.";
+			break;
+		case 11:
+			chanceCardMsg = "De har kør frem for \"Fuld Stop\". Betal kr. 1000 i bøde";
+			break;
+		case 12:
+			chanceCardMsg = "Betal kr. 3000 for reparation af Deres vogn";
+			break;
+		case 13:
+			chanceCardMsg = "Betal Deres bilforsikring kr. 1000.";
+			break;
+		case 14:
+			chanceCardMsg = "Betal kr. 3000 for reparation af Deres vogn";
+			break;
+		case 15:
+			chanceCardMsg = "De har modtaget Deres tandlægeregning. Betal kr. 2000";
+			break;
+		case 16:
+			chanceCardMsg = "De har været en tur i udlandet og haft for mange cigaretter med hjem. Betal told kr. 200.";
+			break;
+		case 17:
+			chanceCardMsg = "Ejendomsskatterne er steget, ekstraudgifterne er:\nkr. 800 pr. hus,\nkr. 2300 pr. hotel.";
+			break;
+		case 18:
+			chanceCardMsg = "Oliepriserne er steget, og De skal betale:\nkr. 500 pr. hus,\nkr. 2000 pr. hotel.";
+			break;
+		case 19:
+			chanceCardMsg = "I anledning af dronningens fødselsdag benådes De herved for fængsel. Dette kort kan opbevares, indtil De får brug for det, eller De kan sælge det";
+			break;
+		case 20:
+			chanceCardMsg = "Gå i fængsel. Ryk direkte til fængslet. Selv om De passerer \"Start\", indkasserer de ikke kr. 4000";
+			break;
+		case 21:
+			chanceCardMsg = "Ryk brikken frem til det nærmeste rederi og betal ejeren to gange den leje, han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan De købe det af banken.";
+			break;
+		case 22:
+			chanceCardMsg = "Tag med den nærmeste færge - Flyt brikken frem, og hvis De passerer \"Start\", indkassér da kr. 4000.";
+			break;
+		case 23:
+			chanceCardMsg = "Ryk frem til Grønningen. Hvis De passerer \"Start\", indkassér da kr. 4000.";
+			break;
+		case 24:
+			chanceCardMsg = "Ryk frem til \"Start\".";
+			break;
+		case 25:
+			chanceCardMsg = "Ryk frem til Frederiksberg Allé. Hvis De passerer \"Start\", indkassér kr. 4000.";
+			break;
+		case 26:
+			chanceCardMsg = "Tag ind på Rådhuspladsen.";
+			break;
+		case 27:
+			chanceCardMsg = "Ryk tre felter tilbage.";
+			break;
+		default:
+			chanceCardMsg = "Prøv lykken";
+			break;
+		}
+		
+		return chanceCardMsg;
 	}
 
 	@Override
-	public String fieldMsg(int fieldNumber){
+	public String fieldMsg(int fieldNumber){		
 		String fieldString = null;
-		// TODO ret det her!
+		
 		switch (fieldNumber) {
-		case 0:  fieldString = "START";
-		break;
-		case 1:  fieldString = "Du er ankommet til Rødovrevej";
-		break;
-		case 2:  fieldString = "Du sejler en tur med Second Sail";
-		break;
-		case 3:  fieldString = "Du finder et stort krater og undersøger nærmere!";
-		break;
-		case 4:  fieldString = "Du er landet på et skatte felt!";
-		break;
-		case 5:  fieldString = "Du er ankommet til et højt bjerg!";
-		break;
-		case 6:  fieldString = "Du ser klosteret i distancen og undersøger det nærmere";
-		break;
-		case 7:  fieldString = "Du er nået til den kolde ørken!";
-		break;
-		case 8:  fieldString = "Du sejler en tur med Sea Grover";
-		break;
-		case 9:  fieldString = "Du er kommet til en sort grotte! ";
-		break;
-		case 10: fieldString = "Du udforsker en grotte der ligner en guldmine";
-		break;
-		case 11: fieldString = "Du er ankommet til en stor mur!";
-		break;	
-		case 12: fieldString = "Du faldet ned i et stort hul!";
-		break;	
-		case 13: fieldString = "Du er ankommet til den famøse bjergby!";
-		break;	
-		case 14: fieldString = "Du sejler en tur med The Buccaneers";
-		break;	
-		case 15: fieldString = "Du er nået til det sydlige kastel!";
-		break;	
-		case 16: fieldString = "Du går forsigtigt igennem den befæstede by";
-		break;	
-		case 17: fieldString = "Du passerer den store slotsport";
-		break;	
-		case 18: fieldString = "Du har fundet en forladt campingvogn!";
-		break;	
-		case 19: fieldString = "Du kæmper dig op i det høje tårn!";
-		break;	
-		case 20: fieldString = "Du sejler en tur med Privateer Armade";
-		break;	
-		case 21: fieldString = "Du er inviteret ind i det store slot!";
-		break;
-		case 22: fieldString = "Du er inviteret ind i det store slot!";
-		break;
-		case 23: fieldString = "Du er inviteret ind i det store slot!";
-		break;
-		case 24: fieldString = "Du er inviteret ind i det store slot!";
-		break;
-		case 25: fieldString = "Du er inviteret ind i det store slot!";
-		break;
-		case 26: fieldString = "Du er inviteret ind i det store slot!";
-		break;
-		case 27: fieldString = "Du er inviteret ind i det store slot!";
-		break;
-		case 28: fieldString = "Du er inviteret ind i det store slot!";
-		break;
-		case 29: fieldString = "Du er inviteret ind i det store slot!";
-		break;
-		case 30: fieldString = "Du er inviteret ind i det store slot!";
-		break;
-		case 31: fieldString = "Du er inviteret ind i det store slot!";
-		break;
-		case 32: fieldString = "Du er inviteret ind i det store slot!";
-		break;
-		case 33: fieldString = "Du er inviteret ind i det store slot!";
-		break;
-		case 34: fieldString = "Du er inviteret ind i det store slot!";
-		break;
-		case 35: fieldString = "Du er inviteret ind i det store slot!";
-		break;
-		case 36: fieldString = "Du er inviteret ind i det store slot!";
-		break;
-		case 37: fieldString = "Du er inviteret ind i det store slot!";
-		break;
-		case 38: fieldString = "Du er inviteret ind i det store slot!";
-		break;
-		case 39: fieldString = "Du er inviteret ind i det store slot!";
-		break;
+		case 2:
+		case 7:
+		case 17:
+		case 22:
+		case 33:
+		case 36:
+			fieldString = "Du er landet på \"Prøv lykken\". Tryk på \"Prøv lykken\" bunken i midten for trække et kort!";
+			break;
+		case 4:
+		case 38:
+			fieldString = "Du er landet på et skatte-felt. Du bedes betale skat.";
+			break;
+		case 10:
+			fieldString = "Du tager et smut på besøg i fængslet";
+			break;
+		case 30:
+			fieldString = "Du ryger i fængsel.";
+			break;
+		default:
+			fieldString = "Du er landet på " + fieldNames(fieldNumber) + ".";
+			break;
+			
 		}
+		
 		return fieldString;
 	}
 
