@@ -26,9 +26,9 @@ public abstract class SequenceController {
 			buildableLabels[i] = buildableList.get(i).getName();
 		}
 		if (buildableLabels.length == 0) {
-			boundary.getButtonPressed("You have no buildable properties");
+			boundary.getButtonPressed(language.notBuildable());
 		} else {
-			Field fieldToBuildOn = gameBoard.getField(gameBoard.getIndexByName(boundary.getUserSelection("Choose plot to build on", buildableLabels)));
+			Field fieldToBuildOn = gameBoard.getField(gameBoard.getIndexByName(boundary.getUserSelection(language.choosePlotToBuildOn(), buildableLabels)));
 			fieldToBuildOn.buildConstruction();
 			boundary.updateBalance(player.getName(), player.getBankAccount().getBalance());
 		}
@@ -47,10 +47,10 @@ public abstract class SequenceController {
 		}
 		if (demolitionableLabels.length == 0)
 		{
-			boundary.getButtonPressed("You have no demolitionable properties");
+			boundary.getButtonPressed(language.noDemolitionableProperties());
 		} else
 		{
-			String fieldToDemolishOn = boundary.getUserSelection("Choose plot to demolish on", demolitionableLabels);
+			String fieldToDemolishOn = boundary.getUserSelection(language.choosePropertyToDemolishOn(), demolitionableLabels);
 			gameBoard.getField(gameBoard.getIndexByName(fieldToDemolishOn)).sellConstruction();
 			boundary.updateBalance(player.getName(), player.getBankAccount().getBalance());
 		}
@@ -72,7 +72,7 @@ public abstract class SequenceController {
 			sellableLabels[i] = sellableList.get(i).getName();
 		}
 		if (sellableLabels.length == 0) {
-			boundary.getButtonPressed("Du har ingen felter at sælge");
+			boundary.getButtonPressed(language.noTradeableProperties());
 		} else {
 			int j = 0;
 			for (int i = 0; i < playerList.getPlayers().length; i++) {
@@ -82,8 +82,8 @@ public abstract class SequenceController {
 				}
 			}
 
-			String fieldToSell = boundary.getUserSelection("Choose plot to trade", sellableLabels);
-			String buyer = boundary.getUserSelection("Choose who is buying", playerLabels);
+			String fieldToSell = boundary.getUserSelection(language.choosePlotTrade(), sellableLabels);
+			String buyer = boundary.getUserSelection(language.choosePropertyBuyer(), playerLabels);
 
 			fieldLoop:
 				for (Field field : sellableList) {
@@ -92,8 +92,8 @@ public abstract class SequenceController {
 						for (Player player : playerList.getPlayers()) {
 							if (buyer.equals(player.getName())) {
 								buyerObject = player;
-								int price = boundary.getInteger("Which price?", 0, 30000);
-								if(boundary.getBoolean("Do you want to trade?", "Yes", "No")){
+								int price = boundary.getInteger(language.enterTradePrice(), 0, 30000);
+								if(boundary.getBoolean(language.confirmTrade(), language.yes(), language.no())){
 									fieldToSellObject.tradeField(owner, buyerObject, price);
 									boundary.setOwner(field.getID(), buyerObject.getName());
 									boundary.updateBalance(owner.getName(), owner.getBankAccount().getBalance());
@@ -120,17 +120,17 @@ public abstract class SequenceController {
 
 		if (pawnableLabels.length == 0)
 		{
-			boundary.getButtonPressed("Du har ingen felter at patnsætte");
+			boundary.getButtonPressed(language.noPawnableFields());
 		} else
 		{
-			String fieldToPawn = boundary.getUserSelection("Choose property to pawn", pawnableLabels);
+			String fieldToPawn = boundary.getUserSelection(language.choosePropertyToPawn(), pawnableLabels);
 			if(gameBoard.getField(gameBoard.getIndexByName(fieldToPawn)).pawnField())
 			{
 				boundary.updatePawnStatus(gameBoard.getField(gameBoard.getIndexByName(fieldToPawn)));
-				boundary.getButtonPressed("Din ejendom er blevet pantsat");
+				boundary.getButtonPressed(language.pawnSuccessful());
 			} else
 			{
-				boundary.getButtonPressed("Din ejendom kunne ikke pantsættes");
+				boundary.getButtonPressed(language.pawnUnsuccessful());
 			}
 		}
 	}
@@ -145,17 +145,17 @@ public abstract class SequenceController {
 
 		if (alreadyPawnedLabels.length == 0)
 		{
-			boundary.getButtonPressed("Du har ingen felter at hæve pantsætningen på");
+			boundary.getButtonPressed(language.noPawnedProperties());
 		} else
 		{
-			String fieldToUndoPawn = boundary.getUserSelection("Vælg ejendom at hæve pantsætning på", alreadyPawnedLabels);
+			String fieldToUndoPawn = boundary.getUserSelection(language.choosePropertyToUndoPawn(), alreadyPawnedLabels);
 			if(gameBoard.getField(gameBoard.getIndexByName(fieldToUndoPawn)).undoPawnField())
 			{
 				boundary.updatePawnStatus(gameBoard.getField(gameBoard.getIndexByName(fieldToUndoPawn)));
-				boundary.getButtonPressed("Din pantsætning er blevet indfriet");
+				boundary.getButtonPressed(language.undoPawnSuccesful());
 			} else
 			{
-				boundary.getButtonPressed("Din pantsætning kunne ikke indfries");
+				boundary.getButtonPressed(language.undoPawnUnsuccesful());
 			}
 		}
 	}
@@ -190,14 +190,14 @@ public abstract class SequenceController {
 				playerLabels[i] = playerList.getPlayers()[i].getName();
 			}
 		}
-		String buyer = boundary.getUserSelection("Choose who is buying", playerLabels);
+		String buyer = boundary.getUserSelection(language.choosePropertyBuyer(), playerLabels);
 		for (Player player : playerList.getPlayers()) {
 			if (buyer.equals(player.getName()))
 			{
 				buyerObject = player;
 			}
 		}
-		int price = boundary.getInteger("Which price?", 0, buyerObject.getBankAccount().getBalance());
+		int price = boundary.getInteger(language.enterAuctionPrice(), 0, buyerObject.getBankAccount().getBalance());
 		field.buyField(buyerObject, price);
 		boundary.setOwner(field.getID(), buyer);
 		boundary.updateBalance(buyer, buyerObject.getBankAccount().getBalance());
@@ -208,23 +208,19 @@ public abstract class SequenceController {
 	public static void getMoneySequence(Player debitor, Player creditor, GameBoard gameBoard, PlayerList playerList, int targetAmount) {
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
-		String[] options = {"Pantsætte", "Sælge bygninger", "Handle ejendomme", "Erklær konkurs"};
+		String[] options = {language.pawn(), language.demolish(), language.trade(), language.bankrupt()};
 
 		getMoneySeq: while(debitor.getBankAccount().getBalance() < targetAmount) {
 
-			String choice = boundary.getUserSelection("Du skal betale " + targetAmount + ", men du har ikke nok penge. Hvad vil du gøre?", options);
+			String choice = boundary.getUserSelection(language.toPay(targetAmount), options);
 
-			switch(choice) {
-			case "Pantsætte":
+			if(choice.equals(language.pawn())) {
 				pawnSequence(debitor, gameBoard);
-				break;
-			case "Sælge bygninger":
+			} else if (choice.equals(language.demolish())) {
 				demolitionSequence(debitor, gameBoard);
-				break;
-			case "Handle ejendomme":
+			} else if (choice.equals(language.trade())) {
 				tradePropertiesSequence(debitor, gameBoard, playerList);
-				break;
-			case "Erklær konkurs":
+			} else if (choice.equals(language.bankrupt())) {
 				if(debitor.getTotalAssets(gameBoard) < targetAmount) {
 					if(creditor != null) {
 						debitor.getBankAccount().transfer(creditor, debitor.getTotalAssets(gameBoard));
@@ -241,14 +237,9 @@ public abstract class SequenceController {
 					}
 					break getMoneySeq;
 				} else {
-					boundary.getButtonPressed("Du kan godt få nok penge");
-					break;
+					boundary.getButtonPressed(language.canGetMoney());
 				}
-			default:
-				break;
 			}
-
 		}
 	}
-
 }

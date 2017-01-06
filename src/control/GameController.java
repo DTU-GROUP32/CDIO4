@@ -1,9 +1,6 @@
 package control;
 
-import java.util.ArrayList;
-
 import boundary.GUIBoundary;
-import control.SequenceController;
 import entity.DiceCup;
 import entity.GameBoard;
 import entity.Player;
@@ -64,7 +61,6 @@ public class GameController {
             int fieldNumber = player.getOnField();
             Field field = gameBoard.getField(fieldNumber);
             boundary.setCar(fieldNumber, player.getName());
-            // læg kort klar
             if(field instanceof Chance) {
             	boundary.setChanceCard(language.getChanceCardMsg(field.getTopCardNumber()));
                 boundary.getButtonPressed(language.fieldMsg(fieldNumber));
@@ -72,7 +68,6 @@ public class GameController {
             } else {
             	boundary.getButtonPressed(language.fieldMsg(fieldNumber));
             }
-            // fjern kort
             if (field instanceof Ownable) {
                 Player ownerOfField = field.getOwner();
                 if (ownerOfField == null) {
@@ -91,8 +86,14 @@ public class GameController {
                     }
                 }
             } else {
-                field.landOnField(player, diceCup.getSum(), gameBoard, playerList, false);
-                boundary.updateBalance(player.getName(), player.getBankAccount().getBalance());
+            	if(field.getID() == 4) {
+            		field.landOnField(player, diceCup.getSum(), gameBoard, playerList, boundary.getBoolean(language.getTaxChoice(), language.yes(), language.no()));
+                	boundary.updateBalance(player.getName(), player.getBankAccount().getBalance());
+            	} else {
+                	field.landOnField(player, diceCup.getSum(), gameBoard, playerList, false);
+                	boundary.updateBalance(player.getName(), player.getBankAccount().getBalance());
+            	}
+            	
             }
             if (player.getBankAccount().getBalance() <= 0) {
                 boundary.getButtonPressed(language.youAreBroke());

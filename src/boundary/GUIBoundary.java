@@ -57,7 +57,7 @@ public class GUIBoundary {
 			} else if(gameBoard.getField(i) instanceof entity.fields.Brewery){
 				fields[i] = new Brewery.Builder()
 						.setTitle(language.fieldNames(i))
-						.setSubText(language.fieldPrices(i))
+						.setSubText(language.fieldPrices(gameBoard.getField(i).getPrice()))
 						.build();
 			}else if(gameBoard.getField(i) instanceof entity.fields.Chance){
 				fields[i] = new Chance.Builder()
@@ -67,7 +67,7 @@ public class GUIBoundary {
 			}else if(gameBoard.getField(i) instanceof entity.fields.Plot){
 				fields[i] = new Street.Builder()
 						.setTitle(language.fieldNames(i))
-						.setSubText(language.fieldPrices(i))
+						.setSubText(language.fieldPrices(gameBoard.getField(i).getPrice()))
 						.setBgColor(getPropertyGroupColor(gameBoard.getField(i).getPropertyGroup()))
 						.setDescription(
 								" - Kun grund: " + gameBoard.getField(i).getRentArray()[0] + " | " +
@@ -85,7 +85,7 @@ public class GUIBoundary {
 			}else if(gameBoard.getField(i) instanceof entity.fields.ShippingLine){
 				fields[i] = new Shipping.Builder()
 						.setTitle(language.fieldNames(i))
-						.setSubText(language.fieldPrices(i))
+						.setSubText(language.fieldPrices(gameBoard.getField(i).getPrice()))
 						.build();
 			}else if(gameBoard.getField(i) instanceof entity.fields.Tax){
 				fields[i] = new Tax.Builder()
@@ -254,7 +254,7 @@ public class GUIBoundary {
 	 * @return language that is selected
 	 */
 	public String getLanguage() {
-		return GUI.getUserSelection("Select entity.language. \nVælg sprog.", "Dansk", "English");
+		return GUI.getUserSelection("Select language. \nVælg sprog.", "Dansk", "English");
 	}
 
 	/**
