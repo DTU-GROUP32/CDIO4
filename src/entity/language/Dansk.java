@@ -8,7 +8,7 @@ public class Dansk implements Language{
 	public String notifyLangChange(){
 		return "Sproget er nu sat til dansk!";
 	}
-	
+
 	@Override
 	public String askForNumberOfPlayers() {
 		return "Hvor mange spillere skal være med? Der kan vælges fra 2 til 6";
@@ -18,34 +18,30 @@ public class Dansk implements Language{
 	public String askForPlayerName(int playerNumber){
 		return "Indtast spiller " + playerNumber + "'s navn, alle spillere skal have forskellige navne.";
 	}
-	
+
 	@Override
 	public String fieldDescription(int fieldNumber) {
 		String fieldDescription = null;
 		switch (fieldNumber) {
-		case 0:  fieldDescription = "Modtag kr. 4.000 fra banken";
+		case 0:  fieldDescription = "Modtag 4000";
 		break;
-		case 2:  fieldDescription = "Prøv lykken";
+		case 2:
+		case 7:
+		case 17:
+		case 22:
+		case 33:
+		case 36: fieldDescription = "Prøv lykken";
 		break;
 		case 4:  fieldDescription = "Betal 10% eller kr. 4000";
 		break;
-		case 7: fieldDescription = "Prøv lykken";
-		break;
 		case 10: fieldDescription = "På besøg i fængselet";
 		break;
-		case 17: fieldDescription = "Prøv lykken";
-		break;
-		case 22: fieldDescription = "Prøv lykken";
+		case 20: fieldDescription = "Parkering";
 		break;
 		case 30: fieldDescription = "Du fængsles";
 		break;
-		case 33: fieldDescription = "Prøv lykken";
-		break;
-		case 36: fieldDescription = "Prøv lykken";
-		break;
 		case 38: fieldDescription = "Betal kr. 2000 i skat";
 		break;
-
 		}
 		return fieldDescription;
 	}
@@ -84,7 +80,7 @@ public class Dansk implements Language{
 		break;	
 		case 14: fieldName = "Gl. Kongevej";
 		break;	
-		case 15: fieldName = "Kalundborg/ Århus";
+		case 15: fieldName = "Kalundb./Århus";
 		break;	
 		case 16: fieldName = "Bernstorffsvej";
 		break;	
@@ -104,13 +100,13 @@ public class Dansk implements Language{
 		break;
 		case 24: fieldName = "Grønningen";
 		break;
-		case 25: fieldName = "DFDS SEAWAYS";
+		case 25: fieldName = "DFDS";
 		break;
 		case 26: fieldName = "Bredgade";
 		break;
 		case 27: fieldName = "Kgs.Nytorv";
 		break;
-		case 28: fieldName = "CocaCola";
+		case 28: fieldName = "Coca Cola";
 		break;
 		case 29: fieldName = "Østergade";
 		break;
@@ -124,11 +120,11 @@ public class Dansk implements Language{
 		break;
 		case 34: fieldName = "Nygade";
 		break;
-		case 35: fieldName = "Helsskov/ Knudshoved";
+		case 35: fieldName = "Halssk./Knudsh.";
 		break;
 		case 36: fieldName = "Prøv lykken";
 		break;
-		case 37: fieldName = "Frederiksberggade";
+		case 37: fieldName = "Frederiksberg gade";
 		break;
 		case 38: fieldName = "Skat";
 		break;
@@ -139,94 +135,39 @@ public class Dansk implements Language{
 	}
 
 	@Override
-	public String fieldPrices(int fieldNumber) {
-		String fieldPrice = null;
-		switch (fieldNumber) {
-		case 0:  fieldPrice = "Modtag kr. 4000";
-		break;
-		case 1:  fieldPrice = "kr. 1200";
-		break;
-		case 2:  fieldPrice = " ";
-		break;
-		case 3:  fieldPrice = "kr. 1200";
-		break;
-		case 4:  fieldPrice = "Betal 10% eller kr. 4000";
-		break;
-		case 5:  fieldPrice = "kr. 4000";
-		break;
-		case 6:  fieldPrice = "kr. 2000";
-		break;
-		case 7:  fieldPrice = " ";
-		break;
-		case 8:  fieldPrice = "kr. 2000";
-		break;
-		case 9:  fieldPrice = "kr. 2400";
-		break;
-		case 10: fieldPrice = "I Fængsel";
-		break;
-		case 11: fieldPrice = "kr. 2800";
-		break;	
-		case 12: fieldPrice = "kr. 3000";
-		break;	
-		case 13: fieldPrice = "kr. 4700";
-		break;	
-		case 14: fieldPrice = "kr. 3200";
-		break;	
-		case 15: fieldPrice = "kr. 4000";
-		break;	
-		case 16: fieldPrice = "kr. 3600";
-		break;	
-		case 17: fieldPrice = " ";
-		break;	
-		case 18: fieldPrice = "kr. 3600";
-		break;	
-		case 19: fieldPrice = "kr. 4000";
-		break;	
-		case 20: fieldPrice = "Den Danske Bank";
-		break;	
-		case 21: fieldPrice = "kr. 4400";
-		break;
-		case 22: fieldPrice = " ";
-		break;
-		case 23: fieldPrice = "kr. 4400";
-		break;
-		case 24: fieldPrice = "kr. 4800";
-		break;
-		case 25: fieldPrice = "kr. 4000";
-		break;
-		case 26: fieldPrice = "kr. 5200";
-		break;
-		case 27: fieldPrice = "kr. 5200";
-		break;
-		case 28: fieldPrice = "kr. 3000";
-		break;
-		case 29: fieldPrice = "kr. 5600";
-		break;
-		case 30: fieldPrice = "De Fængsles";
-		break;
-		case 31: fieldPrice = "kr. 6000";
-		break;
-		case 32: fieldPrice = "kr. 6000";
-		break;
-		case 33: fieldPrice = " ";
-		break;
-		case 34: fieldPrice = "kr. 6400";
-		break;
-		case 35: fieldPrice = "kr. 4000";
-		break;
-		case 36: fieldPrice = " ";
-		break;
-		case 37: fieldPrice = "kr. 7000";
-		break;
-		case 38: fieldPrice = "Betal kr. 2000";
-		break;
-		case 39: fieldPrice = "kr. 8000";
-		break;
-		}
-		return fieldPrice;
+	public String fieldPrices(int fieldPrice) {
+		return "kr. " + fieldPrice;
 	}
 
+	@Override
+	public String readyToBegin(){
+		return "Spillet vil nu begynde. Spillet er vundet af den spiller der står tilbage når de andre er bankerot!";
+	}
+
+	@Override
+	public String winnerMsg(Player player){
+		return player.getName() + " har vundet spillet med " + player.getBankAccount().getBalance() + " kr.!";
+	}
+
+	@Override
+	public String preMsg(Player player){
+		return "Det er " + player.getName() + "'s tur, tryk på en knap!";
+	}
+
+	@Override
+	public String throwDices(){
+		return "Slå Terning";
+	}
+
+	@Override
+	public String build() {
+		return "Bygge";
+	}
 	
+	@Override
+	public String trade(){
+		return "Handle";
+	}
 
 	@Override
 	public String getChanceCardMsg(int topCardNumber) {
@@ -235,24 +176,9 @@ public class Dansk implements Language{
 	}
 
 	@Override
-	public String welcomeMsg(){
-		return "Velkommen til spillet!";
-	}
-
-	
-
-	@Override
-	public String readyToBegin(){
-		return "Spillet vil nu begynde. Spillet er vundet af den spiller der står tilbage når de andre er bankerot!";
-	}
-
-	public String preMsg(Player player){
-		return "Det er " + player.getName() + "'s tur, tryk på en knap!";
-	}
-
-	@Override
 	public String fieldMsg(int fieldNumber){
 		String fieldString = null;
+		// TODO ret det her!
 		switch (fieldNumber) {
 		case 0:  fieldString = "START";
 		break;
@@ -262,7 +188,7 @@ public class Dansk implements Language{
 		break;
 		case 3:  fieldString = "Du finder et stort krater og undersøger nærmere!";
 		break;
-		case 4:  fieldString = "Du efterforsker bjerget nærmere og finder bjerghytter!";
+		case 4:  fieldString = "Du er landet på et skatte felt!";
 		break;
 		case 5:  fieldString = "Du er ankommet til et højt bjerg!";
 		break;
@@ -298,7 +224,7 @@ public class Dansk implements Language{
 		break;	
 		case 21: fieldString = "Du er inviteret ind i det store slot!";
 		break;
-		case 22: fieldString = "Du er inviteret ind i det store slot!";  // <------------
+		case 22: fieldString = "Du er inviteret ind i det store slot!";
 		break;
 		case 23: fieldString = "Du er inviteret ind i det store slot!";
 		break;
@@ -339,10 +265,76 @@ public class Dansk implements Language{
 	}
 
 	@Override
-	public String buyingOfferMsg(int price) {
-		return "Dette felt er ikke ejet af nogen, vil du købe det for " + price + " kr?";
+	public String landedOnOwnedField(Player owner) {
+		return "Dette felt ejes af " + owner.getName() + ", det kommer til at koste!";
 	}
-
+	
+	@Override
+	public String youPaidThisMuchToThisPerson(int amountPayed, Player owner) {
+		return "Du betalte " + amountPayed + " kr. til " + owner.getName() + ".";
+	}
+	
+	@Override
+	public String youOwnThisField() {
+		return "Slap af! Du ejer selv dette felt ;)";
+	}
+	
+	@Override
+	public String getTaxChoice() {
+		return "Du kan vælge enten at betale 4000 kr eller 10% af din pengebeholdning,"
+				+ "\nvil du betale 10%?";
+	}
+	
+	@Override
+	public String youAreBroke() {
+		return "Du er desværre gået bankerot, tak for spillet!";
+	}
+	
+	@Override
+	public String notBuildable(){
+		return "Du har ingen grunde du kan bygge på.";
+	}
+	
+	@Override
+	public String choosePlotToBuildOn(){
+		return "Vælg en grund at bygge på.";
+	}
+	
+	@Override
+	public String noDemolitionableProperties(){
+		return "Du har ingen grunde hvor du kan nedrive bygninger.";
+	}
+	
+	@Override
+	public String choosePropertyToDemolishOn(){
+		return "Vælg den grund hvor du vil nedrive en bygning.";
+	}
+	
+	@Override
+	public String noTradeableProperties(){
+		return "Du har ingen felter at handle med.";
+	}
+	
+	@Override
+	public String choosePlotTrade(){
+		return "Vælg det felt du vil handle.";
+	}
+	
+	@Override
+	public String choosePropertyBuyer(){
+		return "Hvem køber feltet?";
+	}
+	
+	@Override
+	public String enterTradePrice(){
+		return "Hvilken pris skal feltet sælges til?";
+	}
+	
+	@Override
+	public String confirmTrade(){
+		return "Vil du bekræfte handlen?";
+	}
+	
 	@Override
 	public String yes() {
 		return "Ja!";
@@ -352,7 +344,52 @@ public class Dansk implements Language{
 	public String no() {
 		return "Nej!";
 	}
-
+	
+	@Override
+	public String noPawnableFields(){
+		return "Du har ingen felter at pantsætte.";
+	}
+	
+	@Override
+	public String choosePropertyToPawn(){
+		return "Vælg et felt at pantsætte.";
+	}
+	
+	@Override
+	public String pawnSuccessful(){
+		return "Din grund er blevet pantsat.";
+	}
+	
+	@Override 
+	public String pawnUnsuccessful(){
+		return "Din grund kunne ikke pantsættes.";
+	}
+	
+	@Override 
+	public String noPawnedProperties(){
+		return "Du har ingen felter at hæve pantsætningen på.";
+	}
+	
+	@Override 
+	public String choosePropertyToUndoPawn(){
+		return "Vælg en grund at hæve pantsætningen på.";
+	}
+	
+	@Override 
+	public String undoPawnSuccessful(){
+		return "Din pantsætning er blevet indfriet";
+	}
+	
+	@Override
+	public String undoPawnUnsuccessful(){
+		return "Din pantsætning kunne ikke indfries";
+	}
+	
+	@Override
+	public String buyingOfferMsg(int price) {
+		return "Dette felt er ikke ejet af nogen, vil du købe det for " + price + " kr.?";
+	}
+	
 	@Override
 	public String purchaseConfirmation() {
 		return "Du har nu købt feltet!";
@@ -362,26 +399,38 @@ public class Dansk implements Language{
 	public String notEnoughMoney() {
 		return "Du havde desværre ikke nok penge..";
 	}
-
-	public String landedOnOwnedField(Player owner) {
-		return "Dette felt er desværre allerede købt, det kommer til at koste!";
-	}
-
+	
 	@Override
-	public String youPaidThisMuchToThisPerson(int amountPayed, Player owner) {
-		return "Du betalte " + amountPayed + " kr til " + owner.getName() + ".";
+	public String enterAuctionPrice(){
+		return "Hvad blev auktionsprisen?";
 	}
-
+	
 	@Override
-	public String youOwnThisField() {
-		return "Slap af! Du ejer selv dette felt ;)";
+	public String pawn(){
+		return "Pantsæt";
 	}
-
+	
 	@Override
-	public String getTaxChoice() {
-		return "Du kan vælge enten at betale 4000 kr eller 10% af din pengebeholdning,"
-				+ "\nvil du betale 10%?";
+	public String demolish(){
+		return "Nedriv bygninger";
 	}
+	
+	@Override
+	public String bankrupt(){
+		return "Erklær konkurs";
+	}
+	
+	@Override
+	public String toPay(int targetAmount){
+		return "Du skal betale " + targetAmount + "kr., men du har ikke penge nok. Hvad vil du gøre?";
+	}
+	
+	@Override
+	public String canGetMoney(){
+		return "Du kan godt få nok penge, ved at nedrive bygninger og pantsætte ejendomme!";
+	}
+	
+	// ALL METHODS UNDER THIS LINE AREN'T USED IN THIS CURRENT VERSION OF THE GAME.
 
 	@Override
 	public String nonOwnableFieldEffectMsg(int fieldNumber) {
@@ -414,16 +463,6 @@ public class Dansk implements Language{
 	}
 
 	@Override
-	public String youAreBroke() {
-		return "Du er desværre gået bankerot, tak for spillet!";
-	}
-
-	@Override
-	public String winnerMsg(Player player){
-		return player.getName() + " har vundet spillet med " + player.getBankAccount().getBalance() + " kr.!";
-	}
-
-	@Override
 	public String menu(){
 		return "Tast 1 for at skifte antal sider på terningerne.\n" +
 				"Tast 2 for at ændre sprog.\n" +
@@ -433,7 +472,6 @@ public class Dansk implements Language{
 	}
 
 	@Override
-
 	public String printRules(){
 		return "Dette spil er et terningespil mellem 2 personer. Du slår med terninger og lander på et felt fra 1-39. \n Her er vist listen over felterne: \n"
 				+ "1. Rødovrevej: 1200 kr. \n"
@@ -500,109 +538,5 @@ public class Dansk implements Language{
 	public String printDiceChangeNotExecuted(){
 		return "Terningerne kunne ikke ændres";
 	}
-
-	@Override
-	public String throwDices(){ return "Slå Terning"; }
-
-	@Override
-	public String notBuildable(){
-		return "Du har ingen grunde du kan bygge på.";
-	}
-	@Override
-	public String buildable(){
-		return "Vælg en grund at bygge pÃ¥";
-	}
-	@Override
-	public String notDemolitionable(){
-		return "Du har ingen grunde du kan nedrive";
-	}
-	@Override
-	public String chooseDemolition(){
-		return "Vælg et felt at nedrive";
-	}
-
-	@Override
-<<<<<<< HEAD
-	public String trade(){ return "Handle"; }
-
-}
-=======
-	public String notTradeable(){
-		return "Du har ingen felter at handle med.";
-	}
-	@Override
-	public String choosePlotTrade(){
-		return "Vælg et felt at handle med.";
-	}
-	@Override
-	public String chooseBuyerTrade(){
-		return "Hvem køber feltet?";
-	}
-	@Override
-	public String tradePrice(){
-		return "Hvilken pris bliver feltet solgt til?";
-	}
-	@Override
-	public String wantToTrade(){
-		return "Vil du gerne lave denne handel?";
-	}
-	@Override
-	public String noPawnableFields(){
-		return "Du har ingen felter at pantsÃ¦tte";
-	}
-	@Override
-	public String choosePawnField(){
-		return "Vælg et felt at pantsætte";
-	}
-	@Override
-	public String pawnSucces(){
-		return "Du har pantsat din grund";
-	}
-	@Override 
-	public String notPawnable(){
-		return "Din grund kan ikke pantsættes";
-	}
-	@Override 
-	public String noPawnedProperties(){
-		return "Du har ingen felter at hæve pantsætningen på";
-	}
-	@Override 
-	public String choosePawnedWithdraw(){
-		return "Vælg et grund at hæve pantsætningen på";
-	}
-	@Override 
-	public String pawnedWithdrawSucces(){
-		return "Din pantsætning er blevet indfriet";
-	}
-	@Override
-	public String pawnedWithdrawUnsuccesful(){
-		return "Din pantsætning kunne ikke indfires";
-	}
-	@Override
-	public String pawn(){
-		return "Pantsæt";
-	}
-	@Override
-
-	public String sell(){
-		return "Sælge bygninger";
-	}
-	@Override
-	public String trade(){
-		return "Handle ejemdomme";
-	}
-	@Override
-	public String bankrupt(){
-		return "Erklær konkurs";
-	}
-	public String toPay(){
-		return "Du skal betale " + targetAmount + ", men du har ikke penge nok. Hvad vil du gøre?"; // Hvor kommer targetAmount fra?
-	}
-	public String canGetMoney(){
-		return "Du kan godt få nok penge";
-	}
 }
 
-
-
->>>>>>> languagePakkee
