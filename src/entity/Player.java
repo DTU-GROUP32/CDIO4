@@ -59,6 +59,19 @@ public class Player{
 	}
 	
 	/**
+	 * Adds the number that was rolled to the field the player was on and moves him to a new field.
+	 * @param roll - Integer value that was rolled.
+	 */
+	public void movePlayer(int roll){
+		this.onField += roll;
+		while(this.onField > 39)
+		{
+			this.onField -= 40;
+			this.getBankAccount().deposit(4000);
+		}
+	}
+	
+	/**
 	 * Returns the name of the player
 	 * @return name
 	 */
@@ -97,20 +110,7 @@ public class Player{
 	public void setOnField(int onField) {
 		this.onField = onField;
 	}
-	
-	/**
-	 * Adds the number that was rolled to the field the player was on and moves him to a new field.
-	 * @param roll - Integer value that was rolled.
-	 */
-	public void movePlayer(int roll){
-		this.onField += roll;
-		while(this.onField > 39)
-		{
-			this.onField -= 40;
-			this.getBankAccount().deposit(4000);
-		}
-	}
-	
+
 	/**
 	 * Returns player ID
 	 * @return

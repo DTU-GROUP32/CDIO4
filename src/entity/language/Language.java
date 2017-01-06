@@ -6,35 +6,31 @@ public interface Language {
 
 	String notifyLangChange();
 
-	String fieldNames(int fieldNumber);
-
-	String fieldPrices(int fieldNumber);
-
-	String fieldDescription(int fieldNumber);
-	
-	String getChanceCardMsg(int topCardNumber);
-
-	String welcomeMsg();
-
 	String askForNumberOfPlayers();
 
 	String askForPlayerName(int playerNumber);
 
+	String fieldDescription(int fieldNumber);
+
+	String fieldNames(int fieldNumber);
+
+	String fieldPrices(int fieldPrice);
+
 	String readyToBegin();
+
+	String winnerMsg(Player player);
 
 	String preMsg(Player player);
 
+	String throwDices();
+
+	String build();
+
+	String trade();
+
+	String getChanceCardMsg(int topCardNumber);
+
 	String fieldMsg(int fieldNumber);
-
-	String buyingOfferMsg(int price);
-
-	String yes();
-
-	String no();
-
-	String purchaseConfirmation();
-
-	String notEnoughMoney();
 
 	String landedOnOwnedField(Player owner);
 
@@ -44,11 +40,65 @@ public interface Language {
 
 	String getTaxChoice();
 
-	String nonOwnableFieldEffectMsg(int onField);
-
 	String youAreBroke();
 
-	String winnerMsg(Player player);
+	String notBuildable();
+
+	String choosePlotToBuildOn();
+
+	String noDemolitionableProperties();
+
+	String choosePropertyToDemolishOn();
+
+	String noTradeableProperties();
+
+	String choosePlotTrade();
+
+	String choosePropertyBuyer();
+
+	String enterTradePrice();
+
+	String confirmTrade();
+
+	String yes();
+
+	String no();
+
+	String noPawnableFields();
+
+	String choosePropertyToPawn();
+
+	String pawnSuccessful();
+
+	String pawnUnsuccessful();
+
+	String noPawnedProperties();
+
+	String choosePropertyToUndoPawn();
+
+	String undoPawnSuccessful();
+
+	String undoPawnUnsuccessful();
+
+	String buyingOfferMsg(int price);
+
+	String purchaseConfirmation();
+
+	String notEnoughMoney();
+
+	String enterAuctionPrice();
+
+	String pawn();
+
+	String demolish();
+
+	String bankrupt();
+
+	String toPay(int targetAmount);
+
+	String canGetMoney();
+
+	String nonOwnableFieldEffectMsg(int onField);
 
 	String menu();
 
@@ -62,65 +112,7 @@ public interface Language {
 
 	String printDiceChangeNotExecuted();
 
-	String throwDices();
 	
-	String notBuildable();
-	
-	String getChanceCardMsg(int topCardNumber);
-
-	String buildable();
-	
-	String notDemolitionable();
-	
-	String chooseDemolition();
-	
-	String notTradeable();
-	
-	String choosePlotTrade();
-	
-	String chooseBuyerTrade();
-	
-	String tradePrice();
-	
-	String wantToTrade();
-	
-	String noPawnableFields();
-	
-	String choosePawnField();
-	
-	String pawnSucces();
-	
-	String notPawnable();
-
-	String noPawnedProperties();
-
-	String choosePawnedWithdraw();
-	
-	String pawnedWithdrawSucces();
-	
-	String pawnedWithdrawUnsuccesful();
-	
-	String pawn();
-	
-	String sell();
-	
-	String trade();
-<<<<<<< HEAD
-
-
-
-	// Updating Language class regards to changes in SequenceController class
-
-
 
 }
-=======
-	
-	String bankrupt();
-	
-	String toPay();
-	
-	String canGetMoney();
 
-}
->>>>>>> languagePakkee

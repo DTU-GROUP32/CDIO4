@@ -44,6 +44,11 @@ public abstract class Field {
 	/**
 	 * Method that will execute what has to happen to the player that lands on the field.
 	 * @param player
+	 * @param roll
+	 * @param gameBoard
+	 * @param playerList
+	 * @param taxChoice
+	 * @return
 	 */
 	public abstract boolean landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice);
 

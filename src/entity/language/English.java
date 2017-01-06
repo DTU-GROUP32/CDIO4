@@ -347,4 +347,136 @@ public class English implements Language{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String notBuildable() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String buildable() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String notDemolitionable() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String chooseDemolition() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String notTradeable() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String choosePlotTrade() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String chooseBuyerTrade() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String tradePrice() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String wantToTrade() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String noPawnableFields() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String choosePawnField() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String pawnSucces() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String notPawnable() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String noPawnedProperties() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String choosePawnedWithdraw() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String pawnedWithdrawSucces() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String pawnedWithdrawUnsuccesful() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String pawn() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String sell() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String bankrupt() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String toPay() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String canGetMoney() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
