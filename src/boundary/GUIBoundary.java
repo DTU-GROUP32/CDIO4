@@ -148,45 +148,39 @@ public class GUIBoundary {
 		switch (player.getID()) {
 		case 0:
 			carBuilder
-			.typeUfo()
-			.patternCheckered()
-			.primaryColor(Color.RED)
-			.secondaryColor(Color.GRAY);
+			.typeCar()
+			.patternFill()
+			.primaryColor(Color.BLUE);
 			break;
 		case 1:
 			carBuilder
-			.typeRacecar()
-			.patternDiagonalDualColor()
-			.primaryColor(Color.GREEN)
-			.secondaryColor(Color.ORANGE);
+			.typeCar()
+			.patternFill()
+			.primaryColor(Color.RED);
 			break;
 		case 2:
 			carBuilder
-			.typeTractor()
-			.patternDotted()
-			.primaryColor(Color.BLUE)
-			.secondaryColor(Color.CYAN);
+			.typeCar()
+			.patternFill()
+			.primaryColor(Color.GREEN);
 			break;
 		case 3:
 			carBuilder
-			.typeUfo()
-			.patternZebra()
-			.primaryColor(Color.YELLOW)
-			.secondaryColor(Color.MAGENTA);
+			.typeCar()
+			.patternFill()
+			.primaryColor(Color.YELLOW);
 			break;
 		case 4:
 			carBuilder
-			.typeRacecar()
-			.patternHorizontalGradiant()
-			.primaryColor(Color.BLACK)
-			.secondaryColor(Color.WHITE);
+			.typeCar()
+			.patternFill()
+			.primaryColor(Color.BLACK);
 			break;
 		case 5:
 			carBuilder
-			.typeTractor()
-			.patternHorizontalDualColor()
-			.primaryColor(Color.WHITE)
-			.secondaryColor(Color.PINK);
+			.typeCar()
+			.patternFill()
+			.primaryColor(Color.WHITE);
 			break;
 		default:
 			break;
