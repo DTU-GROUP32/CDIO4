@@ -91,6 +91,10 @@ public class LanguageHandler {
 		return selectedLanguage.trade();
 	}
 
+	public String youGetJailedForThreeTimesEqual() {
+		return selectedLanguage.youGetJailedForThreeTimesEqual();
+	}
+
 	public String getChanceCardMsg(int topCardNumber) {
 		return selectedLanguage.getChanceCardMsg(topCardNumber);
 	}

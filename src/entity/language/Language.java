@@ -28,6 +28,8 @@ public interface Language {
 
 	String trade();
 
+	String youGetJailedForThreeTimesEqual();
+
 	String getChanceCardMsg(int topCardNumber);
 
 	String fieldMsg(int fieldNumber);
@@ -111,8 +113,5 @@ public interface Language {
 	String printDiceChangeSucces();
 
 	String printDiceChangeNotExecuted();
-
-	
-
 }
 

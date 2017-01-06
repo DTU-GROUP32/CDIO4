@@ -24,15 +24,6 @@ public class PlayerList {
 	}
 
 	/**
-	 * Returns boolean to determine if players balance is 0 or below
-	 * @param atIndex Index of the player
-	 * @return Boolean
-	 */
-	public boolean isPlayerBroke(int atIndex) {
-		return players[atIndex].getBankAccount().getBalance() < 0;
-	}
-
-	/**
 	 * Checks all players to see if every player, but one is broke. If so true is returned
 	 * @return Boolean
 	 */
