@@ -168,6 +168,11 @@ public class Dansk implements Language{
 	public String trade(){
 		return "Handle";
 	}
+	
+	@Override
+	public String youGetJailedForThreeTimesEqual() {
+		return "De fængles for at have slået to ens 3 gange i træk!";
+	}
 
 	@Override
 	public String getChanceCardMsg(int topCardNumber) {

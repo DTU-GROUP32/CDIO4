@@ -1,7 +1,7 @@
 package entity;
 
 public class DiceCup {
-	
+
 	private Dice[] dices;
 
 	/**
@@ -66,14 +66,14 @@ public class DiceCup {
 		} else
 			return false;
 	}
-		
+
 	/**
 	 * Checks if the dices a equal. 
 	 * @param dice
 	 * @return
 	 */
-	    public boolean diceEvalEqual(DiceCup dice) {
-	        return (this.dices[0].getFaceValue() == this.dices[1].getFaceValue());
-	    }
-	    
+	public boolean diceEvalEqual() {
+		return (this.dices[0].getFaceValue() == this.dices[1].getFaceValue());
+	}
+
 }

@@ -70,6 +70,15 @@ public class Player{
 			this.getBankAccount().deposit(4000);
 		}
 	}
+
+	/**
+	 * Returns boolean to determine if players balance is 0 or below
+	 * @param atIndex Index of the player
+	 * @return Boolean
+	 */
+	public boolean isPlayerBroke() {
+		return this.getBankAccount().getBalance() < 0;
+	}
 	
 	/**
 	 * Returns the name of the player
