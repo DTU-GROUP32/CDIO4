@@ -242,24 +242,6 @@ public class GUIBoundary {
 				GUI.setSubText(field.getID(), field.getOwner().getName());
 		}
 	}
-	
-	/**
-	 * Returns a string containing which language is selected
-	 * @return language that is selected
-	 */
-	public String getLanguage() {
-		return GUI.getUserSelection("Select language. \nVælg sprog.", "Dansk", "English");
-	}
-
-	/**
-	 * Returns a string of which is chosen
-	 * @param message
-	 * @param options
-	 * @return String of the choice that has been made
-	 */
-	public String getUserSelection(String message, String... options) {
-		return GUI.getUserSelection(message, options);
-	}
 
 	/**
 	 * Shows two dice on the board. The dice will have specified values.
@@ -295,6 +277,24 @@ public class GUIBoundary {
 	public void setOwner(int fieldNumber, String playerName) {
 		GUI.setOwner(convertFieldNumber(fieldNumber), playerName);
 	}
+	
+	/**
+	 * Returns a string containing which language is selected
+	 * @return language that is selected
+	 */
+	public String getLanguage() {
+		return GUI.getUserSelection("Select language. \nVælg sprog.", "Dansk", "English");
+	}
+
+	/**
+	 * Returns a string of which is chosen
+	 * @param message
+	 * @param options
+	 * @return String of the choice that has been made
+	 */
+	public String getUserSelection(String message, String... options) {
+		return GUI.getUserSelection(message, options);
+	}
 
 	/**
 	 * Displays a message to the user and awaits the integer response
@@ -307,7 +307,7 @@ public class GUIBoundary {
 
 	/**
 	 * Displays a message to the user and awaits the integer response. Only values between min and max are allowed
-	 * @param message - the message that promts the user.
+	 * @param message - the message that prompts the user.
 	 * @param min - the minimum value the user is allowed to enter
 	 * @param max - the maximum value the user is allowed to enter
 	 * @return int - the integer that the user selected
@@ -318,7 +318,7 @@ public class GUIBoundary {
 
 	/**
 	 * Displays a message to the user and awaits the response
-	 * @param message - the message that promts the user
+	 * @param message - the message that prompts the user
 	 * @return String - the string that the user has entered
 	 */
 	public String getString(String message) {
@@ -327,7 +327,7 @@ public class GUIBoundary {
 
 	/**
 	 * Displays a message to the user and awaits the response from the button that the user pressed
-	 * @param message - the message that promts the user
+	 * @param message - the message that prompts the user
 	 * @param optionTrue - a strings that should be printed on the "true" button
 	 * @param optionFalse - a strings that should be printed on the "false" button
 	 * @return boolean - boolean from the button that the user pressed
@@ -339,7 +339,7 @@ public class GUIBoundary {
 
 	/**
 	 * Displays a message to the user and awaits the "OK!" button pressed response
-	 * @param message - the message that promts the user
+	 * @param message - the message that prompts the user
 	 * @return true - whenever the button is pressed
 	 */
 	public boolean getButtonPressed(String message) {
@@ -349,7 +349,7 @@ public class GUIBoundary {
 
 	/**
 	 * Displays a message to the user and awaits the button pressed response
-	 * @param msg - the message that promts the user
+	 * @param msg - the message that prompts the user
 	 * @param buttons - strings that are shown on the buttons
 	 * @return String from the button that the user pressed
 	 */
