@@ -279,7 +279,7 @@ public class Dansk implements Language{
 		case 22:
 		case 33:
 		case 36:
-			fieldString = "Du er landet på \"Prøv lykken\". Tryk på \"Prøv lykken\" bunken i midten for trække et kort!";
+			fieldString = "Du er landet på \"Prøv lykken\". Tryk på \"Prøv lykken\" bunken i midten for trække et kort, før du trykker \"OK!\"";
 			break;
 		case 4:
 		case 38:
@@ -370,8 +370,8 @@ public class Dansk implements Language{
 	}
 	
 	@Override
-	public String confirmTrade(){
-		return "Vil du bekræfte handlen?";
+	public String confirmTrade(String fieldName, String buyerName, int price){
+		return "Er du sikker på, at du vil sælge \"" + fieldName + "\" til " + buyerName + " for kr. " + price + "?";
 	}
 	
 	@Override
@@ -440,13 +440,18 @@ public class Dansk implements Language{
 	}
 	
 	@Override
+	public String auctionNotification() {
+		return "Da spilleren der landede på dette felt ikke ønskede at købe feltet, kan det nu købes af banken på auktion. Er der nogle andre der ønsker at købe feltet?";
+	}
+	
+	@Override
 	public String enterAuctionPrice(){
 		return "Hvad blev auktionsprisen?";
 	}
 
 	@Override
-	public String confirmPurchase() {
-		return "Vil du bekræfte købet?";
+	public String confirmPurchase(String fieldName, int price) {
+		return "Vil du bekræfte købet af " + fieldName + " til kr. " + price + "?";
 	}
 	
 	@Override
@@ -582,5 +587,6 @@ public class Dansk implements Language{
 	public String printDiceChangeNotExecuted(){
 		return "Terningerne kunne ikke ændres";
 	}
+
 }
 

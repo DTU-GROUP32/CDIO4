@@ -60,7 +60,7 @@ public interface Language {
 
 	String enterTradePrice();
 
-	String confirmTrade();
+	String confirmTrade(String fieldName, String buyerName, int price);
 
 	String yes();
 
@@ -87,10 +87,12 @@ public interface Language {
 	String purchaseConfirmation();
 
 	String notEnoughMoney();
+	
+	String auctionNotification();
 
 	String enterAuctionPrice();
 
-	String confirmPurchase();
+	String confirmPurchase(String fieldName, int price);
 
 	String pawn();
 
@@ -115,5 +117,7 @@ public interface Language {
 	String printDiceChangeSucces();
 
 	String printDiceChangeNotExecuted();
+
+	
 }
 

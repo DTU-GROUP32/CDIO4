@@ -97,7 +97,7 @@ public abstract class SequenceController {
 			// gets the trade price
 			int price = boundary.getInteger(language.enterTradePrice(), 0, buyerObject.getBankAccount().getBalance());
 			// gets confirmation on the trade and executes actions if confirmed
-			if(boundary.getBoolean(language.confirmTrade(), language.yes(), language.no())){
+			if(boundary.getBoolean(language.confirmTrade(fieldToSell, buyer, price), language.yes(), language.no())){
 				if(fieldToSellObject.tradeField(owner, buyerObject, price)) {
 					boundary.updateGUI(gameBoard, playerList);
 					boundary.getButtonPressed(language.purchaseConfirmation());
@@ -206,26 +206,30 @@ public abstract class SequenceController {
 		String[] playerLabels = getPlayerNamesExceptSpecificPlayer(playerList, playerOnField);
 		Player buyerObject = null;
 
-		// gets user choice
-		String buyer = boundary.getUserSelection(language.choosePropertyBuyer(), playerLabels);
+		if(boundary.getBoolean(language.auctionNotification(), language.yes(), language.no())) {
+			// gets user choice
+			String buyer = boundary.getUserSelection(language.choosePropertyBuyer(), playerLabels);
 
-		// gets the player object by the name
-		for (Player player : playerList.getPlayers()) {
-			if (buyer.equals(player.getName()))
-			{
-				buyerObject = player;
+			// gets the player object by the name
+			for (Player player : playerList.getPlayers()) {
+				if (buyer.equals(player.getName()))
+				{
+					buyerObject = player;
+				}
 			}
-		}
 
-		//gets user choice
-		int price = boundary.getInteger(language.enterAuctionPrice(), 0, buyerObject.getBankAccount().getBalance());
-		// gets confirmation on the purchase and executes actions if confirmed
-		if(boundary.getBoolean(language.confirmPurchase(), language.yes(), language.no())){
-			if(field.buyField(buyerObject, price)) {
-				boundary.updateGUI(gameBoard, playerList);
-				boundary.getButtonPressed(language.purchaseConfirmation());
+			//gets user choice
+			int price = boundary.getInteger(language.enterAuctionPrice(), 0, buyerObject.getBankAccount().getBalance());
+			// gets confirmation on the purchase and executes actions if confirmed
+			if(boundary.getBoolean(language.confirmPurchase(field.getName(), price), language.yes(), language.no())){
+				if(field.buyField(buyerObject, price)) {
+					boundary.updateGUI(gameBoard, playerList);
+					boundary.getButtonPressed(language.purchaseConfirmation());
+				} else {
+					boundary.getButtonPressed(language.notEnoughMoney());
+				}
 			} else {
-				boundary.getButtonPressed(language.notEnoughMoney());
+				auctionSequence(playerOnField, field, gameBoard, playerList);
 			}
 		}
 	}
