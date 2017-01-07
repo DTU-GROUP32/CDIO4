@@ -45,7 +45,7 @@ public abstract class SequenceController {
 
 			// check if the field is owned
 			if (ownerOfField == null) {
-				SequenceController.buyPropertySequence(player, field, gameBoard, playerList);
+				SequenceController.buyPropertySequence(player, field, true, gameBoard, playerList);
 			} else {
 				// if the field has an owner and the player landing on the field, is not the owner, the player landing on the field pays rent to the owner
 				if (!field.getOwner().getName().equals(player.getName())) {
@@ -77,6 +77,7 @@ public abstract class SequenceController {
 	 * Method that handles the sequence of constructing a building on a property.
 	 * @param player
 	 * @param gameBoard
+	 * @param playerList
 	 */
 	public static void buildSequence(Player player, GameBoard gameBoard, PlayerList playerList) {
 
@@ -99,6 +100,7 @@ public abstract class SequenceController {
 	 * Method that handles the sequence of demolishing a building on a property.
 	 * @param player
 	 * @param gameBoard
+	 * @param playerList
 	 */
 	public static void demolitionSequence(Player player, GameBoard gameBoard, PlayerList playerList) {
 
@@ -174,6 +176,7 @@ public abstract class SequenceController {
 	 * Method that handles the sequence of pawning a property.
 	 * @param player
 	 * @param gameBoard
+	 * @param playerList
 	 */
 	public static void pawnSequence(Player player, GameBoard gameBoard, PlayerList playerList) {
 
@@ -205,6 +208,7 @@ public abstract class SequenceController {
 	 * Method that handles the sequence of undoing the pawn of a property.
 	 * @param player
 	 * @param gameBoard
+	 * @param playerList
 	 */
 	public static void undoPawnSequence(Player player, GameBoard gameBoard, PlayerList playerList) {
 
@@ -236,13 +240,18 @@ public abstract class SequenceController {
 	 * Method that handles the sequence of buying a property.
 	 * @param player
 	 * @param field
+	 * @param withAuction
+	 * @param gameBoard
+	 * @param playerList
 	 */
-	public static void buyPropertySequence(Player player, Field field, GameBoard gameBoard, PlayerList playerList) {
+	public static void buyPropertySequence(Player player, Field field, Boolean withAuction, GameBoard gameBoard, PlayerList playerList) {
 
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
 		int priceOfField = field.getPrice();
 
+		// updates the GUI in case the player has been moved by a chance card
+		boundary.updateGUI(gameBoard, playerList);
 		// gets user choice
 		if (boundary.getBoolean(language.buyingOfferMsg(priceOfField), language.yes(), language.no())) {
 			// carries out the buy if possible and updates the GUI
@@ -251,19 +260,24 @@ public abstract class SequenceController {
 				boundary.getButtonPressed(language.purchaseConfirmation());
 			} else {
 				boundary.getButtonPressed(language.notEnoughMoney());
-				auctionSequence(player, field, gameBoard, playerList);
+				if(withAuction) {
+					auctionSequence(player, field, gameBoard, playerList);
+				}
 			}
 		} else {
 			// if the playing landing on the field doesn't want to buy it, it gets offered to the other players
-			auctionSequence(player, field, gameBoard, playerList);
+			if(withAuction) {
+				auctionSequence(player, field, gameBoard, playerList);
+			}
 		}
 	}
 
 	/**
 	 * Method that handles the sequence of auctioning off a property.
 	 * @param playerOnField
-	 * @param playerList
 	 * @param field
+	 * @param gameBoard
+	 * @param playerList
 	 */
 	public static void auctionSequence(Player playerOnField, Field field, GameBoard gameBoard, PlayerList playerList){
 
