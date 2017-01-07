@@ -272,8 +272,10 @@ public class GUIBoundary {
 	 * @param player
 	 */
 	public void updateCar(Player player) { 
-		GUI.removeAllCars(player.getName()); 
-		GUI.setCar(convertFieldNumber(player.getOnField()), player.getName()); 
+		GUI.removeAllCars(player.getName());
+		if(player.getOnField() >= 0) {
+			GUI.setCar(convertFieldNumber(player.getOnField()), player.getName());
+		}
 	}
 
 	/**

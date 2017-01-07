@@ -74,10 +74,9 @@ public class GameController {
 						// if the equal counter gets to 3, you get jailed immediately and your turn is over
 						if(player.getEqualsCount() == 3) {
 							boundary.getButtonPressed(language.youGetJailedForThreeTimesEqual());
-							boundary.removeCar(player.getOnField(), player.getName());
 							player.setOnField(10);
 							player.setEqualsCount(0);
-							boundary.setCar(player.getOnField(), player.getName());
+							boundary.updateGUI(gameBoard, playerList);
 							break turnLoop;
 						}
 					} else {
@@ -85,13 +84,11 @@ public class GameController {
 					}
 
 					// normal flow of turn continues here by moving the player
-					boundary.removeCar(player.getOnField(), player.getName());
 					player.movePlayer(diceCup.getSum());
 					int fieldNumber = player.getOnField();
 					Field field = gameBoard.getField(fieldNumber);
-					boundary.setCar(fieldNumber, player.getName());
-					// updating the balance here in case "start" was passed and 4000 was added to the players bank account
-					boundary.updateBalance(player.getName(), player.getBankAccount().getBalance());
+					// updating the GUI to reflect the players new position, and in the case "start" was passed, the new balance will also be reflected
+					boundary.updateGUI(gameBoard, playerList);
 
 					// if the player landed on a chance field, a card is made ready in the GUI
 					if(field instanceof Chance) {
@@ -107,7 +104,7 @@ public class GameController {
 
 						// check if the field is owned
 						if (ownerOfField == null) {
-							SequenceController.buyPropertySequence(player, field);
+							SequenceController.buyPropertySequence(player, field, gameBoard, playerList);
 						} else {
 							// if the field has an owner and the player landing on the field, is not the owner, the player landing on the field pays rent to the owner
 							if (!field.getOwner().getName().equals(player.getName())) {
@@ -115,8 +112,7 @@ public class GameController {
 								int preBalance = player.getBankAccount().getBalance();
 								field.landOnField(player, diceCup.getSum(), gameBoard, playerList, false);
 								int paidAmount = preBalance - player.getBankAccount().getBalance();
-								boundary.updateBalance(player.getName(), player.getBankAccount().getBalance());
-								boundary.updateBalance(ownerOfField.getName(), ownerOfField.getBankAccount().getBalance());
+								boundary.updateGUI(gameBoard, playerList);
 								boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(paidAmount, ownerOfField));
 							} else {
 								boundary.getButtonPressed(language.youOwnThisField());
@@ -127,11 +123,11 @@ public class GameController {
 						// if the field is the tax field with a choice, the landOnField method is run with that choice
 						if(field.getID() == 4) {
 							field.landOnField(player, diceCup.getSum(), gameBoard, playerList, boundary.getBoolean(language.getTaxChoice(), language.yes(), language.no()));
-							boundary.updateBalance(player.getName(), player.getBankAccount().getBalance());
+							boundary.updateGUI(gameBoard, playerList);
 							// otherwise just a standard landOnField call
 						} else {
 							field.landOnField(player, diceCup.getSum(), gameBoard, playerList, false);
-							boundary.updateBalance(player.getName(), player.getBankAccount().getBalance());
+							boundary.updateGUI(gameBoard, playerList);
 						}
 
 					}
@@ -142,18 +138,11 @@ public class GameController {
 					}
 					// if the choice was to build
 				} else if (turnChoice.equals(language.build())) {
-					SequenceController.buildSequence(player, gameBoard);
-					// if the choice was to trade a propety
+					SequenceController.buildSequence(player, gameBoard, playerList);
+					// if the choice was to trade a property
 				} else if (turnChoice.equals(language.trade())) {
 					SequenceController.tradePropertiesSequence(player, gameBoard, playerList);
 				}
 			} while (diceCup.diceEvalEqual() || turnChoice.equals(language.build()) || turnChoice.equals(language.trade()));
-	}
-
-	/**
-	 *
-	 */
-	public GUIBoundary getBoundary() {
-		return this.boundary;
 	}
 }
