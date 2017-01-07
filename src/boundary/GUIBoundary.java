@@ -17,13 +17,14 @@ import desktop_resources.GUI;
 import entity.DiceCup;
 import entity.GameBoard;
 import entity.Player;
+import entity.PlayerList;
 import entity.fields.Ownable;
 import entity.language.LanguageHandler;
 
 public class GUIBoundary {
 
 	private static GUIBoundary instance;
-	
+
 	/**
 	 * Returns and initializes the instance of the GUIBoundary if it is not already initialized
 	 * @return instance - 
@@ -138,7 +139,7 @@ public class GUIBoundary {
 		return color;
 
 	}
-	
+
 	/**
 	 * Adds a player with a specific vehicle on the game board
 	 * @param player
@@ -211,16 +212,24 @@ public class GUIBoundary {
 	}
 
 	/**
-	 * Removes ownership from every field that a player owns
+	 * Updates all info in the GUI that might change during the game.
 	 * @param gameBoard
-	 * @param player to release fields from
+	 * @param playerList
 	 */
-	public void releasePlayersFields(GameBoard gameBoard, Player player) {
-		for(int i = 0; i < gameBoard.getFields().length; i++)
-			if(gameBoard.getField(i) instanceof Ownable)
-				if(gameBoard.getField(i).getOwner().getName().equals(player.getName())) {
-					GUI.removeOwner(convertFieldNumber(i));
-				}
+	public void updateGUI(GameBoard gameBoard, PlayerList playerList) {
+		// updates everything regarding any field
+		for(entity.fields.Field field : gameBoard.getFields()) {
+			if(field instanceof Ownable) {
+				updateOwner(field);
+				updateConstructionRate(field);
+				updatePawnStatus(field);
+			}
+		}
+		// updates everything regarding any player
+		for(Player player : playerList.getPlayers()) {
+			updateCar(player);
+			updateBalance(player);
+		}
 	}
 
 	/**
@@ -263,9 +272,9 @@ public class GUIBoundary {
 	 * @param player
 	 */
 	public void updateCar(Player player) { 
-	    GUI.removeAllCars(player.getName()); 
-	    GUI.setCar(convertFieldNumber(player.getOnField()), player.getName()); 
-	  }
+		GUI.removeAllCars(player.getName()); 
+		GUI.setCar(convertFieldNumber(player.getOnField()), player.getName()); 
+	}
 
 	/**
 	 * Updates the players balance.
@@ -274,7 +283,7 @@ public class GUIBoundary {
 	public void updateBalance(Player player) {
 		GUI.setBalance(player.getName(), player.getBankAccount().getBalance());
 	}
-	
+
 	/**
 	 * Returns a string containing which language is selected
 	 * @return language that is selected
@@ -353,7 +362,7 @@ public class GUIBoundary {
 	public String getUserButtonPressed(String msg, String... buttons) {
 		return GUI.getUserButtonPressed(msg, buttons);
 	}
-	
+
 	/**
 	 * Sets the text to appear in the center when calling displayChanceCard() and when the deck is pressed
 	 * @param message that are shown
@@ -361,6 +370,6 @@ public class GUIBoundary {
 	public void setChanceCard(String message) {
 		GUI.setChanceCard(message);
 	}
-	
+
 
 }
