@@ -95,7 +95,7 @@ public class GUIBoundary {
 			}
 		}
 		GUI.create(fields);
-		GUI.setDice(1, 1);
+		GUI.setDice(1, 0, 4, 3, 1, 0, 5, 3);
 	}
 
 	/**
@@ -262,11 +262,11 @@ public class GUIBoundary {
 	}
 
 	/**
-	 * Shows two dice on the board. The dice will have specified values, but placement is random
+	 * Shows two dice on the board. The dice will have specified values.
 	 * @param diceCup which contains two dice
 	 */
 	public void setDices(DiceCup diceCup) {
-		GUI.setDice(diceCup.getDices()[0].getFaceValue(), diceCup.getDices()[1].getFaceValue());
+		GUI.setDice(diceCup.getDices()[0].getFaceValue(), 0, 4, 3, diceCup.getDices()[1].getFaceValue(), 0, 5, 3);
 	}
 
 	/**
