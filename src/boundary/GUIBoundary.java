@@ -187,7 +187,7 @@ public class GUIBoundary {
 		}
 		Car car = carBuilder.build();
 		GUI.addPlayer(player.getName(), player.getBankAccount().getBalance(), car);
-		this.setCar(player.getOnField(), player.getName());
+		this.updateCar(player);;
 	}
 
 	/**
@@ -270,22 +270,13 @@ public class GUIBoundary {
 	}
 
 	/**
-	 * Places a player's car on a specific field on the board
-	 * @param fieldNumber of the specific field
-	 * @param playerName of the player
+	 * Updates the players position on the board.
+	 * @param player
 	 */
-	public void setCar(int fieldNumber, String playerName) {
-		GUI.setCar(convertFieldNumber(fieldNumber), playerName);
-	}
-
-	/**
-	 * Removes a player's car from a specific field on the board
-	 * @param fieldNumber of the specific field
-	 * @param playerName of the player
-	 */
-	public void removeCar(int fieldNumber, String playerName) {
-		GUI.removeCar(convertFieldNumber(fieldNumber), playerName);
-	}
+	public void updateCar(Player player) { 
+	    GUI.removeAllCars(player.getName()); 
+	    GUI.setCar(convertFieldNumber(player.getOnField()), player.getName()); 
+	  }
 
 	/**
 	 * Updates a player's balance
