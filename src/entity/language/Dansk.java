@@ -325,11 +325,6 @@ public class Dansk implements Language{
 	}
 	
 	@Override
-	public String youAreBroke() {
-		return "Du er desværre gået bankerot, tak for spillet!";
-	}
-	
-	@Override
 	public String notBuildable(){
 		return "Du har ingen grunde du kan bygge på.";
 	}
@@ -441,7 +436,7 @@ public class Dansk implements Language{
 	
 	@Override
 	public String auctionNotification() {
-		return "Da spilleren der landede på dette felt ikke ønskede at købe feltet, kan det nu købes af banken på auktion. Er der nogle andre der ønsker at købe feltet?";
+		return "Da spilleren der landede på dette felt ikke købte feltet, kan det nu købes af banken på auktion. Er der nogle andre der ønsker at købe feltet?";
 	}
 	
 	@Override
@@ -477,6 +472,11 @@ public class Dansk implements Language{
 	@Override
 	public String canGetMoney(){
 		return "Du kan godt få nok penge, ved at nedrive bygninger og pantsætte ejendomme!";
+	}
+
+	@Override
+	public String bankruptcyConcluded() {
+		return "Din konkurs er nu afviklet, tak for spillet!";
 	}
 	
 	// ALL METHODS UNDER THIS LINE AREN'T USED IN THIS CURRENT VERSION OF THE GAME.
@@ -587,6 +587,5 @@ public class Dansk implements Language{
 	public String printDiceChangeNotExecuted(){
 		return "Terningerne kunne ikke ændres";
 	}
-
 }
 

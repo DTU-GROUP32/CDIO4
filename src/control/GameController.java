@@ -5,9 +5,6 @@ import entity.DiceCup;
 import entity.GameBoard;
 import entity.Player;
 import entity.PlayerList;
-import entity.fields.Chance;
-import entity.fields.Field;
-import entity.fields.Ownable;
 import entity.language.LanguageHandler;
 
 public class GameController {
@@ -83,59 +80,10 @@ public class GameController {
 						player.setEqualsCount(0);
 					}
 
-					// normal flow of turn continues here by moving the player
+					// normal flow of turn continues here by moving the player and calling the land on field sequence
 					player.movePlayer(diceCup.getSum());
-					int fieldNumber = player.getOnField();
-					Field field = gameBoard.getField(fieldNumber);
-					// updating the GUI to reflect the players new position, and in the case "start" was passed, the new balance will also be reflected
-					boundary.updateGUI(gameBoard, playerList);
-
-					// if the player landed on a chance field, a card is made ready in the GUI
-					if(field instanceof Chance) {
-						boundary.setChanceCard(language.getChanceCardMsg(field.getTopCardNumber()));
-						boundary.getButtonPressed(language.fieldMsg(fieldNumber));
-						boundary.setChanceCard(language.getChanceCardMsg(-1));
-					} else {
-						boundary.getButtonPressed(language.fieldMsg(fieldNumber));
-					}
-
-					if (field instanceof Ownable) {
-						Player ownerOfField = field.getOwner();
-
-						// check if the field is owned
-						if (ownerOfField == null) {
-							SequenceController.buyPropertySequence(player, field, gameBoard, playerList);
-						} else {
-							// if the field has an owner and the player landing on the field, is not the owner, the player landing on the field pays rent to the owner
-							if (!field.getOwner().getName().equals(player.getName())) {
-								boundary.getButtonPressed(language.landedOnOwnedField(ownerOfField));
-								int preBalance = player.getBankAccount().getBalance();
-								field.landOnField(player, diceCup.getSum(), gameBoard, playerList, false);
-								int paidAmount = preBalance - player.getBankAccount().getBalance();
-								boundary.updateGUI(gameBoard, playerList);
-								boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(paidAmount, ownerOfField));
-							} else {
-								boundary.getButtonPressed(language.youOwnThisField());
-							}
-						}
-					} else {
-
-						// if the field is the tax field with a choice, the landOnField method is run with that choice
-						if(field.getID() == 4) {
-							field.landOnField(player, diceCup.getSum(), gameBoard, playerList, boundary.getBoolean(language.getTaxChoice(), language.yes(), language.no()));
-							boundary.updateGUI(gameBoard, playerList);
-							// otherwise just a standard landOnField call
-						} else {
-							field.landOnField(player, diceCup.getSum(), gameBoard, playerList, false);
-							boundary.updateGUI(gameBoard, playerList);
-						}
-
-					}
-					//
-					if (player.isPlayerBroke()) {
-						boundary.getButtonPressed(language.youAreBroke());
-						break turnLoop;
-					}
+					SequenceController.landOnFieldSequence(player, diceCup.getSum(), gameBoard, playerList);
+					
 					// if the choice was to build
 				} else if (turnChoice.equals(language.build())) {
 					SequenceController.buildSequence(player, gameBoard, playerList);

@@ -119,10 +119,6 @@ public class LanguageHandler {
 		return selectedLanguage.getTaxChoice();
 	}
 
-	public String youAreBroke() {
-		return selectedLanguage.youAreBroke();
-	}
-
 	public String notBuildable(){ 
 		return selectedLanguage.notBuildable();
 	}
@@ -243,6 +239,10 @@ public class LanguageHandler {
 		return selectedLanguage.canGetMoney();
 	}
 
+	public String bankruptcyConcluded() {
+		return selectedLanguage.bankruptcyConcluded();
+	}	
+
 	//
 	//
 	// METHODS UNDER THIS LINE ARE NOT USED IN THIS VERSION OF THE GAME
@@ -275,5 +275,5 @@ public class LanguageHandler {
 
 	public String printDiceChangeNotExecuted(){
 		return selectedLanguage.printDiceChangeNotExecuted();
-	}	
+	}
 }

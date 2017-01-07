@@ -51,7 +51,7 @@ public class BankAccount {
 	 * @return boolean - whether the transfer has been completed or not
 	 */
 	public boolean transfer(Player receiver, int amount){
-		if(this.balance - amount > 0)
+		if(this.balance - amount >= 0)
 		{
 			this.withdraw(amount);
 			receiver.getBankAccount().deposit(amount);

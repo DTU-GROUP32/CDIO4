@@ -229,11 +229,13 @@ public class GameBoard {
 	public void releasePlayersFields(Player player) {
 		for(int i = 0; i < fields.length; i++) {
 			if (fields[i] instanceof Ownable) {
-				if(fields[i].getOwner().getName().equals(player.getName())) {
-					fields[i].setOwner(null);
-					fields[i].setConstructionRate(0);
-					fields[i].releasePawnField();
+				if(fields[i].getOwner() != null) {
+					if(fields[i].getOwner().getName().equals(player.getName())) {
+						fields[i].setOwner(null);
+						fields[i].setConstructionRate(0);
+						fields[i].releasePawnField();
 
+					}
 				}
 			}
 		}

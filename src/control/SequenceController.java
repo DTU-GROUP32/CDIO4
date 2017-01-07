@@ -6,10 +6,72 @@ import boundary.GUIBoundary;
 import entity.GameBoard;
 import entity.Player;
 import entity.PlayerList;
+import entity.fields.Chance;
 import entity.fields.Field;
+import entity.fields.Ownable;
 import entity.language.LanguageHandler;
 
 public abstract class SequenceController {
+
+	/**
+	 * Method that handles the sequence of landing on a field. All you need to do before calling this method, is to make sure you have "moved" the player
+	 * to the correct onField, in the logic, then this method will handle the rest.
+	 * Sometimes this method will even get called recursively, if a chance card changes the player position, and then recalls this method.
+	 * @param player
+	 * @param roll
+	 * @param gameBoard
+	 * @param playerList
+	 */
+	public static void landOnFieldSequence(Player player, int roll, GameBoard gameBoard, PlayerList playerList) {
+
+		GUIBoundary boundary = GUIBoundary.getInstance();
+		LanguageHandler language = LanguageHandler.getInstance();
+		int fieldNumber = player.getOnField();
+		Field field = gameBoard.getField(fieldNumber);
+
+		// updating the GUI to reflect the players position on the game board, and in the case "start" was passed, the new balance will also be reflected
+		boundary.updateGUI(gameBoard, playerList);
+		// if the player landed on a chance field, a card is made ready in the GUI
+		if(field instanceof Chance) {
+			boundary.setChanceCard(language.getChanceCardMsg(field.getTopCardNumber()));
+			boundary.getButtonPressed(language.fieldMsg(fieldNumber));
+			boundary.setChanceCard(language.getChanceCardMsg(-1));
+		} else {
+			boundary.getButtonPressed(language.fieldMsg(fieldNumber));
+		}
+
+		if (field instanceof Ownable) {
+			Player ownerOfField = field.getOwner();
+
+			// check if the field is owned
+			if (ownerOfField == null) {
+				SequenceController.buyPropertySequence(player, field, gameBoard, playerList);
+			} else {
+				// if the field has an owner and the player landing on the field, is not the owner, the player landing on the field pays rent to the owner
+				if (!field.getOwner().getName().equals(player.getName())) {
+					boundary.getButtonPressed(language.landedOnOwnedField(ownerOfField));
+					int preBalance = player.getBankAccount().getBalance();
+					field.landOnField(player, roll, gameBoard, playerList, false);
+					int paidAmount = preBalance - player.getBankAccount().getBalance();
+					boundary.updateGUI(gameBoard, playerList);
+					boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(paidAmount, ownerOfField));
+				} else {
+					boundary.getButtonPressed(language.youOwnThisField());
+				}
+			}
+		} else {
+
+			// if the field is the tax field with a choice, the landOnField method is run with that choice
+			if(field.getID() == 4) {
+				field.landOnField(player, roll, gameBoard, playerList, boundary.getBoolean(language.getTaxChoice(), language.yes(), language.no()));
+				boundary.updateGUI(gameBoard, playerList);
+				// otherwise just a standard landOnField call
+			} else {
+				field.landOnField(player, roll, gameBoard, playerList, false);
+				boundary.updateGUI(gameBoard, playerList);
+			}
+		}
+	}
 
 	/**
 	 * Method that handles the sequence of constructing a building on a property.
@@ -189,7 +251,11 @@ public abstract class SequenceController {
 				boundary.getButtonPressed(language.purchaseConfirmation());
 			} else {
 				boundary.getButtonPressed(language.notEnoughMoney());
+				auctionSequence(player, field, gameBoard, playerList);
 			}
+		} else {
+			// if the playing landing on the field doesn't want to buy it, it gets offered to the other players
+			auctionSequence(player, field, gameBoard, playerList);
 		}
 	}
 
@@ -206,6 +272,7 @@ public abstract class SequenceController {
 		String[] playerLabels = getPlayerNamesExceptSpecificPlayer(playerList, playerOnField);
 		Player buyerObject = null;
 
+		// asks if anyone wants to buy the field
 		if(boundary.getBoolean(language.auctionNotification(), language.yes(), language.no())) {
 			// gets user choice
 			String buyer = boundary.getUserSelection(language.choosePropertyBuyer(), playerLabels);
@@ -285,6 +352,7 @@ public abstract class SequenceController {
 	public static void executeBankruptcy(Player player, GameBoard gameBoard, PlayerList playerList) {
 
 		GUIBoundary boundary = GUIBoundary.getInstance();
+		LanguageHandler language = LanguageHandler.getInstance();
 
 		// sets players onField and bank account to -1 to indicate he is eliminated from the game
 		player.setOnField(-1);
@@ -293,6 +361,7 @@ public abstract class SequenceController {
 		gameBoard.releasePlayersFields(player);
 		// updates GUI, after the bankrupt player and his fields has been reset in the logic
 		boundary.updateGUI(gameBoard, playerList);
+		boundary.getButtonPressed(language.bankruptcyConcluded());
 	}
 
 	/**
