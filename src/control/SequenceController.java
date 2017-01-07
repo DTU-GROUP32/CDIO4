@@ -50,11 +50,12 @@ public abstract class SequenceController {
 				// if the field has an owner and the player landing on the field, is not the owner, the player landing on the field pays rent to the owner
 				if (!field.getOwner().getName().equals(player.getName())) {
 					boundary.getButtonPressed(language.landedOnOwnedField(ownerOfField));
-					int preBalance = player.getBankAccount().getBalance();
 					field.landOnField(player, roll, gameBoard, playerList, false);
-					int paidAmount = preBalance - player.getBankAccount().getBalance();
 					boundary.updateGUI(gameBoard, playerList);
-					boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(paidAmount, ownerOfField));
+					// if the player didn't declare bankruptcy, a message will display how much was paid to who
+					if(!player.isPlayerBroke()) {
+						boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(field.getRent(gameBoard, roll), ownerOfField));
+					}
 				} else {
 					boundary.getButtonPressed(language.youOwnThisField());
 				}
@@ -348,6 +349,7 @@ public abstract class SequenceController {
 					// if the creditor is another player
 					if(creditor != null) {
 						debitor.getBankAccount().transfer(creditor, debitor.getTotalAssets(gameBoard));
+						boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(debitor.getTotalAssets(gameBoard), creditor));
 					}
 					executeBankruptcy(debitor, gameBoard, playerList);
 					break getMoneySeq;
