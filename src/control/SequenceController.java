@@ -190,6 +190,9 @@ public abstract class SequenceController {
 			} else {
 				boundary.getButtonPressed(language.notEnoughMoney());
 			}
+		} else {
+			// if the playing landing on the field doesn't want to buy it, it gets offered to the other players
+			auctionSequence(player, field, gameBoard, playerList);
 		}
 	}
 
@@ -206,6 +209,7 @@ public abstract class SequenceController {
 		String[] playerLabels = getPlayerNamesExceptSpecificPlayer(playerList, playerOnField);
 		Player buyerObject = null;
 
+		// asks if anyone wants to buy the field
 		if(boundary.getBoolean(language.auctionNotification(), language.yes(), language.no())) {
 			// gets user choice
 			String buyer = boundary.getUserSelection(language.choosePropertyBuyer(), playerLabels);
