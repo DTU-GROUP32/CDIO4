@@ -276,4 +276,21 @@ public class LanguageHandler {
 	public String printDiceChangeNotExecuted(){
 		return selectedLanguage.printDiceChangeNotExecuted();
 	}
+
+	public String youAreInJailMsg(Player player) {
+		return selectedLanguage.youAreInJailMsg(player);
+	}
+
+	public String payOneThousand() {
+		return selectedLanguage.payOneThousand();
+	}
+
+	public String useGetOutOfJail() {
+		return selectedLanguage.useGetOutOfJail();
+	}
+
+	public String youAreOutOfJailMsg() {
+		return selectedLanguage.youAreOutOfJailMsg();
+	}
+
 }

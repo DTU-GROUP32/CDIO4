@@ -587,5 +587,25 @@ public class Dansk implements Language{
 	public String printDiceChangeNotExecuted(){
 		return "Terningerne kunne ikke ændres";
 	}
+
+	@Override
+	public String youAreInJailMsg(Player player) {
+		return "De er fængslet. De kan vælge at betale kr. 1000, slå to ens eller indfrie Deres benådning for at slippe fri.";
+	}
+
+	@Override
+	public String payOneThousand() {
+		return "Betal";
+	}
+
+	@Override
+	public String useGetOutOfJail() {
+		return "Indfri benådning";
+	}
+
+	@Override
+	public String youAreOutOfJailMsg() {
+		return "Du er ude af fængslet";
+	}
 }
 

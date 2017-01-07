@@ -117,5 +117,13 @@ public interface Language {
 	String printDiceChangeSucces();
 
 	String printDiceChangeNotExecuted();
+
+	String youAreInJailMsg(Player player);
+
+	String payOneThousand();
+
+	String useGetOutOfJail();
+
+	String youAreOutOfJailMsg();
 }
 
