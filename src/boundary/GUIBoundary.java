@@ -237,7 +237,9 @@ public class GUIBoundary {
 	 * @param field
 	 */
 	public void updateOwner(entity.fields.Field field) {
-		GUI.setOwner(convertFieldNumber(field.getID()), field.getOwner().getName());
+		if(field.getOwner() != null) {
+			GUI.setOwner(convertFieldNumber(field.getID()), field.getOwner().getName());
+		}
 	}
 
 	/**
