@@ -155,8 +155,8 @@ public class LanguageHandler {
 		return selectedLanguage.enterTradePrice(); 
 	}
 
-	public String confirmTrade(){ 
-		return selectedLanguage.confirmTrade(); 
+	public String confirmTrade(String fieldName, String buyerName, int price){ 
+		return selectedLanguage.confirmTrade(fieldName, buyerName, price); 
 	}
 
 	public String yes() {
@@ -210,13 +210,17 @@ public class LanguageHandler {
 	public String notEnoughMoney() {
 		return selectedLanguage.notEnoughMoney();
 	}
+	
+	public String auctionNotification() {
+		return selectedLanguage.auctionNotification();
+	}
 
 	public String enterAuctionPrice() {
 		return selectedLanguage.enterAuctionPrice();
 	}
 	
-	public String confirmPurchase() {
-		return selectedLanguage.confirmPurchase();
+	public String confirmPurchase(String fieldName, int price) {
+		return selectedLanguage.confirmPurchase(fieldName, price);
 	}
 
 	public String pawn(){ 
