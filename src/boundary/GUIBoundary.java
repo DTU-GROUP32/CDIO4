@@ -221,10 +221,9 @@ public class GUIBoundary {
 	 */
 	public void updateConstructionRate(entity.fields.Field field){
 		if(field.getConstructionRate() == 5){
-			GUI.setHouses(field.getID(), 0);
-			GUI.setHotel(field.getID(), true);
+			GUI.setHotel(convertFieldNumber(field.getID()), true);
 		}else{
-			GUI.setHouses(field.getID(), field.getConstructionRate());
+			GUI.setHouses(convertFieldNumber(field.getID()), field.getConstructionRate());
 		}
 	}
 
