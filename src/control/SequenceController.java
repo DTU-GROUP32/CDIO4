@@ -16,7 +16,7 @@ public abstract class SequenceController {
 	 * @param player
 	 * @param gameBoard
 	 */
-	public static void buildSequence(Player player, GameBoard gameBoard) {
+	public static void buildSequence(Player player, GameBoard gameBoard, PlayerList playerList) {
 
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
@@ -29,7 +29,7 @@ public abstract class SequenceController {
 		} else {
 			Field fieldToBuildOn = gameBoard.getField(gameBoard.getIndexByName(boundary.getUserSelection(language.choosePlotToBuildOn(), buildableLabels)));
 			fieldToBuildOn.buildConstruction();
-			boundary.updateBalance(player.getName(), player.getBankAccount().getBalance());
+			boundary.updateGUI(gameBoard, playerList);
 		}
 	}
 
@@ -38,7 +38,7 @@ public abstract class SequenceController {
 	 * @param player
 	 * @param gameBoard
 	 */
-	public static void demolitionSequence(Player player, GameBoard gameBoard) {
+	public static void demolitionSequence(Player player, GameBoard gameBoard, PlayerList playerList) {
 
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
@@ -53,7 +53,7 @@ public abstract class SequenceController {
 		{
 			String fieldToDemolishOn = boundary.getUserSelection(language.choosePropertyToDemolishOn(), demolitionableLabels);
 			gameBoard.getField(gameBoard.getIndexByName(fieldToDemolishOn)).sellConstruction();
-			boundary.updateBalance(player.getName(), player.getBankAccount().getBalance());
+			boundary.updateGUI(gameBoard, playerList);
 		}
 	}
 
@@ -99,9 +99,7 @@ public abstract class SequenceController {
 			// gets confirmation on the trade and executes actions if confirmed
 			if(boundary.getBoolean(language.confirmTrade(), language.yes(), language.no())){
 				if(fieldToSellObject.tradeField(owner, buyerObject, price)) {
-					boundary.setOwner(fieldToSellObject.getID(), buyer);
-					boundary.updateBalance(owner.getName(), owner.getBankAccount().getBalance());
-					boundary.updateBalance(buyerObject.getName(), buyerObject.getBankAccount().getBalance());
+					boundary.updateGUI(gameBoard, playerList);
 					boundary.getButtonPressed(language.purchaseConfirmation());
 				} else {
 					boundary.getButtonPressed(language.notEnoughMoney());
@@ -115,7 +113,7 @@ public abstract class SequenceController {
 	 * @param player
 	 * @param gameBoard
 	 */
-	public static void pawnSequence(Player player, GameBoard gameBoard) {
+	public static void pawnSequence(Player player, GameBoard gameBoard, PlayerList playerList) {
 
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
@@ -132,7 +130,7 @@ public abstract class SequenceController {
 			// gets the field object by the name and pawns it, if its possible
 			if(gameBoard.getField(gameBoard.getIndexByName(fieldToPawn)).pawnField())
 			{
-				boundary.updatePawnStatus(gameBoard.getField(gameBoard.getIndexByName(fieldToPawn)));
+				boundary.updateGUI(gameBoard, playerList);
 				boundary.getButtonPressed(language.pawnSuccessful());
 			} else
 			{
@@ -146,7 +144,7 @@ public abstract class SequenceController {
 	 * @param player
 	 * @param gameBoard
 	 */
-	public static void undoPawnSequence(Player player, GameBoard gameBoard) {
+	public static void undoPawnSequence(Player player, GameBoard gameBoard, PlayerList playerList) {
 
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
@@ -163,7 +161,7 @@ public abstract class SequenceController {
 			// gets the field object by the name and undoes the pawn, if its possible
 			if(gameBoard.getField(gameBoard.getIndexByName(fieldToUndoPawn)).undoPawnField())
 			{
-				boundary.updatePawnStatus(gameBoard.getField(gameBoard.getIndexByName(fieldToUndoPawn)));
+				boundary.updateGUI(gameBoard, playerList);
 				boundary.getButtonPressed(language.undoPawnSuccessful());
 			} else
 			{
@@ -177,7 +175,7 @@ public abstract class SequenceController {
 	 * @param player
 	 * @param field
 	 */
-	public static void buyPropertySequence(Player player, Field field) {
+	public static void buyPropertySequence(Player player, Field field, GameBoard gameBoard, PlayerList playerList) {
 
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
@@ -187,8 +185,7 @@ public abstract class SequenceController {
 		if (boundary.getBoolean(language.buyingOfferMsg(priceOfField), language.yes(), language.no())) {
 			// carries out the buy if possible and updates the GUI
 			if (field.buyField(player)) {
-				boundary.updateBalance(player.getName(), player.getBankAccount().getBalance());
-				boundary.setOwner(player.getOnField(), player.getName());
+				boundary.updateGUI(gameBoard, playerList);
 				boundary.getButtonPressed(language.purchaseConfirmation());
 			} else {
 				boundary.getButtonPressed(language.notEnoughMoney());
@@ -202,7 +199,7 @@ public abstract class SequenceController {
 	 * @param playerList
 	 * @param field
 	 */
-	public static void auctionSequence(Player playerOnField, PlayerList playerList, Field field){
+	public static void auctionSequence(Player playerOnField, Field field, GameBoard gameBoard, PlayerList playerList){
 
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
@@ -225,8 +222,7 @@ public abstract class SequenceController {
 		// gets confirmation on the purchase and executes actions if confirmed
 		if(boundary.getBoolean(language.confirmPurchase(), language.yes(), language.no())){
 			if(field.buyField(buyerObject, price)) {
-				boundary.setOwner(field.getID(), buyer);
-				boundary.updateBalance(buyer, buyerObject.getBankAccount().getBalance());
+				boundary.updateGUI(gameBoard, playerList);
 				boundary.getButtonPressed(language.purchaseConfirmation());
 			} else {
 				boundary.getButtonPressed(language.notEnoughMoney());
@@ -256,9 +252,9 @@ public abstract class SequenceController {
 
 			// handles which other sequence to run by the users choice
 			if(choice.equals(language.pawn())) {
-				pawnSequence(debitor, gameBoard);
+				pawnSequence(debitor, gameBoard, playerList);
 			} else if (choice.equals(language.demolish())) {
-				demolitionSequence(debitor, gameBoard);
+				demolitionSequence(debitor, gameBoard, playerList);
 			} else if (choice.equals(language.trade())) {
 				tradePropertiesSequence(debitor, gameBoard, playerList);
 			} else if (choice.equals(language.bankrupt())) {
@@ -267,14 +263,8 @@ public abstract class SequenceController {
 					// if the creditor is another player
 					if(creditor != null) {
 						debitor.getBankAccount().transfer(creditor, debitor.getTotalAssets(gameBoard));
-						debitor.getBankAccount().setBalance(-1);
-					} 
-					// if the creditor is the bank
-					else {
-						debitor.getBankAccount().withdraw(debitor.getTotalAssets(gameBoard));
-						debitor.getBankAccount().setBalance(-1);
 					}
-					executeBankruptcy(debitor, gameBoard);
+					executeBankruptcy(debitor, gameBoard, playerList);
 					break getMoneySeq;
 				} else {
 					boundary.getButtonPressed(language.canGetMoney());
@@ -288,21 +278,17 @@ public abstract class SequenceController {
 	 * @param player
 	 * @param gameBoard
 	 */
-	public static void executeBankruptcy(Player player, GameBoard gameBoard) {
+	public static void executeBankruptcy(Player player, GameBoard gameBoard, PlayerList playerList) {
 
 		GUIBoundary boundary = GUIBoundary.getInstance();
 
-		// removes car from GUI
-		boundary.removeCar(player.getOnField(), player.getName());
-		// removes his name his fields in the GUI
-		boundary.releasePlayersFields(gameBoard, player);
+		// sets players onField and bank account to -1 to indicate he is eliminated from the game
+		player.setOnField(-1);
+		player.getBankAccount().setBalance(-1);
 		// returns his fields to the bank in the logic
 		gameBoard.releasePlayersFields(player);
-		// updates construction rate and pawn status of all fields, after the bankruptcy players fields has been reset in the logic
-		for(int i = 0; i < gameBoard.getFields().length; i++){
-			boundary.updateConstructionRate(gameBoard.getField(i));
-			boundary.updatePawnStatus(gameBoard.getField(i));
-		}
+		// updates GUI, after the bankrupt player and his fields has been reset in the logic
+		boundary.updateGUI(gameBoard, playerList);
 	}
 
 	/**

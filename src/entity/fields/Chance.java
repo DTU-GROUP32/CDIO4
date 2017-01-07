@@ -146,7 +146,7 @@ public class Chance extends Field {
 				player.movePlayer(45-player.getOnField());
 			else player.movePlayer(5-player.getOnField());
 			if(gameBoard.getField(player.getOnField()).getOwner() == null)
-				SequenceController.buyPropertySequence(player, gameBoard.getField(player.getOnField()));
+				SequenceController.buyPropertySequence(player, gameBoard.getField(player.getOnField()), gameBoard, playerList);
 			else
 				{
 				gameBoard.getField(player.getOnField()).landOnField(player, 0, gameBoard, playerList, false);

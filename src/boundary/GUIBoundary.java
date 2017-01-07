@@ -17,13 +17,14 @@ import desktop_resources.GUI;
 import entity.DiceCup;
 import entity.GameBoard;
 import entity.Player;
+import entity.PlayerList;
 import entity.fields.Ownable;
 import entity.language.LanguageHandler;
 
 public class GUIBoundary {
 
 	private static GUIBoundary instance;
-	
+
 	/**
 	 * Returns and initializes the instance of the GUIBoundary if it is not already initialized
 	 * @return instance - 
@@ -95,7 +96,7 @@ public class GUIBoundary {
 			}
 		}
 		GUI.create(fields);
-		GUI.setDice(1, 1);
+		GUI.setDice(1, 0, 4, 3, 1, 0, 5, 3);
 	}
 
 	/**
@@ -138,7 +139,7 @@ public class GUIBoundary {
 		return color;
 
 	}
-	
+
 	/**
 	 * Adds a player with a specific vehicle on the game board
 	 * @param player
@@ -187,7 +188,7 @@ public class GUIBoundary {
 		}
 		Car car = carBuilder.build();
 		GUI.addPlayer(player.getName(), player.getBankAccount().getBalance(), car);
-		this.setCar(player.getOnField(), player.getName());
+		this.updateCar(player);;
 	}
 
 	/**
@@ -203,33 +204,56 @@ public class GUIBoundary {
 	}
 
 	/**
-	 * Removes ownership from every field that a player owns
-	 * @param gameBoard
-	 * @param player to release fields from
+	 * Shows two dice on the board. The dice will have specified values.
+	 * @param diceCup which contains two dice
 	 */
-	public void releasePlayersFields(GameBoard gameBoard, Player player) {
-		for(int i = 0; i < gameBoard.getFields().length; i++)
-			if(gameBoard.getField(i) instanceof Ownable)
-				if(gameBoard.getField(i).getOwner().getName().equals(player.getName())) {
-					GUI.removeOwner(convertFieldNumber(i));
-				}
+	public void setDices(DiceCup diceCup) {
+		GUI.setDice(diceCup.getDices()[0].getFaceValue(), 0, 4, 3, diceCup.getDices()[1].getFaceValue(), 0, 5, 3);
 	}
 
 	/**
-	 * Updates the construction rate on a specific field
-	 * @param field that is updated
+	 * Updates all info in the GUI that might change during the game.
+	 * @param gameBoard
+	 * @param playerList
 	 */
-	public void updateConstructionRate(entity.fields.Field field){
-		if(field.getConstructionRate() == 5){
-			GUI.setHouses(field.getID(), 0);
-			GUI.setHotel(field.getID(), true);
-		}else{
-			GUI.setHouses(field.getID(), field.getConstructionRate());
+	public void updateGUI(GameBoard gameBoard, PlayerList playerList) {
+		// updates everything regarding any field
+		for(entity.fields.Field field : gameBoard.getFields()) {
+			if(field instanceof Ownable) {
+				updateOwner(field);
+				updateConstructionRate(field);
+				updatePawnStatus(field);
+			}
+		}
+		// updates everything regarding any player
+		for(Player player : playerList.getPlayers()) {
+			updateCar(player);
+			updateBalance(player);
 		}
 	}
 
 	/**
-	 * Updates the pawn status on field
+	 * Updates the owner of a specific field.
+	 * @param field
+	 */
+	public void updateOwner(entity.fields.Field field) {
+		GUI.setOwner(convertFieldNumber(field.getID()), field.getOwner().getName());
+	}
+
+	/**
+	 * Updates the construction rate on a specific field.
+	 * @param field that is updated
+	 */
+	public void updateConstructionRate(entity.fields.Field field){
+		if(field.getConstructionRate() == 5){
+			GUI.setHotel(convertFieldNumber(field.getID()), true);
+		}else{
+			GUI.setHouses(convertFieldNumber(field.getID()), field.getConstructionRate());
+		}
+	}
+
+	/**
+	 * Updates the pawn status on a specific field.
 	 * @param field that is updated
 	 */
 	public void updatePawnStatus(entity.fields.Field field) {
@@ -242,7 +266,26 @@ public class GUIBoundary {
 				GUI.setSubText(field.getID(), field.getOwner().getName());
 		}
 	}
-	
+
+	/**
+	 * Updates the players position on the board.
+	 * @param player
+	 */
+	public void updateCar(Player player) { 
+		GUI.removeAllCars(player.getName());
+		if(player.getOnField() >= 0) {
+			GUI.setCar(convertFieldNumber(player.getOnField()), player.getName());
+		}
+	}
+
+	/**
+	 * Updates the players balance.
+	 * @param player
+	 */
+	public void updateBalance(Player player) {
+		GUI.setBalance(player.getName(), player.getBankAccount().getBalance());
+	}
+
 	/**
 	 * Returns a string containing which language is selected
 	 * @return language that is selected
@@ -262,50 +305,6 @@ public class GUIBoundary {
 	}
 
 	/**
-	 * Shows two dice on the board. The dice will have specified values, but placement is random
-	 * @param diceCup which contains two dice
-	 */
-	public void setDices(DiceCup diceCup) {
-		GUI.setDice(diceCup.getDices()[0].getFaceValue(), diceCup.getDices()[1].getFaceValue());
-	}
-
-	/**
-	 * Places a player's car on a specific field on the board
-	 * @param fieldNumber of the specific field
-	 * @param playerName of the player
-	 */
-	public void setCar(int fieldNumber, String playerName) {
-		GUI.setCar(convertFieldNumber(fieldNumber), playerName);
-	}
-
-	/**
-	 * Removes a player's car from a specific field on the board
-	 * @param fieldNumber of the specific field
-	 * @param playerName of the player
-	 */
-	public void removeCar(int fieldNumber, String playerName) {
-		GUI.removeCar(convertFieldNumber(fieldNumber), playerName);
-	}
-
-	/**
-	 * Updates a player's balance
-	 * @param playerName of the player
-	 * @param newBalance to be updated
-	 */
-	public void updateBalance(String playerName, int newBalance) {
-		GUI.setBalance(playerName, newBalance);
-	}
-
-	/**
-	 * Sets an owner of a field. Field border and subText will be changed and now indicate who's the owner
-	 * @param fieldNumber
-	 * @param playerName
-	 */
-	public void setOwner(int fieldNumber, String playerName) {
-		GUI.setOwner(convertFieldNumber(fieldNumber), playerName);
-	}
-
-	/**
 	 * Displays a message to the user and awaits the integer response
 	 * @param message - the message that prompts the user
 	 * @return int - the integer that the user selected
@@ -316,7 +315,7 @@ public class GUIBoundary {
 
 	/**
 	 * Displays a message to the user and awaits the integer response. Only values between min and max are allowed
-	 * @param message - the message that promts the user.
+	 * @param message - the message that prompts the user.
 	 * @param min - the minimum value the user is allowed to enter
 	 * @param max - the maximum value the user is allowed to enter
 	 * @return int - the integer that the user selected
@@ -327,7 +326,7 @@ public class GUIBoundary {
 
 	/**
 	 * Displays a message to the user and awaits the response
-	 * @param message - the message that promts the user
+	 * @param message - the message that prompts the user
 	 * @return String - the string that the user has entered
 	 */
 	public String getString(String message) {
@@ -336,7 +335,7 @@ public class GUIBoundary {
 
 	/**
 	 * Displays a message to the user and awaits the response from the button that the user pressed
-	 * @param message - the message that promts the user
+	 * @param message - the message that prompts the user
 	 * @param optionTrue - a strings that should be printed on the "true" button
 	 * @param optionFalse - a strings that should be printed on the "false" button
 	 * @return boolean - boolean from the button that the user pressed
@@ -348,7 +347,7 @@ public class GUIBoundary {
 
 	/**
 	 * Displays a message to the user and awaits the "OK!" button pressed response
-	 * @param message - the message that promts the user
+	 * @param message - the message that prompts the user
 	 * @return true - whenever the button is pressed
 	 */
 	public boolean getButtonPressed(String message) {
@@ -358,14 +357,14 @@ public class GUIBoundary {
 
 	/**
 	 * Displays a message to the user and awaits the button pressed response
-	 * @param msg - the message that promts the user
+	 * @param msg - the message that prompts the user
 	 * @param buttons - strings that are shown on the buttons
 	 * @return String from the button that the user pressed
 	 */
 	public String getUserButtonPressed(String msg, String... buttons) {
 		return GUI.getUserButtonPressed(msg, buttons);
 	}
-	
+
 	/**
 	 * Sets the text to appear in the center when calling displayChanceCard() and when the deck is pressed
 	 * @param message that are shown
@@ -373,6 +372,6 @@ public class GUIBoundary {
 	public void setChanceCard(String message) {
 		GUI.setChanceCard(message);
 	}
-	
+
 
 }
