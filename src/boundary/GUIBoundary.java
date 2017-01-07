@@ -268,12 +268,11 @@ public class GUIBoundary {
 	  }
 
 	/**
-	 * Updates a player's balance
-	 * @param playerName of the player
-	 * @param newBalance to be updated
+	 * Updates the players balance.
+	 * @param player
 	 */
-	public void updateBalance(String playerName, int newBalance) {
-		GUI.setBalance(playerName, newBalance);
+	public void updateBalance(Player player) {
+		GUI.setBalance(player.getName(), player.getBankAccount().getBalance());
 	}
 	
 	/**
