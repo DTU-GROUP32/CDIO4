@@ -42,8 +42,6 @@ public interface Language {
 
 	String getTaxChoice();
 
-	String youAreBroke();
-
 	String notBuildable();
 
 	String choosePlotToBuildOn();
@@ -104,6 +102,8 @@ public interface Language {
 
 	String canGetMoney();
 
+	String bankruptcyConcluded();
+
 	String nonOwnableFieldEffectMsg(int onField);
 
 	String menu();
@@ -117,7 +117,5 @@ public interface Language {
 	String printDiceChangeSucces();
 
 	String printDiceChangeNotExecuted();
-
-	
 }
 
