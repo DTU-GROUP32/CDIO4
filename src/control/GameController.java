@@ -56,7 +56,16 @@ public class GameController {
 		turnLoop:
 			do {
 				// gets user choice
-				turnChoice = boundary.getUserButtonPressed(language.preMsg(player), language.throwDices(), language.build(), language.trade());
+				if(player.isInJail()) {
+					if(player.getInJailThrowCount() == 3) {
+						boundary.getButtonPressed(language.youAreOutOfJailMsg());
+						turnChoice = language.payOneThousand();
+					} else {	
+						turnChoice = boundary.getUserButtonPressed(language.youAreInJailMsg(player), language.throwDices(), language.payOneThousand(), language.useGetOutOfJail());
+					}
+				} else {
+					turnChoice = boundary.getUserButtonPressed(language.preMsg(player), language.throwDices(), language.build(), language.trade());
+				}
 
 				// if the choice was roll dice
 				if (turnChoice.equals(language.throwDices())) {
@@ -64,6 +73,14 @@ public class GameController {
 					// dice is rolled and updated in GUI
 					diceCup.rollDices();
 					boundary.setDices(diceCup);
+
+					// if player is in jail
+					if(player.isInJail()) {
+						if (!diceCup.diceEvalEqual()){
+							player.setInJailThrowCount(player.getInJailThrowCount()+1);
+							break turnLoop;
+						}
+					}
 
 					// if the roll is equal, equal counter is increased by 1
 					if(diceCup.diceEvalEqual()) {
@@ -83,14 +100,29 @@ public class GameController {
 					// normal flow of turn continues here by moving the player and calling the land on field sequence
 					player.movePlayer(diceCup.getSum());
 					SequenceController.landOnFieldSequence(player, diceCup.getSum(), gameBoard, playerList);
-					
+
 					// if the choice was to build
 				} else if (turnChoice.equals(language.build())) {
 					SequenceController.buildSequence(player, gameBoard, playerList);
 					// if the choice was to trade a property
 				} else if (turnChoice.equals(language.trade())) {
 					SequenceController.tradePropertiesSequence(player, gameBoard, playerList);
+					// if the choice is to pay a thousand to get out of jail
+				} else if (turnChoice.equals(language.payOneThousand())) {
+					player.getBankAccount().withdraw(1000);
+					player.setInJail(false);
+					player.setInJailThrowCount(0);
+					boundary.updateGUI(gameBoard, playerList);
+					// if the choice is to redeem the granted clemency
+				} else if (turnChoice.equals(language.useGetOutOfJail())) {
+					if(player.getGetOutOfJail() > 0) {
+						player.setGetOutOfJail(player.getGetOutOfJail()-1);
+						player.setInJail(false);
+					} else {
+						boundary.getButtonPressed("De har ingen benådning at indfrie");
+					}
 				}
-			} while (diceCup.diceEvalEqual() || turnChoice.equals(language.build()) || turnChoice.equals(language.trade()));
+
+			} while (diceCup.diceEvalEqual() || turnChoice.equals(language.build()) || turnChoice.equals(language.trade()) || turnChoice.equals(language.payOneThousand()) || turnChoice.equals(language.useGetOutOfJail()));
 	}
 }
