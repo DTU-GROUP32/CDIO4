@@ -34,7 +34,7 @@ public class SetupController {
 	 * @return playerList
 	 */
 	public PlayerList setupPlayers() {
-		PlayerList playerList = new PlayerList(boundary.getInteger(language.askForNumberOfPlayers(), 2, 6));
+		PlayerList playerList = new PlayerList(Integer.parseInt(boundary.getUserButtonPressed(language.askForNumberOfPlayers(), "2", "3", "4", "5", "6")));
 		for(int i = 0; i < playerList.getPlayers().length; i++)
 		{
 			String name;
