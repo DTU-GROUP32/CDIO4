@@ -10,6 +10,7 @@ public class Player{
 	private int equalsCount;
 	private boolean inJail;
 	private int getOutOfJail;
+	private int inJailThrowCount;
 
 	/**
 	 * Default constructor.
@@ -181,5 +182,19 @@ public class Player{
 	 */
 	public static void resetID() {
 		nextID = 0;
+	}
+
+	/**
+	 * @return the inJailThrowCount
+	 */
+	public int getInJailThrowCount() {
+		return inJailThrowCount;
+	}
+
+	/**
+	 * @param inJailThrowCount the inJailThrowCount to set
+	 */
+	public void setInJailThrowCount(int inJailThrowCount) {
+		this.inJailThrowCount = inJailThrowCount;
 	}
 }
