@@ -288,6 +288,9 @@ public class Dansk implements Language{
 		case 10:
 			fieldString = "Du tager et smut på besøg i fængslet";
 			break;
+		case 20:
+			fieldString = "Du er landet på \"Parkering\". Du modtager kr. 5000.";
+			break;
 		case 30:
 			fieldString = "Du ryger i fængsel.";
 			break;
