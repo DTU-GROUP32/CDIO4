@@ -203,6 +203,14 @@ public class GUIBoundary {
 	}
 
 	/**
+	 * Shows two dice on the board. The dice will have specified values.
+	 * @param diceCup which contains two dice
+	 */
+	public void setDices(DiceCup diceCup) {
+		GUI.setDice(diceCup.getDices()[0].getFaceValue(), 0, 4, 3, diceCup.getDices()[1].getFaceValue(), 0, 5, 3);
+	}
+
+	/**
 	 * Removes ownership from every field that a player owns
 	 * @param gameBoard
 	 * @param player to release fields from
@@ -216,7 +224,15 @@ public class GUIBoundary {
 	}
 
 	/**
-	 * Updates the construction rate on a specific field
+	 * Updates the owner of a specific field.
+	 * @param field
+	 */
+	public void updateOwner(entity.fields.Field field) {
+		GUI.setOwner(convertFieldNumber(field.getID()), field.getOwner().getName());
+	}
+
+	/**
+	 * Updates the construction rate on a specific field.
 	 * @param field that is updated
 	 */
 	public void updateConstructionRate(entity.fields.Field field){
@@ -228,7 +244,7 @@ public class GUIBoundary {
 	}
 
 	/**
-	 * Updates the pawn status on field
+	 * Updates the pawn status on a specific field.
 	 * @param field that is updated
 	 */
 	public void updatePawnStatus(entity.fields.Field field) {
@@ -240,14 +256,6 @@ public class GUIBoundary {
 			else
 				GUI.setSubText(field.getID(), field.getOwner().getName());
 		}
-	}
-
-	/**
-	 * Shows two dice on the board. The dice will have specified values.
-	 * @param diceCup which contains two dice
-	 */
-	public void setDices(DiceCup diceCup) {
-		GUI.setDice(diceCup.getDices()[0].getFaceValue(), 0, 4, 3, diceCup.getDices()[1].getFaceValue(), 0, 5, 3);
 	}
 
 	/**
@@ -266,15 +274,6 @@ public class GUIBoundary {
 	 */
 	public void updateBalance(String playerName, int newBalance) {
 		GUI.setBalance(playerName, newBalance);
-	}
-
-	/**
-	 * Sets an owner of a field. Field border and subText will be changed and now indicate who's the owner
-	 * @param fieldNumber
-	 * @param playerName
-	 */
-	public void setOwner(int fieldNumber, String playerName) {
-		GUI.setOwner(convertFieldNumber(fieldNumber), playerName);
 	}
 	
 	/**
