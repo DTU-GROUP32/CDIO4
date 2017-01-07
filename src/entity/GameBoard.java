@@ -112,14 +112,17 @@ public class GameBoard {
 	public ArrayList<Field> getBuildableList(Player owner) {
 
 		ArrayList<Field> listOfBuildableProperties = new ArrayList<Field>();
+		
 
 		for(int i = 0; i < 8; i++) { // For every property group
 			Field[] propertyGroup = getPropertyGroup(i);
 
-			if(propertyGroup[0].getOwner() == owner && evalPropertyGroupSameOwner(propertyGroup)) // If the owner of the fields is the "input"-owner
+			// If the owner of the fields is the "input"-owner
+			if(propertyGroup[0].getOwner() == owner && evalPropertyGroupSameOwner(propertyGroup)) 
 			{
-				int smallestConstructionRate = 0;
-
+				
+				int smallestConstructionRate = 5;
+				
 				// Find the smallest construction rate of property group
 				for(Field field : propertyGroup) {
 					if(field.getConstructionRate() < smallestConstructionRate)
