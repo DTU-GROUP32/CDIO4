@@ -113,7 +113,7 @@ public class GameBoard {
 
 		ArrayList<Field> listOfBuildableProperties = new ArrayList<Field>();
 		
-
+		
 		for(int i = 0; i < 8; i++) { // For every property group
 			Field[] propertyGroup = getPropertyGroup(i);
 
@@ -121,7 +121,7 @@ public class GameBoard {
 			if(propertyGroup[0].getOwner() == owner && evalPropertyGroupSameOwner(propertyGroup)) 
 			{
 				
-				int smallestConstructionRate = 5;
+				int smallestConstructionRate = 6;
 				
 				// Find the smallest construction rate of property group
 				for(Field field : propertyGroup) {
@@ -177,7 +177,7 @@ public class GameBoard {
 		ArrayList<Field> listOfPawnableProperties = new ArrayList<Field>();
 
 		for(int i = 0; i < this.fields.length; i++)
-			if(fields[i].getOwner() == owner && fields[i].getConstructionRate() == 0)
+			if(fields[i].getOwner() == owner && fields[i].getConstructionRate() == 0 && fields[i].getIsPawned() == false)
 				listOfPawnableProperties.add(fields[i]);
 
 		return	listOfPawnableProperties;
