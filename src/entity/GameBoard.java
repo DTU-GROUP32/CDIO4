@@ -18,7 +18,8 @@ public class GameBoard {
 	private Field[] fields;
 
 	/**
-	 * Default constructor, which initializes gameboard with 22 fields
+	 * Constructor that sets up a full "Matador from the 1980's" game board in the logic with all the data for the fields.
+	 * @param language
 	 */
 	public GameBoard(LanguageHandler language) {
 		this.fields = new Field[40];
@@ -64,8 +65,14 @@ public class GameBoard {
 		fields[39] = new Plot(language.fieldNames(39), 8000, new int[] {1000,4000,12000,28000,34000,40000}, 4000, 7);
 	}
 
+	/**
+	 * Returns an array with the fields in the property group, that is specified by the input parameter.
+	 * @param propertyGroup
+	 * @return fieldGroup
+	 */
 	public Field[] getPropertyGroup(int propertyGroup) {
-		// numbers of fields in group
+
+		// counts how many fields are in the group
 		int fieldsInGroup = 0;
 		for(Field field : this.fields)
 		{
@@ -73,7 +80,7 @@ public class GameBoard {
 				fieldsInGroup++;
 		}
 
-		// making property group
+		// creates an array containing the fields in the specified property group
 		Field[] fieldGroup = new Field[fieldsInGroup];
 		int arrayIndex = 0;
 		for(int i = 0; i < this.fields.length; i++)
@@ -88,6 +95,11 @@ public class GameBoard {
 		return fieldGroup;
 	}
 
+	/**
+	 * Evaluates all the properties in a property group has the same owner.
+	 * @param propertyGroup
+	 * @return
+	 */
 	public boolean evalPropertyGroupSameOwner(Field[] propertyGroup) {
 		boolean ownedBySame;
 		if(propertyGroup.length == 2)
@@ -97,10 +109,16 @@ public class GameBoard {
 		return ownedBySame;
 	}
 
+	/**
+	 * Returns a list of all the properties owned by the specified player.
+	 * @param owner
+	 * @return
+	 */
 	public ArrayList<Field> getPropertyList(Player owner) {
 
 		ArrayList<Field> listOfProperties = new ArrayList<Field>();
 
+		// adds every field that has the specified owner to the list
 		for(int i = 0; i < this.fields.length; i++) {
 			if(this.fields[i].getOwner() == owner)
 				listOfProperties.add(this.fields[i]);		
@@ -109,31 +127,38 @@ public class GameBoard {
 		return listOfProperties;
 	}
 
+	/**
+	 * Returns a list of all the fields that the player can currently build constructions on.
+	 * @param owner
+	 * @return
+	 */
 	public ArrayList<Field> getBuildableList(Player owner) {
 
 		ArrayList<Field> listOfBuildableProperties = new ArrayList<Field>();
-		
-		
-		for(int i = 0; i < 8; i++) { // For every property group
+
+		// for every property group(0-7)
+		for(int i = 0; i < 8; i++) {
 			Field[] propertyGroup = getPropertyGroup(i);
 
-			// If the owner of the fields is the "input"-owner
-			if(propertyGroup[0].getOwner() == owner && evalPropertyGroupSameOwner(propertyGroup)) 
-			{
-				
-				int smallestConstructionRate = 6;
-				
-				// Find the smallest construction rate of property group
+			// if the owner of the first field in the group is the "input"-owner, and all properties in the group has the same owner
+			if(propertyGroup[0].getOwner() == owner && evalPropertyGroupSameOwner(propertyGroup)) {
+
+				// setting this to 4, ensures that a field with construction rate 5 won't get on the list
+				int smallestConstructionRate = 4;
+
+				// finds the smallest construction rate of property group
 				for(Field field : propertyGroup) {
-					if(field.getConstructionRate() < smallestConstructionRate)
+					if(field.getConstructionRate() < smallestConstructionRate) {
 						smallestConstructionRate = field.getConstructionRate();
+					}
 				}
 
-				// If construction rate is equal to the smallest construction rate, then add to the buildable list.
-				for(int j = 0; j < propertyGroup.length; j++)
-				{
-					if(propertyGroup[j].getConstructionRate() == smallestConstructionRate)
+				for(int j = 0; j < propertyGroup.length; j++) {
+					// if construction rate is equal to the smallest construction rate, then add to the buildable list
+					// this is to ensure the player is building evenly on the properties
+					if(propertyGroup[j].getConstructionRate() == smallestConstructionRate) {
 						listOfBuildableProperties.add(propertyGroup[j]);
+					}
 				}
 			}
 		}
@@ -141,29 +166,39 @@ public class GameBoard {
 		return listOfBuildableProperties;
 	}
 
+	/**
+	 * Returns a list of all the fields that the player can currently demolish constructions on.
+	 * @param owner
+	 * @return
+	 */
 	public ArrayList<Field> getDemolitionableList(Player owner) {
 
 		ArrayList<Field> listOfSellableProperties = new ArrayList<Field>();
 
-		for(int i = 0; i < 8; i++) { // For every property group
+		// for every property group(0-7)
+		for(int i = 0; i < 8; i++) {
 			Field[] propertyGroup = getPropertyGroup(i);
 
-			if(propertyGroup[0].getOwner() == owner) // If the owner of the fields is the "input"-owner
-			{
+			// if the owner of the first field in the group is the "input"-owner, and all properties in the group has the same owner
+			if(propertyGroup[0].getOwner() == owner) {
+
 				int highestConstructionRate = 0;
 
-				// Determine the highest construction rate
-				for(Field field : propertyGroup)
-					if(field.getConstructionRate() > highestConstructionRate)
+				// finds the highest construction rate of property group
+				for(Field field : propertyGroup) {
+					if(field.getConstructionRate() > highestConstructionRate) {
 						highestConstructionRate = field.getConstructionRate();
+					}
+				}
 
-				// If construction rate is equal to the highest construction rate, then add to the sellable list.
-				if(highestConstructionRate > 0)
-				{
-					for(int j = 0; j < propertyGroup.length; j++)
-					{
-						if(propertyGroup[j].getConstructionRate() == highestConstructionRate)
+				// ensures fields with construction rate 0 won't get on the list
+				if(highestConstructionRate > 0) {
+					for(int j = 0; j < propertyGroup.length; j++) {
+						// if construction rate is equal to the highest construction rate, then add to the demolitionable list
+						// this is to ensure the player is building evenly on the properties
+						if(propertyGroup[j].getConstructionRate() == highestConstructionRate) {
 							listOfSellableProperties.add(propertyGroup[j]);
+						}
 					}
 				}
 			}
@@ -172,38 +207,56 @@ public class GameBoard {
 		return listOfSellableProperties;
 	}
 
+	/**
+	 * Returns a list of all the fields that the player can pawn.
+	 * @param owner
+	 * @return
+	 */
 	public ArrayList<Field> getPawnableList(Player owner) {
 
 		ArrayList<Field> listOfPawnableProperties = new ArrayList<Field>();
 
-		for(int i = 0; i < this.fields.length; i++)
-			if(fields[i].getOwner() == owner && fields[i].getConstructionRate() == 0 && fields[i].getIsPawned() == false)
+		// for each field
+		for(int i = 0; i < this.fields.length; i++) {
+			// if the owner of the field is the specified owner and there are no buildings on the field and the field isn't already pawned
+			if(fields[i].getOwner() == owner && fields[i].getConstructionRate() == 0 && fields[i].getIsPawned() == false) {
 				listOfPawnableProperties.add(fields[i]);
+			}
+		}
 
 		return	listOfPawnableProperties;
 	}
 
+	/**
+	 * Returns a list of all the fields that are already pawned.
+	 * @param owner
+	 * @return
+	 */
 	public ArrayList<Field> getAlreadyPawnedList(Player owner) {
 
 		ArrayList<Field> listOfAlreadyPawnedProperties = new ArrayList<Field>();
 
-		for(int i = 0; i < this.fields.length; i++)
-			if(fields[i].getOwner() == owner && fields[i].getIsPawned())
+		// for each field
+		for(int i = 0; i < this.fields.length; i++) {
+			// if the owner of the field is the specified owner and the field is pawned
+			if(fields[i].getOwner() == owner && fields[i].getIsPawned()) {
 				listOfAlreadyPawnedProperties.add(fields[i]);
+			}
+		}
 
 		return	listOfAlreadyPawnedProperties;
 	}
 
 	/**
-	 * Returns array of fields
-	 * @return Field[]
+	 * Returns an array with on the fields on the game board.
+	 * @return
 	 */
 	public Field[] getFields() {
 		return fields;
 	}
 
 	/**
-	 * Returns specific field in the array at index
+	 * Returns a specific field by index or field ID(they are the same numbers).
 	 * @param atIndex
 	 * @return Field
 	 */
@@ -212,7 +265,7 @@ public class GameBoard {
 	}
 
 	/**
-	 * Returns field index by name. Returns 0 if not found.
+	 * Returns field index by name. Returns -1 if not found.
 	 * @param name
 	 * @return
 	 */
@@ -222,23 +275,25 @@ public class GameBoard {
 				return field.getID();
 			}
 		}
-		return 0;
+		return -1;
 	}
 
 	/**
-	 * Removes ownership of every field a player owns
+	 * Returns all of a players fields to the bank and resets the fields. Used for bankruptcy.
 	 * @param player
 	 */
 	public void releasePlayersFields(Player player) {
+		// for each field
 		for(int i = 0; i < fields.length; i++) {
+			// if it's ownable
 			if (fields[i] instanceof Ownable) {
-				if(fields[i].getOwner() != null) {
-					if(fields[i].getOwner().getName().equals(player.getName())) {
-						fields[i].setOwner(null);
-						fields[i].setConstructionRate(0);
-						fields[i].releasePawnField();
+				// if the fields owner is the specified player
+				if(fields[i].getOwner() == player) {
+					// reset owner, construction rate and pawn status
+					fields[i].setOwner(null);
+					fields[i].setConstructionRate(0);
+					fields[i].releasePawnField();
 
-					}
 				}
 			}
 		}
