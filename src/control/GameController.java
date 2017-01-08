@@ -112,6 +112,7 @@ public class GameController {
 						if(player.getEqualsInRowCount() == 3) {
 							boundary.getButtonPressed(language.youGetJailedForThreeTimesEqual());
 							player.setOnField(10);
+							player.setPlayerInJail(true);
 							player.setEqualsInRowCount(0);
 							boundary.updateGUI(gameBoard, playerList);
 							break turnLoop;
