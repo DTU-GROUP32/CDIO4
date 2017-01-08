@@ -337,9 +337,12 @@ public abstract class SequenceController {
 				} else {
 					boundary.getButtonPressed(language.notEnoughMoney());
 				}
-			} else {
+			}
+			// asks if the auction sequence should run again, since the purchase wasn't confirmed
+			else if(boundary.getBoolean(language.wantToRunAuctionSequenceAgain(), language.yes(), language.no())) {
 				auctionSequence(playerOnField, field, gameBoard, playerList);
 			}
+
 		}
 	}
 

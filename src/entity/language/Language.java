@@ -104,6 +104,8 @@ public interface Language {
 
 	String confirmPurchase(String fieldName, int price);
 
+	String wantToRunAuctionSequenceAgain();
+
 	String pawn();
 
 	String demolish();

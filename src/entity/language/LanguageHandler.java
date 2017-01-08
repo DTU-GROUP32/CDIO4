@@ -243,6 +243,10 @@ public class LanguageHandler {
 		return selectedLanguage.confirmPurchase(fieldName, price);
 	}
 
+	public String wantToRunAuctionSequenceAgain() {
+		return selectedLanguage.wantToRunAuctionSequenceAgain();
+	}
+
 	public String pawn(){ 
 		return selectedLanguage.pawn();
 	}

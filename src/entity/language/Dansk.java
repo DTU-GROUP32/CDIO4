@@ -478,6 +478,11 @@ public class Dansk implements Language{
 	public String confirmPurchase(String fieldName, int price) {
 		return "Vil du bekræfte købet af " + fieldName + " til kr. " + price + "?";
 	}
+
+	@Override
+	public String wantToRunAuctionSequenceAgain() {
+		return "Vil du køre denne auktions sekvens igen?";
+	}
 	
 	@Override
 	public String pawn(){
