@@ -35,8 +35,8 @@ public class Tax extends Field {
 	public void landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
 		// if player chose to pay the tax rate of his total assets
 		if (taxChoice) {
-			while (player.getBankAccount().withdraw(player.getTotalAssets(gameBoard) * taxRate / 100) == false)
-				SequenceController.getMoneySequence(player, null, gameBoard, playerList, player.getTotalAssets(gameBoard) * taxRate / 100);
+			while (player.getBankAccount().withdraw(player.getTotalAssetsForTaxPurposes(gameBoard) * taxRate / 100) == false)
+				SequenceController.getMoneySequence(player, null, gameBoard, playerList, player.getTotalAssetsForTaxPurposes(gameBoard) * taxRate / 100);
 		} 
 		// else the player pays the fixed tax amount
 		else {
@@ -137,7 +137,7 @@ public class Tax extends Field {
 	public void setConstructionRate(int rate) {}
 
 	@Override
-	public boolean getIsPawned() {
+	public boolean isPawned() {
 		return false;
 	}
 
