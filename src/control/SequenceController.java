@@ -75,6 +75,33 @@ public abstract class SequenceController {
 	}
 
 	/**
+	 * Withdraws 1000 from the players bank account and sets him to be out of jail.
+	 * @param player
+	 * @param gameBoard
+	 * @param playerList
+	 */
+	public static void payToGetOutOfJailSequence(Player player, GameBoard gameBoard, PlayerList playerList) {
+
+		GUIBoundary boundary = GUIBoundary.getInstance();
+
+		// tries to withdraw 1000 from the player, while it returns false, the player will be asked to get more money
+		while(player.getBankAccount().withdraw(1000) == false) {
+			SequenceController.getMoneySequence(player, null, gameBoard, playerList, 1000);
+		}
+		player.setPlayerInJail(false);
+		boundary.updateGUI(gameBoard, playerList);
+	}
+
+	/**
+	 * Uses on the players "get out of jail" cards and sets him to be out of jail.
+	 * @param player
+	 */
+	public static void useCardToGetOutOfJailSequence(Player player) {
+		player.setGetOutOfJailCardCount(player.getGetOutOfJailCardCount()-1);
+		player.setPlayerInJail(false);
+	}
+
+	/**
 	 * Method that handles the sequence of constructing a building on a property.
 	 * @param player
 	 * @param gameBoard
@@ -301,7 +328,7 @@ public abstract class SequenceController {
 			}
 
 			//gets user choice
-			int price = boundary.getInteger(language.enterAuctionPrice(), 0, buyerObject.getBankAccount().getBalance());
+			int price = boundary.getInteger(language.enterAuctionPrice(), field.getPrice(), buyerObject.getBankAccount().getBalance());
 			// gets confirmation on the purchase and executes actions if confirmed
 			if(boundary.getBoolean(language.confirmPurchase(field.getName(), price), language.yes(), language.no())){
 				if(field.buyField(buyerObject, price)) {
