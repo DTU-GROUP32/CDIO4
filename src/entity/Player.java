@@ -1,7 +1,7 @@
 package entity;
 
 public class Player{
-	
+
 	private String playerName;
 	private BankAccount bankAccount;
 	private int onField;
@@ -10,7 +10,7 @@ public class Player{
 	private int equalsInRowCount;
 	private boolean playerInJail;
 	private int getOutOfJailCardCount;
-	private int attemptsToGetOutOfJailByEqualCount;
+	private int attemptsAtGettingOutOfJailByEqualCount;
 
 	/**
 	 * Default constructor.
@@ -26,7 +26,7 @@ public class Player{
 	public Player(String name){
 		this(name, 30000);
 	}
-	
+
 	/**
 	 * Constructor that can give the player a name and a starting balance.
 	 * @param name - the players name.
@@ -40,8 +40,9 @@ public class Player{
 		this.equalsInRowCount = 0;
 		this.playerInJail = false;
 		this.getOutOfJailCardCount = 0;
+		this.attemptsAtGettingOutOfJailByEqualCount = 0;
 	}
-	
+
 	/**
 	 * Calculates total assets of player from his balance, owned plots and constructions.
 	 * @param gameBoard
@@ -56,10 +57,10 @@ public class Player{
 			totalAssets += gameBoard.getPropertyList(this).get(i).getPawnValue();
 			totalAssets += gameBoard.getPropertyList(this).get(i).getConstructionRate() * gameBoard.getPropertyList(this).get(i).getConstructionPrice() / 2;
 		}
-		
+
 		return totalAssets;
 	}
-	
+
 	/**
 	 * Adds the number that was rolled to the field the player was on and moves him to a new field.
 	 * @param roll - Integer value that was rolled.
@@ -84,7 +85,7 @@ public class Player{
 	public boolean isPlayerBroke() {
 		return this.getBankAccount().getBalance() < 0;
 	}
-	
+
 	/**
 	 * Returns the name of the player
 	 * @return name
@@ -92,7 +93,7 @@ public class Player{
 	public String getName(){
 		return this.playerName;
 	}
-	
+
 	/**
 	 * Sets the name of the player
 	 * @param name
@@ -116,7 +117,7 @@ public class Player{
 	public int getOnField(){
 		return this.onField;
 	}
-	
+
 	/**
 	 * Sets the position of the player
 	 * @param onField
@@ -151,7 +152,7 @@ public class Player{
 
 	/**
 	 * Returns whether or not the player is in jail.
-	 * @return the inJail
+	 * @return playerInJail
 	 */
 	public boolean isPlayerInJail() {
 		return playerInJail;
@@ -159,15 +160,17 @@ public class Player{
 
 	/**
 	 * Sets the player to be either in or out of jail.
-	 * @param playerInJail the inJail to set
+	 * Also resets the "attempts at getting out of jail by equal count".
+	 * @param playerInJail
 	 */
 	public void setPlayerInJail(boolean playerInJail) {
 		this.playerInJail = playerInJail;
+		this.attemptsAtGettingOutOfJailByEqualCount = 0;
 	}
 
 	/**
 	 * Returns the count of get out of jail cards.
-	 * @return the getOutOfJail
+	 * @return getOutOfJailCardCount
 	 */
 	public int getGetOutOfJailCardCount() {
 		return getOutOfJailCardCount;
@@ -180,7 +183,7 @@ public class Player{
 	public void setGetOutOfJailCardCount(int getOutOfJailCardCount) {
 		this.getOutOfJailCardCount = getOutOfJailCardCount;
 	}
-	
+
 	/**
 	 * Resets the count of players(only used for testing).
 	 */
@@ -189,18 +192,17 @@ public class Player{
 	}
 
 	/**
-	 * Returns how many times the player already tried to get out of jail by rolling the dices.
-	 * @return the inJailThrowCount
+	 * Returns how many attempts the player has had a getting out of jail by rolling equal.
+	 * @return
 	 */
-	public int getAttemptsToGetOutOfJailByEqualCount() {
-		return attemptsToGetOutOfJailByEqualCount;
+	public int getAttemptsAtGettingOutOfJailByEqualCountByOne() {
+		return attemptsAtGettingOutOfJailByEqualCount;
 	}
 
 	/**
-	 * Sets how many times the player already tried to get out of jail by rolling the dices.
-	 * @param attemptsToGetOutOfJailByEqualCount
+	 * Increments the "attempts at getting out of jail by equal count" by 1.
 	 */
-	public void setAttemptsToGetOutOfJailByEqualCount(int attemptsToGetOutOfJailByEqualCount) {
-		this.attemptsToGetOutOfJailByEqualCount = attemptsToGetOutOfJailByEqualCount;
+	public void incrementAttemptsToGetOutOfJailByEqualCount() {
+		this.attemptsAtGettingOutOfJailByEqualCount++;
 	}
 }
