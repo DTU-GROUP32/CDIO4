@@ -7,10 +7,10 @@ public class Player{
 	private int onField;
 	private int ID;
 	private static int nextID = 0;
-	private int equalsCount;
-	private boolean inJail;
-	private int getOutOfJail;
-	private int inJailThrowCount;
+	private int equalsInRowCount;
+	private boolean playerInJail;
+	private int getOutOfJailCardCount;
+	private int attemptsToGetOutOfJailByEqualCount;
 
 	/**
 	 * Default constructor.
@@ -37,9 +37,9 @@ public class Player{
 		bankAccount = new BankAccount(startingBalance);
 		this.onField = 0;
 		this.ID = nextID++;
-		this.equalsCount = 0;
-		this.inJail = false;
-		this.getOutOfJail = 0;
+		this.equalsInRowCount = 0;
+		this.playerInJail = false;
+		this.getOutOfJailCardCount = 0;
 	}
 	
 	/**
@@ -49,8 +49,9 @@ public class Player{
 	 */
 	public int getTotalAssets(GameBoard gameBoard){
 		int totalAssets = 0;
+		// all his money
 		totalAssets += this.bankAccount.getBalance();
-		
+		// for each property he owns, adds the pawn value and the value of his constructions if he sells them(half value)
 		for(int i = 0; i < gameBoard.getPropertyList(this).size(); i++) {
 			totalAssets += gameBoard.getPropertyList(this).get(i).getPawnValue();
 			totalAssets += gameBoard.getPropertyList(this).get(i).getConstructionRate() * gameBoard.getPropertyList(this).get(i).getConstructionPrice() / 2;
@@ -65,9 +66,12 @@ public class Player{
 	 */
 	public void movePlayer(int roll){
 		this.onField += roll;
+		// if onField is bigger than 39
 		while(this.onField > 39)
 		{
+			// a full round on the board is deducted
 			this.onField -= 40;
+			// and 4000 for passing start is added to the players bank account
 			this.getBankAccount().deposit(4000);
 		}
 	}
@@ -130,71 +134,73 @@ public class Player{
 	}
 
 	/**
-	 * Returns how many times the player has rolled two equal facevalues
+	 * Returns how many times the player has rolled two equal face values
 	 * @return the equalsCount
 	 */
-	public int getEqualsCount() {
-		return equalsCount;
+	public int getEqualsInRowCount() {
+		return equalsInRowCount;
 	}
 
 	/**
-	 * Sets the count of how many times the player has rolled two equal facevalues
+	 * Sets the count of how many times the player has rolled two equal face values
 	 * @param equalsCount the equalsCount to set
 	 */
-	public void setEqualsCount(int equalsCount) {
-		this.equalsCount = equalsCount;
+	public void setEqualsInRowCount(int equalsInRowCount) {
+		this.equalsInRowCount = equalsInRowCount;
 	}
 
 	/**
-	 * Returns wether or not the player is in jail
+	 * Returns whether or not the player is in jail.
 	 * @return the inJail
 	 */
-	public boolean isInJail() {
-		return inJail;
+	public boolean isPlayerInJail() {
+		return playerInJail;
 	}
 
 	/**
-	 * Sets the player to be either in or out of jail
-	 * @param inJail the inJail to set
+	 * Sets the player to be either in or out of jail.
+	 * @param playerInJail the inJail to set
 	 */
-	public void setInJail(boolean inJail) {
-		this.inJail = inJail;
+	public void setPlayerInJail(boolean playerInJail) {
+		this.playerInJail = playerInJail;
 	}
 
 	/**
-	 * Returns the count of the ability to get out of jail
+	 * Returns the count of get out of jail cards.
 	 * @return the getOutOfJail
 	 */
-	public int getGetOutOfJail() {
-		return getOutOfJail;
+	public int getGetOutOfJailCardCount() {
+		return getOutOfJailCardCount;
 	}
 
 	/**
-	 * Sets the count of the ability to get out of jail
-	 * @param getOutOfJail the getOutOfJail to set
+	 * Sets the count  of get out of jail cards.
+	 * @param getOutOfJailCardCount
 	 */
-	public void setGetOutOfJail(int getOutOfJail) {
-		this.getOutOfJail = getOutOfJail;
+	public void setGetOutOfJailCardCount(int getOutOfJailCardCount) {
+		this.getOutOfJailCardCount = getOutOfJailCardCount;
 	}
 	
 	/**
-	 * Resets the count of players
+	 * Resets the count of players(only used for testing).
 	 */
 	public static void resetID() {
 		nextID = 0;
 	}
 
 	/**
+	 * Returns how many times the player already tried to get out of jail by rolling the dices.
 	 * @return the inJailThrowCount
 	 */
-	public int getInJailThrowCount() {
-		return inJailThrowCount;
+	public int getAttemptsToGetOutOfJailByEqualCount() {
+		return attemptsToGetOutOfJailByEqualCount;
 	}
 
 	/**
-	 * @param inJailThrowCount the inJailThrowCount to set
+	 * Sets how many times the player already tried to get out of jail by rolling the dices.
+	 * @param attemptsToGetOutOfJailByEqualCount
 	 */
-	public void setInJailThrowCount(int inJailThrowCount) {
-		this.inJailThrowCount = inJailThrowCount;
+	public void setAttemptsToGetOutOfJailByEqualCount(int attemptsToGetOutOfJailByEqualCount) {
+		this.attemptsToGetOutOfJailByEqualCount = attemptsToGetOutOfJailByEqualCount;
 	}
 }
