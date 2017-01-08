@@ -81,9 +81,9 @@ public class GameController {
 					if(player.isPlayerInJail()) {
 						// if the roll isn't equal, his attempts to get out gets incremented by 1 and his turn is over
 						if (!diceCup.diceEvalEqual()){
-							player.incrementAttemptsToGetOutOfJailByEqualCount();
+							player.incrementAttemptsToGetOutOfJailByEqualCountByOne();
 							// if the player just used his third attempt, he will be forced to pay to get out of jail
-							if(player.getAttemptsAtGettingOutOfJailByEqualCountByOne() == 3) {
+							if(player.getAttemptsAtGettingOutOfJailByEqualCount() == 3) {
 								boundary.getButtonPressed(language.noMoreAttemptsAtRollingOutOfJail());
 								SequenceController.payToGetOutOfJailSequence(player, gameBoard, playerList);
 							}
