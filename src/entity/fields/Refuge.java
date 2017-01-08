@@ -110,7 +110,7 @@ public class Refuge extends Field {
 	public void setConstructionRate(int rate) {}
 
 	@Override
-	public boolean getIsPawned() {
+	public boolean isPawned() {
 		return false;
 	}
 

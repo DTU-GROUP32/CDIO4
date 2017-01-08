@@ -259,7 +259,7 @@ public class GUIBoundary {
 	 * @param field that is updated
 	 */
 	public void updatePawnStatus(entity.fields.Field field) {
-		if(field.getIsPawned()) {
+		if(field.isPawned()) {
 			GUI.setSubText(convertFieldNumber(field.getID()), "PANTSAT");
 		} else {
 			if(field.getOwner() == null)

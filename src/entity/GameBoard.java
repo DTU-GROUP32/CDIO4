@@ -219,7 +219,7 @@ public class GameBoard {
 		// for each field
 		for(int i = 0; i < this.fields.length; i++) {
 			// if the owner of the field is the specified owner and there are no buildings on the field and the field isn't already pawned
-			if(fields[i].getOwner() == owner && fields[i].getConstructionRate() == 0 && fields[i].getIsPawned() == false) {
+			if(fields[i].getOwner() == owner && fields[i].getConstructionRate() == 0 && fields[i].isPawned() == false) {
 				listOfPawnableProperties.add(fields[i]);
 			}
 		}
@@ -239,7 +239,7 @@ public class GameBoard {
 		// for each field
 		for(int i = 0; i < this.fields.length; i++) {
 			// if the owner of the field is the specified owner and the field is pawned
-			if(fields[i].getOwner() == owner && fields[i].getIsPawned()) {
+			if(fields[i].getOwner() == owner && fields[i].isPawned()) {
 				listOfAlreadyPawnedProperties.add(fields[i]);
 			}
 		}

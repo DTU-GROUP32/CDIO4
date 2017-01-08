@@ -106,7 +106,7 @@ public abstract class Field {
 	 * Returns whether the field is pawned or not.
 	 * @return isPawned
 	 */
-	public abstract boolean getIsPawned();
+	public abstract boolean isPawned();
 
 	/**
 	 * Resets isPawned to false(used when a pawned field it returned to the bank on bankruptcy).
