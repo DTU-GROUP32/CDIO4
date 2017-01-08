@@ -126,6 +126,24 @@ public class GameBoard {
 
 		return listOfProperties;
 	}
+	
+	/**
+	 * Returns a list of all the properties owned by the specified player, that doesn't have any buildings on them.
+	 * @param owner
+	 * @return
+	 */
+	public ArrayList<Field> getTradeableList(Player owner) {
+
+		ArrayList<Field> listOfTradeableProperties = new ArrayList<Field>();
+
+		// adds every field that has the specified owner and no constructions to the list
+		for(int i = 0; i < this.fields.length; i++) {
+			if(this.fields[i].getOwner() == owner && this.fields[i].getConstructionRate() == 0)
+				listOfTradeableProperties.add(this.fields[i]);		
+		}
+
+		return listOfTradeableProperties;
+	}
 
 	/**
 	 * Returns a list of all the fields that the player can currently build constructions on.

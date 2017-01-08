@@ -159,21 +159,21 @@ public abstract class SequenceController {
 
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
-		ArrayList<Field> sellableList = gameBoard.getPropertyList(owner);
-		String[] sellableLabels = getFieldNamesFromListOfFields(sellableList);
+		ArrayList<Field> tradeableList = gameBoard.getTradeableList(owner);
+		String[] tradeableLabels = getFieldNamesFromListOfFields(tradeableList);
 		String[] playerLabels = getPlayerNamesExceptSpecificPlayer(playerList, owner);
 		Field fieldToSellObject = null;
 		Player buyerObject = null;
 
-		if (sellableLabels.length == 0) {
+		if (tradeableLabels.length == 0) {
 			boundary.getButtonPressed(language.noTradeableProperties());
 		} else {
 			// gets user choices
-			String fieldToSell = boundary.getUserSelection(language.choosePropertyToTrade(), sellableLabels);
+			String fieldToSell = boundary.getUserSelection(language.choosePropertyToTrade(), tradeableLabels);
 			String buyer = boundary.getUserSelection(language.choosePropertyBuyer(), playerLabels);
 
 			// finds the field object by the name
-			for (Field field : sellableList) {
+			for (Field field : tradeableList) {
 				if (fieldToSell.equals(field.getName())) {
 					fieldToSellObject = field;
 				}
