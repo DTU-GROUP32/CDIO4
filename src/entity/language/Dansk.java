@@ -441,7 +441,6 @@ public class Dansk implements Language{
 
 	@Override
 	public String getOutOfJailCardPurchaseConfirmation() {
-		// TODO Auto-generated method stub
 		return "Du har nu købt benådelses kortet!";
 	}
 	

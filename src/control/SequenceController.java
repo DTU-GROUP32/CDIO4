@@ -45,7 +45,7 @@ public abstract class SequenceController {
 
 			// check if the field is owned
 			if (ownerOfField == null) {
-				SequenceController.buyPropertySequence(player, field, true, gameBoard, playerList);
+				SequenceController.buyPropertySequence(player, field, gameBoard, playerList);
 			} else {
 				// if the field has an owner and the player landing on the field, is not the owner, the player landing on the field pays rent to the owner
 				if (!field.getOwner().getName().equals(player.getName())) {
@@ -209,14 +209,14 @@ public abstract class SequenceController {
 
 		// gets user choice
 		String buyer = boundary.getUserSelection(language.chooseGetOutOfJailCardBuyer(), playerLabels);
-		
+
 		// finds the buyer object by name
 		for (Player player : playerList.getPlayers()) {
 			if (buyer.equals(player.getName())) {
 				buyerObject = player;
 			}
 		}
-		
+
 		// gets the trade price
 		int price = boundary.getInteger(language.enterGetOutOfJailCardTradePrice(), 0, buyerObject.getBankAccount().getBalance());
 		// gets confirmation on the trade and executes actions if confirmed
@@ -306,7 +306,7 @@ public abstract class SequenceController {
 	 * @param gameBoard
 	 * @param playerList
 	 */
-	public static void buyPropertySequence(Player player, Field field, Boolean withAuction, GameBoard gameBoard, PlayerList playerList) {
+	public static void buyPropertySequence(Player player, Field field, GameBoard gameBoard, PlayerList playerList) {
 
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
@@ -322,15 +322,12 @@ public abstract class SequenceController {
 				boundary.getButtonPressed(language.propertyPurchaseConfirmation());
 			} else {
 				boundary.getButtonPressed(language.notEnoughMoney());
-				if(withAuction) {
-					auctionSequence(player, field, gameBoard, playerList);
-				}
+				// if the playing landing on the field wanted to buy it, but couldn't afford it, it gets offered to the other players
+				auctionSequence(player, field, gameBoard, playerList);
 			}
 		} else {
 			// if the playing landing on the field doesn't want to buy it, it gets offered to the other players
-			if(withAuction) {
-				auctionSequence(player, field, gameBoard, playerList);
-			}
+			auctionSequence(player, field, gameBoard, playerList);
 		}
 	}
 

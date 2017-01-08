@@ -178,7 +178,7 @@ public class Chance extends Field {
 			}
 			// else the player can buy the shipping line
 			else {
-				SequenceController.buyPropertySequence(player, gameBoard.getField(player.getOnField()), false, gameBoard, playerList);
+				SequenceController.buyPropertySequence(player, gameBoard.getField(player.getOnField()), gameBoard, playerList);
 			}
 			break;
 		case 22:
@@ -198,7 +198,7 @@ public class Chance extends Field {
 			}
 			// else the player can buy the shipping line
 			else {
-				SequenceController.buyPropertySequence(player, gameBoard.getField(player.getOnField()), false, gameBoard, playerList);
+				SequenceController.buyPropertySequence(player, gameBoard.getField(player.getOnField()), gameBoard, playerList);
 			}
 			break;
 		case 23:
