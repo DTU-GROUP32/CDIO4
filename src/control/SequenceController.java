@@ -405,12 +405,12 @@ public abstract class SequenceController {
 			} else if (choice.equals(language.trade())) {
 				tradePropertiesSequence(debitor, gameBoard, playerList);
 			} else if (choice.equals(language.bankrupt())) {
-				// only lets the player declare bankruptcy if his total assets amounts to less than his debt
-				if(debitor.getTotalAssets(gameBoard) < targetAmount) {
+				// only lets the player declare bankruptcy if his total releasable assets amounts to less than his debt
+				if(debitor.getTotalReleasableAssets(gameBoard) < targetAmount) {
 					// if the creditor is another player
 					if(creditor != null) {
-						debitor.getBankAccount().transfer(creditor, debitor.getTotalAssets(gameBoard));
-						boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(debitor.getTotalAssets(gameBoard), creditor));
+						debitor.getBankAccount().transfer(creditor, debitor.getTotalReleasableAssets(gameBoard));
+						boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(debitor.getTotalReleasableAssets(gameBoard), creditor));
 					}
 					executeBankruptcy(debitor, gameBoard, playerList);
 					break getMoneySeq;

@@ -42,7 +42,7 @@ public class Chance extends Field {
 			player.getBankAccount().deposit(200);
 			break;
 		case 5:
-			if(player.getTotalAssets(gameBoard) <= 15000) {
+			if(player.getTotalAssetsForTaxPurposes(gameBoard) <= 15000) {
 				player.getBankAccount().deposit(40000);
 			}
 			break;
@@ -338,7 +338,7 @@ public class Chance extends Field {
 	public void setConstructionRate(int rate) {}
 
 	@Override
-	public boolean getIsPawned() {
+	public boolean isPawned() {
 		return false;
 	}
 
