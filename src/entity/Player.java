@@ -44,21 +44,36 @@ public class Player{
 	}
 
 	/**
-	 * Calculates total assets of player from his balance, owned plots and constructions.
+	 * Calculates total releasable assets of player from his balance, owned plots and constructions.
 	 * @param gameBoard
 	 * @return totalAssets
 	 */
-	public int getTotalAssets(GameBoard gameBoard){
-		int totalAssets = 0;
+	public int getTotalReleasableAssets(GameBoard gameBoard){
+		int totalReleasableAssets = 0;
 		// all his money
-		totalAssets += this.bankAccount.getBalance();
+		totalReleasableAssets += this.bankAccount.getBalance();
 		// for each property he owns, adds the pawn value and the value of his constructions if he sells them(half value)
 		for(int i = 0; i < gameBoard.getPropertyList(this).size(); i++) {
-			totalAssets += gameBoard.getPropertyList(this).get(i).getPawnValue();
-			totalAssets += gameBoard.getPropertyList(this).get(i).getConstructionRate() * gameBoard.getPropertyList(this).get(i).getConstructionPrice() / 2;
+			if(gameBoard.getPropertyList(this).get(i).isPawned() == false) {
+				totalReleasableAssets += gameBoard.getPropertyList(this).get(i).getPawnValue();
+			}
+			totalReleasableAssets += gameBoard.getPropertyList(this).get(i).getConstructionRate() * gameBoard.getPropertyList(this).get(i).getConstructionPrice() / 2;
 		}
 
-		return totalAssets;
+		return totalReleasableAssets;
+	}
+
+	public int getTotalAssetsForTaxPurposes(GameBoard gameBoard) {
+		int totalAssetsForTaxPurposes = 0;
+		// all his money
+		totalAssetsForTaxPurposes += this.bankAccount.getBalance();
+		// for each property he owns, adds the price of the property and the price of his constructions
+		for(int i = 0; i < gameBoard.getPropertyList(this).size(); i++) {
+			totalAssetsForTaxPurposes += gameBoard.getPropertyList(this).get(i).getPrice();
+			totalAssetsForTaxPurposes += gameBoard.getPropertyList(this).get(i).getConstructionRate() * gameBoard.getPropertyList(this).get(i).getConstructionPrice();
+		}
+
+		return totalAssetsForTaxPurposes;
 	}
 
 	/**
