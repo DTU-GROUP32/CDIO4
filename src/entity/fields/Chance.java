@@ -30,7 +30,7 @@ public class Chance extends Field {
 	}
 
 	@Override
-	public boolean landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
+	public void landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
 
 		switch(chanceCards[0]) {
 		case 1:
@@ -241,7 +241,7 @@ public class Chance extends Field {
 			SequenceController.landOnFieldSequence(player, roll, gameBoard, playerList);
 			break;
 		default:
-			return false;
+			break;
 		}
 
 		// moves the card that was just used to the bottom of the pile(left shift)
@@ -250,8 +250,6 @@ public class Chance extends Field {
 			chanceCards[i] = chanceCards[i+1];
 		}
 		chanceCards[chanceCards.length-1] = temp;
-
-		return true;
 	}
 
 	public int getTopCardNumber() {
