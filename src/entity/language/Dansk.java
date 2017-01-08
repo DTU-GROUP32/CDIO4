@@ -206,7 +206,7 @@ public class Dansk implements Language{
 
 	@Override
 	public String noMoreAttemptsAtRollingOutOfJail() {
-		return "Du har nu haft 3 forsøg og bliver automatisk trukket kr. 1000 for at komme ud!";
+		return "Du har nu haft 3 forsøg til at slå to ens, du bliver derfor nødt til at betale kr. 1000, for at komme ud, og rykke hvad øjnene på dit tredje slag viser";
 	}
 
 	@Override
