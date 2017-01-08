@@ -169,7 +169,7 @@ public abstract class SequenceController {
 			boundary.getButtonPressed(language.noTradeableProperties());
 		} else {
 			// gets user choices
-			String fieldToSell = boundary.getUserSelection(language.choosePlotTrade(), sellableLabels);
+			String fieldToSell = boundary.getUserSelection(language.choosePropertyToTrade(), sellableLabels);
 			String buyer = boundary.getUserSelection(language.choosePropertyBuyer(), playerLabels);
 
 			// finds the field object by the name
@@ -187,15 +187,49 @@ public abstract class SequenceController {
 			}
 
 			// gets the trade price
-			int price = boundary.getInteger(language.enterTradePrice(), 0, buyerObject.getBankAccount().getBalance());
+			int price = boundary.getInteger(language.enterPropertyTradePrice(), 0, buyerObject.getBankAccount().getBalance());
 			// gets confirmation on the trade and executes actions if confirmed
-			if(boundary.getBoolean(language.confirmTrade(fieldToSell, buyer, price), language.yes(), language.no())){
+			if(boundary.getBoolean(language.confirmPropertyTrade(fieldToSell, buyer, price), language.yes(), language.no())){
 				if(fieldToSellObject.tradeField(owner, buyerObject, price)) {
 					boundary.updateGUI(gameBoard, playerList);
-					boundary.getButtonPressed(language.purchaseConfirmation());
+					boundary.getButtonPressed(language.propertyPurchaseConfirmation());
 				} else {
 					boundary.getButtonPressed(language.notEnoughMoney());
 				}
+			}
+		}
+	}
+
+	public static void tradeGetOutOfJailCardSequence(Player owner, GameBoard gameBoard, PlayerList playerList) {
+
+		GUIBoundary boundary = GUIBoundary.getInstance();
+		LanguageHandler language = LanguageHandler.getInstance();
+		String[] playerLabels = getPlayerNamesExceptSpecificPlayer(playerList, owner);
+		Player buyerObject = null;
+
+		// gets user choice
+		String buyer = boundary.getUserSelection(language.chooseGetOutOfJailCardBuyer(), playerLabels);
+		
+		// finds the buyer object by name
+		for (Player player : playerList.getPlayers()) {
+			if (buyer.equals(player.getName())) {
+				buyerObject = player;
+			}
+		}
+		
+		// gets the trade price
+		int price = boundary.getInteger(language.enterGetOutOfJailCardTradePrice(), 0, buyerObject.getBankAccount().getBalance());
+		// gets confirmation on the trade and executes actions if confirmed
+		if(boundary.getBoolean(language.confirmGetOutOfJailCardTrade(buyer, price), language.yes(), language.no())){
+			if(buyerObject.getBankAccount().transfer(owner, price)) {
+				// transfers the "get out of jail" card
+				owner.setGetOutOfJailCardCount(owner.getGetOutOfJailCardCount()-1);
+				buyerObject.setGetOutOfJailCardCount(buyerObject.getGetOutOfJailCardCount()+1);
+				// updates GUI after money was transfered
+				boundary.updateGUI(gameBoard, playerList);
+				boundary.getButtonPressed(language.getOutOfJailCardPurchaseConfirmation());
+			} else {
+				boundary.getButtonPressed(language.notEnoughMoney());
 			}
 		}
 	}
@@ -285,7 +319,7 @@ public abstract class SequenceController {
 			// carries out the buy if possible and updates the GUI
 			if (field.buyField(player)) {
 				boundary.updateGUI(gameBoard, playerList);
-				boundary.getButtonPressed(language.purchaseConfirmation());
+				boundary.getButtonPressed(language.propertyPurchaseConfirmation());
 			} else {
 				boundary.getButtonPressed(language.notEnoughMoney());
 				if(withAuction) {
@@ -330,10 +364,10 @@ public abstract class SequenceController {
 			//gets user choice
 			int price = boundary.getInteger(language.enterAuctionPrice(), field.getPrice(), buyerObject.getBankAccount().getBalance());
 			// gets confirmation on the purchase and executes actions if confirmed
-			if(boundary.getBoolean(language.confirmPurchase(field.getName(), price), language.yes(), language.no())){
+			if(boundary.getBoolean(language.confirmPropertyPurchase(field.getName(), price), language.yes(), language.no())){
 				if(field.buyField(buyerObject, price)) {
 					boundary.updateGUI(gameBoard, playerList);
-					boundary.getButtonPressed(language.purchaseConfirmation());
+					boundary.getButtonPressed(language.propertyPurchaseConfirmation());
 				} else {
 					boundary.getButtonPressed(language.notEnoughMoney());
 				}
