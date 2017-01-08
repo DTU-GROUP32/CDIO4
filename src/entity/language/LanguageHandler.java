@@ -75,12 +75,24 @@ public class LanguageHandler {
 		return selectedLanguage.winnerMsg(player);
 	}
 
-	public String preMsg(Player player){
-		return selectedLanguage.preMsg(player);
+	public String youAreInJailMsg(Player player) {
+		return selectedLanguage.youAreInJailMsg(player);
 	}
 
 	public String throwDices(){ 
 		return selectedLanguage.throwDices();
+	}
+
+	public String payOneThousand() {
+		return selectedLanguage.payOneThousand();
+	}
+
+	public String useGetOutOfJail() {
+		return selectedLanguage.useGetOutOfJail();
+	}
+
+	public String preMsg(Player player){
+		return selectedLanguage.preMsg(player);
 	}
 
 	public String build(){ 
@@ -89,6 +101,18 @@ public class LanguageHandler {
 
 	public String trade(){ 
 		return selectedLanguage.trade();
+	}
+
+	public String undoPawn() {
+		return selectedLanguage.undoPawn();
+	}
+
+	public String noMoreAttemptsAtRollingOutOfJail() {
+		return selectedLanguage.noMoreAttemptsAtRollingOutOfJail();
+	}
+
+	public String attemptAtRollingOutOfJailUnsuccessful() {
+		return selectedLanguage.attemptAtRollingOutOfJailUnsuccessful();
 	}
 
 	public String youGetJailedForThreeTimesEqual() {
@@ -217,6 +241,10 @@ public class LanguageHandler {
 	
 	public String confirmPurchase(String fieldName, int price) {
 		return selectedLanguage.confirmPurchase(fieldName, price);
+	}
+
+	public String wantToRunAuctionSequenceAgain() {
+		return selectedLanguage.wantToRunAuctionSequenceAgain();
 	}
 
 	public String pawn(){ 

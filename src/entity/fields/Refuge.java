@@ -19,9 +19,8 @@ public class Refuge extends Field {
 	}
 
 	@Override
-	public boolean landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
+	public void landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
 		player.getBankAccount().deposit(bonus);
-		return false;
 	}
 	
 	@Override

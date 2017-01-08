@@ -32,21 +32,19 @@ public class Tax extends Field {
 	}
 
 	@Override
-	public boolean landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
-		if (taxChoice)
-		{
+	public void landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
+		// if player chose to pay the tax rate of his total assets
+		if (taxChoice) {
 			while (player.getBankAccount().withdraw(player.getTotalAssets(gameBoard) * taxRate / 100) == false)
 				SequenceController.getMoneySequence(player, null, gameBoard, playerList, player.getTotalAssets(gameBoard) * taxRate / 100);
-			return true;
-		}
-		else
-		{
+		} 
+		// else the player pays the fixed tax amount
+		else {
 			while (player.getBankAccount().withdraw(taxAmount) == false)
-				SequenceController.getMoneySequence(player, null, gameBoard, playerList, taxAmount);	
-			return true;
+				SequenceController.getMoneySequence(player, null, gameBoard, playerList, taxAmount);
 		}
 	}
-	
+
 	@Override
 	public int getTaxAmount() {
 		return this.taxAmount;
@@ -56,7 +54,7 @@ public class Tax extends Field {
 	public int getTaxRate() {
 		return this.taxRate;
 	}
-	
+
 	// all methods under this line are default methods
 
 	@Override

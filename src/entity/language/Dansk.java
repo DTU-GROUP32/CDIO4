@@ -150,13 +150,28 @@ public class Dansk implements Language{
 	}
 
 	@Override
-	public String preMsg(Player player){
-		return "Det er " + player.getName() + "'s tur, tryk på en knap!";
+	public String youAreInJailMsg(Player player) {
+		return "De er fængslet. De kan vælge at betale kr. 1000, slå to ens eller indfrie Deres benådning for at slippe fri.";
 	}
 
 	@Override
 	public String throwDices(){
 		return "Slå Terning";
+	}
+
+	@Override
+	public String payOneThousand() {
+		return "Betal";
+	}
+
+	@Override
+	public String useGetOutOfJail() {
+		return "Indfri benådning";
+	}
+	
+	@Override
+	public String preMsg(Player player){
+		return "Det er " + player.getName() + "'s tur, tryk på en knap!";
 	}
 
 	@Override
@@ -167,6 +182,21 @@ public class Dansk implements Language{
 	@Override
 	public String trade(){
 		return "Handle";
+	}
+
+	@Override
+	public String undoPawn() {
+		return "Hæv pantsætning";
+	}
+
+	@Override
+	public String noMoreAttemptsAtRollingOutOfJail() {
+		return "Du har nu haft 3 forsøg og bliver automatisk trukket kr. 1000 for at komme ud!";
+	}
+
+	@Override
+	public String attemptAtRollingOutOfJailUnsuccessful() {
+		return  "Du slog desværre ikke to ens og bliver i fængsel.";
 	}
 	
 	@Override
@@ -436,7 +466,7 @@ public class Dansk implements Language{
 	
 	@Override
 	public String auctionNotification() {
-		return "Da spilleren der landede på dette felt ikke købte feltet, kan det nu købes af banken på auktion. Er der nogle andre der ønsker at købe feltet?";
+		return "Da spilleren der landede på dette felt ikke købte feltet, kan det nu købes af banken på auktion, feltets oprindelige pris er mindste prisen. Er der nogle andre der ønsker at købe feltet?";
 	}
 	
 	@Override
@@ -447,6 +477,11 @@ public class Dansk implements Language{
 	@Override
 	public String confirmPurchase(String fieldName, int price) {
 		return "Vil du bekræfte købet af " + fieldName + " til kr. " + price + "?";
+	}
+
+	@Override
+	public String wantToRunAuctionSequenceAgain() {
+		return "Vil du køre denne auktions sekvens igen?";
 	}
 	
 	@Override

@@ -52,7 +52,7 @@ public abstract class Field {
 	 * @param taxChoice
 	 * @return
 	 */
-	public abstract boolean landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice);
+	public abstract void landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice);
 
 	/**
 	 * Returns the bonus of the field.
