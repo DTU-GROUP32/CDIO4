@@ -57,14 +57,17 @@ public class GameController {
 			do {
 				// gets user choice
 				if(player.isPlayerInJail()) {
-					if(player.getAttemptsToGetOutOfJailByEqualCount() == 3) {
-						boundary.getButtonPressed(language.youAreOutOfJailMsg());
-						turnChoice = language.payOneThousand();
-					} else {	
+					if(player.getGetOutOfJailCardCount() > 0) {
 						turnChoice = boundary.getUserButtonPressed(language.youAreInJailMsg(player), language.throwDices(), language.payOneThousand(), language.useGetOutOfJail());
+					} else {
+						turnChoice = boundary.getUserButtonPressed(language.youAreInJailMsg(player), language.throwDices(), language.payOneThousand());
 					}
 				} else {
-					turnChoice = boundary.getUserButtonPressed(language.preMsg(player), language.throwDices(), language.build(), language.trade());
+					if(gameBoard.getAlreadyPawnedList(player).size() > 0) {
+						turnChoice = boundary.getUserButtonPressed(language.preMsg(player), language.throwDices(), language.build(), language.trade(), language.undoPawn());
+					} else {
+						turnChoice = boundary.getUserButtonPressed(language.preMsg(player), language.throwDices(), language.build(), language.trade());
+					}
 				}
 
 				// if the choice was roll dice
@@ -76,12 +79,20 @@ public class GameController {
 
 					// if player is in jail
 					if(player.isPlayerInJail()) {
+						// if the roll isn't equal, his attempts to get out gets incremented by 1 and his turn is over
 						if (!diceCup.diceEvalEqual()){
-							player.setAttemptsToGetOutOfJailByEqualCount(player.getAttemptsToGetOutOfJailByEqualCount()+1);
+							player.incrementAttemptsToGetOutOfJailByEqualCount();
+							// if
+							if(player.getAttemptsAtGettingOutOfJailByEqualCountByOne() == 3) {
+								boundary.getButtonPressed(language.noMoreAttemptsAtRollingOutOfJail());
+								SequenceController.payToGetOutOfJailSequence(player, gameBoard, playerList);
+							} else {
+								boundary.getButtonPressed(language.attemptAtRollingOutOfJailUnsuccessful());
+							}
 							break turnLoop;
 						}
 					}
-
+					
 					// if the roll is equal, equal counter is increased by 1
 					if(diceCup.diceEvalEqual()) {
 						player.setEqualsInRowCount(player.getEqualsInRowCount() + 1);
@@ -100,28 +111,27 @@ public class GameController {
 					// normal flow of turn continues here by moving the player and calling the land on field sequence
 					player.movePlayer(diceCup.getSum());
 					SequenceController.landOnFieldSequence(player, diceCup.getSum(), gameBoard, playerList);
-
-					// if the choice was to build
-				} else if (turnChoice.equals(language.build())) {
-					SequenceController.buildSequence(player, gameBoard, playerList);
-					// if the choice was to trade a property
-				} else if (turnChoice.equals(language.trade())) {
-					SequenceController.tradePropertiesSequence(player, gameBoard, playerList);
-					// if the choice is to pay a thousand to get out of jail
-				} else if (turnChoice.equals(language.payOneThousand())) {
-					player.getBankAccount().withdraw(1000);
-					player.setPlayerInJail(false);
-					player.setAttemptsToGetOutOfJailByEqualCount(0);
-					boundary.updateGUI(gameBoard, playerList);
-					// if the choice is to redeem the granted clemency
-				} else if (turnChoice.equals(language.useGetOutOfJail())) {
-					if(player.getGetOutOfJailCardCount() > 0) {
-						player.setGetOutOfJailCardCount(player.getGetOutOfJailCardCount()-1);
-						player.setPlayerInJail(false);
-					} else {
-						boundary.getButtonPressed("De har ingen benådning at indfrie");
-					}
 				}
+				// if the choice is to pay to get out of jail
+				else if (turnChoice.equals(language.payOneThousand())) {
+					SequenceController.payToGetOutOfJailSequence(player, gameBoard, playerList);
+				}
+				// if the choice is to redeem a "get out of jail" card
+				else if (turnChoice.equals(language.useGetOutOfJail())) {
+					SequenceController.useCardToGetOutOfJailSequence(player);
+				}
+				// if the choice was to build
+				else if (turnChoice.equals(language.build())) {
+					SequenceController.buildSequence(player, gameBoard, playerList);
+				}
+				// if the choice was to trade a property
+				else if (turnChoice.equals(language.trade())) {
+					SequenceController.tradePropertiesSequence(player, gameBoard, playerList);
+				} 
+				// if the choice was to undo pawn of properties
+				else if (turnChoice.equals(language.undoPawn())) {
+					SequenceController.undoPawnSequence(player, gameBoard, playerList);	
+				} 
 
 			} while (diceCup.diceEvalEqual() || turnChoice.equals(language.build()) || turnChoice.equals(language.trade()) || turnChoice.equals(language.payOneThousand()) || turnChoice.equals(language.useGetOutOfJail()));
 	}
