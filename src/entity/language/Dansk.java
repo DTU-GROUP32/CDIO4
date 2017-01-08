@@ -466,7 +466,7 @@ public class Dansk implements Language{
 	
 	@Override
 	public String auctionNotification() {
-		return "Da spilleren der landede på dette felt ikke købte feltet, kan det nu købes af banken på auktion. Er der nogle andre der ønsker at købe feltet?";
+		return "Da spilleren der landede på dette felt ikke købte feltet, kan det nu købes af banken på auktion, feltets oprindelige pris er mindste prisen. Er der nogle andre der ønsker at købe feltet?";
 	}
 	
 	@Override
