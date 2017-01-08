@@ -195,14 +195,14 @@ public class Player{
 	 * Returns how many attempts the player has had a getting out of jail by rolling equal.
 	 * @return
 	 */
-	public int getAttemptsAtGettingOutOfJailByEqualCountByOne() {
+	public int getAttemptsAtGettingOutOfJailByEqualCount() {
 		return attemptsAtGettingOutOfJailByEqualCount;
 	}
 
 	/**
 	 * Increments the "attempts at getting out of jail by equal count" by 1.
 	 */
-	public void incrementAttemptsToGetOutOfJailByEqualCount() {
+	public void incrementAttemptsToGetOutOfJailByEqualCountByOne() {
 		this.attemptsAtGettingOutOfJailByEqualCount++;
 	}
 }

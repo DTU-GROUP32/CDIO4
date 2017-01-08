@@ -107,6 +107,18 @@ public class LanguageHandler {
 		return selectedLanguage.undoPawn();
 	}
 
+	public String whatDoYouWantToTrade() {
+		return selectedLanguage.whatDoYouWantToTrade();
+	}
+
+	public String tradeProperties() {
+		return selectedLanguage.tradeProperties();
+	}
+
+	public String tradeGetOutOfJailCard() {
+		return selectedLanguage.tradeGetOutOfJailCard();
+	}
+
 	public String noMoreAttemptsAtRollingOutOfJail() {
 		return selectedLanguage.noMoreAttemptsAtRollingOutOfJail();
 	}
@@ -163,20 +175,20 @@ public class LanguageHandler {
 		return selectedLanguage.noTradeableProperties();
 	}
 
-	public String choosePlotTrade(){ 
-		return selectedLanguage.choosePlotTrade(); 
+	public String choosePropertyToTrade(){ 
+		return selectedLanguage.choosePropertyToTrade(); 
 	}
 
 	public String choosePropertyBuyer(){ 
 		return selectedLanguage.choosePropertyBuyer(); 
 	}
 
-	public String enterTradePrice(){ 
-		return selectedLanguage.enterTradePrice(); 
+	public String enterPropertyTradePrice(){ 
+		return selectedLanguage.enterPropertyTradePrice(); 
 	}
 
-	public String confirmTrade(String fieldName, String buyerName, int price){ 
-		return selectedLanguage.confirmTrade(fieldName, buyerName, price); 
+	public String confirmPropertyTrade(String fieldName, String buyerName, int price){ 
+		return selectedLanguage.confirmPropertyTrade(fieldName, buyerName, price); 
 	}
 
 	public String yes() {
@@ -185,6 +197,22 @@ public class LanguageHandler {
 
 	public String no() {
 		return selectedLanguage.no();
+	}
+
+	public String chooseGetOutOfJailCardBuyer() {
+		return selectedLanguage.chooseGetOutOfJailCardBuyer();
+	}
+
+	public String enterGetOutOfJailCardTradePrice() {
+		return selectedLanguage.enterGetOutOfJailCardTradePrice();
+	}
+
+	public String confirmGetOutOfJailCardTrade(String buyerName, int price) {
+		return selectedLanguage.confirmGetOutOfJailCardTrade(buyerName, price);
+	}
+
+	public String getOutOfJailCardPurchaseConfirmation() {
+		return selectedLanguage.getOutOfJailCardPurchaseConfirmation();
 	}
 
 	public String noPawnableFields(){ 
@@ -223,8 +251,8 @@ public class LanguageHandler {
 		return selectedLanguage.buyingOfferMsg(price);
 	}
 
-	public String purchaseConfirmation() {
-		return selectedLanguage.purchaseConfirmation();
+	public String propertyPurchaseConfirmation() {
+		return selectedLanguage.propertyPurchaseConfirmation();
 	}
 
 	public String notEnoughMoney() {
@@ -239,8 +267,8 @@ public class LanguageHandler {
 		return selectedLanguage.enterAuctionPrice();
 	}
 	
-	public String confirmPurchase(String fieldName, int price) {
-		return selectedLanguage.confirmPurchase(fieldName, price);
+	public String confirmPropertyPurchase(String fieldName, int price) {
+		return selectedLanguage.confirmPropertyPurchase(fieldName, price);
 	}
 
 	public String wantToRunAuctionSequenceAgain() {

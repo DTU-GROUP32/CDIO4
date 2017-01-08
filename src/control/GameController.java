@@ -56,17 +56,27 @@ public class GameController {
 		turnLoop:
 			do {
 				// gets user choice
+				// if player is in jail
 				if(player.isPlayerInJail()) {
+					// if he has a "get out of jail" card
 					if(player.getGetOutOfJailCardCount() > 0) {
 						turnChoice = boundary.getUserButtonPressed(language.youAreInJailMsg(player), language.throwDices(), language.payOneThousand(), language.useGetOutOfJail());
 					} else {
 						turnChoice = boundary.getUserButtonPressed(language.youAreInJailMsg(player), language.throwDices(), language.payOneThousand());
 					}
-				} else {
+				} 
+				// when player is not in jail
+				else {
+					// if he has pawned properties
 					if(gameBoard.getAlreadyPawnedList(player).size() > 0) {
 						turnChoice = boundary.getUserButtonPressed(language.preMsg(player), language.throwDices(), language.build(), language.trade(), language.undoPawn());
 					} else {
 						turnChoice = boundary.getUserButtonPressed(language.preMsg(player), language.throwDices(), language.build(), language.trade());
+					}
+					// if user picked trade and he has a "get out of jail" card
+					if(turnChoice.equals(language.trade()) && player.getGetOutOfJailCardCount() > 0) {
+						// we get him to pick what he wants to trade
+						turnChoice = boundary.getUserButtonPressed(language.whatDoYouWantToTrade(), language.tradeProperties(), language.tradeGetOutOfJailCard());
 					}
 				}
 
@@ -81,9 +91,9 @@ public class GameController {
 					if(player.isPlayerInJail()) {
 						// if the roll isn't equal, his attempts to get out gets incremented by 1 and his turn is over
 						if (!diceCup.diceEvalEqual()){
-							player.incrementAttemptsToGetOutOfJailByEqualCount();
+							player.incrementAttemptsToGetOutOfJailByEqualCountByOne();
 							// if the player just used his third attempt, he will be forced to pay to get out of jail
-							if(player.getAttemptsAtGettingOutOfJailByEqualCountByOne() == 3) {
+							if(player.getAttemptsAtGettingOutOfJailByEqualCount() == 3) {
 								boundary.getButtonPressed(language.noMoreAttemptsAtRollingOutOfJail());
 								SequenceController.payToGetOutOfJailSequence(player, gameBoard, playerList);
 							}
@@ -130,6 +140,10 @@ public class GameController {
 				else if (turnChoice.equals(language.trade())) {
 					SequenceController.tradePropertiesSequence(player, gameBoard, playerList);
 				} 
+				// if the choice was to trade a "get out of jail" card
+				else if (turnChoice.equals(language.tradeGetOutOfJailCard())) {
+					SequenceController.tradeGetOutOfJailCardSequence(player, gameBoard, playerList);
+				}
 				// if the choice was to undo pawn of properties
 				else if (turnChoice.equals(language.undoPawn())) {
 					SequenceController.undoPawnSequence(player, gameBoard, playerList);	

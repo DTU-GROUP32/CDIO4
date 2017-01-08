@@ -190,6 +190,21 @@ public class Dansk implements Language{
 	}
 
 	@Override
+	public String whatDoYouWantToTrade() {
+		return "Hvad vil du handle?";
+	}
+
+	@Override
+	public String tradeProperties() {
+		return "Ejendomme";
+	}
+
+	@Override
+	public String tradeGetOutOfJailCard() {
+		return "Benådelses kort";
+	}
+
+	@Override
 	public String noMoreAttemptsAtRollingOutOfJail() {
 		return "Du har nu haft 3 forsøg og bliver automatisk trukket kr. 1000 for at komme ud!";
 	}
@@ -380,7 +395,7 @@ public class Dansk implements Language{
 	}
 	
 	@Override
-	public String choosePlotTrade(){
+	public String choosePropertyToTrade(){
 		return "Vælg det felt du vil handle.";
 	}
 	
@@ -390,12 +405,12 @@ public class Dansk implements Language{
 	}
 	
 	@Override
-	public String enterTradePrice(){
+	public String enterPropertyTradePrice(){
 		return "Hvilken pris skal feltet sælges til?";
 	}
 	
 	@Override
-	public String confirmTrade(String fieldName, String buyerName, int price){
+	public String confirmPropertyTrade(String fieldName, String buyerName, int price){
 		return "Er du sikker på, at du vil sælge \"" + fieldName + "\" til " + buyerName + " for kr. " + price + "?";
 	}
 	
@@ -407,6 +422,27 @@ public class Dansk implements Language{
 	@Override
 	public String no() {
 		return "Nej!";
+	}
+
+	@Override
+	public String chooseGetOutOfJailCardBuyer() {
+		return "Hvem køber benådelses kortet?";
+	}
+
+	@Override
+	public String enterGetOutOfJailCardTradePrice() {
+		return "Hvilken pris skal kortet sælges til?";
+	}
+
+	@Override
+	public String confirmGetOutOfJailCardTrade(String buyerName, int price) {
+		return "Er du sikker på, at du vil sælge kortet til " + buyerName + " for kr. " + price + "?";
+	}
+
+	@Override
+	public String getOutOfJailCardPurchaseConfirmation() {
+		// TODO Auto-generated method stub
+		return "Du har nu købt benådelses kortet!";
 	}
 	
 	@Override
@@ -455,7 +491,7 @@ public class Dansk implements Language{
 	}
 	
 	@Override
-	public String purchaseConfirmation() {
+	public String propertyPurchaseConfirmation() {
 		return "Du har nu købt feltet!";
 	}
 
@@ -475,7 +511,7 @@ public class Dansk implements Language{
 	}
 
 	@Override
-	public String confirmPurchase(String fieldName, int price) {
+	public String confirmPropertyPurchase(String fieldName, int price) {
 		return "Vil du bekræfte købet af " + fieldName + " til kr. " + price + "?";
 	}
 

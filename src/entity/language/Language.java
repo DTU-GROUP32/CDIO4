@@ -36,6 +36,12 @@ public interface Language {
 
 	String undoPawn();
 
+	String whatDoYouWantToTrade();
+
+	String tradeProperties();
+
+	String tradeGetOutOfJailCard();
+
 	String noMoreAttemptsAtRollingOutOfJail();
 
 	String attemptAtRollingOutOfJailUnsuccessful();
@@ -64,17 +70,25 @@ public interface Language {
 
 	String noTradeableProperties();
 
-	String choosePlotTrade();
+	String choosePropertyToTrade();
 
 	String choosePropertyBuyer();
 
-	String enterTradePrice();
+	String enterPropertyTradePrice();
 
-	String confirmTrade(String fieldName, String buyerName, int price);
+	String confirmPropertyTrade(String fieldName, String buyerName, int price);
 
 	String yes();
 
 	String no();
+
+	String chooseGetOutOfJailCardBuyer();
+
+	String enterGetOutOfJailCardTradePrice();
+
+	String confirmGetOutOfJailCardTrade(String buyerName, int price);
+
+	String getOutOfJailCardPurchaseConfirmation();
 
 	String noPawnableFields();
 
@@ -94,7 +108,7 @@ public interface Language {
 
 	String buyingOfferMsg(int price);
 
-	String purchaseConfirmation();
+	String propertyPurchaseConfirmation();
 
 	String notEnoughMoney();
 	
@@ -102,7 +116,7 @@ public interface Language {
 
 	String enterAuctionPrice();
 
-	String confirmPurchase(String fieldName, int price);
+	String confirmPropertyPurchase(String fieldName, int price);
 
 	String wantToRunAuctionSequenceAgain();
 
