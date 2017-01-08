@@ -150,13 +150,28 @@ public class Dansk implements Language{
 	}
 
 	@Override
-	public String preMsg(Player player){
-		return "Det er " + player.getName() + "'s tur, tryk på en knap!";
+	public String youAreInJailMsg(Player player) {
+		return "De er fængslet. De kan vælge at betale kr. 1000, slå to ens eller indfrie Deres benådning for at slippe fri.";
 	}
 
 	@Override
 	public String throwDices(){
 		return "Slå Terning";
+	}
+
+	@Override
+	public String payOneThousand() {
+		return "Betal";
+	}
+
+	@Override
+	public String useGetOutOfJail() {
+		return "Indfri benådning";
+	}
+	
+	@Override
+	public String preMsg(Player player){
+		return "Det er " + player.getName() + "'s tur, tryk på en knap!";
 	}
 
 	@Override
@@ -167,6 +182,21 @@ public class Dansk implements Language{
 	@Override
 	public String trade(){
 		return "Handle";
+	}
+
+	@Override
+	public String undoPawn() {
+		return "Hæv pantsætning";
+	}
+
+	@Override
+	public String noMoreAttemptsAtRollingOutOfJail() {
+		return "Du har nu haft 3 forsøg og bliver automatisk trukket kr. 1000 for at komme ud!";
+	}
+
+	@Override
+	public String attemptAtRollingOutOfJailUnsuccessful() {
+		return  "Du slog desværre ikke to ens og bliver i fængsel.";
 	}
 	
 	@Override
@@ -586,26 +616,6 @@ public class Dansk implements Language{
 	@Override
 	public String printDiceChangeNotExecuted(){
 		return "Terningerne kunne ikke ændres";
-	}
-
-	@Override
-	public String youAreInJailMsg(Player player) {
-		return "De er fængslet. De kan vælge at betale kr. 1000, slå to ens eller indfrie Deres benådning for at slippe fri.";
-	}
-
-	@Override
-	public String payOneThousand() {
-		return "Betal";
-	}
-
-	@Override
-	public String useGetOutOfJail() {
-		return "Indfri benådning";
-	}
-
-	@Override
-	public String youAreOutOfJailMsg() {
-		return "Du er ude af fængslet";
 	}
 }
 

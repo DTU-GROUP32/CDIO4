@@ -20,13 +20,25 @@ public interface Language {
 
 	String winnerMsg(Player player);
 
-	String preMsg(Player player);
+	String youAreInJailMsg(Player player);
 
 	String throwDices();
+
+	String payOneThousand();
+
+	String useGetOutOfJail();
+
+	String preMsg(Player player);
 
 	String build();
 
 	String trade();
+
+	String undoPawn();
+
+	String noMoreAttemptsAtRollingOutOfJail();
+
+	String attemptAtRollingOutOfJailUnsuccessful();
 
 	String youGetJailedForThreeTimesEqual();
 
@@ -117,13 +129,5 @@ public interface Language {
 	String printDiceChangeSucces();
 
 	String printDiceChangeNotExecuted();
-
-	String youAreInJailMsg(Player player);
-
-	String payOneThousand();
-
-	String useGetOutOfJail();
-
-	String youAreOutOfJailMsg();
 }
 
