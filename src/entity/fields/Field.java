@@ -39,7 +39,9 @@ public abstract class Field {
 	 * Returns the ID of the field.
 	 * @return ID
 	 */
-	public int getID(){ return this.ID; }
+	public int getID(){
+		return this.ID;
+	}
 
 	/**
 	 * Method that will execute what has to happen to the player that lands on the field.
@@ -110,7 +112,7 @@ public abstract class Field {
 	 * Resets isPawned to false(used when a pawned field it returned to the bank on bankruptcy).
 	 */
 	public abstract void releasePawnField();
-	
+
 	/**
 	 * Makes you able to buy an ownable field. Takes the player buying the field as input.
 	 * @param player
@@ -125,7 +127,7 @@ public abstract class Field {
 	 * @return if the action was carried out
 	 */
 	public abstract boolean buyField(Player player, int price);
-	
+
 	/**
 	 * Makes a trade between two players, the parameter names should be self-explanatory.
 	 * @param seller
@@ -134,7 +136,7 @@ public abstract class Field {
 	 * @return if the action was carried out
 	 */
 	public abstract boolean tradeField(Player seller, Player buyer, int price);
-	
+
 	/**
 	 * Pawns the field(including money transactions).
 	 * @return if the action was carried out
@@ -146,7 +148,7 @@ public abstract class Field {
 	 * @return if the action was carried out
 	 */
 	public abstract boolean undoPawnField();
-	
+
 	/**
 	 * Returns the rent array of a plot field(used for setting up the rent list in the GUI).
 	 * @return rent
@@ -166,7 +168,7 @@ public abstract class Field {
 	public abstract int getConstructionPrice();
 
 	/**
-	 * Returns the number of property group of the field.
+	 * Returns the property group number of the field.
 	 * @return propertyGroup
 	 */
 	public abstract int getPropertyGroup();

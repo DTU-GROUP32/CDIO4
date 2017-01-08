@@ -11,7 +11,7 @@ public class Dansk implements Language{
 
 	@Override
 	public String askForNumberOfPlayers() {
-		return "Hvor mange spillere skal være med? Der kan vælges fra 2 til 6";
+		return "Hvor mange spillere skal være med?";
 	}
 
 	@Override
