@@ -17,7 +17,7 @@ public class Jail extends Field {
 	@Override
 	public boolean landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
 		player.setOnField(10);
-		player.setInJail(true);
+		player.setPlayerInJail(true);
 		return true;
 	}
 	

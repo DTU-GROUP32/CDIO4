@@ -56,8 +56,8 @@ public class GameController {
 		turnLoop:
 			do {
 				// gets user choice
-				if(player.isInJail()) {
-					if(player.getInJailThrowCount() == 3) {
+				if(player.isPlayerInJail()) {
+					if(player.getAttemptsToGetOutOfJailByEqualCount() == 3) {
 						boundary.getButtonPressed(language.youAreOutOfJailMsg());
 						turnChoice = language.payOneThousand();
 					} else {	
@@ -75,26 +75,26 @@ public class GameController {
 					boundary.setDices(diceCup);
 
 					// if player is in jail
-					if(player.isInJail()) {
+					if(player.isPlayerInJail()) {
 						if (!diceCup.diceEvalEqual()){
-							player.setInJailThrowCount(player.getInJailThrowCount()+1);
+							player.setAttemptsToGetOutOfJailByEqualCount(player.getAttemptsToGetOutOfJailByEqualCount()+1);
 							break turnLoop;
 						}
 					}
 
 					// if the roll is equal, equal counter is increased by 1
 					if(diceCup.diceEvalEqual()) {
-						player.setEqualsCount(player.getEqualsCount() + 1);
+						player.setEqualsInRowCount(player.getEqualsInRowCount() + 1);
 						// if the equal counter gets to 3, you get jailed immediately and your turn is over
-						if(player.getEqualsCount() == 3) {
+						if(player.getEqualsInRowCount() == 3) {
 							boundary.getButtonPressed(language.youGetJailedForThreeTimesEqual());
 							player.setOnField(10);
-							player.setEqualsCount(0);
+							player.setEqualsInRowCount(0);
 							boundary.updateGUI(gameBoard, playerList);
 							break turnLoop;
 						}
 					} else {
-						player.setEqualsCount(0);
+						player.setEqualsInRowCount(0);
 					}
 
 					// normal flow of turn continues here by moving the player and calling the land on field sequence
@@ -110,14 +110,14 @@ public class GameController {
 					// if the choice is to pay a thousand to get out of jail
 				} else if (turnChoice.equals(language.payOneThousand())) {
 					player.getBankAccount().withdraw(1000);
-					player.setInJail(false);
-					player.setInJailThrowCount(0);
+					player.setPlayerInJail(false);
+					player.setAttemptsToGetOutOfJailByEqualCount(0);
 					boundary.updateGUI(gameBoard, playerList);
 					// if the choice is to redeem the granted clemency
 				} else if (turnChoice.equals(language.useGetOutOfJail())) {
-					if(player.getGetOutOfJail() > 0) {
-						player.setGetOutOfJail(player.getGetOutOfJail()-1);
-						player.setInJail(false);
+					if(player.getGetOutOfJailCardCount() > 0) {
+						player.setGetOutOfJailCardCount(player.getGetOutOfJailCardCount()-1);
+						player.setPlayerInJail(false);
 					} else {
 						boundary.getButtonPressed("De har ingen benådning at indfrie");
 					}

@@ -153,12 +153,12 @@ public class Chance extends Field {
 			break;
 		case 19:
 			// player gets 1 added to his get out of jail count
-			player.setGetOutOfJail(player.getGetOutOfJail()+1);
+			player.setGetOutOfJailCardCount(player.getGetOutOfJailCardCount()+1);
 			break;
 		case 20:
 			// puts the player jail, because the setOnField-method is used instead of the movePlayer-method, the start bonus can't get triggered
 			player.setOnField(10);
-			player.setInJail(true);
+			player.setPlayerInJail(true);
 			break;
 		case 21:
 			// moves the player to the nearest shipping line
