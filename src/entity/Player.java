@@ -62,7 +62,12 @@ public class Player{
 
 		return totalReleasableAssets;
 	}
-
+	
+	/**
+	 * Calculates total assets of player for tax purposes from his balance, owned plots and constructions.
+	 * @param gameBoard
+	 * @return
+	 */
 	public int getTotalAssetsForTaxPurposes(GameBoard gameBoard) {
 		int totalAssetsForTaxPurposes = 0;
 		// all his money
