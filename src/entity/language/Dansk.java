@@ -328,7 +328,7 @@ public class Dansk implements Language{
 			break;
 		case 4:
 		case 38:
-			fieldString = "Du er landet på et skatte-felt. Du bedes betale skat.";
+			fieldString = "Du er landet på et skatte-felt. Du bedes betale kr. 2000 i skat.";
 			break;
 		case 10:
 			fieldString = "Du tager et smut på besøg i fængslet";
