@@ -30,7 +30,7 @@ public class Plot extends Ownable {
 	public int[] getRentArray() {
 		return this.rent;
 	}
-	
+
 	@Override
 	public int getConstructionPrice() {
 		return this.constructionPrice;
@@ -50,12 +50,14 @@ public class Plot extends Ownable {
 	public void setConstructionRate(int rate) {
 		this.constructionRate = rate;
 	}
-	
+
 	@Override
-	public int getRent(GameBoard gameBoard, int roll){
-		if (gameBoard.evalPropertyGroupSameOwner(gameBoard.getPropertyGroup(this.propertyGroup)) && constructionRate == 0)
+	public int getRent(GameBoard gameBoard, int roll) {
+		if (gameBoard.evalPropertyGroupSameOwner(gameBoard.getPropertyGroup(this.propertyGroup)) && constructionRate == 0) {
 			return this.rent[constructionRate] * 2;
-		return this.rent[constructionRate];
+		} else {
+			return this.rent[constructionRate];
+		}
 	}
 
 	public boolean buildConstruction(){
