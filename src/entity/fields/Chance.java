@@ -9,7 +9,7 @@ import entity.PlayerList;
 
 public class Chance extends Field {
 
-	private static int[] chanceCards = {1,1,1,2,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,19,20,20,21,21,22,23,24,25,26,27};
+	private int[] chanceCards = {1,1,1,2,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,19,20,20,21,21,22,23,24,25,26,27};
 
 	/**
 	 * Constructor for the Chance field, only takes a name.
@@ -259,5 +259,10 @@ public class Chance extends Field {
 	@Override
 	public int getTopCardNumber() {
 		return chanceCards[0];
+	}
+
+	@Override
+	public void setTopCardNumber(int number){
+		this.chanceCards[0] = number;
 	}
 }
