@@ -103,8 +103,12 @@ public class GameController {
 								break turnLoop;
 							}
 						}
+
+						else {
+							player.setPlayerInJail(false);
+						}
 					}
-					
+
 					// if the roll is equal, equal counter is increased by 1
 					if(diceCup.diceEvalEqual()) {
 						player.setEqualsInRowCount(player.getEqualsInRowCount() + 1);
