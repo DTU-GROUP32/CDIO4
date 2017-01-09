@@ -21,17 +21,26 @@ public class PlayerTest {
         diceCup = null;
     }
 
+    /**
+     * Method tests that player can move around the gameboard and each time crossing start is granted 4000 bonus.
+     * @throws Exception
+     */
     @Test
     public void movePlayer() throws Exception {
         for(int i = 0; i < 100; i++){
             diceCup.rollDices();
             int roll = diceCup.getSum();
-            int expected = testPlayer.getOnField()+roll;
+            int expectedOnField = testPlayer.getOnField()+roll;
+            int expectedBalance = testPlayer.getBankAccount().getBalance();
             if(roll + testPlayer.getOnField() > 39){
-                expected -= 40;
+                expectedOnField -= 40;
+                expectedBalance += 4000;
             }
             testPlayer.movePlayer(roll);
-            assertEquals(testPlayer.getOnField(), expected);
+            // Assert player is on expected field
+            assertEquals(testPlayer.getOnField(), expectedOnField);
+            // Assert player balance corresponds with start-bonuses gained.
+            assertEquals(testPlayer.getBankAccount().getBalance(), expectedBalance);
         }
     }
 }
