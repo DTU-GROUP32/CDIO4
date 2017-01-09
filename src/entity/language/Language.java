@@ -130,7 +130,7 @@ public interface Language {
 
 	String bankrupt();
 
-	String toPay(int targetAmount);
+	String getMoneySequenceStatus(int targetAmount, int amountToGet);
 
 	String canGetMoney();
 

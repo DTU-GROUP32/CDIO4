@@ -91,6 +91,7 @@ public abstract class SequenceController {
 
 		// tries to withdraw 1000 from the player, while it returns false, the player will be asked to get more money
 		while(player.getBankAccount().withdraw(1000) == false) {
+			//TODO tag stilling til den her
 			SequenceController.getMoneySequence(player, null, gameBoard, playerList, 1000);
 		}
 		player.setPlayerInJail(false);
@@ -400,7 +401,7 @@ public abstract class SequenceController {
 			while(debitor.getBankAccount().getBalance() < targetAmount) {
 
 				// gets user choice
-				String choice = boundary.getUserSelection(language.toPay(targetAmount), options);
+				String choice = boundary.getUserSelection(language.getMoneySequenceStatus(targetAmount, targetAmount - debitor.getBankAccount().getBalance()), options);
 
 				// handles which other sequence to run by the users choice
 				if(choice.equals(language.pawn())) {

@@ -545,8 +545,8 @@ public class Dansk implements Language{
 	}
 	
 	@Override
-	public String toPay(int targetAmount){
-		return "Du skal betale " + targetAmount + "kr., men du har ikke penge nok. Hvad vil du gøre?";
+	public String getMoneySequenceStatus(int targetAmount, int amountToGet){
+		return "Du skal betale kr. " + targetAmount + ", men du mangler kr. " + amountToGet + " Hvad vil du gøre?";
 	}
 	
 	@Override

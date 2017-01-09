@@ -294,8 +294,8 @@ public class LanguageHandler {
 		return selectedLanguage.bankrupt();
 	}
 
-	public String toPay(int targetAmount){ 
-		return selectedLanguage.toPay(targetAmount);
+	public String getMoneySequenceStatus(int targetAmount, int amountToGet){ 
+		return selectedLanguage.getMoneySequenceStatus(targetAmount, amountToGet);
 	}
 
 	public String canGetMoney(){ 
