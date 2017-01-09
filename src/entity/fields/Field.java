@@ -71,6 +71,14 @@ public abstract class Field {
 	}
 
 	/**
+	 * Returns the number of the card that is in the top of the card stack.
+	 * @return topCardNumber
+	 */
+	public int getTopCardNumber() {
+		return 0;
+	}
+
+	/**
 	 * Returns the tax rate of the field.
 	 * @return taxRate
 	 */
@@ -227,9 +235,5 @@ public abstract class Field {
 	 */
 	public boolean sellConstruction() {
 		return false;
-	}
-
-	public int getTopCardNumber() {
-		return 0;
 	}
 }
