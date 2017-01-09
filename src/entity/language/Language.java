@@ -131,19 +131,5 @@ public interface Language {
 	String canGetMoney();
 
 	String bankruptcyConcluded();
-
-	String nonOwnableFieldEffectMsg(int onField);
-
-	String menu();
-
-	String printRules();
-
-	String printScore(Player[] players);
-
-	String changeDices();
-
-	String printDiceChangeSucces();
-
-	String printDiceChangeNotExecuted();
 }
 

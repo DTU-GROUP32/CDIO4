@@ -296,39 +296,5 @@ public class LanguageHandler {
 
 	public String bankruptcyConcluded() {
 		return selectedLanguage.bankruptcyConcluded();
-	}	
-
-	//
-	//
-	// METHODS UNDER THIS LINE ARE NOT USED IN THIS VERSION OF THE GAME
-	//
-	//
-
-	public String nonOwnableFieldEffectMsg(int onField) {
-		return selectedLanguage.nonOwnableFieldEffectMsg(onField);
-	}
-
-	public String menu(){
-		return selectedLanguage.menu();
-	}
-
-	public String printRules(){
-		return selectedLanguage.printRules();
-	}
-
-	public String printScore(Player[] players){
-		return selectedLanguage.printScore(players);
-	}
-
-	public String changeDices(){
-		return selectedLanguage.changeDices();
-	}
-
-	public String printDiceChangeSucces(){
-		return selectedLanguage.printDiceChangeSucces();
-	}
-
-	public String printDiceChangeNotExecuted(){
-		return selectedLanguage.printDiceChangeNotExecuted();
 	}
 }
