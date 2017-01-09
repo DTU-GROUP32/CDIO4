@@ -55,11 +55,7 @@ public abstract class Ownable extends Field {
 		if(this.owner.isPlayerInJail() == false && this.pawned == false) {
 			// if the player can't pay a sequence to get money is executed
 			if(player.getBankAccount().transfer(owner, this.getRent(gameBoard, roll)) == false) {
-				SequenceController.getMoneySequence(player, this.owner, gameBoard, playerList, this.getRent(gameBoard, roll));
-			}
-			// if he wasn't declared bankrupt during the sequence to get money, he will be charged what he owes
-			if(player.getBankAccount().getBalance() > -1) {
-				player.getBankAccount().transfer(owner, this.getRent(gameBoard, roll));
+				SequenceController.getMoneySequence(player, this.owner, true, gameBoard, playerList, this.getRent(gameBoard, roll));
 			}
 		}
 	}

@@ -92,7 +92,7 @@ public abstract class SequenceController {
 		// tries to withdraw 1000 from the player, while it returns false, the player will be asked to get more money
 		while(player.getBankAccount().withdraw(1000) == false) {
 			//TODO tag stilling til den her
-			SequenceController.getMoneySequence(player, null, gameBoard, playerList, 1000);
+			SequenceController.getMoneySequence(player, null, false, gameBoard, playerList, 1000);
 		}
 		player.setPlayerInJail(false);
 		boundary.updateGUI(gameBoard, playerList);
@@ -383,14 +383,15 @@ public abstract class SequenceController {
 	}
 
 	/**
-	 * Method that handles the sequence of getting money if a player doesn't have enough money.
+	 * Method that handles the sequence of getting money if a player doesn't have enough money. Can be called with or without debt settlement.
 	 * @param debitor
 	 * @param creditor
+	 * @param withDebtSettlement
 	 * @param gameBoard
 	 * @param playerList
 	 * @param targetAmount
 	 */
-	public static void getMoneySequence(Player debitor, Player creditor, GameBoard gameBoard, PlayerList playerList, int targetAmount) {
+	public static void getMoneySequence(Player debitor, Player creditor, Boolean withDebtSettlement, GameBoard gameBoard, PlayerList playerList, int targetAmount) {
 
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
@@ -423,6 +424,17 @@ public abstract class SequenceController {
 					} else {
 						boundary.getButtonPressed(language.canGetMoney());
 					}
+				}
+				// if the player has enough money to pay his debt, and the method was called with debt settlement, he will be charged what he owes
+				if(debitor.getBankAccount().getBalance() >= targetAmount && withDebtSettlement) {
+					// if the creditor is another player
+					if(creditor != null) {
+						debitor.getBankAccount().transfer(creditor, debitor.getTotalReleasableAssets(gameBoard));
+						boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(debitor.getTotalReleasableAssets(gameBoard), creditor));
+					} else {
+						debitor.getBankAccount().withdraw(targetAmount);
+					}
+					break getMoneySeq;
 				}
 			}
 	}
