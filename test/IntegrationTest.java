@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.Assert.*;
 
+import entity.language.Language;
+import entity.language.LanguageHandler;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +23,8 @@ public class IntegrationTest {
 		p1 = new Player("p1", 30000);
 		p2 = new Player("p2", 30000);
 		testStub = new GameControllerTestStub();
-		gameBoard = new GameBoard();
+		LanguageHandler language = new LanguageHandler("Dansk");
+		gameBoard = new GameBoard(language);
 	}
 
 	@After
@@ -148,6 +151,5 @@ public class IntegrationTest {
 	 */
 	private void setPlayer(Player player, int onField, boolean taxChoice) {
 		player.setOnField(onField);
-		player.setTaxChoice(taxChoice);
 	}
 }

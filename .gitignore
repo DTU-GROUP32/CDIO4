@@ -1,0 +1,9 @@
+# Intellij & Eclipise IDEA
+.idea/
+.classpath
+.project
+
+# Compiled files
+out/
+!out/.gitkeep
+/bin/

@@ -5,15 +5,15 @@ public class BankAccount {
 	private int balance;
 
 	/**
-	 * Default constructor.
+	 * Constructor that sets balance to 30000.
 	 */
-	public BankAccount(){
+	public BankAccount() {
 		this(30000);
 	}
 
 	/**
 	 * Constructor for the BankAccount class which takes an integer to set balance.
-	 * @param balance Integer amount to instantiate object with
+	 * @param balance - integer amount to instantiate object with
 	 */
 	public BankAccount(int balance){
 		if (balance < 1)
@@ -23,22 +23,17 @@ public class BankAccount {
 	}
 	
 	/**
-	 * Withdraws money from the BankAccount.
-	 * @param amount to withdraw.
-	 * @return amount actually withdrawn.
+	 * Withdraws money from the BankAccount if player has the required balance
+	 * @param amount to withdraw
+	 * @return boolean - whether the withdrawal has been completed or not
 	 */
-	public int withdraw(int amount){
+	public boolean withdraw(int amount){
 		if (this.balance >= amount)
 		{
 			this.balance -= amount;
-			return amount;
+			return true;
 		}
-		else
-		{
-			int remainder = this.balance;
-			this.balance = 0;
-			return remainder;
-		}
+		return false;
 	}
 	
 	/**
@@ -47,16 +42,37 @@ public class BankAccount {
 	 */
 	public void deposit(int amount){
 		this.balance += amount;
-		if (amount < 0)
-			this.balance = 0;
+	}
+	
+	/**
+	 * Transfers amount to receiver from the player if player has the required balance
+	 * @param receiver to receive the amount
+	 * @param amount to transfer
+	 * @return boolean - whether the transfer has been completed or not
+	 */
+	public boolean transfer(Player receiver, int amount){
+		if(this.balance - amount >= 0)
+		{
+			this.withdraw(amount);
+			receiver.getBankAccount().deposit(amount);
+			return true;
+		}
+		return false;
 	}
 
 	/**
-	 * Get the current balance of the BankAccount.
-	 * @return the current balance.
+	 * Returns the current balance of the BankAccount.
+	 * @return balance - the current balance.
 	 */
-	public int getBalance()
-	{
+	public int getBalance() {
 		return this.balance;
+	}
+	
+	/**
+	 * Changes the balance to new balance
+	 * @param balance - the new balance
+	 */
+	public void setBalance(int balance) {
+		this.balance = balance;
 	}
 }
