@@ -188,7 +188,7 @@ public class GUIBoundary {
 		}
 		Car car = carBuilder.build();
 		GUI.addPlayer(player.getName(), player.getBankAccount().getBalance(), car);
-		this.updateCar(player);;
+		this.updateCar(player);
 	}
 
 	/**
