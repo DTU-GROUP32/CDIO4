@@ -26,20 +26,19 @@ public class DiceCupTest {
     @Test
     public void rollDices() throws Exception {
         for(int i = 0; i < 100; i++){
-
+            diceCup.rollDices();
+            assertEquals("Dices Not within bounds", 7, diceCup.getSum(), 5);
         }
     }
 
     @Test
     public void getSum() throws Exception {
+        diceCup.rollDices();
+        assertEquals("Dices Not within bounds", 7, diceCup.getSum(), 5);
     }
 
     @Test
-    public void setDiceSides() throws Exception {
+    public void getDices1() throws Exception {
+        assertTrue("Get Dices doesn't return array of dices", diceCup.getDices() instanceof Dice[]);
     }
-
-    @Test
-    public void diceEvalEqual() throws Exception {
-    }
-
 }
