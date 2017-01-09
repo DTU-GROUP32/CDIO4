@@ -302,7 +302,6 @@ public abstract class SequenceController {
 	 * Method that handles the sequence of buying a property.
 	 * @param player
 	 * @param field
-	 * @param withAuction
 	 * @param gameBoard
 	 * @param playerList
 	 */
