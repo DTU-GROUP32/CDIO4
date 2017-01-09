@@ -201,7 +201,7 @@ public class Dansk implements Language{
 
 	@Override
 	public String tradeGetOutOfJailCard() {
-		return "Benådelses kort";
+		return "Løsladelseskort";
 	}
 
 	@Override
@@ -426,22 +426,22 @@ public class Dansk implements Language{
 
 	@Override
 	public String chooseGetOutOfJailCardBuyer() {
-		return "Hvem køber benådelses kortet?";
+		return "Hvem køber løsladelseskortet?";
 	}
 
 	@Override
 	public String enterGetOutOfJailCardTradePrice() {
-		return "Hvilken pris skal kortet sælges til?";
+		return "Hvilken pris skal løsladelseskortet sælges til?";
 	}
 
 	@Override
 	public String confirmGetOutOfJailCardTrade(String buyerName, int price) {
-		return "Er du sikker på, at du vil sælge kortet til " + buyerName + " for kr. " + price + "?";
+		return "Er du sikker på, at du vil sælge løsladelseskortet til " + buyerName + " for kr. " + price + "?";
 	}
 
 	@Override
 	public String getOutOfJailCardPurchaseConfirmation() {
-		return "Du har nu købt benådelses kortet!";
+		return "Du har nu købt løsladelseskortet!";
 	}
 	
 	@Override
