@@ -59,7 +59,7 @@ public abstract class Field {
 	 * @return bonus
 	 */
 	public int getBonus() {
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -67,7 +67,7 @@ public abstract class Field {
 	 * @return taxAmount
 	 */
 	public int getTaxAmount() {
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -75,7 +75,7 @@ public abstract class Field {
 	 * @return topCardNumber
 	 */
 	public int getTopCardNumber() {
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -89,7 +89,7 @@ public abstract class Field {
 	 * @return taxRate
 	 */
 	public int getTaxRate() {
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -97,7 +97,7 @@ public abstract class Field {
 	 * @return price
 	 */
 	public int getPrice() {
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -119,7 +119,7 @@ public abstract class Field {
 	 * @return pawnValue
 	 */
 	public int getPawnValue() {
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -194,7 +194,7 @@ public abstract class Field {
 	 * @return calculated rent
 	 */
 	public int getRent(GameBoard gameBoard, int roll) {
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -202,7 +202,7 @@ public abstract class Field {
 	 * @return constructionPrice
 	 */
 	public int getConstructionPrice() {
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -210,7 +210,7 @@ public abstract class Field {
 	 * @return propertyGroup
 	 */
 	public int getPropertyGroup() {
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -218,7 +218,7 @@ public abstract class Field {
 	 * @return constructionRate
 	 */
 	public int getConstructionRate() {
-		return 0;
+		return -1;
 	}
 
 	/**
