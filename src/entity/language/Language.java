@@ -78,6 +78,8 @@ public interface Language {
 
 	String confirmPropertyTrade(String fieldName, String buyerName, int price);
 
+	String propertyTradeConfirmation(String buyerName, int price);
+
 	String yes();
 
 	String no();

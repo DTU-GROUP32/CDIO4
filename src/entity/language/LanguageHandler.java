@@ -190,6 +190,10 @@ public class LanguageHandler {
 		return selectedLanguage.confirmPropertyTrade(fieldName, buyerName, price); 
 	}
 
+	public String propertyTradeConfirmation(String buyerName, int price) {
+		return selectedLanguage.propertyTradeConfirmation(buyerName, price);
+	}
+
 	public String yes() {
 		return selectedLanguage.yes();
 	}
