@@ -26,30 +26,37 @@ public abstract class Ownable extends Field {
 		this.pawned = false;
 	}
 
+	@Override
 	public int getPrice() {
 		return price;
 	}
 
+	@Override
 	public Player getOwner() {
 		return owner;
 	}
 
+	@Override
 	public void setOwner(Player newOwner) {
 		this.owner = newOwner;
 	}
 
+	@Override
 	public int getPawnValue() {
 		return pawnValue;
 	}
 
+	@Override
 	public boolean isPawned() {
 		return this.pawned;
 	}
 
+	@Override
 	public void releasePawnField() {
 		this.pawned = false;
 	}
 
+	@Override
 	public void landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
 		// if the owner isn't in jail and the property isn't pawned
 		if(this.owner.isPlayerInJail() == false && this.pawned == false) {
@@ -60,26 +67,47 @@ public abstract class Ownable extends Field {
 		}
 	}
 
-	public boolean buyField(Player player) {
-		return buyField(player, this.price);
+	@Override
+	public boolean buyField(Player player, GameBoard gameBoard, PlayerList playerList) {
+		return buyField(player, this.price, gameBoard, playerList);
 	}
 
-	public boolean buyField(Player player, int price) {
+	@Override
+	public boolean buyField(Player player, int price, GameBoard gameBoard, PlayerList playerList) {
 		if(player.getBankAccount().withdraw(price)) {
 			this.setOwner(player);
 			return true;
+		} else {
+			SequenceController.getMoneySequence(player, null, false, gameBoard, playerList, 0);
+			// request is only executed if the player got enough money
+			if(player.getBankAccount().withdraw(price)) {
+				this.setOwner(player);
+				return true;
+			} else {
+				return false;
+			}
 		}
-		return false;
 	}
 
-	public boolean tradeField(Player seller, Player buyer, int price) {
-		if (buyer.getBankAccount().transfer(seller, price)) {
+	@Override
+	public boolean tradeField(Player seller, Player buyer, int price, GameBoard gameBoard, PlayerList playerList) {
+		if(buyer.getBankAccount().transfer(seller, price)) {
 			this.setOwner(buyer);
 			return true;
+		} else {
+			SequenceController.getMoneySequence(buyer, null, false, gameBoard, playerList, 0);
+			// request is only executed if the player got enough money
+			if(buyer.getBankAccount().transfer(seller, price)) {
+				this.setOwner(buyer);
+				return true;
+			} else {
+				return false;
+			}
+
 		}
-		return false;
 	}
 
+	@Override
 	public boolean pawnField() {
 		if (this.getConstructionRate() == 0) {
 			this.owner.getBankAccount().deposit(pawnValue);
@@ -89,10 +117,44 @@ public abstract class Ownable extends Field {
 		return false;
 	}
 
-	public boolean undoPawnField() {
-		if (this.pawned == true && this.owner.getBankAccount().withdraw(pawnValue * 110 / 100)) {
-			this.pawned = false;
-			return true;
+	@Override
+	public boolean undoPawnField(GameBoard gameBoard, PlayerList playerList) {
+		if (this.pawned) {
+			if(this.owner.getBankAccount().withdraw(pawnValue * 110 / 100)) {
+				this.pawned = false;
+				return true;
+			} else {
+				// if it was because the player didn't have enough money
+				SequenceController.getMoneySequence(owner, null, false, gameBoard, playerList, 0);
+				// request is only executed if the player got enough money
+				if(this.owner.getBankAccount().withdraw(pawnValue * 110 / 100)) {
+					this.pawned = false;
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean undoPawnFieldWithoutInterest(GameBoard gameBoard, PlayerList playerList) {
+		if (this.pawned) {
+			if(this.owner.getBankAccount().withdraw(pawnValue)) {
+				this.pawned = false;
+				return true;
+			} else {
+				// if it was because the player didn't have enough money
+				SequenceController.getMoneySequence(owner, null, false, gameBoard, playerList, 0);
+				// request is only executed if the player got enough money
+				if(this.owner.getBankAccount().withdraw(pawnValue)) {
+					this.pawned = false;
+					return true;
+				} else {
+					return false;
+				}
+			}
 		}
 		return false;
 	}

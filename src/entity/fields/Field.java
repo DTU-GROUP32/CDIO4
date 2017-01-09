@@ -140,7 +140,7 @@ public abstract class Field {
 	 * @param player
 	 * @return if the action was carried out
 	 */
-	public boolean buyField(Player player) {
+	public boolean buyField(Player player, GameBoard gameBoard, PlayerList playerList) {
 		return false;
 	}
 
@@ -150,7 +150,7 @@ public abstract class Field {
 	 * @param player
 	 * @return if the action was carried out
 	 */
-	public boolean buyField(Player player, int price) {
+	public boolean buyField(Player player, int price, GameBoard gameBoard, PlayerList playerList) {
 		return false;
 	}
 
@@ -161,7 +161,7 @@ public abstract class Field {
 	 * @param price
 	 * @return if the action was carried out
 	 */
-	public boolean tradeField(Player seller, Player buyer, int price) {
+	public boolean tradeField(Player seller, Player buyer, int price, GameBoard gameBoard, PlayerList playerList) {
 		return false;
 	}
 
@@ -177,7 +177,7 @@ public abstract class Field {
 	 * Undoes the pawn of the field(including money transactions).
 	 * @return if the action was carried out
 	 */
-	public boolean undoPawnField() {
+	public boolean undoPawnField(GameBoard gameBoard, PlayerList playerList) {
 		return false;
 	}
 
@@ -240,6 +240,14 @@ public abstract class Field {
 	 * @return if the action was carried out
 	 */
 	public boolean sellConstruction() {
+		return false;
+	}
+	
+	/**
+	 * Undoes the pawn of the field without interest(including money transactions).
+	 * @return
+	 */
+	public boolean undoPawnFieldWithoutInterest(GameBoard gameBoard, PlayerList playerList) {
 		return false;
 	}
 }

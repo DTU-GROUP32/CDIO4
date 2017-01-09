@@ -1,6 +1,8 @@
 package entity.fields;
 
+import control.SequenceController;
 import entity.GameBoard;
+import entity.PlayerList;
 
 public class Plot extends Ownable {
 
@@ -60,14 +62,23 @@ public class Plot extends Ownable {
 		}
 	}
 
-	public boolean buildConstruction(){
-		if(owner.getBankAccount().withdraw(constructionPrice) && !this.isPawned())
-		{
-			constructionRate++;
-			return true;
-		} else {
-			return false;
-		}
+	public boolean buildConstruction(GameBoard gameBoard, PlayerList playerList){
+		if(!this.isPawned()) {
+			if(owner.getBankAccount().withdraw(constructionPrice)) {
+				constructionRate++;
+				return true;
+			} else {
+				// if it was because the player didn't have enough money
+				SequenceController.getMoneySequence(owner, null, false, gameBoard, playerList, 0);
+				// request is only executed if the player got enough money
+				if(owner.getBankAccount().withdraw(constructionPrice)) {
+					constructionRate++;
+					return true;
+				} else {
+					return false;
+				}
+			}
+		} return false;
 	}
 
 	public boolean sellConstruction(){

@@ -1,7 +1,9 @@
 package entity.fields;
 
+import control.SequenceController;
 import entity.GameBoard;
 import entity.Player;
+import entity.PlayerList;
 
 public class ShippingLine extends Ownable {
 
@@ -23,26 +25,48 @@ public class ShippingLine extends Ownable {
 	}
 
 	@Override
-	public boolean buyField(Player player) {
-		if(player.getBankAccount().withdraw(this.price))
-		{
-			this.setOwner(player);
-			numberOfShippingLinesOwnedByEachPlayer[player.getID()]++;
-			return true;
-		}
-		return false;
+	public boolean buyField(Player player, GameBoard gameBoard, PlayerList playerList) {
+		return buyField(player, this.price, gameBoard, playerList);
 	}
 
 	@Override
-	public boolean tradeField(Player seller, Player buyer, int price){
-		if(buyer.getBankAccount().transfer(seller, price))
-		{
+	public boolean buyField(Player player, int price, GameBoard gameBoard, PlayerList playerList) {
+		if(player.getBankAccount().withdraw(price)) {
+			this.setOwner(player);
+			numberOfShippingLinesOwnedByEachPlayer[player.getID()]++;
+			return true;
+		} else {
+			SequenceController.getMoneySequence(player, null, false, gameBoard, playerList, 0);
+			// request is only executed if the player got enough money
+			if(player.getBankAccount().withdraw(price)) {
+				this.setOwner(player);
+				numberOfShippingLinesOwnedByEachPlayer[player.getID()]++;
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	@Override
+	public boolean tradeField(Player seller, Player buyer, int price, GameBoard gameBoard, PlayerList playerList) {
+		if(buyer.getBankAccount().transfer(seller, price)) {
 			this.setOwner(buyer);
 			numberOfShippingLinesOwnedByEachPlayer[seller.getID()]--;
 			numberOfShippingLinesOwnedByEachPlayer[buyer.getID()]++;
 			return true;
-		}
-		return false;
-	}
+		} else {
+			SequenceController.getMoneySequence(buyer, null, false, gameBoard, playerList, 0);
+			// request is only executed if the player got enough money
+			if(buyer.getBankAccount().transfer(seller, price)) {
+				this.setOwner(buyer);
+				numberOfShippingLinesOwnedByEachPlayer[seller.getID()]--;
+				numberOfShippingLinesOwnedByEachPlayer[buyer.getID()]++;
+				return true;
+			} else {
+				return false;
+			}
 
+		}
+	}
 }
