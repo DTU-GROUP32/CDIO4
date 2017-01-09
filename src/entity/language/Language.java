@@ -15,6 +15,8 @@ public interface Language {
 	String fieldNames(int fieldNumber);
 
 	String fieldPrices(int fieldPrice);
+	
+	String fieldInfo(int[] fieldRent, int fieldPrice, int constructionPrice);
 
 	String readyToBegin();
 
@@ -135,5 +137,6 @@ public interface Language {
 	String canGetMoney();
 
 	String bankruptcyConcluded();
+
 }
 
