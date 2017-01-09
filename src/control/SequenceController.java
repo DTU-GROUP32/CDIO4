@@ -192,7 +192,7 @@ public abstract class SequenceController {
 			if(boundary.getBoolean(language.confirmPropertyTrade(fieldToSell, buyer, price), language.yes(), language.no())){
 				if(fieldToSellObject.tradeField(owner, buyerObject, price)) {
 					boundary.updateGUI(gameBoard, playerList);
-					boundary.getButtonPressed(language.propertyPurchaseConfirmation());
+					boundary.getButtonPressed(language.propertyTradeConfirmation(buyer, price));
 				} else {
 					boundary.getButtonPressed(language.notEnoughMoney());
 				}

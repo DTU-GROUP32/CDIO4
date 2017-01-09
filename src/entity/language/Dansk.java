@@ -413,6 +413,11 @@ public class Dansk implements Language{
 	public String confirmPropertyTrade(String fieldName, String buyerName, int price){
 		return "Er du sikker på, at du vil sælge \"" + fieldName + "\" til " + buyerName + " for kr. " + price + "?";
 	}
+
+	@Override
+	public String propertyTradeConfirmation(String buyerName, int price) {
+		return buyerName + " har nu købt feltet til kr. " + price + "!";
+	}
 	
 	@Override
 	public String yes() {
