@@ -56,6 +56,8 @@ public interface Language {
 
 	String youPaidThisMuchToThisPerson(int amountPayed, Player owner);
 
+	String landedOnOwnedFieldOwnerIsInJail(Player owner);
+
 	String youOwnThisField();
 
 	String getTaxChoice();

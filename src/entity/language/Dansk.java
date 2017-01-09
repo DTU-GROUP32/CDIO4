@@ -357,6 +357,11 @@ public class Dansk implements Language{
 	public String youPaidThisMuchToThisPerson(int amountPayed, Player owner) {
 		return "Du betalte " + amountPayed + " kr. til " + owner.getName() + ".";
 	}
+
+	@Override
+	public String landedOnOwnedFieldOwnerIsInJail(Player owner) {
+		return "Dette felt ejes af " + owner.getName() + ", men han er i fængsel! Så du slipper for at betale ;)";
+	}
 	
 	@Override
 	public String youOwnThisField() {

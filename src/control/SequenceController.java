@@ -2,6 +2,8 @@ package control;
 
 import java.util.ArrayList;
 
+import org.junit.experimental.theories.Theories;
+
 import boundary.GUIBoundary;
 import entity.GameBoard;
 import entity.Player;
@@ -47,14 +49,19 @@ public abstract class SequenceController {
 			if (ownerOfField == null) {
 				SequenceController.buyPropertySequence(player, field, gameBoard, playerList);
 			} else {
-				// if the field has an owner and the player landing on the field, is not the owner, the player landing on the field pays rent to the owner
+				// if the field has an owner and the player landing on the field, isn't the owner
 				if (!field.getOwner().getName().equals(player.getName())) {
-					boundary.getButtonPressed(language.landedOnOwnedField(ownerOfField));
-					field.landOnField(player, roll, gameBoard, playerList, false);
-					boundary.updateGUI(gameBoard, playerList);
-					// if the player didn't declare bankruptcy, a message will display how much was paid to who
-					if(!player.isPlayerBroke()) {
-						boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(field.getRent(gameBoard, roll), ownerOfField));
+					// and if the owner isn't in jail, the player landing on the field pays rent to the owner
+					if(!field.getOwner().isPlayerInJail()) {
+						boundary.getButtonPressed(language.landedOnOwnedField(ownerOfField));
+						field.landOnField(player, roll, gameBoard, playerList, false);
+						boundary.updateGUI(gameBoard, playerList);
+						// if the player didn't declare bankruptcy, a message will display how much was paid to who
+						if(!player.isPlayerBroke()) {
+							boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(field.getRent(gameBoard, roll), ownerOfField));
+						}
+					} else {
+						boundary.getButtonPressed(language.landedOnOwnedFieldOwnerIsInJail(ownerOfField));
 					}
 				} else {
 					boundary.getButtonPressed(language.youOwnThisField());

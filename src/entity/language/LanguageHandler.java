@@ -146,6 +146,10 @@ public class LanguageHandler {
 		return selectedLanguage.youPaidThisMuchToThisPerson(amountPayed, owner);
 	}
 
+	public String landedOnOwnedFieldOwnerIsInJail(Player owner) {
+		return selectedLanguage.landedOnOwnedFieldOwnerIsInJail(owner);
+	}
+
 	public String youOwnThisField() {
 		return selectedLanguage.youOwnThisField();
 	}
