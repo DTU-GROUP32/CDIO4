@@ -390,34 +390,35 @@ public abstract class SequenceController {
 		LanguageHandler language = LanguageHandler.getInstance();
 		String[] options = {language.pawn(), language.demolish(), language.trade(), language.bankrupt()};
 
-		// loop that continues until the player has enough money to pay his debt
-		getMoneySeq: while(debitor.getBankAccount().getBalance() < targetAmount) {
+		getMoneySeq:
+			// loop that continues until the player has enough money to pay his debt
+			while(debitor.getBankAccount().getBalance() < targetAmount) {
 
-			// gets user choice
-			String choice = boundary.getUserSelection(language.toPay(targetAmount), options);
+				// gets user choice
+				String choice = boundary.getUserSelection(language.toPay(targetAmount), options);
 
-			// handles which other sequence to run by the users choice
-			if(choice.equals(language.pawn())) {
-				pawnSequence(debitor, gameBoard, playerList);
-			} else if (choice.equals(language.demolish())) {
-				demolitionSequence(debitor, gameBoard, playerList);
-			} else if (choice.equals(language.trade())) {
-				tradePropertiesSequence(debitor, gameBoard, playerList);
-			} else if (choice.equals(language.bankrupt())) {
-				// only lets the player declare bankruptcy if his total releasable assets amounts to less than his debt
-				if(debitor.getTotalReleasableAssets(gameBoard) < targetAmount) {
-					// if the creditor is another player
-					if(creditor != null) {
-						debitor.getBankAccount().transfer(creditor, debitor.getTotalReleasableAssets(gameBoard));
-						boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(debitor.getTotalReleasableAssets(gameBoard), creditor));
+				// handles which other sequence to run by the users choice
+				if(choice.equals(language.pawn())) {
+					pawnSequence(debitor, gameBoard, playerList);
+				} else if (choice.equals(language.demolish())) {
+					demolitionSequence(debitor, gameBoard, playerList);
+				} else if (choice.equals(language.trade())) {
+					tradePropertiesSequence(debitor, gameBoard, playerList);
+				} else if (choice.equals(language.bankrupt())) {
+					// only lets the player declare bankruptcy if his total releasable assets amounts to less than his debt
+					if(debitor.getTotalReleasableAssets(gameBoard) < targetAmount) {
+						// if the creditor is another player
+						if(creditor != null) {
+							debitor.getBankAccount().transfer(creditor, debitor.getTotalReleasableAssets(gameBoard));
+							boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(debitor.getTotalReleasableAssets(gameBoard), creditor));
+						}
+						executeBankruptcy(debitor, gameBoard, playerList);
+						break getMoneySeq;
+					} else {
+						boundary.getButtonPressed(language.canGetMoney());
 					}
-					executeBankruptcy(debitor, gameBoard, playerList);
-					break getMoneySeq;
-				} else {
-					boundary.getButtonPressed(language.canGetMoney());
 				}
 			}
-		}
 	}
 
 	/**
