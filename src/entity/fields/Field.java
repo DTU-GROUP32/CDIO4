@@ -79,6 +79,12 @@ public abstract class Field {
 	}
 
 	/**
+	 * Setter used for unittesting landOnField method
+	 * @param number
+	 */
+	public void setTopCardNumber(int number){}
+
+	/**
 	 * Returns the tax rate of the field.
 	 * @return taxRate
 	 */
