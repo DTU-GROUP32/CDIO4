@@ -184,7 +184,7 @@ public class GameBoard {
 				for(int j = 0; j < propertyGroup.length; j++) {
 					// if construction rate is equal to the smallest construction rate, then add to the buildable list
 					// this is to ensure the player is building evenly on the properties
-					if(propertyGroup[j].getConstructionRate() == smallestConstructionRate) {
+					if(propertyGroup[j].getConstructionRate() == smallestConstructionRate && !propertyGroup[j].isPawned()) {
 						listOfBuildableProperties.add(propertyGroup[j]);
 					}
 				}

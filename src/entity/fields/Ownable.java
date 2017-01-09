@@ -94,11 +94,9 @@ public abstract class Ownable extends Field {
 	}
 
 	public boolean undoPawnField() {
-		if (this.pawned == true) {
-			if(this.owner.getBankAccount().withdraw(pawnValue * 110 / 100)) {
-				this.pawned = false;
-				return true;
-			}
+		if (this.pawned == true && this.owner.getBankAccount().withdraw(pawnValue * 110 / 100)) {
+			this.pawned = false;
+			return true;
 		}
 		return false;
 	}

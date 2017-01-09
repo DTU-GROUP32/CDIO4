@@ -61,17 +61,22 @@ public class Plot extends Ownable {
 	}
 
 	public boolean buildConstruction(){
-		if(owner.getBankAccount().withdraw(constructionPrice))
+		if(owner.getBankAccount().withdraw(constructionPrice) && !this.isPawned())
 		{
 			constructionRate++;
 			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 
 	public boolean sellConstruction(){
-		owner.getBankAccount().deposit(constructionPrice / 2);
-		constructionRate--;
-		return true;
+		if(this.constructionRate > 0) {
+			owner.getBankAccount().deposit(constructionPrice / 2);
+			constructionRate--;
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
