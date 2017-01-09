@@ -164,11 +164,11 @@ public class Chance extends Field {
 			// moves the player to the nearest shipping line
 			if(player.getOnField() > 4 && player.getOnField() < 15)
 				player.movePlayer(15-player.getOnField());
-			if(player.getOnField() > 14 && player.getOnField() < 25)
+			else if(player.getOnField() > 14 && player.getOnField() < 25)
 				player.movePlayer(25-player.getOnField());
-			if(player.getOnField() > 24 && player.getOnField() < 35)
+			else if(player.getOnField() > 24 && player.getOnField() < 35)
 				player.movePlayer(35-player.getOnField());
-			if(player.getOnField() > 34)
+			else if(player.getOnField() > 34)
 				player.movePlayer(45-player.getOnField());
 			else player.movePlayer(5-player.getOnField());
 			// if the field is owned the player pays double rent
@@ -185,11 +185,11 @@ public class Chance extends Field {
 			// moves the player to the nearest shipping line
 			if(player.getOnField() > 4 && player.getOnField() < 15)
 				player.movePlayer(15-player.getOnField());
-			if(player.getOnField() > 14 && player.getOnField() < 25)
+			else if(player.getOnField() > 14 && player.getOnField() < 25)
 				player.movePlayer(25-player.getOnField());
-			if(player.getOnField() > 24 && player.getOnField() < 35)
+			else if(player.getOnField() > 24 && player.getOnField() < 35)
 				player.movePlayer(35-player.getOnField());
-			if(player.getOnField() > 34)
+			else if(player.getOnField() > 34)
 				player.movePlayer(45-player.getOnField());
 			else player.movePlayer(5-player.getOnField());
 			// if the field is owned the player pays rent
