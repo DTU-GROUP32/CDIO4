@@ -38,7 +38,6 @@ public class LanguageHandler {
 	public void setLanguage(String language) {
 		switch(language) {
 		case "Dansk": selectedLanguage = new Dansk(); break;
-		case "English": selectedLanguage = new English(); break;
 		default: selectedLanguage = new Dansk();
 		}
 	}
