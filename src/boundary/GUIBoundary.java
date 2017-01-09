@@ -17,13 +17,14 @@ import desktop_resources.GUI;
 import entity.DiceCup;
 import entity.GameBoard;
 import entity.Player;
+import entity.PlayerList;
 import entity.fields.Ownable;
 import entity.language.LanguageHandler;
 
 public class GUIBoundary {
 
 	private static GUIBoundary instance;
-	
+
 	/**
 	 * Returns and initializes the instance of the GUIBoundary if it is not already initialized
 	 * @return instance - 
@@ -57,7 +58,7 @@ public class GUIBoundary {
 			} else if(gameBoard.getField(i) instanceof entity.fields.Brewery){
 				fields[i] = new Brewery.Builder()
 						.setTitle(language.fieldNames(i))
-						.setSubText(language.fieldPrices(i))
+						.setSubText(language.fieldPrices(gameBoard.getField(i).getPrice()))
 						.build();
 			}else if(gameBoard.getField(i) instanceof entity.fields.Chance){
 				fields[i] = new Chance.Builder()
@@ -67,15 +68,15 @@ public class GUIBoundary {
 			}else if(gameBoard.getField(i) instanceof entity.fields.Plot){
 				fields[i] = new Street.Builder()
 						.setTitle(language.fieldNames(i))
-						.setSubText(language.fieldPrices(i))
+						.setSubText(language.fieldPrices(gameBoard.getField(i).getPrice()))
 						.setBgColor(getPropertyGroupColor(gameBoard.getField(i).getPropertyGroup()))
 						.setDescription(
-								" - Kun grund: " + gameBoard.getField(i).getRent()[0] + " | " +
-										"1 hus: " + gameBoard.getField(i).getRent()[1] + " | " +
-										"2 huse: " + gameBoard.getField(i).getRent()[2] + " | " +
-										"3 huse: " + gameBoard.getField(i).getRent()[3] + " | " +
-										"4 huse: " + gameBoard.getField(i).getRent()[4] + " | " +
-										"Hotel: " + gameBoard.getField(i).getRent()[5])
+								" - Kun grund: " + gameBoard.getField(i).getRentArray()[0] + " | " +
+										"1 hus: " + gameBoard.getField(i).getRentArray()[1] + " | " +
+										"2 huse: " + gameBoard.getField(i).getRentArray()[2] + " | " +
+										"3 huse: " + gameBoard.getField(i).getRentArray()[3] + " | " +
+										"4 huse: " + gameBoard.getField(i).getRentArray()[4] + " | " +
+										"Hotel: " + gameBoard.getField(i).getRentArray()[5])
 						.build();
 			}else if(gameBoard.getField(i) instanceof entity.fields.Refuge){
 				fields[i] = new Refuge.Builder()
@@ -85,7 +86,7 @@ public class GUIBoundary {
 			}else if(gameBoard.getField(i) instanceof entity.fields.ShippingLine){
 				fields[i] = new Shipping.Builder()
 						.setTitle(language.fieldNames(i))
-						.setSubText(language.fieldPrices(i))
+						.setSubText(language.fieldPrices(gameBoard.getField(i).getPrice()))
 						.build();
 			}else if(gameBoard.getField(i) instanceof entity.fields.Tax){
 				fields[i] = new Tax.Builder()
@@ -95,7 +96,7 @@ public class GUIBoundary {
 			}
 		}
 		GUI.create(fields);
-		GUI.setDice(1, 1);
+		GUI.setDice(1, 0, 4, 3, 1, 0, 5, 3);
 	}
 
 	/**
@@ -140,32 +141,6 @@ public class GUIBoundary {
 	}
 
 	/**
-	 * Returns a string containing which language is selected
-	 * @return language that is selected
-	 */
-	public String getLanguage() {
-		return GUI.getUserSelection("Select entity.language. \nVælg sprog.", "Dansk", "English");
-	}
-
-	/**
-	 * Returns a string of which is chosen
-	 * @param message
-	 * @param options
-	 * @return String of the choice that has been made
-	 */
-	public String getUserSelection(String message, String... options) {
-		return GUI.getUserSelection(message, options);
-	}
-
-	/**
-	 * Shows two dice on the board. The dice will have specified values, but placement is random
-	 * @param diceCup which contains two dice
-	 */
-	public void setDices(DiceCup diceCup) {
-		GUI.setDice(diceCup.getDices()[0].getFaceValue(), diceCup.getDices()[1].getFaceValue());
-	}
-
-	/**
 	 * Adds a player with a specific vehicle on the game board
 	 * @param player
 	 */
@@ -174,149 +149,46 @@ public class GUIBoundary {
 		switch (player.getID()) {
 		case 0:
 			carBuilder
-			.typeUfo()
-			.patternCheckered()
-			.primaryColor(Color.RED)
-			.secondaryColor(Color.GRAY);
+			.typeCar()
+			.patternFill()
+			.primaryColor(Color.BLUE);
 			break;
 		case 1:
 			carBuilder
-			.typeRacecar()
-			.patternDiagonalDualColor()
-			.primaryColor(Color.GREEN)
-			.secondaryColor(Color.ORANGE);
+			.typeCar()
+			.patternFill()
+			.primaryColor(Color.RED);
 			break;
 		case 2:
 			carBuilder
-			.typeTractor()
-			.patternDotted()
-			.primaryColor(Color.BLUE)
-			.secondaryColor(Color.CYAN);
+			.typeCar()
+			.patternFill()
+			.primaryColor(Color.GREEN);
 			break;
 		case 3:
 			carBuilder
-			.typeUfo()
-			.patternZebra()
-			.primaryColor(Color.YELLOW)
-			.secondaryColor(Color.MAGENTA);
+			.typeCar()
+			.patternFill()
+			.primaryColor(Color.YELLOW);
 			break;
 		case 4:
 			carBuilder
-			.typeRacecar()
-			.patternHorizontalGradiant()
-			.primaryColor(Color.BLACK)
-			.secondaryColor(Color.WHITE);
+			.typeCar()
+			.patternFill()
+			.primaryColor(Color.BLACK);
 			break;
 		case 5:
 			carBuilder
-			.typeTractor()
-			.patternHorizontalDualColor()
-			.primaryColor(Color.WHITE)
-			.secondaryColor(Color.PINK);
+			.typeCar()
+			.patternFill()
+			.primaryColor(Color.WHITE);
 			break;
 		default:
 			break;
 		}
 		Car car = carBuilder.build();
 		GUI.addPlayer(player.getName(), player.getBankAccount().getBalance(), car);
-		this.setCar(player.getOnField(), player.getName());
-	}
-
-	/**
-	 * Places a player's car on a specific field on the board
-	 * @param fieldNumber of the specific field
-	 * @param playerName of the player
-	 */
-	public void setCar(int fieldNumber, String playerName) {
-		GUI.setCar(convertFieldNumber(fieldNumber), playerName);
-	}
-
-	/**
-	 * Removes a player's car from a specific field on the board
-	 * @param fieldNumber of the specific field
-	 * @param playerName of the player
-	 */
-	public void removeCar(int fieldNumber, String playerName) {
-		GUI.removeCar(convertFieldNumber(fieldNumber), playerName);
-	}
-
-	/**
-	 * Updates a player's balance
-	 * @param playerName of the player
-	 * @param newBalance to be updated
-	 */
-	public void updateBalance(String playerName, int newBalance) {
-		GUI.setBalance(playerName, newBalance);
-	}
-
-	/**
-	 * Sets an owner of a field. Field border and subText will be changed and now indicate who's the owner
-	 * @param fieldNumber
-	 * @param playerName
-	 */
-	public void setOwner(int fieldNumber, String playerName) {
-		GUI.setOwner(convertFieldNumber(fieldNumber), playerName);
-	}
-
-	/**
-	 * Displays a message to the user and awaits the integer response
-	 * @param message - the message that prompts the user
-	 * @return int - the integer that the user selected
-	 */
-	public int getInteger(String message) {
-		return GUI.getUserInteger(message);
-	}
-
-	/**
-	 * Displays a message to the user and awaits the integer response. Only values between min and max are allowed
-	 * @param message - the message that promts the user.
-	 * @param min - the minimum value the user is allowed to enter
-	 * @param max - the maximum value the user is allowed to enter
-	 * @return int - the integer that the user selected
-	 */
-	public int getInteger(String message, int min, int max) {
-		return GUI.getUserInteger(message, min, max);
-	}
-
-	/**
-	 * Displays a message to the user and awaits the response
-	 * @param message - the message that promts the user
-	 * @return String - the string that the user has entered
-	 */
-	public String getString(String message) {
-		return GUI.getUserString(message);
-	}
-
-	/**
-	 * Displays a message to the user and awaits the response from the button that the user pressed
-	 * @param message - the message that promts the user
-	 * @param optionTrue - a strings that should be printed on the "true" button
-	 * @param optionFalse - a strings that should be printed on the "false" button
-	 * @return boolean - boolean from the button that the user pressed
-	 */
-	public boolean getBoolean(String message, String optionTrue, String optionFalse) {
-		String response = GUI.getUserButtonPressed(message, optionTrue, optionFalse);
-		return response.equals(optionTrue);
-	}
-
-	/**
-	 * Displays a message to the user and awaits the "OK!" button pressed response
-	 * @param message - the message that promts the user
-	 * @return true - whenever the button is pressed
-	 */
-	public boolean getButtonPressed(String message) {
-		GUI.getUserButtonPressed(message, "OK!");
-		return true;
-	}
-
-	/**
-	 * Displays a message to the user and awaits the button pressed response
-	 * @param msg - the message that promts the user
-	 * @param buttons - strings that are shown on the buttons
-	 * @return String from the button that the user pressed
-	 */
-	public String getUserButtonPressed(String msg, String... buttons) {
-		return GUI.getUserButtonPressed(msg, buttons);
+		this.updateCar(player);;
 	}
 
 	/**
@@ -332,46 +204,169 @@ public class GUIBoundary {
 	}
 
 	/**
-	 * Removes ownership from every field that a player owns
-	 * @param gameBoard
-	 * @param player to release fields from
+	 * Shows two dice on the board. The dice will have specified values.
+	 * @param diceCup which contains two dice
 	 */
-	public void releasePlayersFields(GameBoard gameBoard, Player player) {
-		for(int i = 0; i < gameBoard.getFields().length; i++)
-			if(gameBoard.getField(i) instanceof Ownable)
-				if(gameBoard.getField(i).getOwner().getName().equals(player.getName())) {
-					GUI.removeOwner(convertFieldNumber(i));
-				}
+	public void setDices(DiceCup diceCup) {
+		GUI.setDice(diceCup.getDices()[0].getFaceValue(), 0, 4, 3, diceCup.getDices()[1].getFaceValue(), 0, 5, 3);
 	}
 
 	/**
-	 * Updates the construction rate on a specific field
+	 * Updates all info in the GUI that might change during the game.
+	 * @param gameBoard
+	 * @param playerList
+	 */
+	public void updateGUI(GameBoard gameBoard, PlayerList playerList) {
+		// updates everything regarding any field
+		for(entity.fields.Field field : gameBoard.getFields()) {
+			if(field instanceof Ownable) {
+				updateOwner(field);
+				updateConstructionRate(field);
+				updatePawnStatus(field);
+			}
+		}
+		// updates everything regarding any player
+		for(Player player : playerList.getPlayers()) {
+			updateCar(player);
+			updateBalance(player);
+		}
+	}
+
+	/**
+	 * Updates the owner of a specific field.
+	 * @param field
+	 */
+	public void updateOwner(entity.fields.Field field) {
+		if(field.getOwner() != null) {
+			GUI.setOwner(convertFieldNumber(field.getID()), field.getOwner().getName());
+		}
+	}
+
+	/**
+	 * Updates the construction rate on a specific field.
 	 * @param field that is updated
 	 */
 	public void updateConstructionRate(entity.fields.Field field){
 		if(field.getConstructionRate() == 5){
-			GUI.setHouses(field.getID(), 0);
-			GUI.setHotel(field.getID(), true);
+			GUI.setHotel(convertFieldNumber(field.getID()), true);
 		}else{
-			GUI.setHouses(field.getID(), field.getConstructionRate());
+			GUI.setHouses(convertFieldNumber(field.getID()), field.getConstructionRate());
 		}
 	}
 
 	/**
-	 * Updates the pawn status on field
+	 * Updates the pawn status on a specific field.
 	 * @param field that is updated
 	 */
 	public void updatePawnStatus(entity.fields.Field field) {
-		if(field.getIsPawned()) {
-			GUI.setSubText(field.getID(), "PANTSAT");
+		if(field.isPawned()) {
+			GUI.setSubText(convertFieldNumber(field.getID()), "PANTSAT");
 		} else {
 			if(field.getOwner() == null)
-				GUI.setSubText(field.getID(), LanguageHandler.getInstance().fieldPrices(field.getID()));
+				GUI.setSubText(convertFieldNumber(field.getID()), LanguageHandler.getInstance().fieldPrices(field.getPrice()));
 			else
-				GUI.setSubText(field.getID(), field.getOwner().getName());
+				GUI.setSubText(convertFieldNumber(field.getID()), field.getOwner().getName());
 		}
 	}
-	
+
+	/**
+	 * Updates the players position on the board.
+	 * @param player
+	 */
+	public void updateCar(Player player) { 
+		GUI.removeAllCars(player.getName());
+		if(player.getOnField() >= 0) {
+			GUI.setCar(convertFieldNumber(player.getOnField()), player.getName());
+		}
+	}
+
+	/**
+	 * Updates the players balance.
+	 * @param player
+	 */
+	public void updateBalance(Player player) {
+		GUI.setBalance(player.getName(), player.getBankAccount().getBalance());
+	}
+
+	/**
+	 * Returns a string containing which language is selected
+	 * @return language that is selected
+	 */
+	public String getLanguage() {
+		return GUI.getUserSelection("Select language. \nVælg sprog.", "Dansk", "English");
+	}
+
+	/**
+	 * Returns a string of which is chosen
+	 * @param message
+	 * @param options
+	 * @return String of the choice that has been made
+	 */
+	public String getUserSelection(String message, String... options) {
+		return GUI.getUserSelection(message, options);
+	}
+
+	/**
+	 * Displays a message to the user and awaits the integer response
+	 * @param message - the message that prompts the user
+	 * @return int - the integer that the user selected
+	 */
+	public int getInteger(String message) {
+		return GUI.getUserInteger(message);
+	}
+
+	/**
+	 * Displays a message to the user and awaits the integer response. Only values between min and max are allowed
+	 * @param message - the message that prompts the user.
+	 * @param min - the minimum value the user is allowed to enter
+	 * @param max - the maximum value the user is allowed to enter
+	 * @return int - the integer that the user selected
+	 */
+	public int getInteger(String message, int min, int max) {
+		return GUI.getUserInteger(message, min, max);
+	}
+
+	/**
+	 * Displays a message to the user and awaits the response
+	 * @param message - the message that prompts the user
+	 * @return String - the string that the user has entered
+	 */
+	public String getString(String message) {
+		return GUI.getUserString(message);
+	}
+
+	/**
+	 * Displays a message to the user and awaits the response from the button that the user pressed
+	 * @param message - the message that prompts the user
+	 * @param optionTrue - a strings that should be printed on the "true" button
+	 * @param optionFalse - a strings that should be printed on the "false" button
+	 * @return boolean - boolean from the button that the user pressed
+	 */
+	public boolean getBoolean(String message, String optionTrue, String optionFalse) {
+		String response = GUI.getUserButtonPressed(message, optionTrue, optionFalse);
+		return response.equals(optionTrue);
+	}
+
+	/**
+	 * Displays a message to the user and awaits the "OK!" button pressed response
+	 * @param message - the message that prompts the user
+	 * @return true - whenever the button is pressed
+	 */
+	public boolean getButtonPressed(String message) {
+		GUI.getUserButtonPressed(message, "OK!");
+		return true;
+	}
+
+	/**
+	 * Displays a message to the user and awaits the button pressed response
+	 * @param msg - the message that prompts the user
+	 * @param buttons - strings that are shown on the buttons
+	 * @return String from the button that the user pressed
+	 */
+	public String getUserButtonPressed(String msg, String... buttons) {
+		return GUI.getUserButtonPressed(msg, buttons);
+	}
+
 	/**
 	 * Sets the text to appear in the center when calling displayChanceCard() and when the deck is pressed
 	 * @param message that are shown
@@ -379,6 +374,6 @@ public class GUIBoundary {
 	public void setChanceCard(String message) {
 		GUI.setChanceCard(message);
 	}
-	
+
 
 }

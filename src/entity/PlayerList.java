@@ -24,15 +24,6 @@ public class PlayerList {
 	}
 
 	/**
-	 * Returns boolean to determine if players balance is 0 or below
-	 * @param atIndex Index of the player
-	 * @return Boolean
-	 */
-	public boolean isPlayerBroke(int atIndex) {
-		return players[atIndex].getBankAccount().getBalance() < 0;
-	}
-
-	/**
 	 * Checks all players to see if every player, but one is broke. If so true is returned
 	 * @return Boolean
 	 */
@@ -55,6 +46,19 @@ public class PlayerList {
 				winner = players[i];
 		return winner;
 	}
+	
+	/**
+	 * Checks if the name is already taken
+	 * @param name
+	 * @return Boolean
+	 */
+	public boolean isNameTaken(String name) {
+		boolean answer = false;
+		for(Player player: this.players)
+			if(player.getName().equalsIgnoreCase(name))
+				answer = true;
+		return answer;
+	}
 
 	/**
 	 * Returns an array of players in the game
@@ -71,18 +75,5 @@ public class PlayerList {
 	 */
 	public Player getPlayer(int atIndex) {
 		return players[atIndex];
-	}
-	
-	/**
-	 * Checks if the name is already taken
-	 * @param name
-	 * @return Boolean
-	 */
-	public boolean isNameTaken(String name) {
-		boolean answer = false;
-		for(Player player: this.players)
-			if(player.getName().equalsIgnoreCase(name))
-				answer = true;
-		return answer;
 	}
 }

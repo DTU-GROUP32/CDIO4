@@ -10,9 +10,13 @@ public class Plot extends Ownable {
 	private int constructionRate;
 
 	/**
-	 * Constructor. Territory has a price and rent
+	 * Constructor for the plot field. Takes a name, a price, a rent array, a construction price and a property group number.
+	 * By default the construction rate is set to O.
+	 * @param name
 	 * @param price
 	 * @param rent
+	 * @param constructionPrice
+	 * @param propertyGroup
 	 */
 	public Plot(String name, int price, int[] rent, int constructionPrice, int propertyGroup){
 		super(name, price);
@@ -23,7 +27,32 @@ public class Plot extends Ownable {
 	}
 
 	@Override
-	public int getRent(GameBoard gameBoard){
+	public int[] getRentArray() {
+		return this.rent;
+	}
+	
+	@Override
+	public int getConstructionPrice() {
+		return this.constructionPrice;
+	}
+
+	@Override
+	public int getPropertyGroup() {
+		return this.propertyGroup;
+	}
+
+	@Override
+	public int getConstructionRate() {
+		return this.constructionRate;
+	}
+
+	@Override
+	public void setConstructionRate(int rate) {
+		this.constructionRate = rate;
+	}
+	
+	@Override
+	public int getRent(GameBoard gameBoard, int roll){
 		if (gameBoard.evalPropertyGroupSameOwner(gameBoard.getPropertyGroup(this.propertyGroup)) && constructionRate == 0)
 			return this.rent[constructionRate] * 2;
 		return this.rent[constructionRate];
@@ -43,40 +72,26 @@ public class Plot extends Ownable {
 		constructionRate--;
 		return true;
 	}
+	
+	// all methods under this line are default methods
 
-	/**
-	 * @return the constructionRate
-	 */
-	public int getConstructionRate() {
-		return constructionRate;
-	}
-
-	/**
-	 * @return the constructionPrice
-	 */
-	public int getConstructionPrice() {
-		return constructionPrice;
-	}
-
-	/**
-	 * @return the propertyGroup
-	 */
-	public int getPropertyGroup() {
-		return propertyGroup;
+	@Override
+	public int getBonus() {
+		return 0;
 	}
 
 	@Override
-	public void setConstructionRate(int rate) {
-		this.constructionRate = rate;
+	public int getTaxAmount() {
+		return 0;
 	}
 
 	@Override
-	public int[] getRent() {
-		return this.rent;
+	public int getTaxRate() {
+		return 0;
 	}
 
 	@Override
 	public int getTopCardNumber() {
 		return 0;
-	}	
+	}
 }

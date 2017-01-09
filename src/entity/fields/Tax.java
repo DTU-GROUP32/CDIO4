@@ -11,7 +11,8 @@ public class Tax extends Field {
 	private int taxRate; //in percent
 
 	/**
-	 * Default constructor. Tax, which is not ownable, will have a tax amount and a tax rate, which is automatically set to 0.
+	 * Constructor. Tax, which is not ownable, will have a name, a tax amount and a tax rate, which is set to 0 with this constructor.
+	 * @param name
 	 * @param taxAmount
 	 */
 	public Tax(String name, int taxAmount) {
@@ -19,7 +20,8 @@ public class Tax extends Field {
 	}
 
 	/**
-	 * Constructor that has a tax amount and a tax rate
+	 * Constructor. Tax, which is not ownable, will have a name, a tax amount and a tax rate.
+	 * @param name
 	 * @param taxAmount
 	 * @param taxRate
 	 */
@@ -30,20 +32,30 @@ public class Tax extends Field {
 	}
 
 	@Override
-	public boolean landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
-		if (taxChoice)
-		{
-			while (player.getBankAccount().withdraw(player.getTotalAssets(gameBoard) * taxRate / 100) == false)
-				SequenceController.getMoneySequence(player, null, gameBoard, playerList, player.getTotalAssets(gameBoard) * taxRate / 100);
-			return true;
-		}
-		else
-		{
+	public void landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
+		// if player chose to pay the tax rate of his total assets
+		if (taxChoice) {
+			while (player.getBankAccount().withdraw(player.getTotalAssetsForTaxPurposes(gameBoard) * taxRate / 100) == false)
+				SequenceController.getMoneySequence(player, null, gameBoard, playerList, player.getTotalAssetsForTaxPurposes(gameBoard) * taxRate / 100);
+		} 
+		// else the player pays the fixed tax amount
+		else {
 			while (player.getBankAccount().withdraw(taxAmount) == false)
-				SequenceController.getMoneySequence(player, null, gameBoard, playerList, taxAmount);	
-			return true;
+				SequenceController.getMoneySequence(player, null, gameBoard, playerList, taxAmount);
 		}
 	}
+
+	@Override
+	public int getTaxAmount() {
+		return this.taxAmount;
+	}
+
+	@Override
+	public int getTaxRate() {
+		return this.taxRate;
+	}
+
+	// all methods under this line are default methods
 
 	@Override
 	public int getPrice() {
@@ -56,11 +68,10 @@ public class Tax extends Field {
 	}
 
 	@Override
-	public void setOwner(Player newOwner) {
-	}
+	public void setOwner(Player newOwner) {}
 
 	@Override
-	public int getRent(GameBoard gameBoard) {
+	public int getRent(GameBoard gameBoard, int roll) {
 		return 0;
 	}
 
@@ -120,26 +131,28 @@ public class Tax extends Field {
 	}
 
 	@Override
-	public void releasePawnField() {
-		
-	}
+	public void releasePawnField() {}
 
 	@Override
-	public void setConstructionRate(int rate) {
-	}
+	public void setConstructionRate(int rate) {}
 
 	@Override
-	public boolean getIsPawned() {
+	public boolean isPawned() {
 		return false;
-	}
-
-	@Override
-	public int[] getRent() {
-		return null;
 	}
 
 	@Override
 	public int getTopCardNumber() {
 		return 0;
+	}
+
+	@Override
+	public int getBonus() {
+		return 0;
+	}
+
+	@Override
+	public int[] getRentArray() {
+		return null;
 	}
 }

@@ -1,31 +1,26 @@
 package entity.fields;
 
-import control.SequenceController;
 import entity.GameBoard;
 import entity.Player;
-import entity.PlayerList;
 
 public class Brewery extends Ownable {
 
 	private int baseRent;
 	private static int[] numberOfBreweriesOwnedByEachPlayer = {0,0,0,0,0,0};
 
+	/**
+	 * Constructor for the brewery field. Only takes a name.
+	 * By default it sets the base rent to 100.
+	 * @param name
+	 */
 	public Brewery(String name) {
 		super(name, 3000);
 		this.baseRent = 100;
 	}
 
 	@Override
-	public boolean landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
-		if (this.owner.isInJail() == false || this.isPawned == false)
-			while (player.getBankAccount().transfer(owner, this.getRent(gameBoard) * roll) == false)
-				SequenceController.getMoneySequence(player, this.owner, gameBoard, playerList, this.getRent(gameBoard) * roll);
-		return true;
-	}
-
-	@Override
-	public int getRent(GameBoard gameBoard) {
-		return baseRent * numberOfBreweriesOwnedByEachPlayer[owner.getID()];
+	public int getRent(GameBoard gameBoard, int roll) {
+		return baseRent * roll * numberOfBreweriesOwnedByEachPlayer[owner.getID()];
 	}
 
 	@Override
@@ -51,6 +46,8 @@ public class Brewery extends Ownable {
 		return false;
 	}
 
+	// all methods under this line are default methods
+	
 	@Override
 	public int getConstructionRate() {
 		return 0;
@@ -77,18 +74,30 @@ public class Brewery extends Ownable {
 	}
 
 	@Override
-	public void setConstructionRate(int rate) {
-		
-	}
-
-	@Override
-	public int[] getRent() {
-		return null;
-	}
+	public void setConstructionRate(int rate) {}
 
 	@Override
 	public int getTopCardNumber() {
-		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int getBonus() {
+		return 0;
+	}
+
+	@Override
+	public int getTaxAmount() {
+		return 0;
+	}
+
+	@Override
+	public int getTaxRate() {
+		return 0;
+	}
+
+	@Override
+	public int[] getRentArray() {
+		return null;
 	}
 }

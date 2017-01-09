@@ -5,15 +5,15 @@ public class BankAccount {
 	private int balance;
 
 	/**
-	 * Default constructor.
+	 * Constructor that sets balance to 30000.
 	 */
-	public BankAccount(){
+	public BankAccount() {
 		this(30000);
 	}
 
 	/**
 	 * Constructor for the BankAccount class which takes an integer to set balance.
-	 * @param balance Integer amount to instantiate object with
+	 * @param balance - integer amount to instantiate object with
 	 */
 	public BankAccount(int balance){
 		if (balance < 1)
@@ -51,7 +51,7 @@ public class BankAccount {
 	 * @return boolean - whether the transfer has been completed or not
 	 */
 	public boolean transfer(Player receiver, int amount){
-		if(this.balance - amount > 0)
+		if(this.balance - amount >= 0)
 		{
 			this.withdraw(amount);
 			receiver.getBankAccount().deposit(amount);

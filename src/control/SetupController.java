@@ -7,32 +7,34 @@ import entity.language.LanguageHandler;
 
 public class SetupController {
 
-	private GUIBoundary boundary = GUIBoundary.getInstance();
+	private GUIBoundary boundary;
 	private GameBoard gameBoard;
-	private LanguageHandler language = LanguageHandler.getInstance();
+	private LanguageHandler language;
 
+	/**
+	 * Constructor that creates the logic of the gameBoard from our games default language.
+	 */
 	public SetupController() {
+		boundary = GUIBoundary.getInstance();
+		language = LanguageHandler.getInstance();
 		gameBoard = new GameBoard(language);
 	}
 
+	/**
+	 * Sets up the GUI game board and returns the gameBoard instance.
+	 * @return gameBoard
+	 */
 	public GameBoard setupGameBoard() {
 		boundary.createGameBoard(gameBoard);
 		return gameBoard;
 	}
 
 	/**
-	 * Method to change & set entity.language for the gameboard
-	 */
-	public LanguageHandler chooseLanguage() {
-		boundary.getButtonPressed(language.notifyLangChange());
-		return language;
-	}
-
-	/**
 	 * Method to ask for each players name and generate a player object from it.
+	 * @return playerList
 	 */
 	public PlayerList setupPlayers() {
-		PlayerList playerList = new PlayerList(boundary.getInteger(language.askForNumberOfPlayers(), 2, 6));
+		PlayerList playerList = new PlayerList(Integer.parseInt(boundary.getUserButtonPressed(language.askForNumberOfPlayers(), "2", "3", "4", "5", "6")));
 		for(int i = 0; i < playerList.getPlayers().length; i++)
 		{
 			String name;

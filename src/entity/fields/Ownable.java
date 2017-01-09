@@ -10,11 +10,12 @@ public abstract class Ownable extends Field {
 	protected int price;
 	protected Player owner;
 	protected int pawnValue;
-	protected boolean isPawned;
+	protected boolean pawned;
 
 	/**
-	 * Default constructor
-	 * 
+	 * Constructor for the ownable type fields, because the class is abstract, this constructor is only used as a super constructor.
+	 * By default it sets the owner, pawnValue and isPawned.
+	 * @param name
 	 * @param price
 	 */
 	public Ownable(String name, int price) {
@@ -22,7 +23,7 @@ public abstract class Ownable extends Field {
 		this.price = price;
 		this.owner = null;
 		this.pawnValue = price / 2;
-		this.isPawned = false;
+		this.pawned = false;
 	}
 
 	public int getPrice() {
@@ -37,30 +38,28 @@ public abstract class Ownable extends Field {
 		this.owner = newOwner;
 	}
 
-	/**
-	 * @return the pawnValue
-	 */
 	public int getPawnValue() {
 		return pawnValue;
 	}
 
-	public boolean landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
-		if (this.owner.isInJail() == false || this.isPawned == false)
-			while (player.getBankAccount().transfer(owner, this.getRent(gameBoard)) == false)
-				SequenceController.getMoneySequence(player, this.owner, gameBoard, playerList, this.getRent(gameBoard));
-		return true;
+	public boolean isPawned() {
+		return this.pawned;
 	}
 
-	public abstract int getRent(GameBoard gameBoard);
+	public void releasePawnField() {
+		this.pawned = false;
+	}
+
+	public void landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
+		if (this.owner.isPlayerInJail() == false || this.pawned == false)
+			while (player.getBankAccount().transfer(owner, this.getRent(gameBoard, roll)) == false)
+				SequenceController.getMoneySequence(player, this.owner, gameBoard, playerList, this.getRent(gameBoard, roll));
+	}
 
 	public boolean buyField(Player player) {
-		if (player.getBankAccount().withdraw(this.price)) {
-			this.setOwner(player);
-			return true;
-		}
-		return false;
+		return buyField(player, this.price);
 	}
-	
+
 	public boolean buyField(Player player, int price) {
 		if (player.getBankAccount().withdraw(price)) {
 			this.setOwner(player);
@@ -80,26 +79,19 @@ public abstract class Ownable extends Field {
 	public boolean pawnField() {
 		if (this.getConstructionRate() == 0) {
 			this.owner.getBankAccount().deposit(pawnValue);
-			this.isPawned = true;
+			this.pawned = true;
 			return true;
 		}
 		return false;
 	}
 
 	public boolean undoPawnField() {
-		if (this.isPawned == true) {
-			this.owner.getBankAccount().withdraw(pawnValue * 110 / 100);
-			this.isPawned = false;
-			return true;
+		if (this.pawned == true) {
+			if(this.owner.getBankAccount().withdraw(pawnValue * 110 / 100)) {
+				this.pawned = false;
+				return true;
+			}
 		}
 		return false;
-	}
-
-	public void releasePawnField() {
-		this.isPawned = false;
-	}
-	
-	public boolean getIsPawned() {
-		return this.isPawned;
 	}
 }
