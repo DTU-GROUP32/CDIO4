@@ -546,7 +546,7 @@ public class Dansk implements Language{
 	
 	@Override
 	public String getMoneySequenceStatus(int targetAmount, int amountToGet){
-		return "Du skal betale kr. " + targetAmount + ", men du mangler kr. " + amountToGet + " Hvad vil du gøre?";
+		return "Du skal betale kr. " + targetAmount + ", men du mangler kr. " + amountToGet + ", hvad vil du gøre?";
 	}
 	
 	@Override
@@ -557,6 +557,32 @@ public class Dansk implements Language{
 	@Override
 	public String bankruptcyConcluded() {
 		return "Din konkurs er nu afviklet, tak for spillet!";
+	}
+
+	@Override
+	public String confirmBuild(int constructionPrice, String fieldName) {
+		return "Er du sikker på, at du vil bygge for kr. " + constructionPrice + " på " + fieldName +"?";
+	}
+
+	@Override
+	public String confirmDemolition(String fieldName) {
+		return "Er du sikker på, at du vil nedrive en bygning på " + fieldName +"?";
+	}
+
+	@Override
+	public String wantToUndoPawnWithoutInterest() {
+		return "Den ejendom du lige har købt er pantsat! Hvis du hæver pantsætningen med det samme, slipper du for at betale 10% i renter, vil du det?";
+	}
+
+	@Override
+	public String wantToRunVoluntaryGetMoneySequence() {
+		// TODO Auto-generated method stub
+		return "Du har sagt at du ønsker at bruge flere penge end der er på din bankkonto, ønsker du at frigøre penge?";
+	}
+
+	@Override
+	public String confirmUndoPawn(String fieldName) {
+		return "Er du sikker på, at du vil hæve pantsætningen på " + fieldName +"?";
 	}
 }
 

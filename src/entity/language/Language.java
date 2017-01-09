@@ -135,5 +135,15 @@ public interface Language {
 	String canGetMoney();
 
 	String bankruptcyConcluded();
+
+	String confirmBuild(int constructionPrice, String fieldName);
+
+	String confirmDemolition(String fieldName);
+
+	String wantToUndoPawnWithoutInterest();
+
+	String wantToRunVoluntaryGetMoneySequence();
+
+	String confirmUndoPawn(String fieldName);
 }
 

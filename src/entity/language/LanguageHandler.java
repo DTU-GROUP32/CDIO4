@@ -305,4 +305,24 @@ public class LanguageHandler {
 	public String bankruptcyConcluded() {
 		return selectedLanguage.bankruptcyConcluded();
 	}
+
+	public String confirmBuild(int constructionPrice, String fieldName) {
+		return selectedLanguage.confirmBuild(constructionPrice, fieldName);
+	}
+
+	public String confirmDemolition(String fieldName) {
+		return selectedLanguage.confirmDemolition(fieldName);
+	}
+
+	public String wantToUndoPawnWithoutInterest() {
+		return selectedLanguage.wantToUndoPawnWithoutInterest();
+	}
+
+	public String wantToRunVoluntaryGetMoneySequence() {
+		return selectedLanguage.wantToRunVoluntaryGetMoneySequence();
+	}
+
+	public String confirmUndoPawn(String fieldName) {
+		return selectedLanguage.confirmUndoPawn(fieldName);
+	}
 }
