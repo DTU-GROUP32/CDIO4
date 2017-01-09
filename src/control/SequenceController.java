@@ -2,8 +2,6 @@ package control;
 
 import java.util.ArrayList;
 
-import org.junit.experimental.theories.Theories;
-
 import boundary.GUIBoundary;
 import entity.GameBoard;
 import entity.Player;

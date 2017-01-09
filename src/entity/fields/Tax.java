@@ -35,14 +35,27 @@ public class Tax extends Field {
 	public void landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
 		// if player chose to pay the tax rate of his total assets
 		if (taxChoice) {
-			while (player.getBankAccount().withdraw(player.getTotalAssetsForTaxPurposes(gameBoard) * taxRate / 100) == false)
+			// if the player can't pay a sequence to get money is executed
+			if(player.getBankAccount().withdraw(player.getTotalAssetsForTaxPurposes(gameBoard) * taxRate / 100) == false) {
 				SequenceController.getMoneySequence(player, null, gameBoard, playerList, player.getTotalAssetsForTaxPurposes(gameBoard) * taxRate / 100);
+			}
+			// if he wasn't declared bankrupt during the sequence to get money, he will be charged what he owes
+			if(player.getBankAccount().getBalance() > -1) {
+				player.getBankAccount().withdraw(player.getTotalAssetsForTaxPurposes(gameBoard) * taxRate / 100);
+			}
 		} 
 		// else the player pays the fixed tax amount
 		else {
-			while (player.getBankAccount().withdraw(taxAmount) == false)
+			// if the player can't pay a sequence to get money is executed
+			if(player.getBankAccount().withdraw(taxAmount) == false) {
 				SequenceController.getMoneySequence(player, null, gameBoard, playerList, taxAmount);
+			}
+			// if he wasn't declared bankrupt during the sequence to get money, he will be charged what he owes
+			if(player.getBankAccount().getBalance() > -1) {
+				player.getBankAccount().withdraw(taxAmount);
+			}
 		}
+
 	}
 
 	@Override

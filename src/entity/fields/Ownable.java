@@ -51,9 +51,17 @@ public abstract class Ownable extends Field {
 	}
 
 	public void landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
-		if (this.owner.isPlayerInJail() == false && this.pawned == false)
-			while (player.getBankAccount().transfer(owner, this.getRent(gameBoard, roll)) == false)
+		// if the owner isn't in jail and the property isn't pawned
+		if(this.owner.isPlayerInJail() == false && this.pawned == false) {
+			// if the player can't pay a sequence to get money is executed
+			if(player.getBankAccount().transfer(owner, this.getRent(gameBoard, roll)) == false) {
 				SequenceController.getMoneySequence(player, this.owner, gameBoard, playerList, this.getRent(gameBoard, roll));
+			}
+			// if he wasn't declared bankrupt during the sequence to get money, he will be charged what he owes
+			if(player.getBankAccount().getBalance() > -1) {
+				player.getBankAccount().transfer(owner, this.getRent(gameBoard, roll));
+			}
+		}
 	}
 
 	public boolean buyField(Player player) {
@@ -61,7 +69,7 @@ public abstract class Ownable extends Field {
 	}
 
 	public boolean buyField(Player player, int price) {
-		if (player.getBankAccount().withdraw(price)) {
+		if(player.getBankAccount().withdraw(price)) {
 			this.setOwner(player);
 			return true;
 		}

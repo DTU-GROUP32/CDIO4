@@ -51,16 +51,22 @@ public class Chance extends Field {
 			break;
 		case 7:
 			// for each player in the player list
-			for(int i = 0; i < playerList.getPlayers().length; i++)
-				// while the player has less than 200
-				while(playerList.getPlayer(i).getBankAccount().getBalance() < 200)
-					// if the player isn't the receiver, he will be asked to get more money
+			for(int i = 0; i < playerList.getPlayers().length; i++) {
+				// if the player has less than 200
+				if(playerList.getPlayer(i).getBankAccount().getBalance() < 200) {
+					// and if the player isn't the receiver, he will be asked to get more money
 					if(playerList.getPlayer(i) != player) {
 						SequenceController.getMoneySequence(playerList.getPlayer(i), player, gameBoard, playerList, 200);
 					}
+				}
+			}
 			// each player transfers 200 to the receiver
-			for(int i = 0; i < playerList.getPlayers().length; i++)
-				playerList.getPlayer(i).getBankAccount().transfer(player, 200);
+			for(int i = 0; i < playerList.getPlayers().length; i++) {
+				// except if the player is the receiver
+				if(playerList.getPlayer(i) != player) {
+					playerList.getPlayer(i).getBankAccount().transfer(player, 200);
+				}
+			}
 			break;
 		case 8:
 			player.getBankAccount().deposit(1000);
@@ -69,39 +75,74 @@ public class Chance extends Field {
 			player.getBankAccount().deposit(500);
 			break;
 		case 10:
-			// tries to withdraw 200 from the player, while it returns false, the player will be asked to get more money
-			while(player.getBankAccount().withdraw(200) == false)
+			// tries to withdraw 200 from the player, if it returns false, the player will be asked to get more money
+			if(player.getBankAccount().withdraw(200) == false) {
 				SequenceController.getMoneySequence(player, null, gameBoard, playerList, 200);
+			}
+			// if he wasn't declared bankrupt during the sequence to get money, he will be charged what he owes
+			if(player.getBankAccount().getBalance() > -1) {
+				player.getBankAccount().withdraw(200);
+			}
 			break;
 		case 11:
-			// tries to withdraw 1000 from the player, while it returns false, the player will be asked to get more money
-			while(player.getBankAccount().withdraw(1000) == false)
+			// tries to withdraw 1000 from the player, if it returns false, the player will be asked to get more money
+			if(player.getBankAccount().withdraw(1000) == false) {
 				SequenceController.getMoneySequence(player, null, gameBoard, playerList, 1000);
+			}
+			// if he wasn't declared bankrupt during the sequence to get money, he will be charged what he owes
+			if(player.getBankAccount().getBalance() > -1) {
+				player.getBankAccount().withdraw(1000);
+			}
 			break;
 		case 12:
-			// tries to withdraw 3000 from the player, while it returns false, the player will be asked to get more money
-			while(player.getBankAccount().withdraw(3000) == false)
+			// tries to withdraw 3000 from the player, if it returns false, the player will be asked to get more money
+			if(player.getBankAccount().withdraw(3000) == false) {
 				SequenceController.getMoneySequence(player, null, gameBoard, playerList, 3000);
+			}
+			// if he wasn't declared bankrupt during the sequence to get money, he will be charged what he owes
+			if(player.getBankAccount().getBalance() > -1) {
+				player.getBankAccount().withdraw(3000);
+			}
 			break;
 		case 13:
-			// tries to withdraw 1000 from the player, while it returns false, the player will be asked to get more money
-			while(player.getBankAccount().withdraw(1000) == false)
+			// tries to withdraw 1000 from the player, if it returns false, the player will be asked to get more money
+			if(player.getBankAccount().withdraw(1000) == false) {
 				SequenceController.getMoneySequence(player, null, gameBoard, playerList, 1000);
+			}
+			// if he wasn't declared bankrupt during the sequence to get money, he will be charged what he owes
+			if(player.getBankAccount().getBalance() > -1) {
+				player.getBankAccount().withdraw(1000);
+			}
 			break;
 		case 14:
-			// tries to withdraw 3000 from the player, while it returns false, the player will be asked to get more money
-			while(player.getBankAccount().withdraw(3000) == false)
+			// tries to withdraw 3000 from the player, if it returns false, the player will be asked to get more money
+			if(player.getBankAccount().withdraw(3000) == false) {
 				SequenceController.getMoneySequence(player, null, gameBoard, playerList, 3000);
+			}
+			// if he wasn't declared bankrupt during the sequence to get money, he will be charged what he owes
+			if(player.getBankAccount().getBalance() > -1) {
+				player.getBankAccount().withdraw(3000);
+			}
 			break;
 		case 15:
-			// tries to withdraw 2000 from the player, while it returns false, the player will be asked to get more money
-			while(player.getBankAccount().withdraw(2000) == false)
+			// tries to withdraw 2000 from the player, if it returns false, the player will be asked to get more money
+			if(player.getBankAccount().withdraw(2000) == false) {
 				SequenceController.getMoneySequence(player, null, gameBoard, playerList, 2000);
+			}
+			// if he wasn't declared bankrupt during the sequence to get money, he will be charged what he owes
+			if(player.getBankAccount().getBalance() > -1) {
+				player.getBankAccount().withdraw(2000);
+			}
 			break;
 		case 16:
-			// tries to withdraw 200 from the player, while it returns false, the player will be asked to get more money
-			while(player.getBankAccount().withdraw(200) == false)
+			// tries to withdraw 200 from the player, if it returns false, the player will be asked to get more money
+			if(player.getBankAccount().withdraw(200) == false) {
 				SequenceController.getMoneySequence(player, null, gameBoard, playerList, 200);
+			}
+			// if he wasn't declared bankrupt during the sequence to get money, he will be charged what he owes
+			if(player.getBankAccount().getBalance() > -1) {
+				player.getBankAccount().withdraw(200);
+			}
 			break;
 		case 17:
 
@@ -122,10 +163,14 @@ public class Chance extends Field {
 						amountToPay += 2300;
 				}
 
-			// tries to withdraw the amount to pay from the player, while it returns false, the player will be asked to get more money
-			while(player.getBankAccount().withdraw(amountToPay) == false)
+			// tries to withdraw the amount to pay from the player, if it returns false, the player will be asked to get more money
+			if(player.getBankAccount().withdraw(amountToPay) == false) {
 				SequenceController.getMoneySequence(player, null, gameBoard, playerList, amountToPay);
-
+			}
+			// if he wasn't declared bankrupt during the sequence to get money, he will be charged what he owes
+			if(player.getBankAccount().getBalance() > -1) {
+				player.getBankAccount().withdraw(amountToPay);
+			}
 			break;
 		case 18:
 
@@ -146,10 +191,14 @@ public class Chance extends Field {
 						amountToPay1 += 2000;
 				}
 
-			// tries to withdraw the amount to pay from the player, while it returns false, the player will be asked to get more money
-			while(player.getBankAccount().withdraw(amountToPay1) == false)
+			// tries to withdraw the amount to pay from the player, if it returns false, the player will be asked to get more money
+			if(player.getBankAccount().withdraw(amountToPay1) == false) {
 				SequenceController.getMoneySequence(player, null, gameBoard, playerList, amountToPay1);
-
+			}
+			// if he wasn't declared bankrupt during the sequence to get money, he will be charged what he owes
+			if(player.getBankAccount().getBalance() > -1) {
+				player.getBankAccount().withdraw(amountToPay1);
+			}
 			break;
 		case 19:
 			// player gets 1 added to his get out of jail count
