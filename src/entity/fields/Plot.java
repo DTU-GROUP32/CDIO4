@@ -72,26 +72,4 @@ public class Plot extends Ownable {
 		constructionRate--;
 		return true;
 	}
-	
-	// all methods under this line are default methods
-
-	@Override
-	public int getBonus() {
-		return 0;
-	}
-
-	@Override
-	public int getTaxAmount() {
-		return 0;
-	}
-
-	@Override
-	public int getTaxRate() {
-		return 0;
-	}
-
-	@Override
-	public int getTopCardNumber() {
-		return 0;
-	}
 }
