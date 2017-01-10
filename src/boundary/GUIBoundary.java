@@ -70,13 +70,7 @@ public class GUIBoundary {
 						.setTitle(language.fieldNames(i))
 						.setSubText(language.fieldPrices(gameBoard.getField(i).getPrice()))
 						.setBgColor(getPropertyGroupColor(gameBoard.getField(i).getPropertyGroup()))
-						.setDescription(
-								" - Kun grund: " + gameBoard.getField(i).getRentArray()[0] + " | " +
-										"1 hus: " + gameBoard.getField(i).getRentArray()[1] + " | " +
-										"2 huse: " + gameBoard.getField(i).getRentArray()[2] + " | " +
-										"3 huse: " + gameBoard.getField(i).getRentArray()[3] + " | " +
-										"4 huse: " + gameBoard.getField(i).getRentArray()[4] + " | " +
-										"Hotel: " + gameBoard.getField(i).getRentArray()[5])
+						.setDescription(language.fieldInfo(gameBoard.getField(i).getRentArray(), gameBoard.getField(i).getPrice(), gameBoard.getField(i).getConstructionPrice()))
 						.build();
 			}else if(gameBoard.getField(i) instanceof entity.fields.Refuge){
 				fields[i] = new Refuge.Builder()
