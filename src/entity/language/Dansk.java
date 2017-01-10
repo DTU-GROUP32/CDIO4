@@ -139,6 +139,18 @@ public class Dansk implements Language{
 		return "kr. " + fieldPrice;
 	}
 
+	@Override 
+	public String fieldInfo(int[] fieldRent, int fieldPrice, int constructionPrice) { 
+		return " - Kun grund: " + fieldRent[0] + " | " + 
+				"1 hus: " + fieldRent[1] + " | " + 
+				"2 huse: " + fieldRent[2] + " | " + 
+				"3 huse: " + fieldRent[3] + " | " + 
+				"4 huse: " + fieldRent[4] + " | " + 
+				"Hotel: " + fieldRent[5] + " | " + 
+				"Pris per bygning: " + constructionPrice + " | " + 
+				"Oprindelig pris: " + fieldPrice; 
+	} 
+
 	@Override
 	public String readyToBegin(){
 		return "Spillet vil nu begynde. Spillet er vundet af den spiller der står tilbage når de andre er bankerot!";
@@ -168,7 +180,7 @@ public class Dansk implements Language{
 	public String useGetOutOfJail() {
 		return "Indfri benådning";
 	}
-	
+
 	@Override
 	public String preMsg(Player player){
 		return "Det er " + player.getName() + "'s tur, tryk på en knap!";
@@ -178,7 +190,7 @@ public class Dansk implements Language{
 	public String build() {
 		return "Bygge";
 	}
-	
+
 	@Override
 	public String trade(){
 		return "Handle";
@@ -213,7 +225,7 @@ public class Dansk implements Language{
 	public String attemptAtRollingOutOfJailUnsuccessful() {
 		return  "Du slog desværre ikke to ens og bliver i fængsel.";
 	}
-	
+
 	@Override
 	public String youGetJailedForThreeTimesEqual() {
 		return "De fængles for at have slået to ens 3 gange i træk!";
@@ -222,7 +234,7 @@ public class Dansk implements Language{
 	@Override
 	public String getChanceCardMsg(int topCardNumber) {
 		String chanceCardMsg = null;
-		
+
 		switch(topCardNumber) {
 		case 1:
 			chanceCardMsg = "Modtag udbytte af Deres aktier kr. 1000.";
@@ -309,14 +321,14 @@ public class Dansk implements Language{
 			chanceCardMsg = "Prøv lykken";
 			break;
 		}
-		
+
 		return chanceCardMsg;
 	}
 
 	@Override
 	public String fieldMsg(int fieldNumber){		
 		String fieldString = null;
-		
+
 		switch (fieldNumber) {
 		case 2:
 		case 7:
@@ -342,9 +354,9 @@ public class Dansk implements Language{
 		default:
 			fieldString = "Du er landet på " + fieldNames(fieldNumber) + ".";
 			break;
-			
+
 		}
-		
+
 		return fieldString;
 	}
 
@@ -352,7 +364,7 @@ public class Dansk implements Language{
 	public String landedOnOwnedField(Player owner) {
 		return "Dette felt ejes af " + owner.getName() + ", det kommer til at koste!";
 	}
-	
+
 	@Override
 	public String youPaidThisMuchToThisPerson(int amountPayed, Player owner) {
 		return "Du betalte " + amountPayed + " kr. til " + owner.getName() + ".";
@@ -362,58 +374,58 @@ public class Dansk implements Language{
 	public String landedOnOwnedFieldOwnerIsInJail(Player owner) {
 		return "Dette felt ejes af " + owner.getName() + ", men han er i fængsel! Så du slipper for at betale ;)";
 	}
-	
+
 	@Override
 	public String youOwnThisField() {
 		return "Slap af! Du ejer selv dette felt ;)";
 	}
-	
+
 	@Override
 	public String getTaxChoice() {
 		return "Du kan vælge enten at betale 4000 kr eller 10% af din pengebeholdning,"
 				+ "\nvil du betale 10%?";
 	}
-	
+
 	@Override
 	public String notBuildable(){
 		return "Du har ingen grunde du kan bygge på.";
 	}
-	
+
 	@Override
 	public String choosePlotToBuildOn(){
 		return "Vælg en grund at bygge på.";
 	}
-	
+
 	@Override
 	public String noDemolitionableProperties(){
 		return "Du har ingen grunde hvor du kan nedrive bygninger.";
 	}
-	
+
 	@Override
 	public String choosePropertyToDemolishOn(){
 		return "Vælg den grund hvor du vil nedrive en bygning.";
 	}
-	
+
 	@Override
 	public String noTradeableProperties(){
 		return "Du har ingen felter at handle med.";
 	}
-	
+
 	@Override
 	public String choosePropertyToTrade(){
 		return "Vælg det felt du vil handle.";
 	}
-	
+
 	@Override
 	public String choosePropertyBuyer(){
 		return "Hvem køber feltet?";
 	}
-	
+
 	@Override
 	public String enterPropertyTradePrice(){
 		return "Hvilken pris skal feltet sælges til?";
 	}
-	
+
 	@Override
 	public String confirmPropertyTrade(String fieldName, String buyerName, int price){
 		return "Er du sikker på, at du vil sælge \"" + fieldName + "\" til " + buyerName + " for kr. " + price + "?";
@@ -423,7 +435,7 @@ public class Dansk implements Language{
 	public String propertyTradeConfirmation(String buyerName, int price) {
 		return buyerName + " har nu købt feltet til kr. " + price + "!";
 	}
-	
+
 	@Override
 	public String yes() {
 		return "Ja!";
@@ -453,52 +465,52 @@ public class Dansk implements Language{
 	public String getOutOfJailCardPurchaseConfirmation() {
 		return "Du har nu købt løsladelseskortet!";
 	}
-	
+
 	@Override
 	public String noPawnableFields(){
 		return "Du har ingen felter at pantsætte.";
 	}
-	
+
 	@Override
 	public String choosePropertyToPawn(){
 		return "Vælg et felt at pantsætte.";
 	}
-	
+
 	@Override
 	public String pawnSuccessful(){
 		return "Din grund er blevet pantsat.";
 	}
-	
+
 	@Override 
 	public String pawnUnsuccessful(){
 		return "Din grund kunne ikke pantsættes.";
 	}
-	
+
 	@Override 
 	public String noPawnedProperties(){
 		return "Du har ingen felter at hæve pantsætningen på.";
 	}
-	
+
 	@Override 
 	public String choosePropertyToUndoPawn(){
 		return "Vælg en grund at hæve pantsætningen på.";
 	}
-	
+
 	@Override 
 	public String undoPawnSuccessful(){
 		return "Din pantsætning er blevet indfriet";
 	}
-	
+
 	@Override
 	public String undoPawnUnsuccessful(){
 		return "Din pantsætning kunne ikke indfries";
 	}
-	
+
 	@Override
 	public String buyingOfferMsg(int price) {
 		return "Dette felt er ikke ejet af nogen, vil du købe det for " + price + " kr.?";
 	}
-	
+
 	@Override
 	public String propertyPurchaseConfirmation() {
 		return "Du har nu købt feltet!";
@@ -508,12 +520,12 @@ public class Dansk implements Language{
 	public String notEnoughMoney() {
 		return "Du havde desværre ikke nok penge..";
 	}
-	
+
 	@Override
 	public String auctionNotification() {
 		return "Da spilleren der landede på dette felt ikke købte feltet, kan det nu købes af banken på auktion, feltets oprindelige pris er mindste prisen. Er der nogle andre der ønsker at købe feltet?";
 	}
-	
+
 	@Override
 	public String enterAuctionPrice(){
 		return "Hvad blev auktionsprisen?";
@@ -528,27 +540,27 @@ public class Dansk implements Language{
 	public String wantToRunAuctionSequenceAgain() {
 		return "Vil du køre denne auktions sekvens igen?";
 	}
-	
+
 	@Override
 	public String pawn(){
 		return "Pantsæt";
 	}
-	
+
 	@Override
 	public String demolish(){
 		return "Nedriv bygninger";
 	}
-	
+
 	@Override
 	public String bankrupt(){
 		return "Erklær konkurs";
 	}
-	
+
 	@Override
 	public String getMoneySequenceStatus(String debitorName, int targetAmount, int amountToGet){
 		return debitorName + " ,du skal betale kr. " + targetAmount + ", men du mangler kr. " + amountToGet + ", hvad vil du gøre?";
 	}
-	
+
 	@Override
 	public String canGetMoney(){
 		return "Du kan godt få nok penge, ved at nedrive bygninger og pantsætte ejendomme!";
