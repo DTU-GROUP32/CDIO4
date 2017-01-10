@@ -583,5 +583,16 @@ public class Dansk implements Language{
 	public String confirmUndoPawn(String fieldName) {
 		return "Er du sikker på, at du vil hæve pantsætningen på " + fieldName +"?";
 	}
+
+	@Override
+	public String landedOnOwnedFieldButItsPawned(Player ownerOfField) {
+		return "Dette felt ejes af " + ownerOfField.getName() + ", men feltet er pantsat! Så du slipper for at betale ;)";
+	}
+
+	@Override
+	public String landedOnOwnedFieldHasToPayDoubleRent(Player owner) {
+		// TODO Auto-generated method stub
+		return "Dette felt ejes af " + owner.getName() + ", det kommer til at koste to gange den leje, han ellers er berettiget til!";
+	}
 }
 

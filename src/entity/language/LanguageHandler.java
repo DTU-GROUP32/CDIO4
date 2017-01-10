@@ -325,4 +325,12 @@ public class LanguageHandler {
 	public String confirmUndoPawn(String fieldName) {
 		return selectedLanguage.confirmUndoPawn(fieldName);
 	}
+
+	public String landedOnOwnedFieldButItsPawned(Player ownerOfField) {
+		return selectedLanguage.landedOnOwnedFieldButItsPawned(ownerOfField);
+	}
+
+	public String landedOnOwnedFieldHasToPayDoubleRent(Player owner) {
+		return selectedLanguage.landedOnOwnedFieldHasToPayDoubleRent(owner);
+	}
 }

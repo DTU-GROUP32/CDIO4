@@ -145,5 +145,9 @@ public interface Language {
 	String wantToRunVoluntaryGetMoneySequence(String debitorName);
 
 	String confirmUndoPawn(String fieldName);
+
+	String landedOnOwnedFieldButItsPawned(Player ownerOfField);
+
+	String landedOnOwnedFieldHasToPayDoubleRent(Player owner);
 }
 
