@@ -109,7 +109,7 @@ public class GameBoard {
 			} else {
 				return false;
 			}
-		} else {
+		} else if(propertyGroup.length == 3) {
 			// if the owner of the first property is the same as the second and third property
 			if(propertyGroup[0].getOwner() == propertyGroup[1].getOwner() && propertyGroup[0].getOwner() == propertyGroup[2].getOwner()) {
 				return true;
@@ -117,6 +117,7 @@ public class GameBoard {
 				return false;
 			}
 		}
+		return false;
 	}
 
 	/**

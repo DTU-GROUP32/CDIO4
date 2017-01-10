@@ -603,7 +603,6 @@ public class Dansk implements Language{
 
 	@Override
 	public String landedOnOwnedFieldHasToPayDoubleRent(Player owner) {
-		// TODO Auto-generated method stub
 		return "Dette felt ejes af " + owner.getName() + ", det kommer til at koste to gange den leje, han ellers er berettiget til!";
 	}
 }
