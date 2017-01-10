@@ -49,14 +49,19 @@ public abstract class SequenceController {
 			} else {
 				// if the field has an owner and the player landing on the field, isn't the owner
 				if (!field.getOwner().getName().equals(player.getName())) {
-					// and if the owner isn't in jail, the player landing on the field pays rent to the owner
+					// and if the owner isn't in jail
 					if(!field.getOwner().isPlayerInJail()) {
-						boundary.getButtonPressed(language.landedOnOwnedField(ownerOfField));
-						field.landOnField(player, roll, gameBoard, playerList, false);
-						boundary.updateGUI(gameBoard, playerList);
-						// if the player didn't declare bankruptcy, a message will display how much was paid to who
-						if(!player.isPlayerBroke()) {
-							boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(field.getRent(gameBoard, roll), ownerOfField));
+						// and the field ins't pawned, the player landing on the field pays rent to the owner
+						if(!field.isPawned()) {
+							boundary.getButtonPressed(language.landedOnOwnedField(ownerOfField));
+							field.landOnField(player, roll, gameBoard, playerList, false);
+							boundary.updateGUI(gameBoard, playerList);
+							// if the player didn't declare bankruptcy, a message will display how much was paid to who
+							if(!player.isPlayerBroke()) {
+								boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(field.getRent(gameBoard, roll), ownerOfField));
+							}
+						} else {
+							boundary.getButtonPressed(language.landedOnOwnedFieldButItsPawned(ownerOfField));
 						}
 					} else {
 						boundary.getButtonPressed(language.landedOnOwnedFieldOwnerIsInJail(ownerOfField));
@@ -539,5 +544,42 @@ public abstract class SequenceController {
 			}
 		}
 		return playerLabels;
+	}
+
+	/**
+	 * Method that handles the sequence of paying double rent on a shipping line.
+	 * @param player
+	 * @param gameBoard
+	 * @param playerList
+	 */
+	public static void payDoubleRentOnShippingLineSequence(Player player, GameBoard gameBoard, PlayerList playerList) {
+		
+		GUIBoundary boundary = GUIBoundary.getInstance();
+		LanguageHandler language = LanguageHandler.getInstance();
+		Field field = gameBoard.getField(player.getOnField());
+		
+		// if the  player landing on the field, isn't the owner
+		if (!field.getOwner().getName().equals(player.getName())) {
+			// and if the owner isn't in jail
+			if(!field.getOwner().isPlayerInJail()) {
+				// and the field ins't pawned, the player landing on the field pays rent to the owner
+				if(!field.isPawned()) {
+					boundary.getButtonPressed(language.landedOnOwnedFieldHasToPayDoubleRent(field.getOwner()));
+					field.landOnField(player, 0, gameBoard, playerList, false);
+					field.landOnField(player, 0, gameBoard, playerList, false);
+					boundary.updateGUI(gameBoard, playerList);
+					// if the player didn't declare bankruptcy, a message will display how much was paid to who
+					if(!player.isPlayerBroke()) {
+						boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(field.getRent(gameBoard, 0) * 2, field.getOwner()));
+					}
+				} else {
+					boundary.getButtonPressed(language.landedOnOwnedFieldButItsPawned(field.getOwner()));
+				}
+			} else {
+				boundary.getButtonPressed(language.landedOnOwnedFieldOwnerIsInJail(field.getOwner()));
+			}
+		} else {
+			boundary.getButtonPressed(language.youOwnThisField());
+		}
 	}
 }

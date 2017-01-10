@@ -186,8 +186,7 @@ public class Chance extends Field {
 			else player.movePlayer(5-player.getOnField());
 			// if the field is owned the player pays double rent
 			if(gameBoard.getField(player.getOnField()).getOwner() != null) {
-				gameBoard.getField(player.getOnField()).landOnField(player, 0, gameBoard, playerList, false);
-				gameBoard.getField(player.getOnField()).landOnField(player, 0, gameBoard, playerList, false);
+				SequenceController.payDoubleRentOnShippingLineSequence(player, gameBoard, playerList);
 			}
 			// else the player can buy the shipping line
 			else {
@@ -205,14 +204,8 @@ public class Chance extends Field {
 			else if(player.getOnField() > 34)
 				player.movePlayer(45-player.getOnField());
 			else player.movePlayer(5-player.getOnField());
-			// if the field is owned the player pays rent
-			if(gameBoard.getField(player.getOnField()).getOwner() != null) {
-				gameBoard.getField(player.getOnField()).landOnField(player, 0, gameBoard, playerList, false);
-			}
-			// else the player can buy the shipping line
-			else {
-				SequenceController.buyPropertySequence(player, gameBoard.getField(player.getOnField()), gameBoard, playerList);
-			}
+			// according to the rules a landOnFieldSequence has to be executed when a player gets moved to a field by a chance card
+			SequenceController.landOnFieldSequence(player, roll, gameBoard, playerList);
 			break;
 		case 23:
 			// moves the player to the field 24(logic)
