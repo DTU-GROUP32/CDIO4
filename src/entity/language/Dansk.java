@@ -138,18 +138,6 @@ public class Dansk implements Language{
 	public String fieldPrices(int fieldPrice) {
 		return "kr. " + fieldPrice;
 	}
-	
-	@Override
-	public String fieldInfo(int[] fieldRent, int fieldPrice, int constructionPrice) {
-		return " - Kun grund: " + fieldRent[0] + " | " +
-				"1 hus: " + fieldRent[1] + " | " +
-				"2 huse: " + fieldRent[2] + " | " +
-				"3 huse: " + fieldRent[3] + " | " +
-				"4 huse: " + fieldRent[4] + " | " +
-				"Hotel: " + fieldRent[5] + " | " +
-				"Pris per bygning: " + constructionPrice + " | " +
-				"Oprindelig pris: " + fieldPrice;
-	}
 
 	@Override
 	public String readyToBegin(){
