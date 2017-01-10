@@ -56,7 +56,7 @@ public class Chance extends Field {
 				if(playerList.getPlayer(i).getBankAccount().getBalance() < 200) {
 					// and if the player isn't the receiver, he will be asked to get more money
 					if(playerList.getPlayer(i) != player) {
-						SequenceController.getMoneySequence(playerList.getPlayer(i), player, false, gameBoard, playerList, 200);
+						SequenceController.getMoneySequence(playerList.getPlayer(i), player, false, gameBoard, playerList, 200, false);
 					}
 				}
 			}
@@ -77,43 +77,43 @@ public class Chance extends Field {
 		case 10:
 			// tries to withdraw 200 from the player, if it returns false, the player will be asked to get more money
 			if(player.getBankAccount().withdraw(200) == false) {
-				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, 200);
+				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, 200, false);
 			}
 			break;
 		case 11:
 			// tries to withdraw 1000 from the player, if it returns false, the player will be asked to get more money
 			if(player.getBankAccount().withdraw(1000) == false) {
-				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, 1000);
+				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, 1000, false);
 			}
 			break;
 		case 12:
 			// tries to withdraw 3000 from the player, if it returns false, the player will be asked to get more money
 			if(player.getBankAccount().withdraw(3000) == false) {
-				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, 3000);
+				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, 3000, false);
 			}
 			break;
 		case 13:
 			// tries to withdraw 1000 from the player, if it returns false, the player will be asked to get more money
 			if(player.getBankAccount().withdraw(1000) == false) {
-				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, 1000);
+				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, 1000, false);
 			}
 			break;
 		case 14:
 			// tries to withdraw 3000 from the player, if it returns false, the player will be asked to get more money
 			if(player.getBankAccount().withdraw(3000) == false) {
-				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, 3000);
+				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, 3000, false);
 			}
 			break;
 		case 15:
 			// tries to withdraw 2000 from the player, if it returns false, the player will be asked to get more money
 			if(player.getBankAccount().withdraw(2000) == false) {
-				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, 2000);
+				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, 2000, false);
 			}
 			break;
 		case 16:
 			// tries to withdraw 200 from the player, if it returns false, the player will be asked to get more money
 			if(player.getBankAccount().withdraw(200) == false) {
-				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, 200);
+				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, 200, false);
 			}
 			break;
 		case 17:
@@ -137,7 +137,7 @@ public class Chance extends Field {
 
 			// tries to withdraw the amount to pay from the player, if it returns false, the player will be asked to get more money
 			if(player.getBankAccount().withdraw(amountToPay) == false) {
-				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, amountToPay);
+				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, amountToPay, false);
 			}
 			break;
 		case 18:
@@ -161,7 +161,7 @@ public class Chance extends Field {
 
 			// tries to withdraw the amount to pay from the player, if it returns false, the player will be asked to get more money
 			if(player.getBankAccount().withdraw(amountToPay1) == false) {
-				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, amountToPay1);
+				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, amountToPay1, false);
 			}
 			break;
 		case 19:

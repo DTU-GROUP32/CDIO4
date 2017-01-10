@@ -130,7 +130,7 @@ public interface Language {
 
 	String bankrupt();
 
-	String getMoneySequenceStatus(int targetAmount, int amountToGet);
+	String getMoneySequenceStatus(String debitorName, int targetAmount, int amountToGet);
 
 	String canGetMoney();
 
@@ -142,7 +142,7 @@ public interface Language {
 
 	String wantToUndoPawnWithoutInterest();
 
-	String wantToRunVoluntaryGetMoneySequence();
+	String wantToRunVoluntaryGetMoneySequence(String debitorName);
 
 	String confirmUndoPawn(String fieldName);
 }

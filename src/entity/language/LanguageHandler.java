@@ -294,8 +294,8 @@ public class LanguageHandler {
 		return selectedLanguage.bankrupt();
 	}
 
-	public String getMoneySequenceStatus(int targetAmount, int amountToGet){ 
-		return selectedLanguage.getMoneySequenceStatus(targetAmount, amountToGet);
+	public String getMoneySequenceStatus(String debitorName, int targetAmount, int amountToGet){ 
+		return selectedLanguage.getMoneySequenceStatus(debitorName, targetAmount, amountToGet);
 	}
 
 	public String canGetMoney(){ 
@@ -318,8 +318,8 @@ public class LanguageHandler {
 		return selectedLanguage.wantToUndoPawnWithoutInterest();
 	}
 
-	public String wantToRunVoluntaryGetMoneySequence() {
-		return selectedLanguage.wantToRunVoluntaryGetMoneySequence();
+	public String wantToRunVoluntaryGetMoneySequence(String debitorName) {
+		return selectedLanguage.wantToRunVoluntaryGetMoneySequence(debitorName);
 	}
 
 	public String confirmUndoPawn(String fieldName) {

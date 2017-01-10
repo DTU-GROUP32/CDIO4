@@ -69,7 +69,7 @@ public class Plot extends Ownable {
 				return true;
 			} else {
 				// if it was because the player didn't have enough money
-				SequenceController.getMoneySequence(owner, null, false, gameBoard, playerList, 0);
+				SequenceController.getMoneySequence(owner, null, false, gameBoard, playerList, constructionPrice, true);
 				// request is only executed if the player got enough money
 				if(owner.getBankAccount().withdraw(constructionPrice)) {
 					constructionRate++;

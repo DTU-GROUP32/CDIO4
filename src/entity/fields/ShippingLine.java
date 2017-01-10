@@ -36,7 +36,7 @@ public class ShippingLine extends Ownable {
 			numberOfShippingLinesOwnedByEachPlayer[player.getID()]++;
 			return true;
 		} else {
-			SequenceController.getMoneySequence(player, null, false, gameBoard, playerList, 0);
+			SequenceController.getMoneySequence(player, null, false, gameBoard, playerList, price, true);
 			// request is only executed if the player got enough money
 			if(player.getBankAccount().withdraw(price)) {
 				this.setOwner(player);
@@ -56,7 +56,7 @@ public class ShippingLine extends Ownable {
 			numberOfShippingLinesOwnedByEachPlayer[buyer.getID()]++;
 			return true;
 		} else {
-			SequenceController.getMoneySequence(buyer, null, false, gameBoard, playerList, 0);
+			SequenceController.getMoneySequence(buyer, null, false, gameBoard, playerList, price, true);
 			// request is only executed if the player got enough money
 			if(buyer.getBankAccount().transfer(seller, price)) {
 				this.setOwner(buyer);

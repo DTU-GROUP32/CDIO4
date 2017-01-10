@@ -545,8 +545,8 @@ public class Dansk implements Language{
 	}
 	
 	@Override
-	public String getMoneySequenceStatus(int targetAmount, int amountToGet){
-		return "Du skal betale kr. " + targetAmount + ", men du mangler kr. " + amountToGet + ", hvad vil du gøre?";
+	public String getMoneySequenceStatus(String debitorName, int targetAmount, int amountToGet){
+		return debitorName + " ,du skal betale kr. " + targetAmount + ", men du mangler kr. " + amountToGet + ", hvad vil du gøre?";
 	}
 	
 	@Override
@@ -575,9 +575,8 @@ public class Dansk implements Language{
 	}
 
 	@Override
-	public String wantToRunVoluntaryGetMoneySequence() {
-		// TODO Auto-generated method stub
-		return "Du har sagt at du ønsker at bruge flere penge end der er på din bankkonto, ønsker du at frigøre penge?";
+	public String wantToRunVoluntaryGetMoneySequence(String debitorName) {
+		return debitorName + " ,du har sagt at du ønsker at bruge flere penge end der er på din bankkonto, ønsker du at frigøre penge?";
 	}
 
 	@Override

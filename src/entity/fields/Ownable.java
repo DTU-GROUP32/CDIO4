@@ -62,7 +62,7 @@ public abstract class Ownable extends Field {
 		if(this.owner.isPlayerInJail() == false && this.pawned == false) {
 			// if the player can't pay a sequence to get money is executed
 			if(player.getBankAccount().transfer(owner, this.getRent(gameBoard, roll)) == false) {
-				SequenceController.getMoneySequence(player, this.owner, true, gameBoard, playerList, this.getRent(gameBoard, roll));
+				SequenceController.getMoneySequence(player, this.owner, true, gameBoard, playerList, this.getRent(gameBoard, roll), false);
 			}
 		}
 	}
@@ -78,7 +78,7 @@ public abstract class Ownable extends Field {
 			this.setOwner(player);
 			return true;
 		} else {
-			SequenceController.getMoneySequence(player, null, false, gameBoard, playerList, 0);
+			SequenceController.getMoneySequence(player, null, false, gameBoard, playerList, price, true);
 			// request is only executed if the player got enough money
 			if(player.getBankAccount().withdraw(price)) {
 				this.setOwner(player);
@@ -95,7 +95,7 @@ public abstract class Ownable extends Field {
 			this.setOwner(buyer);
 			return true;
 		} else {
-			SequenceController.getMoneySequence(buyer, null, false, gameBoard, playerList, 0);
+			SequenceController.getMoneySequence(buyer, null, false, gameBoard, playerList, price, true);
 			// request is only executed if the player got enough money
 			if(buyer.getBankAccount().transfer(seller, price)) {
 				this.setOwner(buyer);
@@ -125,7 +125,7 @@ public abstract class Ownable extends Field {
 				return true;
 			} else {
 				// if it was because the player didn't have enough money
-				SequenceController.getMoneySequence(owner, null, false, gameBoard, playerList, 0);
+				SequenceController.getMoneySequence(owner, null, false, gameBoard, playerList, pawnValue * 110 / 100, true);
 				// request is only executed if the player got enough money
 				if(this.owner.getBankAccount().withdraw(pawnValue * 110 / 100)) {
 					this.pawned = false;
@@ -146,7 +146,7 @@ public abstract class Ownable extends Field {
 				return true;
 			} else {
 				// if it was because the player didn't have enough money
-				SequenceController.getMoneySequence(owner, null, false, gameBoard, playerList, 0);
+				SequenceController.getMoneySequence(owner, null, false, gameBoard, playerList, pawnValue, true);
 				// request is only executed if the player got enough money
 				if(this.owner.getBankAccount().withdraw(pawnValue)) {
 					this.pawned = false;

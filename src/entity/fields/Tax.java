@@ -37,14 +37,14 @@ public class Tax extends Field {
 		if (taxChoice) {
 			// if the player can't pay a sequence to get money is executed
 			if(player.getBankAccount().withdraw(player.getTotalAssetsForTaxPurposes(gameBoard) * taxRate / 100) == false) {
-				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, player.getTotalAssetsForTaxPurposes(gameBoard) * taxRate / 100);
+				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, player.getTotalAssetsForTaxPurposes(gameBoard) * taxRate / 100, false);
 			}
 		} 
 		// else the player pays the fixed tax amount
 		else {
 			// if the player can't pay a sequence to get money is executed
 			if(player.getBankAccount().withdraw(taxAmount) == false) {
-				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, taxAmount);
+				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, taxAmount, false);
 			}
 		}
 

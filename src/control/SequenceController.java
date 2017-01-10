@@ -95,7 +95,7 @@ public abstract class SequenceController {
 			player.setPlayerInJail(false);
 			boundary.updateGUI(gameBoard, playerList);
 		} else {
-			SequenceController.getMoneySequence(player, null, false, gameBoard, playerList, 0);
+			SequenceController.getMoneySequence(player, null, false, gameBoard, playerList, 1000, true);
 			// request is only executed if the player got enough money
 			if(player.getBankAccount().withdraw(1000)) {
 				player.setPlayerInJail(false);
@@ -269,7 +269,7 @@ public abstract class SequenceController {
 				boundary.updateGUI(gameBoard, playerList);
 				boundary.getButtonPressed(language.getOutOfJailCardPurchaseConfirmation());
 			} else {
-				SequenceController.getMoneySequence(buyerObject, null, false, gameBoard, playerList, 0);
+				SequenceController.getMoneySequence(buyerObject, null, false, gameBoard, playerList, price, true);
 				// request is only executed if the player got enough money
 				if(buyerObject.getBankAccount().transfer(owner, price)) {
 					// transfers the "get out of jail" card
@@ -438,7 +438,7 @@ public abstract class SequenceController {
 	 * @param playerList
 	 * @param targetAmount
 	 */
-	public static void getMoneySequence(Player debitor, Player creditor, Boolean withDebtSettlement, GameBoard gameBoard, PlayerList playerList, int targetAmount) {
+	public static void getMoneySequence(Player debitor, Player creditor, Boolean withDebtSettlement, GameBoard gameBoard, PlayerList playerList, int targetAmount, Boolean voluntaryGetMoneySequence) {
 
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
@@ -448,12 +448,12 @@ public abstract class SequenceController {
 			// loop that continues until the player has enough money to pay his debt
 			do {
 				// gets user choices
-				if(targetAmount == 0) {
-					if(!boundary.getBoolean(language.wantToRunVoluntaryGetMoneySequence(), language.yes(), language.no())) {
+				if(voluntaryGetMoneySequence) {
+					if(!boundary.getBoolean(language.wantToRunVoluntaryGetMoneySequence(debitor.getName()), language.yes(), language.no())) {
 						break getMoneySeq;
 					}
 				}
-				String choice = boundary.getUserSelection(language.getMoneySequenceStatus(targetAmount, targetAmount - debitor.getBankAccount().getBalance()), options);
+				String choice = boundary.getUserSelection(language.getMoneySequenceStatus(debitor.getName(), targetAmount, targetAmount - debitor.getBankAccount().getBalance()), options);
 
 				// handles which other sequence to run by the users choice
 				if(choice.equals(language.pawn())) {
