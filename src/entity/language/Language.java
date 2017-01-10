@@ -15,6 +15,8 @@ public interface Language {
 	String fieldNames(int fieldNumber);
 
 	String fieldPrices(int fieldPrice);
+	
+	String fieldInfo(int[] fieldRent, int fieldPrice, int constructionPrice);
 
 	String readyToBegin();
 
@@ -138,16 +140,5 @@ public interface Language {
 
 	String confirmBuild(int constructionPrice, String fieldName);
 
-	String confirmDemolition(String fieldName);
-
-	String wantToUndoPawnWithoutInterest();
-
-	String wantToRunVoluntaryGetMoneySequence(String debitorName);
-
-	String confirmUndoPawn(String fieldName);
-
-	String landedOnOwnedFieldButItsPawned(Player ownerOfField);
-
-	String landedOnOwnedFieldHasToPayDoubleRent(Player owner);
 }
 
