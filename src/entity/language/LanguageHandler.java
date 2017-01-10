@@ -65,6 +65,10 @@ public class LanguageHandler {
 	public String fieldPrices(int fieldPrice) {
 		return selectedLanguage.fieldPrices(fieldPrice);
 	}
+	
+	public String fieldInfo(int[] fieldRent, int fieldPrice, int constructionPrice) { 
+		return selectedLanguage.fieldInfo(fieldRent, fieldPrice, constructionPrice); 
+	} 
 
 	public String readyToBegin(){
 		return selectedLanguage.readyToBegin();
