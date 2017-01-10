@@ -101,12 +101,22 @@ public class GameBoard {
 	 * @return
 	 */
 	public boolean evalPropertyGroupSameOwner(Field[] propertyGroup) {
-		boolean ownedBySame;
-		if(propertyGroup.length == 2)
-			ownedBySame = propertyGroup[0].getOwner() == propertyGroup[1].getOwner();
-		else ownedBySame = propertyGroup[0].getOwner() == propertyGroup[1].getOwner() && propertyGroup[0].getOwner() == propertyGroup[2].getOwner();
-
-		return ownedBySame;
+		// if the property group has two properties
+		if(propertyGroup.length == 2) {
+			// if the owner is the same return true
+			if(propertyGroup[0].getOwner() == propertyGroup[1].getOwner()) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			// if the owner of the first property is the same as the second and third property
+			if(propertyGroup[0].getOwner() == propertyGroup[1].getOwner() && propertyGroup[0].getOwner() == propertyGroup[2].getOwner()) {
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 
 	/**
@@ -126,7 +136,7 @@ public class GameBoard {
 
 		return listOfProperties;
 	}
-	
+
 	/**
 	 * Returns a list of all the properties owned by the specified player, that doesn't have any buildings on them.
 	 * @param owner
@@ -174,7 +184,7 @@ public class GameBoard {
 				for(int j = 0; j < propertyGroup.length; j++) {
 					// if construction rate is equal to the smallest construction rate, then add to the buildable list
 					// this is to ensure the player is building evenly on the properties
-					if(propertyGroup[j].getConstructionRate() == smallestConstructionRate) {
+					if(propertyGroup[j].getConstructionRate() == smallestConstructionRate && !propertyGroup[j].isPawned()) {
 						listOfBuildableProperties.add(propertyGroup[j]);
 					}
 				}

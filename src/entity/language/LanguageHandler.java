@@ -146,6 +146,10 @@ public class LanguageHandler {
 		return selectedLanguage.youPaidThisMuchToThisPerson(amountPayed, owner);
 	}
 
+	public String landedOnOwnedFieldOwnerIsInJail(Player owner) {
+		return selectedLanguage.landedOnOwnedFieldOwnerIsInJail(owner);
+	}
+
 	public String youOwnThisField() {
 		return selectedLanguage.youOwnThisField();
 	}
@@ -290,8 +294,8 @@ public class LanguageHandler {
 		return selectedLanguage.bankrupt();
 	}
 
-	public String toPay(int targetAmount){ 
-		return selectedLanguage.toPay(targetAmount);
+	public String getMoneySequenceStatus(String debitorName, int targetAmount, int amountToGet){ 
+		return selectedLanguage.getMoneySequenceStatus(debitorName, targetAmount, amountToGet);
 	}
 
 	public String canGetMoney(){ 
@@ -300,5 +304,25 @@ public class LanguageHandler {
 
 	public String bankruptcyConcluded() {
 		return selectedLanguage.bankruptcyConcluded();
+	}
+
+	public String confirmBuild(int constructionPrice, String fieldName) {
+		return selectedLanguage.confirmBuild(constructionPrice, fieldName);
+	}
+
+	public String confirmDemolition(String fieldName) {
+		return selectedLanguage.confirmDemolition(fieldName);
+	}
+
+	public String wantToUndoPawnWithoutInterest() {
+		return selectedLanguage.wantToUndoPawnWithoutInterest();
+	}
+
+	public String wantToRunVoluntaryGetMoneySequence(String debitorName) {
+		return selectedLanguage.wantToRunVoluntaryGetMoneySequence(debitorName);
+	}
+
+	public String confirmUndoPawn(String fieldName) {
+		return selectedLanguage.confirmUndoPawn(fieldName);
 	}
 }

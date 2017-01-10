@@ -59,7 +59,7 @@ public abstract class Field {
 	 * @return bonus
 	 */
 	public int getBonus() {
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -67,7 +67,7 @@ public abstract class Field {
 	 * @return taxAmount
 	 */
 	public int getTaxAmount() {
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -75,7 +75,7 @@ public abstract class Field {
 	 * @return topCardNumber
 	 */
 	public int getTopCardNumber() {
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -89,7 +89,7 @@ public abstract class Field {
 	 * @return taxRate
 	 */
 	public int getTaxRate() {
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -97,7 +97,7 @@ public abstract class Field {
 	 * @return price
 	 */
 	public int getPrice() {
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -119,7 +119,7 @@ public abstract class Field {
 	 * @return pawnValue
 	 */
 	public int getPawnValue() {
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -140,7 +140,7 @@ public abstract class Field {
 	 * @param player
 	 * @return if the action was carried out
 	 */
-	public boolean buyField(Player player) {
+	public boolean buyField(Player player, GameBoard gameBoard, PlayerList playerList) {
 		return false;
 	}
 
@@ -150,7 +150,7 @@ public abstract class Field {
 	 * @param player
 	 * @return if the action was carried out
 	 */
-	public boolean buyField(Player player, int price) {
+	public boolean buyField(Player player, int price, GameBoard gameBoard, PlayerList playerList) {
 		return false;
 	}
 
@@ -161,7 +161,7 @@ public abstract class Field {
 	 * @param price
 	 * @return if the action was carried out
 	 */
-	public boolean tradeField(Player seller, Player buyer, int price) {
+	public boolean tradeField(Player seller, Player buyer, int price, GameBoard gameBoard, PlayerList playerList) {
 		return false;
 	}
 
@@ -177,7 +177,7 @@ public abstract class Field {
 	 * Undoes the pawn of the field(including money transactions).
 	 * @return if the action was carried out
 	 */
-	public boolean undoPawnField() {
+	public boolean undoPawnField(GameBoard gameBoard, PlayerList playerList) {
 		return false;
 	}
 
@@ -194,7 +194,7 @@ public abstract class Field {
 	 * @return calculated rent
 	 */
 	public int getRent(GameBoard gameBoard, int roll) {
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -202,7 +202,7 @@ public abstract class Field {
 	 * @return constructionPrice
 	 */
 	public int getConstructionPrice() {
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -210,7 +210,7 @@ public abstract class Field {
 	 * @return propertyGroup
 	 */
 	public int getPropertyGroup() {
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -218,7 +218,7 @@ public abstract class Field {
 	 * @return constructionRate
 	 */
 	public int getConstructionRate() {
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -240,6 +240,14 @@ public abstract class Field {
 	 * @return if the action was carried out
 	 */
 	public boolean sellConstruction() {
+		return false;
+	}
+	
+	/**
+	 * Undoes the pawn of the field without interest(including money transactions).
+	 * @return
+	 */
+	public boolean undoPawnFieldWithoutInterest(GameBoard gameBoard, PlayerList playerList) {
 		return false;
 	}
 }

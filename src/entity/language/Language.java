@@ -56,6 +56,8 @@ public interface Language {
 
 	String youPaidThisMuchToThisPerson(int amountPayed, Player owner);
 
+	String landedOnOwnedFieldOwnerIsInJail(Player owner);
+
 	String youOwnThisField();
 
 	String getTaxChoice();
@@ -128,10 +130,20 @@ public interface Language {
 
 	String bankrupt();
 
-	String toPay(int targetAmount);
+	String getMoneySequenceStatus(String debitorName, int targetAmount, int amountToGet);
 
 	String canGetMoney();
 
 	String bankruptcyConcluded();
+
+	String confirmBuild(int constructionPrice, String fieldName);
+
+	String confirmDemolition(String fieldName);
+
+	String wantToUndoPawnWithoutInterest();
+
+	String wantToRunVoluntaryGetMoneySequence(String debitorName);
+
+	String confirmUndoPawn(String fieldName);
 }
 
