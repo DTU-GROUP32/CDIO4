@@ -561,6 +561,8 @@ public abstract class SequenceController {
 		LanguageHandler language = LanguageHandler.getInstance();
 		Field field = gameBoard.getField(player.getOnField());
 
+		// updates the GUI in case the player has been moved by a chance card
+		boundary.updateGUI(gameBoard, playerList);
 		// if the  player landing on the field, isn't the owner
 		if (!field.getOwner().getName().equals(player.getName())) {
 			// and if the owner isn't in jail
