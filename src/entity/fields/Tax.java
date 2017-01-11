@@ -35,14 +35,19 @@ public class Tax extends Field {
 	public void landOnField(Player player, int roll, GameBoard gameBoard, PlayerList playerList, boolean taxChoice) {
 		// if player chose to pay the tax rate of his total assets
 		if (taxChoice) {
-			while (player.getBankAccount().withdraw(player.getTotalAssetsForTaxPurposes(gameBoard) * taxRate / 100) == false)
-				SequenceController.getMoneySequence(player, null, gameBoard, playerList, player.getTotalAssetsForTaxPurposes(gameBoard) * taxRate / 100);
+			// if the player can't pay a sequence to get money is executed
+			if(player.getBankAccount().withdraw(player.getTotalAssetsForTaxPurposes(gameBoard) * taxRate / 100) == false) {
+				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, player.getTotalAssetsForTaxPurposes(gameBoard) * taxRate / 100, false);
+			}
 		} 
 		// else the player pays the fixed tax amount
 		else {
-			while (player.getBankAccount().withdraw(taxAmount) == false)
-				SequenceController.getMoneySequence(player, null, gameBoard, playerList, taxAmount);
+			// if the player can't pay a sequence to get money is executed
+			if(player.getBankAccount().withdraw(taxAmount) == false) {
+				SequenceController.getMoneySequence(player, null, true, gameBoard, playerList, taxAmount, false);
+			}
 		}
+
 	}
 
 	@Override
@@ -53,106 +58,5 @@ public class Tax extends Field {
 	@Override
 	public int getTaxRate() {
 		return this.taxRate;
-	}
-
-	// all methods under this line are default methods
-
-	@Override
-	public int getPrice() {
-		return 0;
-	}
-
-	@Override
-	public Player getOwner() {
-		return null;
-	}
-
-	@Override
-	public void setOwner(Player newOwner) {}
-
-	@Override
-	public int getRent(GameBoard gameBoard, int roll) {
-		return 0;
-	}
-
-	@Override
-	public boolean buyField(Player player) {
-		return false;
-	}
-
-	@Override
-	public boolean tradeField(Player seller, Player buyer, int price) {
-		return false;
-	}
-
-	@Override
-	public int getConstructionRate() {
-		return 0;
-	}
-
-	@Override
-	public int getConstructionPrice() {
-		return 0;
-	}
-
-	@Override
-	public int getPawnValue() {
-		return 0;
-	}
-
-	@Override
-	public int getPropertyGroup() {
-		return 0;
-	}
-
-	@Override
-	public boolean pawnField() {
-		return false;
-	}
-
-	@Override
-	public boolean undoPawnField() {
-		return false;
-	}
-
-	@Override
-	public boolean buildConstruction() {
-		return false;
-	}
-
-	@Override
-	public boolean sellConstruction() {
-		return false;
-	}
-
-	@Override
-	public boolean buyField(Player player, int price) {
-		return false;
-	}
-
-	@Override
-	public void releasePawnField() {}
-
-	@Override
-	public void setConstructionRate(int rate) {}
-
-	@Override
-	public boolean isPawned() {
-		return false;
-	}
-
-	@Override
-	public int getTopCardNumber() {
-		return 0;
-	}
-
-	@Override
-	public int getBonus() {
-		return 0;
-	}
-
-	@Override
-	public int[] getRentArray() {
-		return null;
 	}
 }

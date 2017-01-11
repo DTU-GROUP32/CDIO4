@@ -103,8 +103,12 @@ public class GameController {
 								break turnLoop;
 							}
 						}
+
+						else {
+							player.setPlayerInJail(false);
+						}
 					}
-					
+
 					// if the roll is equal, equal counter is increased by 1
 					if(diceCup.diceEvalEqual()) {
 						player.setEqualsInRowCount(player.getEqualsInRowCount() + 1);
@@ -150,6 +154,7 @@ public class GameController {
 					SequenceController.undoPawnSequence(player, gameBoard, playerList);	
 				} 
 
-			} while (diceCup.diceEvalEqual() || turnChoice.equals(language.build()) || turnChoice.equals(language.trade()) || turnChoice.equals(language.payOneThousand()) || turnChoice.equals(language.useGetOutOfJail()));
+			} while (diceCup.diceEvalEqual() || turnChoice.equals(language.build()) || turnChoice.equals(language.trade()) || turnChoice.equals(language.payOneThousand())
+					|| turnChoice.equals(language.useGetOutOfJail()) || turnChoice.equals(language.tradeProperties()) || turnChoice.equals(language.tradeGetOutOfJailCard()));
 	}
 }

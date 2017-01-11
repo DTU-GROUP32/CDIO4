@@ -1,6 +1,8 @@
 package entity.fields;
 
+import control.SequenceController;
 import entity.GameBoard;
+import entity.PlayerList;
 
 public class Plot extends Ownable {
 
@@ -30,7 +32,7 @@ public class Plot extends Ownable {
 	public int[] getRentArray() {
 		return this.rent;
 	}
-	
+
 	@Override
 	public int getConstructionPrice() {
 		return this.constructionPrice;
@@ -50,48 +52,42 @@ public class Plot extends Ownable {
 	public void setConstructionRate(int rate) {
 		this.constructionRate = rate;
 	}
-	
+
 	@Override
-	public int getRent(GameBoard gameBoard, int roll){
-		if (gameBoard.evalPropertyGroupSameOwner(gameBoard.getPropertyGroup(this.propertyGroup)) && constructionRate == 0)
+	public int getRent(GameBoard gameBoard, int roll) {
+		if (gameBoard.evalPropertyGroupSameOwner(gameBoard.getPropertyGroup(this.propertyGroup)) && constructionRate == 0) {
 			return this.rent[constructionRate] * 2;
-		return this.rent[constructionRate];
+		} else {
+			return this.rent[constructionRate];
+		}
 	}
 
-	public boolean buildConstruction(){
-		if(owner.getBankAccount().withdraw(constructionPrice))
-		{
-			constructionRate++;
-			return true;
-		}
-		return false;
+	public boolean buildConstruction(GameBoard gameBoard, PlayerList playerList){
+		if(!this.isPawned()) {
+			if(owner.getBankAccount().withdraw(constructionPrice)) {
+				constructionRate++;
+				return true;
+			} else {
+				// if it was because the player didn't have enough money
+				SequenceController.getMoneySequence(owner, null, false, gameBoard, playerList, constructionPrice, true);
+				// request is only executed if the player got enough money
+				if(owner.getBankAccount().withdraw(constructionPrice)) {
+					constructionRate++;
+					return true;
+				} else {
+					return false;
+				}
+			}
+		} return false;
 	}
 
 	public boolean sellConstruction(){
-		owner.getBankAccount().deposit(constructionPrice / 2);
-		constructionRate--;
-		return true;
-	}
-	
-	// all methods under this line are default methods
-
-	@Override
-	public int getBonus() {
-		return 0;
-	}
-
-	@Override
-	public int getTaxAmount() {
-		return 0;
-	}
-
-	@Override
-	public int getTaxRate() {
-		return 0;
-	}
-
-	@Override
-	public int getTopCardNumber() {
-		return 0;
+		if(this.constructionRate > 0) {
+			owner.getBankAccount().deposit(constructionPrice / 2);
+			constructionRate--;
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
