@@ -342,4 +342,8 @@ public class LanguageHandler {
 	public String addCurrencyToNumber(int value) {
 		return selectedLanguage.addCurrencyToNumber(value);
 	}
+
+	public String noChanceBuddy() {
+		return selectedLanguage.noChanceBuddy();
+	}
 }

@@ -154,5 +154,7 @@ public interface Language {
 	String landedOnOwnedFieldHasToPayDoubleRent(Player owner);
 
 	String addCurrencyToNumber(int value);
+
+	String noChanceBuddy();
 }
 

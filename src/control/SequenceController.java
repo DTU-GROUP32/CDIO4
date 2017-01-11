@@ -439,14 +439,15 @@ public abstract class SequenceController {
 
 	/**
 	 * Method that handles the sequence of getting money if a player doesn't have enough money. Can be called with or without debt settlement.
-	 * @param debitor
+	 * @param debtor
 	 * @param creditor
 	 * @param withDebtSettlement
 	 * @param gameBoard
 	 * @param playerList
 	 * @param targetAmount
+	 * @param voluntaryGetMoneySequence - if called true, the player will get an option to break the sequence at each run through
 	 */
-	public static void getMoneySequence(Player debitor, Player creditor, Boolean withDebtSettlement, GameBoard gameBoard, PlayerList playerList, int targetAmount, Boolean voluntaryGetMoneySequence) {
+	public static void getMoneySequence(Player debtor, Player creditor, Boolean withDebtSettlement, GameBoard gameBoard, PlayerList playerList, int targetAmount, Boolean voluntaryGetMoneySequence) {
 
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
@@ -456,45 +457,52 @@ public abstract class SequenceController {
 			// loop that continues until the player has enough money to pay his debt
 			do {
 				// gets user choices
+				// if the sequence is voluntary
 				if(voluntaryGetMoneySequence) {
-					if(!boundary.getBoolean(language.wantToRunVoluntaryGetMoneySequence(debitor.getName()), language.yes(), language.no())) {
+					// if the debtor has no chance to reach the amount he has chosen to spend
+					if(debtor.getTotalReleasableAssets(gameBoard) < targetAmount) {
+						boundary.getButtonPressed(language.noChanceBuddy());
 						break getMoneySeq;
+					} else {
+						if(!boundary.getBoolean(language.wantToRunVoluntaryGetMoneySequence(debtor.getName()), language.yes(), language.no())) {
+							break getMoneySeq;
+						}
 					}
 				}
-				String choice = boundary.getUserSelection(language.getMoneySequenceStatus(debitor.getName(), targetAmount, targetAmount - debitor.getBankAccount().getBalance()), options);
+				String choice = boundary.getUserSelection(language.getMoneySequenceStatus(debtor.getName(), targetAmount, targetAmount - debtor.getBankAccount().getBalance()), options);
 
 				// handles which other sequence to run by the users choice
 				if(choice.equals(language.pawn())) {
-					pawnSequence(debitor, gameBoard, playerList);
+					pawnSequence(debtor, gameBoard, playerList);
 				} else if (choice.equals(language.demolish())) {
-					demolitionSequence(debitor, gameBoard, playerList);
+					demolitionSequence(debtor, gameBoard, playerList);
 				} else if (choice.equals(language.trade())) {
-					tradePropertiesSequence(debitor, gameBoard, playerList);
+					tradePropertiesSequence(debtor, gameBoard, playerList);
 				} else if (choice.equals(language.bankrupt())) {
 					// only lets the player declare bankruptcy if his total releasable assets amounts to less than his debt
-					if(debitor.getTotalReleasableAssets(gameBoard) < targetAmount) {
+					if(debtor.getTotalReleasableAssets(gameBoard) < targetAmount) {
 						// if the creditor is another player
 						if(creditor != null) {
-							debitor.getBankAccount().transfer(creditor, debitor.getTotalReleasableAssets(gameBoard));
-							boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(debitor.getTotalReleasableAssets(gameBoard), creditor));
+							debtor.getBankAccount().transfer(creditor, debtor.getTotalReleasableAssets(gameBoard));
+							boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(debtor.getTotalReleasableAssets(gameBoard), creditor));
 						}
-						executeBankruptcy(debitor, gameBoard, playerList);
+						executeBankruptcy(debtor, gameBoard, playerList);
 						break getMoneySeq;
 					} else {
 						boundary.getButtonPressed(language.canGetMoney());
 					}
 				}
 				// if the player has enough money to pay his debt, and the method was called with debt settlement, he will be charged what he owes
-				if(debitor.getBankAccount().getBalance() >= targetAmount && withDebtSettlement) {
+				if(debtor.getBankAccount().getBalance() >= targetAmount && withDebtSettlement) {
 					// if the creditor is another player
 					if(creditor != null) {
-						debitor.getBankAccount().transfer(creditor, targetAmount);
+						debtor.getBankAccount().transfer(creditor, targetAmount);
 					} else {
-						debitor.getBankAccount().withdraw(targetAmount);
+						debtor.getBankAccount().withdraw(targetAmount);
 					}
 					break getMoneySeq;
 				}
-			} while(debitor.getBankAccount().getBalance() < targetAmount);
+			} while(debtor.getBankAccount().getBalance() < targetAmount);
 	}
 
 	/**

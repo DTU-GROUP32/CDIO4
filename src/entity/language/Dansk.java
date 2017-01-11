@@ -611,5 +611,10 @@ public class Dansk implements Language{
 	public String addCurrencyToNumber(int value) {
 		return "kr. " + value;
 	}
+
+	@Override
+	public String noChanceBuddy() {
+		return "Der er ingen chance for at du kan skaffe penge til denne handling..";
+	}
 }
 
