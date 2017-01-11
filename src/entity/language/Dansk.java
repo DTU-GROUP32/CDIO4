@@ -164,7 +164,7 @@ public class Dansk implements Language{
 
 	@Override
 	public String youAreInJailMsg(Player player) {
-		return player.getName() + " er fængslet. De kan vælge at betale kr. 1000, slå to ens eller indfrie Deres benådning for at slippe fri.";
+		return player.getName() + " er fængslet. De kan vælge at betale kr. 1000, slå to ens eller indfrie et løsladelseskort(hvis du har et), for at slippe fri.";
 	}
 
 	@Override
