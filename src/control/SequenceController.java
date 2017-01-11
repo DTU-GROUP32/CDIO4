@@ -488,8 +488,7 @@ public abstract class SequenceController {
 				if(debitor.getBankAccount().getBalance() >= targetAmount && withDebtSettlement) {
 					// if the creditor is another player
 					if(creditor != null) {
-						debitor.getBankAccount().transfer(creditor, debitor.getTotalReleasableAssets(gameBoard));
-						boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(debitor.getTotalReleasableAssets(gameBoard), creditor));
+						debitor.getBankAccount().transfer(creditor, targetAmount);
 					} else {
 						debitor.getBankAccount().withdraw(targetAmount);
 					}
