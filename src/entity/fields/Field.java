@@ -231,7 +231,7 @@ public abstract class Field {
 	 * Raises the construction rate by 1 and performs money transaction.
 	 * @return if the action was carried out
 	 */
-	public boolean buildConstruction() {
+	public boolean buildConstruction(GameBoard gameBoard, PlayerList playerList) {
 		return false;
 	}
 

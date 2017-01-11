@@ -62,6 +62,7 @@ public class Plot extends Ownable {
 		}
 	}
 
+	@Override
 	public boolean buildConstruction(GameBoard gameBoard, PlayerList playerList){
 		if(!this.isPawned()) {
 			if(owner.getBankAccount().withdraw(constructionPrice)) {
@@ -81,6 +82,7 @@ public class Plot extends Ownable {
 		} return false;
 	}
 
+	@Override
 	public boolean sellConstruction(){
 		if(this.constructionRate > 0) {
 			owner.getBankAccount().deposit(constructionPrice / 2);

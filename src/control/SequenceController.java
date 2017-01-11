@@ -37,7 +37,10 @@ public abstract class SequenceController {
 			boundary.getButtonPressed(language.fieldMsg(fieldNumber));
 			boundary.setChanceCard(language.getChanceCardMsg(-1));
 		} else {
-			boundary.getButtonPressed(language.fieldMsg(fieldNumber));
+			// if it's not the tax field with a choice
+			if(field.getID() != 4) {
+				boundary.getButtonPressed(language.fieldMsg(fieldNumber));
+			}
 		}
 
 		if (field instanceof Ownable) {
@@ -74,7 +77,7 @@ public abstract class SequenceController {
 
 			// if the field is the tax field with a choice, the landOnField method is run with that choice
 			if(field.getID() == 4) {
-				field.landOnField(player, roll, gameBoard, playerList, boundary.getBoolean(language.getTaxChoice(), language.yes(), language.no()));
+				field.landOnField(player, roll, gameBoard, playerList, boundary.getBoolean(language.getTaxChoice(), "10%", language.addCurrencyToNumber(4000)));
 				boundary.updateGUI(gameBoard, playerList);
 				// otherwise just a standard landOnField call
 			} else {
@@ -141,7 +144,7 @@ public abstract class SequenceController {
 			// gets confirmation on the build order and executes actions if confirmed
 			if(boundary.getBoolean(language.confirmBuild(fieldToBuildOn.getConstructionPrice(), fieldToBuildOn.getName()), language.yes(), language.no())){
 				// if the build construction is successful GUI gets updated
-				if(fieldToBuildOn.buildConstruction()) {
+				if(fieldToBuildOn.buildConstruction(gameBoard, playerList)) {
 					boundary.updateGUI(gameBoard, playerList);
 				} else {
 					boundary.getButtonPressed(language.notEnoughMoney());
@@ -223,7 +226,7 @@ public abstract class SequenceController {
 					boundary.updateGUI(gameBoard, playerList); 
 					boundary.getButtonPressed(language.propertyTradeConfirmation(buyer, price));
 					if(fieldToSellObject.isPawned()) {
-						if(boundary.getBoolean(language.wantToUndoPawnWithoutInterest(), language.yes(), language.no())) {
+						if(boundary.getBoolean(language.wantToUndoPawnWithoutInterest(fieldToSellObject), language.yes(), language.no())) {
 							if(fieldToSellObject.undoPawnFieldWithoutInterest(gameBoard, playerList)) {
 								boundary.updateGUI(gameBoard, playerList);
 								boundary.getButtonPressed(language.undoPawnSuccessful());
@@ -343,7 +346,7 @@ public abstract class SequenceController {
 			// gets user choice
 			String fieldToUndoPawn = boundary.getUserSelection(language.choosePropertyToUndoPawn(), alreadyPawnedLabels);
 			// gets confirmation and executes actions if confirmed
-			if(boundary.getBoolean(language.confirmUndoPawn(fieldToUndoPawn), language.yes(), language.no())){
+			if(boundary.getBoolean(language.confirmUndoPawn(gameBoard.getField(gameBoard.getIndexByName(fieldToUndoPawn))), language.yes(), language.no())){
 				if(gameBoard.getField(gameBoard.getIndexByName(fieldToUndoPawn)).undoPawnField(gameBoard, playerList)) {
 					boundary.updateGUI(gameBoard, playerList);
 					boundary.getButtonPressed(language.undoPawnSuccessful());
@@ -436,14 +439,15 @@ public abstract class SequenceController {
 
 	/**
 	 * Method that handles the sequence of getting money if a player doesn't have enough money. Can be called with or without debt settlement.
-	 * @param debitor
+	 * @param debtor
 	 * @param creditor
 	 * @param withDebtSettlement
 	 * @param gameBoard
 	 * @param playerList
 	 * @param targetAmount
+	 * @param voluntaryGetMoneySequence - if called true, the player will get an option to break the sequence at each run through
 	 */
-	public static void getMoneySequence(Player debitor, Player creditor, Boolean withDebtSettlement, GameBoard gameBoard, PlayerList playerList, int targetAmount, Boolean voluntaryGetMoneySequence) {
+	public static void getMoneySequence(Player debtor, Player creditor, Boolean withDebtSettlement, GameBoard gameBoard, PlayerList playerList, int targetAmount, Boolean voluntaryGetMoneySequence) {
 
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
@@ -453,46 +457,52 @@ public abstract class SequenceController {
 			// loop that continues until the player has enough money to pay his debt
 			do {
 				// gets user choices
+				// if the sequence is voluntary
 				if(voluntaryGetMoneySequence) {
-					if(!boundary.getBoolean(language.wantToRunVoluntaryGetMoneySequence(debitor.getName()), language.yes(), language.no())) {
+					// if the debtor has no chance to reach the amount he has chosen to spend
+					if(debtor.getTotalReleasableAssets(gameBoard) < targetAmount) {
+						boundary.getButtonPressed(language.noChanceBuddy());
 						break getMoneySeq;
+					} else {
+						if(!boundary.getBoolean(language.wantToRunVoluntaryGetMoneySequence(debtor.getName()), language.yes(), language.no())) {
+							break getMoneySeq;
+						}
 					}
 				}
-				String choice = boundary.getUserSelection(language.getMoneySequenceStatus(debitor.getName(), targetAmount, targetAmount - debitor.getBankAccount().getBalance()), options);
+				String choice = boundary.getUserSelection(language.getMoneySequenceStatus(debtor.getName(), targetAmount, targetAmount - debtor.getBankAccount().getBalance()), options);
 
 				// handles which other sequence to run by the users choice
 				if(choice.equals(language.pawn())) {
-					pawnSequence(debitor, gameBoard, playerList);
+					pawnSequence(debtor, gameBoard, playerList);
 				} else if (choice.equals(language.demolish())) {
-					demolitionSequence(debitor, gameBoard, playerList);
+					demolitionSequence(debtor, gameBoard, playerList);
 				} else if (choice.equals(language.trade())) {
-					tradePropertiesSequence(debitor, gameBoard, playerList);
+					tradePropertiesSequence(debtor, gameBoard, playerList);
 				} else if (choice.equals(language.bankrupt())) {
 					// only lets the player declare bankruptcy if his total releasable assets amounts to less than his debt
-					if(debitor.getTotalReleasableAssets(gameBoard) < targetAmount) {
+					if(debtor.getTotalReleasableAssets(gameBoard) < targetAmount) {
 						// if the creditor is another player
 						if(creditor != null) {
-							debitor.getBankAccount().transfer(creditor, debitor.getTotalReleasableAssets(gameBoard));
-							boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(debitor.getTotalReleasableAssets(gameBoard), creditor));
+							debtor.getBankAccount().transfer(creditor, debtor.getTotalReleasableAssets(gameBoard));
+							boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(debtor.getTotalReleasableAssets(gameBoard), creditor));
 						}
-						executeBankruptcy(debitor, gameBoard, playerList);
+						executeBankruptcy(debtor, gameBoard, playerList);
 						break getMoneySeq;
 					} else {
 						boundary.getButtonPressed(language.canGetMoney());
 					}
 				}
 				// if the player has enough money to pay his debt, and the method was called with debt settlement, he will be charged what he owes
-				if(debitor.getBankAccount().getBalance() >= targetAmount && withDebtSettlement) {
+				if(debtor.getBankAccount().getBalance() >= targetAmount && withDebtSettlement) {
 					// if the creditor is another player
 					if(creditor != null) {
-						debitor.getBankAccount().transfer(creditor, debitor.getTotalReleasableAssets(gameBoard));
-						boundary.getButtonPressed(language.youPaidThisMuchToThisPerson(debitor.getTotalReleasableAssets(gameBoard), creditor));
+						debtor.getBankAccount().transfer(creditor, targetAmount);
 					} else {
-						debitor.getBankAccount().withdraw(targetAmount);
+						debtor.getBankAccount().withdraw(targetAmount);
 					}
 					break getMoneySeq;
 				}
-			} while(debitor.getBankAccount().getBalance() < targetAmount);
+			} while(debtor.getBankAccount().getBalance() < targetAmount);
 	}
 
 	/**
@@ -553,11 +563,13 @@ public abstract class SequenceController {
 	 * @param playerList
 	 */
 	public static void payDoubleRentOnShippingLineSequence(Player player, GameBoard gameBoard, PlayerList playerList) {
-		
+
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
 		Field field = gameBoard.getField(player.getOnField());
-		
+
+		// updates the GUI in case the player has been moved by a chance card
+		boundary.updateGUI(gameBoard, playerList);
 		// if the  player landing on the field, isn't the owner
 		if (!field.getOwner().getName().equals(player.getName())) {
 			// and if the owner isn't in jail
