@@ -247,9 +247,16 @@ public class GameBoard {
 
 		// for each field
 		for(int i = 0; i < this.fields.length; i++) {
-			// if the owner of the field is the specified owner and there are no buildings on the field and the field isn't already pawned
-			if(fields[i].getOwner() == owner && fields[i].getConstructionRate() == 0 && fields[i].isPawned() == false) {
-				listOfPawnableProperties.add(fields[i]);
+			// if the owner of the field is the specified owner and the field isn't already pawned
+			if(fields[i].getOwner() == owner && fields[i].isPawned() == false) {
+				// if it's a plot
+				if(fields[i] instanceof Plot) {
+					// it also has to have no buildings on it
+					if(fields[i].getConstructionRate() == 0)
+						listOfPawnableProperties.add(fields[i]);
+				} else {
+					listOfPawnableProperties.add(fields[i]);
+				}
 			}
 		}
 
