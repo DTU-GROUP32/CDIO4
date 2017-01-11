@@ -1,6 +1,7 @@
 package entity.language;
 
 import entity.Player;
+import entity.fields.Field;
 
 public interface Language {
 
@@ -142,11 +143,11 @@ public interface Language {
 
 	String confirmDemolition(String fieldName);
 
-	String wantToUndoPawnWithoutInterest();
+	String wantToUndoPawnWithoutInterest(Field field);
 
 	String wantToRunVoluntaryGetMoneySequence(String debitorName);
 
-	String confirmUndoPawn(String fieldName);
+	String confirmUndoPawn(Field field);
 
 	String landedOnOwnedFieldButItsPawned(Player ownerOfField);
 

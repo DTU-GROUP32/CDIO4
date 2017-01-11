@@ -226,7 +226,7 @@ public abstract class SequenceController {
 					boundary.updateGUI(gameBoard, playerList); 
 					boundary.getButtonPressed(language.propertyTradeConfirmation(buyer, price));
 					if(fieldToSellObject.isPawned()) {
-						if(boundary.getBoolean(language.wantToUndoPawnWithoutInterest(), language.yes(), language.no())) {
+						if(boundary.getBoolean(language.wantToUndoPawnWithoutInterest(fieldToSellObject), language.yes(), language.no())) {
 							if(fieldToSellObject.undoPawnFieldWithoutInterest(gameBoard, playerList)) {
 								boundary.updateGUI(gameBoard, playerList);
 								boundary.getButtonPressed(language.undoPawnSuccessful());
@@ -346,7 +346,7 @@ public abstract class SequenceController {
 			// gets user choice
 			String fieldToUndoPawn = boundary.getUserSelection(language.choosePropertyToUndoPawn(), alreadyPawnedLabels);
 			// gets confirmation and executes actions if confirmed
-			if(boundary.getBoolean(language.confirmUndoPawn(fieldToUndoPawn), language.yes(), language.no())){
+			if(boundary.getBoolean(language.confirmUndoPawn(gameBoard.getField(gameBoard.getIndexByName(fieldToUndoPawn))), language.yes(), language.no())){
 				if(gameBoard.getField(gameBoard.getIndexByName(fieldToUndoPawn)).undoPawnField(gameBoard, playerList)) {
 					boundary.updateGUI(gameBoard, playerList);
 					boundary.getButtonPressed(language.undoPawnSuccessful());

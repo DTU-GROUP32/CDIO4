@@ -1,6 +1,7 @@
 package entity.language;
 
 import entity.Player;
+import entity.fields.Field;
 
 /**
  * Every method in this class should be self-explanatory by their names
@@ -318,16 +319,16 @@ public class LanguageHandler {
 		return selectedLanguage.confirmDemolition(fieldName);
 	}
 
-	public String wantToUndoPawnWithoutInterest() {
-		return selectedLanguage.wantToUndoPawnWithoutInterest();
+	public String wantToUndoPawnWithoutInterest(Field field) {
+		return selectedLanguage.wantToUndoPawnWithoutInterest(field);
 	}
 
 	public String wantToRunVoluntaryGetMoneySequence(String debitorName) {
 		return selectedLanguage.wantToRunVoluntaryGetMoneySequence(debitorName);
 	}
 
-	public String confirmUndoPawn(String fieldName) {
-		return selectedLanguage.confirmUndoPawn(fieldName);
+	public String confirmUndoPawn(Field field) {
+		return selectedLanguage.confirmUndoPawn(field);
 	}
 
 	public String landedOnOwnedFieldButItsPawned(Player ownerOfField) {

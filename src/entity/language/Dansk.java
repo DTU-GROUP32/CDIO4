@@ -1,6 +1,7 @@
 package entity.language;
 
 import entity.Player;
+import entity.fields.Field;
 
 public class Dansk implements Language{
 
@@ -581,8 +582,9 @@ public class Dansk implements Language{
 	}
 
 	@Override
-	public String wantToUndoPawnWithoutInterest() {
-		return "Den ejendom du lige har købt er pantsat! Hvis du hæver pantsætningen med det samme, slipper du for at betale 10% i renter, vil du det?";
+	public String wantToUndoPawnWithoutInterest(Field field) {
+		return "Den ejendom du lige har købt er pantsat! Hvis du hæver pantsætningen med det samme, slipper du for at betale 10% i renter,"
+				+ "prisen for at hæve pantsætningen på denne er kr. " + field.getPawnValue() + " vil du det?";
 	}
 
 	@Override
@@ -591,8 +593,8 @@ public class Dansk implements Language{
 	}
 
 	@Override
-	public String confirmUndoPawn(String fieldName) {
-		return "Er du sikker på, at du vil hæve pantsætningen på " + fieldName +"?";
+	public String confirmUndoPawn(Field field) {
+		return "Er du sikker på, at du vil hæve pantsætningen på " + field.getName() +" for kr. " + field.getPawnValue() * 110 / 100 + "?";
 	}
 
 	@Override
