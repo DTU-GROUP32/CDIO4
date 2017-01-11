@@ -337,4 +337,8 @@ public class LanguageHandler {
 	public String landedOnOwnedFieldHasToPayDoubleRent(Player owner) {
 		return selectedLanguage.landedOnOwnedFieldHasToPayDoubleRent(owner);
 	}
+
+	public String addCurrencyToNumber(int value) {
+		return selectedLanguage.addCurrencyToNumber(value);
+	}
 }

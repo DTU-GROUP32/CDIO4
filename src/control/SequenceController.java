@@ -37,7 +37,10 @@ public abstract class SequenceController {
 			boundary.getButtonPressed(language.fieldMsg(fieldNumber));
 			boundary.setChanceCard(language.getChanceCardMsg(-1));
 		} else {
-			boundary.getButtonPressed(language.fieldMsg(fieldNumber));
+			// if it's not the tax field with a choice
+			if(field.getID() != 4) {
+				boundary.getButtonPressed(language.fieldMsg(fieldNumber));
+			}
 		}
 
 		if (field instanceof Ownable) {
@@ -74,7 +77,7 @@ public abstract class SequenceController {
 
 			// if the field is the tax field with a choice, the landOnField method is run with that choice
 			if(field.getID() == 4) {
-				field.landOnField(player, roll, gameBoard, playerList, boundary.getBoolean(language.getTaxChoice(), language.yes(), language.no()));
+				field.landOnField(player, roll, gameBoard, playerList, boundary.getBoolean(language.getTaxChoice(), "10%", language.addCurrencyToNumber(4000)));
 				boundary.updateGUI(gameBoard, playerList);
 				// otherwise just a standard landOnField call
 			} else {
@@ -553,11 +556,11 @@ public abstract class SequenceController {
 	 * @param playerList
 	 */
 	public static void payDoubleRentOnShippingLineSequence(Player player, GameBoard gameBoard, PlayerList playerList) {
-		
+
 		GUIBoundary boundary = GUIBoundary.getInstance();
 		LanguageHandler language = LanguageHandler.getInstance();
 		Field field = gameBoard.getField(player.getOnField());
-		
+
 		// if the  player landing on the field, isn't the owner
 		if (!field.getOwner().getName().equals(player.getName())) {
 			// and if the owner isn't in jail

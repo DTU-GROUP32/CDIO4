@@ -151,5 +151,7 @@ public interface Language {
 	String landedOnOwnedFieldButItsPawned(Player ownerOfField);
 
 	String landedOnOwnedFieldHasToPayDoubleRent(Player owner);
+
+	String addCurrencyToNumber(int value);
 }
 

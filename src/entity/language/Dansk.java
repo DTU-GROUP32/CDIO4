@@ -338,7 +338,6 @@ public class Dansk implements Language{
 		case 36:
 			fieldString = "Du er landet på \"Prøv lykken\". Tryk på \"Prøv lykken\" bunken i midten for trække et kort, før du trykker \"OK!\"";
 			break;
-		case 4:
 		case 38:
 			fieldString = "Du er landet på et skatte-felt. Du bedes betale kr. 2000 i skat.";
 			break;
@@ -382,8 +381,8 @@ public class Dansk implements Language{
 
 	@Override
 	public String getTaxChoice() {
-		return "Du kan vælge enten at betale 4000 kr eller 10% af din pengebeholdning,"
-				+ "\nvil du betale 10%?";
+		return "Du er landet på et skatte-felt, hvor du kan vælge enten at betale kr. 4000 eller 10% af alle dine værdier."
+				+ "\nHvad vælger du?";
 	}
 
 	@Override
@@ -604,6 +603,11 @@ public class Dansk implements Language{
 	@Override
 	public String landedOnOwnedFieldHasToPayDoubleRent(Player owner) {
 		return "Dette felt ejes af " + owner.getName() + ", det kommer til at koste to gange den leje, han ellers er berettiget til!";
+	}
+
+	@Override
+	public String addCurrencyToNumber(int value) {
+		return "kr. " + value;
 	}
 }
 
