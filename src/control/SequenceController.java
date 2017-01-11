@@ -144,7 +144,7 @@ public abstract class SequenceController {
 			// gets confirmation on the build order and executes actions if confirmed
 			if(boundary.getBoolean(language.confirmBuild(fieldToBuildOn.getConstructionPrice(), fieldToBuildOn.getName()), language.yes(), language.no())){
 				// if the build construction is successful GUI gets updated
-				if(fieldToBuildOn.buildConstruction()) {
+				if(fieldToBuildOn.buildConstruction(gameBoard, playerList)) {
 					boundary.updateGUI(gameBoard, playerList);
 				} else {
 					boundary.getButtonPressed(language.notEnoughMoney());
