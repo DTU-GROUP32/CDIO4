@@ -147,10 +147,18 @@ public class GameBoard {
 
 		ArrayList<Field> listOfTradeableProperties = new ArrayList<Field>();
 
-		// adds every field that has the specified owner and no constructions to the list
+		// adds every field that has the specified owner
 		for(int i = 0; i < this.fields.length; i++) {
-			if(this.fields[i].getOwner() == owner && this.fields[i].getConstructionRate() == 0)
-				listOfTradeableProperties.add(this.fields[i]);		
+			if(this.fields[i].getOwner() == owner) {
+				// if it's a plot
+				if(fields[i] instanceof Plot) {
+					// it also has to have no buildings on it
+					if(fields[i].getConstructionRate() == 0)
+						listOfTradeableProperties.add(fields[i]);
+				} else {
+					listOfTradeableProperties.add(this.fields[i]);
+				}
+			}	
 		}
 
 		return listOfTradeableProperties;
