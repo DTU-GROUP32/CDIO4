@@ -109,7 +109,7 @@ public abstract class Ownable extends Field {
 
 	@Override
 	public boolean pawnField() {
-		if (pawned) {
+		if (!this.pawned) {
 			if(this instanceof Plot) {
 				if (this.getConstructionRate() == 0) {
 					this.owner.getBankAccount().deposit(pawnValue);
