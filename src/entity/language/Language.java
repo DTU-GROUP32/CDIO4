@@ -95,7 +95,7 @@ public interface Language {
 
 	String confirmGetOutOfJailCardTrade(String buyerName, int price);
 
-	String getOutOfJailCardPurchaseConfirmation();
+	String getOutOfJailCardPurchaseConfirmation(String buyer);
 
 	String noPawnableFields();
 

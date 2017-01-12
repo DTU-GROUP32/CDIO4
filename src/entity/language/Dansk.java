@@ -462,8 +462,8 @@ public class Dansk implements Language{
 	}
 
 	@Override
-	public String getOutOfJailCardPurchaseConfirmation() {
-		return "Du har nu købt løsladelseskortet!";
+	public String getOutOfJailCardPurchaseConfirmation(String buyer) {
+		return buyer + " har nu købt løsladelseskortet!";
 	}
 
 	@Override
@@ -583,7 +583,7 @@ public class Dansk implements Language{
 
 	@Override
 	public String wantToUndoPawnWithoutInterest(Field field) {
-		return "Den ejendom du lige har købt er pantsat! Hvis du hæver pantsætningen med det samme, slipper du for at betale 10% i renter,"
+		return "Den ejendom du lige har købt er pantsat! Hvis du hæver pantsætningen med det samme, slipper du for at betale 10% i renter, "
 				+ "prisen for at hæve pantsætningen på denne er kr. " + field.getPawnValue() + " vil du det?";
 	}
 

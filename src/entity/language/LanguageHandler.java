@@ -223,8 +223,8 @@ public class LanguageHandler {
 		return selectedLanguage.confirmGetOutOfJailCardTrade(buyerName, price);
 	}
 
-	public String getOutOfJailCardPurchaseConfirmation() {
-		return selectedLanguage.getOutOfJailCardPurchaseConfirmation();
+	public String getOutOfJailCardPurchaseConfirmation(String buyer) {
+		return selectedLanguage.getOutOfJailCardPurchaseConfirmation(buyer);
 	}
 
 	public String noPawnableFields(){ 

@@ -142,7 +142,7 @@ public class GameController {
 					SequenceController.buildSequence(player, gameBoard, playerList);
 				}
 				// if the choice was to trade a property
-				else if (turnChoice.equals(language.trade())) {
+				else if (turnChoice.equals(language.trade()) || turnChoice.equals(language.tradeProperties())) {
 					SequenceController.tradePropertiesSequence(player, gameBoard, playerList);
 				} 
 				// if the choice was to trade a "get out of jail" card

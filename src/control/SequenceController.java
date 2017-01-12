@@ -275,7 +275,7 @@ public abstract class SequenceController {
 				buyerObject.setGetOutOfJailCardCount(buyerObject.getGetOutOfJailCardCount()+1);
 				// updates GUI after money was transfered
 				boundary.updateGUI(gameBoard, playerList);
-				boundary.getButtonPressed(language.getOutOfJailCardPurchaseConfirmation());
+				boundary.getButtonPressed(language.getOutOfJailCardPurchaseConfirmation(buyer));
 			} else {
 				SequenceController.getMoneySequence(buyerObject, null, false, gameBoard, playerList, price, true);
 				// request is only executed if the player got enough money
@@ -285,7 +285,7 @@ public abstract class SequenceController {
 					buyerObject.setGetOutOfJailCardCount(buyerObject.getGetOutOfJailCardCount()+1);
 					// updates GUI after money was transfered
 					boundary.updateGUI(gameBoard, playerList);
-					boundary.getButtonPressed(language.getOutOfJailCardPurchaseConfirmation());
+					boundary.getButtonPressed(language.getOutOfJailCardPurchaseConfirmation(buyer));
 				} else {
 					boundary.getButtonPressed(language.notEnoughMoney());
 				}
