@@ -154,8 +154,8 @@ public class GameController {
 					SequenceController.undoPawnSequence(player, gameBoard, playerList);	
 				} 
 
-			} while (diceCup.diceEvalEqual() || turnChoice.equals(language.build()) || turnChoice.equals(language.trade()) || turnChoice.equals(language.payOneThousand())
+			} while ((diceCup.diceEvalEqual() || turnChoice.equals(language.build()) || turnChoice.equals(language.trade()) || turnChoice.equals(language.payOneThousand())
 					|| turnChoice.equals(language.useGetOutOfJail()) || turnChoice.equals(language.tradeProperties()) || turnChoice.equals(language.tradeGetOutOfJailCard())
-					|| turnChoice.equals(language.undoPawn()) && !player.isPlayerBroke());
+					|| turnChoice.equals(language.undoPawn())) && !player.isPlayerBroke());
 	}
 }
