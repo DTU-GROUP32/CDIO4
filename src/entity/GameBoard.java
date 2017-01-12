@@ -210,7 +210,7 @@ public class GameBoard {
 	 */
 	public ArrayList<Field> getDemolitionableList(Player owner) {
 
-		ArrayList<Field> listOfSellableProperties = new ArrayList<Field>();
+		ArrayList<Field> listODemolitionableProperties = new ArrayList<Field>();
 
 		// for every property group(0-7)
 		for(int i = 0; i < 8; i++) {
@@ -234,14 +234,14 @@ public class GameBoard {
 						// if construction rate is equal to the highest construction rate, then add to the demolitionable list
 						// this is to ensure the player is building evenly on the properties
 						if(propertyGroup[j].getConstructionRate() == highestConstructionRate) {
-							listOfSellableProperties.add(propertyGroup[j]);
+							listODemolitionableProperties.add(propertyGroup[j]);
 						}
 					}
 				}
 			}
 		}
 
-		return listOfSellableProperties;
+		return listODemolitionableProperties;
 	}
 
 	/**
