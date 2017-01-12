@@ -37,7 +37,7 @@ public class GameController {
 				if (!playerList.isThereAWinner() && !playerList.getPlayer(i).isPlayerBroke())
 					playTurn(playerList.getPlayer(i));
 		}
-		boundary.getButtonPressed(language.winnerMsg(playerList.whoIsTheWinner()));
+		boundary.getButtonPressed(language.winnerMsg(playerList.whoIsTheWinner(), gameBoard));
 	}
 
 

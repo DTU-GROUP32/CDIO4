@@ -1,5 +1,6 @@
 package entity.language;
 
+import entity.GameBoard;
 import entity.Player;
 import entity.fields.Field;
 
@@ -158,8 +159,8 @@ public class Dansk implements Language{
 	}
 
 	@Override
-	public String winnerMsg(Player player){
-		return player.getName() + " har vundet spillet med " + player.getBankAccount().getBalance() + " kr.!";
+	public String winnerMsg(Player player, GameBoard gameBoard){
+		return player.getName() + " har vundet spillet med samlede værdier for kr. " + player.getTotalAssetsForTaxPurposes(gameBoard) + "!";
 	}
 
 	@Override

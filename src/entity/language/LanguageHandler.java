@@ -1,5 +1,6 @@
 package entity.language;
 
+import entity.GameBoard;
 import entity.Player;
 import entity.fields.Field;
 
@@ -75,8 +76,8 @@ public class LanguageHandler {
 		return selectedLanguage.readyToBegin();
 	}
 
-	public String winnerMsg(Player player){
-		return selectedLanguage.winnerMsg(player);
+	public String winnerMsg(Player player, GameBoard gameBoard){
+		return selectedLanguage.winnerMsg(player, gameBoard);
 	}
 
 	public String youAreInJailMsg(Player player) {

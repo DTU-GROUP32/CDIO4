@@ -1,5 +1,6 @@
 package entity.language;
 
+import entity.GameBoard;
 import entity.Player;
 import entity.fields.Field;
 
@@ -21,7 +22,7 @@ public interface Language {
 
 	String readyToBegin();
 
-	String winnerMsg(Player player);
+	String winnerMsg(Player player, GameBoard gameBoard);
 
 	String youAreInJailMsg(Player player);
 
