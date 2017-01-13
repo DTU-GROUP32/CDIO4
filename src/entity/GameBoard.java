@@ -109,7 +109,7 @@ public class GameBoard {
 			} else {
 				return false;
 			}
-		} else {
+		} else if(propertyGroup.length == 3) {
 			// if the owner of the first property is the same as the second and third property
 			if(propertyGroup[0].getOwner() == propertyGroup[1].getOwner() && propertyGroup[0].getOwner() == propertyGroup[2].getOwner()) {
 				return true;
@@ -117,6 +117,7 @@ public class GameBoard {
 				return false;
 			}
 		}
+		return false;
 	}
 
 	/**
@@ -146,10 +147,18 @@ public class GameBoard {
 
 		ArrayList<Field> listOfTradeableProperties = new ArrayList<Field>();
 
-		// adds every field that has the specified owner and no constructions to the list
+		// adds every field that has the specified owner
 		for(int i = 0; i < this.fields.length; i++) {
-			if(this.fields[i].getOwner() == owner && this.fields[i].getConstructionRate() == 0)
-				listOfTradeableProperties.add(this.fields[i]);		
+			if(this.fields[i].getOwner() == owner) {
+				// if it's a plot
+				if(fields[i] instanceof Plot) {
+					// it also has to have no buildings on it
+					if(fields[i].getConstructionRate() == 0)
+						listOfTradeableProperties.add(fields[i]);
+				} else {
+					listOfTradeableProperties.add(this.fields[i]);
+				}
+			}	
 		}
 
 		return listOfTradeableProperties;
@@ -201,7 +210,7 @@ public class GameBoard {
 	 */
 	public ArrayList<Field> getDemolitionableList(Player owner) {
 
-		ArrayList<Field> listOfSellableProperties = new ArrayList<Field>();
+		ArrayList<Field> listODemolitionableProperties = new ArrayList<Field>();
 
 		// for every property group(0-7)
 		for(int i = 0; i < 8; i++) {
@@ -225,14 +234,14 @@ public class GameBoard {
 						// if construction rate is equal to the highest construction rate, then add to the demolitionable list
 						// this is to ensure the player is building evenly on the properties
 						if(propertyGroup[j].getConstructionRate() == highestConstructionRate) {
-							listOfSellableProperties.add(propertyGroup[j]);
+							listODemolitionableProperties.add(propertyGroup[j]);
 						}
 					}
 				}
 			}
 		}
 
-		return listOfSellableProperties;
+		return listODemolitionableProperties;
 	}
 
 	/**
@@ -246,9 +255,16 @@ public class GameBoard {
 
 		// for each field
 		for(int i = 0; i < this.fields.length; i++) {
-			// if the owner of the field is the specified owner and there are no buildings on the field and the field isn't already pawned
-			if(fields[i].getOwner() == owner && fields[i].getConstructionRate() == 0 && fields[i].isPawned() == false) {
-				listOfPawnableProperties.add(fields[i]);
+			// if the owner of the field is the specified owner and the field isn't already pawned
+			if(fields[i].getOwner() == owner && fields[i].isPawned() == false) {
+				// if it's a plot
+				if(fields[i] instanceof Plot) {
+					// it also has to have no buildings on it
+					if(fields[i].getConstructionRate() == 0)
+						listOfPawnableProperties.add(fields[i]);
+				} else {
+					listOfPawnableProperties.add(fields[i]);
+				}
 			}
 		}
 

@@ -1,6 +1,8 @@
 package entity.language;
 
+import entity.GameBoard;
 import entity.Player;
+import entity.fields.Field;
 
 public interface Language {
 
@@ -20,7 +22,7 @@ public interface Language {
 
 	String readyToBegin();
 
-	String winnerMsg(Player player);
+	String winnerMsg(Player player, GameBoard gameBoard);
 
 	String youAreInJailMsg(Player player);
 
@@ -94,7 +96,7 @@ public interface Language {
 
 	String confirmGetOutOfJailCardTrade(String buyerName, int price);
 
-	String getOutOfJailCardPurchaseConfirmation();
+	String getOutOfJailCardPurchaseConfirmation(String buyer);
 
 	String noPawnableFields();
 
@@ -142,14 +144,18 @@ public interface Language {
 
 	String confirmDemolition(String fieldName);
 
-	String wantToUndoPawnWithoutInterest();
+	String wantToUndoPawnWithoutInterest(Field field);
 
 	String wantToRunVoluntaryGetMoneySequence(String debitorName);
 
-	String confirmUndoPawn(String fieldName);
+	String confirmUndoPawn(Field field);
 
 	String landedOnOwnedFieldButItsPawned(Player ownerOfField);
 
 	String landedOnOwnedFieldHasToPayDoubleRent(Player owner);
+
+	String addCurrencyToNumber(int value);
+
+	String noChanceBuddy();
 }
 

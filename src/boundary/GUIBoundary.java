@@ -231,7 +231,8 @@ public class GUIBoundary {
 	 * @param field
 	 */
 	public void updateOwner(entity.fields.Field field) {
-		if(field.getOwner() != null) {
+		GUI.removeOwner(convertFieldNumber(field.getID()));
+		if(field.getOwner() != null) { 
 			GUI.setOwner(convertFieldNumber(field.getID()), field.getOwner().getName());
 		}
 	}
@@ -258,8 +259,6 @@ public class GUIBoundary {
 		} else {
 			if(field.getOwner() == null)
 				GUI.setSubText(convertFieldNumber(field.getID()), LanguageHandler.getInstance().fieldPrices(field.getPrice()));
-			else
-				GUI.setSubText(convertFieldNumber(field.getID()), field.getOwner().getName());
 		}
 	}
 

@@ -1,6 +1,8 @@
 package entity.language;
 
+import entity.GameBoard;
 import entity.Player;
+import entity.fields.Field;
 
 public class Dansk implements Language{
 
@@ -157,13 +159,13 @@ public class Dansk implements Language{
 	}
 
 	@Override
-	public String winnerMsg(Player player){
-		return player.getName() + " har vundet spillet med " + player.getBankAccount().getBalance() + " kr.!";
+	public String winnerMsg(Player player, GameBoard gameBoard){
+		return player.getName() + " har vundet spillet med samlede værdier for kr. " + player.getTotalAssetsForTaxPurposes(gameBoard) + "!";
 	}
 
 	@Override
 	public String youAreInJailMsg(Player player) {
-		return player.getName() + " er fængslet. De kan vælge at betale kr. 1000, slå to ens eller indfrie Deres benådning for at slippe fri.";
+		return player.getName() + " er fængslet. De kan vælge at betale kr. 1000, slå to ens eller indfrie et løsladelseskort(hvis du har et), for at slippe fri.";
 	}
 
 	@Override
@@ -338,7 +340,6 @@ public class Dansk implements Language{
 		case 36:
 			fieldString = "Du er landet på \"Prøv lykken\". Tryk på \"Prøv lykken\" bunken i midten for trække et kort, før du trykker \"OK!\"";
 			break;
-		case 4:
 		case 38:
 			fieldString = "Du er landet på et skatte-felt. Du bedes betale kr. 2000 i skat.";
 			break;
@@ -382,8 +383,8 @@ public class Dansk implements Language{
 
 	@Override
 	public String getTaxChoice() {
-		return "Du kan vælge enten at betale 4000 kr eller 10% af din pengebeholdning,"
-				+ "\nvil du betale 10%?";
+		return "Du er landet på et skatte-felt, hvor du kan vælge enten at betale kr. 4000 eller 10% af alle dine værdier."
+				+ "\nHvad vælger du?";
 	}
 
 	@Override
@@ -462,8 +463,8 @@ public class Dansk implements Language{
 	}
 
 	@Override
-	public String getOutOfJailCardPurchaseConfirmation() {
-		return "Du har nu købt løsladelseskortet!";
+	public String getOutOfJailCardPurchaseConfirmation(String buyer) {
+		return buyer + " har nu købt løsladelseskortet!";
 	}
 
 	@Override
@@ -582,8 +583,9 @@ public class Dansk implements Language{
 	}
 
 	@Override
-	public String wantToUndoPawnWithoutInterest() {
-		return "Den ejendom du lige har købt er pantsat! Hvis du hæver pantsætningen med det samme, slipper du for at betale 10% i renter, vil du det?";
+	public String wantToUndoPawnWithoutInterest(Field field) {
+		return "Den ejendom du lige har købt er pantsat! Hvis du hæver pantsætningen med det samme, slipper du for at betale 10% i renter, "
+				+ "prisen for at hæve pantsætningen på denne er kr. " + field.getPawnValue() + " vil du det?";
 	}
 
 	@Override
@@ -592,8 +594,8 @@ public class Dansk implements Language{
 	}
 
 	@Override
-	public String confirmUndoPawn(String fieldName) {
-		return "Er du sikker på, at du vil hæve pantsætningen på " + fieldName +"?";
+	public String confirmUndoPawn(Field field) {
+		return "Er du sikker på, at du vil hæve pantsætningen på " + field.getName() +" for kr. " + field.getPawnValue() * 110 / 100 + "?";
 	}
 
 	@Override
@@ -603,8 +605,17 @@ public class Dansk implements Language{
 
 	@Override
 	public String landedOnOwnedFieldHasToPayDoubleRent(Player owner) {
-		// TODO Auto-generated method stub
 		return "Dette felt ejes af " + owner.getName() + ", det kommer til at koste to gange den leje, han ellers er berettiget til!";
+	}
+
+	@Override
+	public String addCurrencyToNumber(int value) {
+		return "kr. " + value;
+	}
+
+	@Override
+	public String noChanceBuddy() {
+		return "Der er ingen chance for at du kan skaffe penge til denne handling..";
 	}
 }
 

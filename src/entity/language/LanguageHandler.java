@@ -1,6 +1,8 @@
 package entity.language;
 
+import entity.GameBoard;
 import entity.Player;
+import entity.fields.Field;
 
 /**
  * Every method in this class should be self-explanatory by their names
@@ -74,8 +76,8 @@ public class LanguageHandler {
 		return selectedLanguage.readyToBegin();
 	}
 
-	public String winnerMsg(Player player){
-		return selectedLanguage.winnerMsg(player);
+	public String winnerMsg(Player player, GameBoard gameBoard){
+		return selectedLanguage.winnerMsg(player, gameBoard);
 	}
 
 	public String youAreInJailMsg(Player player) {
@@ -222,8 +224,8 @@ public class LanguageHandler {
 		return selectedLanguage.confirmGetOutOfJailCardTrade(buyerName, price);
 	}
 
-	public String getOutOfJailCardPurchaseConfirmation() {
-		return selectedLanguage.getOutOfJailCardPurchaseConfirmation();
+	public String getOutOfJailCardPurchaseConfirmation(String buyer) {
+		return selectedLanguage.getOutOfJailCardPurchaseConfirmation(buyer);
 	}
 
 	public String noPawnableFields(){ 
@@ -318,16 +320,16 @@ public class LanguageHandler {
 		return selectedLanguage.confirmDemolition(fieldName);
 	}
 
-	public String wantToUndoPawnWithoutInterest() {
-		return selectedLanguage.wantToUndoPawnWithoutInterest();
+	public String wantToUndoPawnWithoutInterest(Field field) {
+		return selectedLanguage.wantToUndoPawnWithoutInterest(field);
 	}
 
 	public String wantToRunVoluntaryGetMoneySequence(String debitorName) {
 		return selectedLanguage.wantToRunVoluntaryGetMoneySequence(debitorName);
 	}
 
-	public String confirmUndoPawn(String fieldName) {
-		return selectedLanguage.confirmUndoPawn(fieldName);
+	public String confirmUndoPawn(Field field) {
+		return selectedLanguage.confirmUndoPawn(field);
 	}
 
 	public String landedOnOwnedFieldButItsPawned(Player ownerOfField) {
@@ -336,5 +338,13 @@ public class LanguageHandler {
 
 	public String landedOnOwnedFieldHasToPayDoubleRent(Player owner) {
 		return selectedLanguage.landedOnOwnedFieldHasToPayDoubleRent(owner);
+	}
+
+	public String addCurrencyToNumber(int value) {
+		return selectedLanguage.addCurrencyToNumber(value);
+	}
+
+	public String noChanceBuddy() {
+		return selectedLanguage.noChanceBuddy();
 	}
 }
