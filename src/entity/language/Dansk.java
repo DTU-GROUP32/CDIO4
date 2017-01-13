@@ -617,5 +617,10 @@ public class Dansk implements Language{
 	public String noChanceBuddy() {
 		return "Der er ingen chance for at du kan skaffe penge til denne handling..";
 	}
+
+	@Override
+	public String pawnedLabel() {
+		return "PANTSAT";
+	}
 }
 

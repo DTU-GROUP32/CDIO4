@@ -347,4 +347,8 @@ public class LanguageHandler {
 	public String noChanceBuddy() {
 		return selectedLanguage.noChanceBuddy();
 	}
+
+	public String pawnedLabel() {
+		return selectedLanguage.pawnedLabel();
+	}
 }

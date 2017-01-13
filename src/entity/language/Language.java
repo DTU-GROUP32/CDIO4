@@ -157,5 +157,7 @@ public interface Language {
 	String addCurrencyToNumber(int value);
 
 	String noChanceBuddy();
+
+	String pawnedLabel();
 }
 

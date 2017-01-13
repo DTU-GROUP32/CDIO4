@@ -255,10 +255,13 @@ public class GUIBoundary {
 	 */
 	public void updatePawnStatus(entity.fields.Field field) {
 		if(field.isPawned()) {
-			GUI.setSubText(convertFieldNumber(field.getID()), "PANTSAT");
+			GUI.setSubText(convertFieldNumber(field.getID()), LanguageHandler.getInstance().pawnedLabel());
 		} else {
-			if(field.getOwner() == null)
+			if(field.getOwner() == null) {
 				GUI.setSubText(convertFieldNumber(field.getID()), LanguageHandler.getInstance().fieldPrices(field.getPrice()));
+			} else {
+				GUI.setSubText(convertFieldNumber(field.getID()), field.getOwner().getName());
+			}
 		}
 	}
 
