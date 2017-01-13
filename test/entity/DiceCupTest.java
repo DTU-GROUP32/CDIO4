@@ -33,12 +33,11 @@ public class DiceCupTest {
 
     @Test
     public void getSum() throws Exception {
-        diceCup.rollDices();
-        assertEquals("Dices Not within bounds", 7, diceCup.getSum(), 5);
-    }
-
-    @Test
-    public void getDices1() throws Exception {
-        assertTrue("Get Dices doesn't return array of dices", diceCup.getDices() instanceof Dice[]);
+        for(int i = 0; i < 100; i++) {
+            diceCup.rollDices();
+            int dice1Value = diceCup.getDices()[0].getFaceValue();
+            int dice2Value = diceCup.getDices()[1].getFaceValue();
+            assertEquals("Dices Not within bounds", dice1Value + dice2Value, diceCup.getSum());
+        }
     }
 }
