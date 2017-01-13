@@ -548,7 +548,7 @@ public abstract class SequenceController {
 		String[] playerLabels = new String[playerList.getPlayers().length - 1];
 		int i = 0;
 		for(Player player : playerList.getPlayers()) {
-			if (player.getName().equals(playerToExclude.getName()) == false) {
+			if (!player.getName().equals(playerToExclude.getName()) && !player.isPlayerBroke()) {
 				playerLabels[i] = player.getName();
 				i++;
 			}
