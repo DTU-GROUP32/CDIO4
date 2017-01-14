@@ -3,7 +3,6 @@ package entity.fields;
 import entity.GameBoard;
 import entity.Player;
 import entity.PlayerList;
-import entity.language.Language;
 import entity.language.LanguageHandler;
 import org.junit.After;
 import org.junit.Before;
@@ -39,7 +38,6 @@ public class ChanceTest {
     public void landOnField() throws Exception {
         for(int i = 1; i <= 27; i++){
             int expected;
-            int onFieldBefore = player1.getOnField();
             chanceFieldTest.setTopCardNumber(i);
             int roll = (int)((Math.random()*6 + 1)+(Math.random()*6 + 1));
             switch (i){
