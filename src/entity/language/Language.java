@@ -1,6 +1,8 @@
 package entity.language;
 
+import entity.GameBoard;
 import entity.Player;
+import entity.fields.Field;
 
 public interface Language {
 
@@ -15,10 +17,12 @@ public interface Language {
 	String fieldNames(int fieldNumber);
 
 	String fieldPrices(int fieldPrice);
+	
+	String fieldInfo(int[] fieldRent, int fieldPrice, int constructionPrice);
 
 	String readyToBegin();
 
-	String winnerMsg(Player player);
+	String winnerMsg(Player player, GameBoard gameBoard);
 
 	String youAreInJailMsg(Player player);
 
@@ -56,6 +60,8 @@ public interface Language {
 
 	String youPaidThisMuchToThisPerson(int amountPayed, Player owner);
 
+	String landedOnOwnedFieldOwnerIsInJail(Player owner);
+
 	String youOwnThisField();
 
 	String getTaxChoice();
@@ -78,6 +84,8 @@ public interface Language {
 
 	String confirmPropertyTrade(String fieldName, String buyerName, int price);
 
+	String propertyTradeConfirmation(String buyerName, int price);
+
 	String yes();
 
 	String no();
@@ -88,7 +96,7 @@ public interface Language {
 
 	String confirmGetOutOfJailCardTrade(String buyerName, int price);
 
-	String getOutOfJailCardPurchaseConfirmation();
+	String getOutOfJailCardPurchaseConfirmation(String buyer);
 
 	String noPawnableFields();
 
@@ -126,24 +134,30 @@ public interface Language {
 
 	String bankrupt();
 
-	String toPay(int targetAmount);
+	String getMoneySequenceStatus(String debitorName, int targetAmount, int amountToGet);
 
 	String canGetMoney();
 
 	String bankruptcyConcluded();
 
-	String nonOwnableFieldEffectMsg(int onField);
+	String confirmBuild(int constructionPrice, String fieldName);
 
-	String menu();
+	String confirmDemolition(String fieldName);
 
-	String printRules();
+	String wantToUndoPawnWithoutInterest(Field field);
 
-	String printScore(Player[] players);
+	String wantToRunVoluntaryGetMoneySequence(String debitorName);
 
-	String changeDices();
+	String confirmUndoPawn(Field field);
 
-	String printDiceChangeSucces();
+	String landedOnOwnedFieldButItsPawned(Player ownerOfField);
 
-	String printDiceChangeNotExecuted();
+	String landedOnOwnedFieldHasToPayDoubleRent(Player owner);
+
+	String addCurrencyToNumber(int value);
+
+	String noChanceBuddy();
+
+	String pawnedLabel();
 }
 

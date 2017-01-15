@@ -1,6 +1,8 @@
 package entity.language;
 
+import entity.GameBoard;
 import entity.Player;
+import entity.fields.Field;
 
 /**
  * Every method in this class should be self-explanatory by their names
@@ -65,13 +67,17 @@ public class LanguageHandler {
 	public String fieldPrices(int fieldPrice) {
 		return selectedLanguage.fieldPrices(fieldPrice);
 	}
+	
+	public String fieldInfo(int[] fieldRent, int fieldPrice, int constructionPrice) { 
+		return selectedLanguage.fieldInfo(fieldRent, fieldPrice, constructionPrice); 
+	} 
 
 	public String readyToBegin(){
 		return selectedLanguage.readyToBegin();
 	}
 
-	public String winnerMsg(Player player){
-		return selectedLanguage.winnerMsg(player);
+	public String winnerMsg(Player player, GameBoard gameBoard){
+		return selectedLanguage.winnerMsg(player, gameBoard);
 	}
 
 	public String youAreInJailMsg(Player player) {
@@ -146,6 +152,10 @@ public class LanguageHandler {
 		return selectedLanguage.youPaidThisMuchToThisPerson(amountPayed, owner);
 	}
 
+	public String landedOnOwnedFieldOwnerIsInJail(Player owner) {
+		return selectedLanguage.landedOnOwnedFieldOwnerIsInJail(owner);
+	}
+
 	public String youOwnThisField() {
 		return selectedLanguage.youOwnThisField();
 	}
@@ -190,6 +200,10 @@ public class LanguageHandler {
 		return selectedLanguage.confirmPropertyTrade(fieldName, buyerName, price); 
 	}
 
+	public String propertyTradeConfirmation(String buyerName, int price) {
+		return selectedLanguage.propertyTradeConfirmation(buyerName, price);
+	}
+
 	public String yes() {
 		return selectedLanguage.yes();
 	}
@@ -210,8 +224,8 @@ public class LanguageHandler {
 		return selectedLanguage.confirmGetOutOfJailCardTrade(buyerName, price);
 	}
 
-	public String getOutOfJailCardPurchaseConfirmation() {
-		return selectedLanguage.getOutOfJailCardPurchaseConfirmation();
+	public String getOutOfJailCardPurchaseConfirmation(String buyer) {
+		return selectedLanguage.getOutOfJailCardPurchaseConfirmation(buyer);
 	}
 
 	public String noPawnableFields(){ 
@@ -286,8 +300,8 @@ public class LanguageHandler {
 		return selectedLanguage.bankrupt();
 	}
 
-	public String toPay(int targetAmount){ 
-		return selectedLanguage.toPay(targetAmount);
+	public String getMoneySequenceStatus(String debitorName, int targetAmount, int amountToGet){ 
+		return selectedLanguage.getMoneySequenceStatus(debitorName, targetAmount, amountToGet);
 	}
 
 	public String canGetMoney(){ 
@@ -296,39 +310,45 @@ public class LanguageHandler {
 
 	public String bankruptcyConcluded() {
 		return selectedLanguage.bankruptcyConcluded();
-	}	
-
-	//
-	//
-	// METHODS UNDER THIS LINE ARE NOT USED IN THIS VERSION OF THE GAME
-	//
-	//
-
-	public String nonOwnableFieldEffectMsg(int onField) {
-		return selectedLanguage.nonOwnableFieldEffectMsg(onField);
 	}
 
-	public String menu(){
-		return selectedLanguage.menu();
+	public String confirmBuild(int constructionPrice, String fieldName) {
+		return selectedLanguage.confirmBuild(constructionPrice, fieldName);
 	}
 
-	public String printRules(){
-		return selectedLanguage.printRules();
+	public String confirmDemolition(String fieldName) {
+		return selectedLanguage.confirmDemolition(fieldName);
 	}
 
-	public String printScore(Player[] players){
-		return selectedLanguage.printScore(players);
+	public String wantToUndoPawnWithoutInterest(Field field) {
+		return selectedLanguage.wantToUndoPawnWithoutInterest(field);
 	}
 
-	public String changeDices(){
-		return selectedLanguage.changeDices();
+	public String wantToRunVoluntaryGetMoneySequence(String debitorName) {
+		return selectedLanguage.wantToRunVoluntaryGetMoneySequence(debitorName);
 	}
 
-	public String printDiceChangeSucces(){
-		return selectedLanguage.printDiceChangeSucces();
+	public String confirmUndoPawn(Field field) {
+		return selectedLanguage.confirmUndoPawn(field);
 	}
 
-	public String printDiceChangeNotExecuted(){
-		return selectedLanguage.printDiceChangeNotExecuted();
+	public String landedOnOwnedFieldButItsPawned(Player ownerOfField) {
+		return selectedLanguage.landedOnOwnedFieldButItsPawned(ownerOfField);
+	}
+
+	public String landedOnOwnedFieldHasToPayDoubleRent(Player owner) {
+		return selectedLanguage.landedOnOwnedFieldHasToPayDoubleRent(owner);
+	}
+
+	public String addCurrencyToNumber(int value) {
+		return selectedLanguage.addCurrencyToNumber(value);
+	}
+
+	public String noChanceBuddy() {
+		return selectedLanguage.noChanceBuddy();
+	}
+
+	public String pawnedLabel() {
+		return selectedLanguage.pawnedLabel();
 	}
 }

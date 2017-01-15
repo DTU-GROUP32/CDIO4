@@ -68,8 +68,7 @@ public class DiceCup {
 	}
 
 	/**
-	 * Checks if the dices a equal. 
-	 * @param dice
+	 * Checks if the dices a equal.
 	 * @return
 	 */
 	public boolean diceEvalEqual() {

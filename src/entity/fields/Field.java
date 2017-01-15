@@ -58,67 +58,91 @@ public abstract class Field {
 	 * Returns the bonus of the field.
 	 * @return bonus
 	 */
-	public abstract int getBonus();
+	public int getBonus() {
+		return -1;
+	}
 
 	/**
 	 * Returns the tax amount of the field.
 	 * @return taxAmount
 	 */
-	public abstract int getTaxAmount();
-
-	/**
-	 * Returns the tax rate of the field.
-	 * @return taxRate
-	 */
-	public abstract int getTaxRate();
+	public int getTaxAmount() {
+		return -1;
+	}
 
 	/**
 	 * Returns the number of the card that is in the top of the card stack.
 	 * @return topCardNumber
 	 */
-	public abstract int getTopCardNumber();
+	public int getTopCardNumber() {
+		return -1;
+	}
+
+	/**
+	 * Setter used for unittesting landOnField method
+	 * @param number
+	 */
+	public void setTopCardNumber(int number){}
+
+	/**
+	 * Returns the tax rate of the field.
+	 * @return taxRate
+	 */
+	public int getTaxRate() {
+		return -1;
+	}
 
 	/**
 	 * Returns the price of the field.
 	 * @return price
 	 */
-	public abstract int getPrice();
+	public int getPrice() {
+		return -1;
+	}
 
 	/**
 	 * Returns the owner of the field.
 	 * @return owner
 	 */
-	public abstract Player getOwner();
+	public Player getOwner() {
+		return null;
+	}
 
 	/**
 	 * Sets the owner of the field.
 	 * @param newOwner
 	 */
-	public abstract void setOwner(Player newOwner);
+	public void setOwner(Player newOwner) {}
 
 	/**
 	 * Returns the pawn value of the field.
 	 * @return pawnValue
 	 */
-	public abstract int getPawnValue();
+	public int getPawnValue() {
+		return -1;
+	}
 
 	/**
 	 * Returns whether the field is pawned or not.
 	 * @return isPawned
 	 */
-	public abstract boolean isPawned();
+	public boolean isPawned() {
+		return false;
+	}
 
 	/**
 	 * Resets isPawned to false(used when a pawned field it returned to the bank on bankruptcy).
 	 */
-	public abstract void releasePawnField();
+	public void releasePawnField() {}
 
 	/**
 	 * Makes you able to buy an ownable field. Takes the player buying the field as input.
 	 * @param player
 	 * @return if the action was carried out
 	 */
-	public abstract boolean buyField(Player player);
+	public boolean buyField(Player player, GameBoard gameBoard, PlayerList playerList) {
+		return false;
+	}
 
 	/**
 	 * Makes you able to buy an ownable field at a specific price. Takes the player buying the field and the price as input.
@@ -126,7 +150,9 @@ public abstract class Field {
 	 * @param player
 	 * @return if the action was carried out
 	 */
-	public abstract boolean buyField(Player player, int price);
+	public boolean buyField(Player player, int price, GameBoard gameBoard, PlayerList playerList) {
+		return false;
+	}
 
 	/**
 	 * Makes a trade between two players, the parameter names should be self-explanatory.
@@ -135,65 +161,93 @@ public abstract class Field {
 	 * @param price
 	 * @return if the action was carried out
 	 */
-	public abstract boolean tradeField(Player seller, Player buyer, int price);
+	public boolean tradeField(Player seller, Player buyer, int price, GameBoard gameBoard, PlayerList playerList) {
+		return false;
+	}
 
 	/**
 	 * Pawns the field(including money transactions).
 	 * @return if the action was carried out
 	 */
-	public abstract boolean pawnField();
+	public boolean pawnField() {
+		return false;
+	}
 
 	/**
 	 * Undoes the pawn of the field(including money transactions).
 	 * @return if the action was carried out
 	 */
-	public abstract boolean undoPawnField();
+	public boolean undoPawnField(GameBoard gameBoard, PlayerList playerList) {
+		return false;
+	}
 
 	/**
 	 * Returns the rent array of a plot field(used for setting up the rent list in the GUI).
 	 * @return rent
 	 */
-	public abstract int[] getRentArray();
+	public int[] getRentArray() {
+		return null;
+	}
 
 	/**
 	 * Returns rent of the field to be used when executing landOnField method.
 	 * @return calculated rent
 	 */
-	public abstract int getRent(GameBoard gameBoard, int roll);
+	public int getRent(GameBoard gameBoard, int roll) {
+		return -1;
+	}
 
 	/**
 	 * Returns the price of constructing on the field.
 	 * @return constructionPrice
 	 */
-	public abstract int getConstructionPrice();
+	public int getConstructionPrice() {
+		return -1;
+	}
 
 	/**
 	 * Returns the property group number of the field.
 	 * @return propertyGroup
 	 */
-	public abstract int getPropertyGroup();
+	public int getPropertyGroup() {
+		return -1;
+	}
 
 	/**
 	 * Returns the construction rate of the field.
 	 * @return constructionRate
 	 */
-	public abstract int getConstructionRate();
+	public int getConstructionRate() {
+		return -1;
+	}
 
 	/**
 	 * Sets the construction rate of the field
 	 * @param rate
 	 */
-	public abstract void setConstructionRate(int rate);
+	public void setConstructionRate(int rate) {}
 
 	/**
 	 * Raises the construction rate by 1 and performs money transaction.
 	 * @return if the action was carried out
 	 */
-	public abstract boolean buildConstruction();
+	public boolean buildConstruction(GameBoard gameBoard, PlayerList playerList) {
+		return false;
+	}
 
 	/**
 	 * Lowers the construction rate by 1 and performs money transaction.
 	 * @return if the action was carried out
 	 */
-	public abstract boolean sellConstruction();
+	public boolean sellConstruction() {
+		return false;
+	}
+	
+	/**
+	 * Undoes the pawn of the field without interest(including money transactions).
+	 * @return
+	 */
+	public boolean undoPawnFieldWithoutInterest(GameBoard gameBoard, PlayerList playerList) {
+		return false;
+	}
 }

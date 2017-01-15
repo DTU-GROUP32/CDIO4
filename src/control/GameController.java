@@ -37,7 +37,7 @@ public class GameController {
 				if (!playerList.isThereAWinner() && !playerList.getPlayer(i).isPlayerBroke())
 					playTurn(playerList.getPlayer(i));
 		}
-		boundary.getButtonPressed(language.winnerMsg(playerList.whoIsTheWinner()));
+		boundary.getButtonPressed(language.winnerMsg(playerList.whoIsTheWinner(), gameBoard));
 	}
 
 
@@ -103,8 +103,12 @@ public class GameController {
 								break turnLoop;
 							}
 						}
+
+						else {
+							player.setPlayerInJail(false);
+						}
 					}
-					
+
 					// if the roll is equal, equal counter is increased by 1
 					if(diceCup.diceEvalEqual()) {
 						player.setEqualsInRowCount(player.getEqualsInRowCount() + 1);
@@ -138,7 +142,7 @@ public class GameController {
 					SequenceController.buildSequence(player, gameBoard, playerList);
 				}
 				// if the choice was to trade a property
-				else if (turnChoice.equals(language.trade())) {
+				else if (turnChoice.equals(language.trade()) || turnChoice.equals(language.tradeProperties())) {
 					SequenceController.tradePropertiesSequence(player, gameBoard, playerList);
 				} 
 				// if the choice was to trade a "get out of jail" card
@@ -150,6 +154,8 @@ public class GameController {
 					SequenceController.undoPawnSequence(player, gameBoard, playerList);	
 				} 
 
-			} while (diceCup.diceEvalEqual() || turnChoice.equals(language.build()) || turnChoice.equals(language.trade()) || turnChoice.equals(language.payOneThousand()) || turnChoice.equals(language.useGetOutOfJail()));
+			} while ((diceCup.diceEvalEqual() || turnChoice.equals(language.build()) || turnChoice.equals(language.trade()) || turnChoice.equals(language.payOneThousand())
+					|| turnChoice.equals(language.useGetOutOfJail()) || turnChoice.equals(language.tradeProperties()) || turnChoice.equals(language.tradeGetOutOfJailCard())
+					|| turnChoice.equals(language.undoPawn())) && !player.isPlayerBroke());
 	}
 }

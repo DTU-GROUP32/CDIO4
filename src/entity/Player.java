@@ -99,7 +99,6 @@ public class Player{
 
 	/**
 	 * Returns boolean to determine if players balance is 0 or below
-	 * @param atIndex Index of the player
 	 * @return Boolean
 	 */
 	public boolean isPlayerBroke() {
@@ -164,7 +163,6 @@ public class Player{
 
 	/**
 	 * Sets the count of how many times the player has rolled two equal face values
-	 * @param equalsCount the equalsCount to set
 	 */
 	public void setEqualsInRowCount(int equalsInRowCount) {
 		this.equalsInRowCount = equalsInRowCount;
