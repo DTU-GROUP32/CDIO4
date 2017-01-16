@@ -2,6 +2,7 @@ package control;
 
 import boundary.GUIBoundary;
 import entity.DiceCup;
+import entity.DiceCupAutoTest;
 import entity.GameBoard;
 import entity.Player;
 import entity.PlayerList;
@@ -21,7 +22,7 @@ public class GameController {
 		playerList = setupController.setupPlayers();
 		language = LanguageHandler.getInstance();
 		boundary = GUIBoundary.getInstance();
-		diceCup = new DiceCup();
+		diceCup = new DiceCupAutoTest(0);
 	}
 
 	/**

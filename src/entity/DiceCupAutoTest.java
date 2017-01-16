@@ -21,7 +21,7 @@ public class DiceCupAutoTest extends DiceCup {
 						{1,1}, // Spiller 2, slår 3x2 ens
 						{2,2},
 						{2,2},
-						{6,3}, // Spiller 3, fødselsdag
+						{6,2}, // Spiller 3, fødselsdag
 						{5,2}, // Spiller 1, Køb af rederi
 						{2,5}, // Spiller 2, betal sig ud, og slå - land på rederi, dobbelt leje						
 						{1,2},	// Spiller 3, Handle, sælge, grund til spiller 1, hvor spiller 1 ikke har penge nok og pantsætter sin grund for at købe den..
@@ -46,6 +46,21 @@ public class DiceCupAutoTest extends DiceCup {
 //					  3,3};
 //		terning1 = data[index++ % data.length];
 //		terning2 = data[index++ % data.length];
+	}
+	
+	@Override
+	public int getSum() {
+		return faceValue1+faceValue2;
+	}
+	
+	@Override
+	public int getFaceValue1() {
+		return faceValue1;
+	}
+	
+	@Override
+	public int getFaceValue2() {
+		return faceValue2;
 	}
 	
 	@Override

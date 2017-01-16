@@ -75,4 +75,14 @@ public class DiceCup {
 		return (this.dices[0].getFaceValue() == this.dices[1].getFaceValue());
 	}
 
+	public int getFaceValue1() {
+		// TODO Auto-generated method stub
+		return -1;
+	}
+
+	public int getFaceValue2() {
+		// TODO Auto-generated method stub
+		return -1;
+	}
+
 }
