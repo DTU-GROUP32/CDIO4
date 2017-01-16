@@ -9,7 +9,7 @@ import entity.PlayerList;
 
 public class Chance extends Field {
 
-	private int[] chanceCards = {1,1,1,2,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,19,20,20,21,21,22,23,24,25,26,27};
+	private int[] chanceCards = {7,22,21,1,1,1,2,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,19,20,20,21,21,22,23,24,25,26,27};
 
 	/**
 	 * Constructor for the Chance field, only takes a name.
@@ -19,14 +19,14 @@ public class Chance extends Field {
 	public Chance(String name) {
 		super(name);
 
-		for(int i = 0; i < 1000; i++)
-		{
-			int rnd1 = (int) (Math.random() * chanceCards.length);
-			int rnd2 = (int) (Math.random() * chanceCards.length);
-			int temp = chanceCards[rnd1];
-			chanceCards[rnd1] = chanceCards[rnd2];
-			chanceCards[rnd2] = temp;
-		}
+//		for(int i = 0; i < 1000; i++)
+//		{
+//			int rnd1 = (int) (Math.random() * chanceCards.length);
+//			int rnd2 = (int) (Math.random() * chanceCards.length);
+//			int temp = chanceCards[rnd1];
+//			chanceCards[rnd1] = chanceCards[rnd2];
+//			chanceCards[rnd2] = temp;
+//		}
 	}
 
 	@Override
