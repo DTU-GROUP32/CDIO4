@@ -202,7 +202,7 @@ public class GUIBoundary {
 	 * @param diceCup which contains two dice
 	 */
 	public void setDices(DiceCup diceCup) {
-		GUI.setDice(diceCup.getDices()[0].getFaceValue(), 0, 4, 3, diceCup.getDices()[1].getFaceValue(), 0, 5, 3);
+		GUI.setDice(diceCup.getFaceValue1(), 0, 4, 3, diceCup.getFaceValue2(), 0, 5, 3);
 	}
 
 	/**
